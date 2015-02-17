@@ -264,11 +264,10 @@ func FormString(generator *GoGenerator, data *httpgen_common.DataOption) string 
 		}
 		if strings.HasPrefix(field[1], "@") {
 			var buffer bytes.Buffer
-			var sentFileName string
 			var contentType string
 			fragments := strings.Split(field[1][1:], ";")
 			sourceFile := fragments[0]
-			sentFileName = fragments[0]
+			sentFileName := fragments[0]
 			for _, fragment := range fragments[1:] {
 				if strings.HasPrefix(fragment, "filename=") {
 					sentFileName = fragment[9:]
@@ -302,7 +301,35 @@ func FormString(generator *GoGenerator, data *httpgen_common.DataOption) string 
 			generator.Modules["os"] = true
 			generator.Modules["io"] = true
 		} else if strings.HasPrefix(field[1], "<") {
-			result = fmt.Sprintf("    writer.WriteField(\"%s\", \"%s\")\n", field[0], field[1])
+			var buffer bytes.Buffer
+			var contentType string
+			fragments := strings.Split(field[1][1:], ";")
+			sourceFile := fragments[0]
+			for _, fragment := range fragments[1:] {
+				if strings.HasPrefix(fragment, "type=") {
+					contentType = fragment[5:]
+				}
+			}
+			buffer.WriteString("    {\n")
+			buffer.WriteString("        header := make(textproto.MIMEHeader)\n")
+			buffer.WriteString(fmt.Sprintf("        header.Add(\"Content-Disposition\", \"form-data; name=\\\"%s\\\"\")\n", field[0]))
+			if contentType != "" {
+				buffer.WriteString(fmt.Sprintf("        header.Add(\"Content-Type\", \"%s\")\n", contentType))
+			}
+			buffer.WriteString("        fileWriter, err := writer.CreatePart(header)\n")
+			buffer.WriteString("        if err != nil {\n")
+			buffer.WriteString("            log.Fatal(err)\n")
+			buffer.WriteString("        }\n")
+			buffer.WriteString(fmt.Sprintf("        file, err := os.Open(\"%s\")\n", sourceFile))
+			buffer.WriteString("        if err != nil {\n")
+			buffer.WriteString("            log.Fatal(err)\n")
+			buffer.WriteString("        }\n")
+			buffer.WriteString("        io.Copy(fileWriter, file)\n")
+			buffer.WriteString("    }\n")
+			result = buffer.String()
+			generator.Modules["net/textproto"] = true
+			generator.Modules["os"] = true
+			generator.Modules["io"] = true
 		} else {
 			result = fmt.Sprintf("    writer.WriteField(\"%s\", \"%s\")\n", field[0], field[1])
 		}

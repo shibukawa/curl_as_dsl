@@ -36,11 +36,11 @@ echo "case 8: simple post with data"
 ./httpgen curl -X POST http://localhost:18888 > test/test.go
 pushd test;go build;./test;popd
 
-echo "case 8: simple post with local file content"
+echo "case 9: simple post with local file content"
 ./httpgen curl -X POST -T test.go http://localhost:18888 > test/test.go
 pushd test;go build;./test;popd
 
-echo "case 9: post form"
+echo "case 10: post form"
 ./httpgen curl -F hello=world http://localhost:18888 > test/test.go
 pushd test;go build;./test;popd
 
@@ -74,6 +74,14 @@ pushd test;go build;./test;popd
 
 echo "case 18: send file in form protocol with explicit name and type"
 ./httpgen curl -F "file=@test.go;filename=nameinpost;type=text/plain" http://localhost:18888 > test/test.go
+pushd test;go build;./test;popd
+
+echo "case 19: send file in form protocol (2)"
+./httpgen curl -F "file=<test.go" http://localhost:18888 > test/test.go
+pushd test;go build;./test;popd
+
+echo "case 20: send file in form protocol with explicit type (2)"
+./httpgen curl -F "file=<test.go;type=text/plain" http://localhost:18888 > test/test.go
 pushd test;go build;./test;popd
 
 

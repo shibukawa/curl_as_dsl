@@ -74,9 +74,9 @@ func (self *DataOptions) HasForm() bool {
 	}
 	return false
 }
-
 type CurlOptions struct {
 	// Example of verbosity with level
+	Basic bool `long:"basic" description:"Use HTTP Basic Authentication (H)"`
 	Cookie string `short:"b" long:"cookie" value-name:"STRING/FILE" description:"Read cookies from STRING/FILE (H)"`
 	CookieJar string `short:"c" long:"cookie-jar" value-name:"FILE" description:"Write cookies to FILE after operation (H)"`
 	Data func(string) `short:"d" long:"data" value-name:"DATA" description:"HTTP POST data (H)"`
@@ -88,14 +88,16 @@ type CurlOptions struct {
 	FormString func(string) `long:"form-string" value-name:"KEY=VALUE" description:"Specify HTTP multipart POST data (H)"`
 	Header []string `short:"H" long:"header" value-name:"LINE" description:"Pass custom header LINE to server (H)"`
 	Head bool `short:"I" long:"head" description:"Show document info only"`
-	Http11 bool `long:"http1.1" description:"Use HTTP 1.1 (H)"`
-	Http2 bool `long:"http2" description:"Use HTTP 2 (H)"`
+	//Http11 bool `long:"http1.1" description:"Use HTTP 1.1 (H)"`
+	//Http2 bool `long:"http2" description:"Use HTTP 2 (H)"`
 	Proxy string `short:"x" long:"proxy" value-name:"[PROTOCOL://]HOST[:PORT]" description:"Use proxy on given port"`
 	Referer string `short:"e" long:"referer" description:"Referer URL (H)"`
 	Request string `short:"X" long:"request" value-name:"COMMAND" description:"Specify request command to use"`
 	Compressed bool `long:"tr-encoding" description:"Request compressed transfer encoding (H)"`
 	Transfer string `short:"T" long:"upload-file" value-name:"FILE" description:"Transfer FILE to destination"`
 	Url string `long:"url" value-name:"URL" description:"URL to work with"`
+	User string `short:"u" long:"user" value-name:"USER[:PASSWORD]" description:"Server user and password"`
+	UserAgent string `short:"A" long:"user-agent" value-name:"STRING" description:"User-Agent to send to server (H)"`
 	ProcessedData DataOptions
 }
 
