@@ -26,15 +26,19 @@ func (self *DataOption) IsFormStyle() bool {
 }
 
 func (self *DataOption) UseExternalFile() bool {
-	index := strings.Index(self.Value, "=")
-	if index == -1 {
-		return false
-	}
-	if index < len(self.Value) - 1 {
-		nextChar := self.Value[index + 1:index + 2]
-		if nextChar == "@" || nextChar == "<" {
-			return true
+	if self.Type == FormType {
+		index := strings.Index(self.Value, "=")
+		if index == -1 {
+			return false
 		}
+		if index < len(self.Value) - 1 {
+			nextChar := self.Value[index + 1:index + 2]
+			if nextChar == "@" || nextChar == "<" {
+				return true
+			}
+		}
+	} else if self.Type != FormStringType {
+		return strings.HasPrefix(self.Value, "@")
 	}
 	return false
 }
@@ -77,6 +81,7 @@ func (self *DataOptions) HasForm() bool {
 type CurlOptions struct {
 	// Example of verbosity with level
 	Basic bool `long:"basic" description:"Use HTTP Basic Authentication (H)"`
+    Compressed func() `long:"compressed" description:"Request compressed response (using deflate or gzip)"`
 	Cookie string `short:"b" long:"cookie" value-name:"STRING/FILE" description:"Read cookies from STRING/FILE (H)"`
 	CookieJar string `short:"c" long:"cookie-jar" value-name:"FILE" description:"Write cookies to FILE after operation (H)"`
 	Data func(string) `short:"d" long:"data" value-name:"DATA" description:"HTTP POST data (H)"`
@@ -91,17 +96,22 @@ type CurlOptions struct {
 	//Http11 bool `long:"http1.1" description:"Use HTTP 1.1 (H)"`
 	//Http2 bool `long:"http2" description:"Use HTTP 2 (H)"`
 	Proxy string `short:"x" long:"proxy" value-name:"[PROTOCOL://]HOST[:PORT]" description:"Use proxy on given port"`
-	Referer string `short:"e" long:"referer" description:"Referer URL (H)"`
+	Referer func(string) `short:"e" long:"referer" description:"Referer URL (H)"`
 	Request string `short:"X" long:"request" value-name:"COMMAND" description:"Specify request command to use"`
-	Compressed bool `long:"tr-encoding" description:"Request compressed transfer encoding (H)"`
-	Transfer string `short:"T" long:"upload-file" value-name:"FILE" description:"Transfer FILE to destination"`
+	TrEncoding func() `long:"tr-encoding" description:"Request compressed transfer encoding (H)"`
+	Transfer func(string) `short:"T" long:"upload-file" value-name:"FILE" description:"Transfer FILE to destination"`
 	Url string `long:"url" value-name:"URL" description:"URL to work with"`
 	User string `short:"u" long:"user" value-name:"USER[:PASSWORD]" description:"Server user and password"`
-	UserAgent string `short:"A" long:"user-agent" value-name:"STRING" description:"User-Agent to send to server (H)"`
+	UserAgent func(string) `short:"A" long:"user-agent" value-name:"STRING" description:"User-Agent to send to server (H)"`
 	ProcessedData DataOptions
 }
 
 func (self *CurlOptions) Init() {
+	self.Compressed = func () {
+		self.Header = append(self.Header, "Accept-Encoding: deflate")
+		self.Header = append(self.Header, "Accept-Encoding: gzip")
+	}
+
 	self.Data = func (data string) {
 		self.ProcessedData.Append(data, DataAsciiType)
 	}
@@ -122,6 +132,26 @@ func (self *CurlOptions) Init() {
 	self.FormString = func (data string) {
 		self.ProcessedData.Append(data, FormStringType)
 	}
+
+	self.Referer = func (data string) {
+		self.Header = append(self.Header, fmt.Sprintf("Referer: %s", data))
+	}
+
+	self.Transfer = func (data string) {
+		self.ProcessedData.Append(fmt.Sprintf("@%s", data), DataAsciiType)
+		if self.Request == "" {
+			self.Request = "PUT"
+		}
+	}
+
+	self.TrEncoding = func () {
+		self.Header = append(self.Header, "Te: gzip")
+	}
+
+	self.UserAgent = func (data string) {
+		self.Header = append(self.Header, fmt.Sprintf("User-Agent: %s", data))
+	}
+
 }
 
 func (self *CurlOptions) CheckError() error {
@@ -146,9 +176,6 @@ func (self *CurlOptions) Method() string {
 	if self.ProcessedData.HasAnyData() {
 		return "POST"
 	}
-	if self.Transfer != "" {
-		return "PUT"
-	}
 	return "GET"
 }
 
@@ -166,10 +193,10 @@ func (self *CurlOptions) Headers() [][]string {
 }
 
 func (self *CurlOptions) OnlyHasContentTypeHeader() bool {
-headers := self.Headers()
-if len(headers) == 0 || (len(headers) == 1 && strings.ToLower(headers[0][0]) == "content-type") {
-return true
-}
-return false
+	headers := self.Headers()
+	if len(headers) == 0 || (len(headers) == 1 && strings.ToLower(headers[0][0]) == "content-type") {
+		return true
+	}
+	return false
 }
 

@@ -2,7 +2,7 @@ package go_client
 
 import (
 	"fmt"
-	"log"
+	//"log"
 	"strings"
 	"../httpgen_common"
 	"mime"
@@ -21,8 +21,9 @@ func ClientNeeded(options *httpgen_common.CurlOptions) bool {
 		if method != "GET" && method != "POST" {
 			return true
 		}
+		return false
 	}
-	return false
+	return true
 }
 
 /*
@@ -41,23 +42,18 @@ func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{
 	onlyHasContentTypeHeader := options.OnlyHasContentTypeHeader()
 
 	if method == "POST" && onlyHasContentTypeHeader {
-		if options.Transfer != "" {
-			return processCurlPostSingleFile(generator)
-		} else {
-			if !options.ProcessedData.HasData() {
-
-			}
-			if options.ProcessedData.HasData() {
-				if options.Get {
-					return processCurlPostDataWithUrl(generator)
-				} else {
-					return processCurlPostData(generator, options.ProcessedData)
-				}
-			} else if options.ProcessedData.HasForm() {
-				return processCurlPostForm(generator)
+		if options.ProcessedData.HasData() {
+			if options.Get {
+				return processCurlPostDataWithUrl(generator)
+			} else if len(options.ProcessedData) == 1 && options.ProcessedData[0].UseExternalFile() {
+				return processCurlPostSingleFile(generator)
 			} else {
-				return processCurlSimple(generator)
+				return processCurlPostData(generator)
 			}
+		} else if options.ProcessedData.HasForm() {
+			return processCurlPostForm(generator)
+		} else {
+			return processCurlSimple(generator)
 		}
 	}
 
@@ -77,17 +73,51 @@ func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{
 }
 
 func processCurlFullFeatureRequest(generator *GoGenerator) (string, interface{}) {
-	log.Println("processCurlFullFeatureRequest")
+	options := generator.Options
+	if options.ProcessedData.HasData() {
+		if options.Get {
+			generator.SetDataForUrl()
+			generator.DataVariable = "nil"
+		} else {
+			generator.DataVariable = "&buffer"
+			insertContentTypeHeader(generator, "application/x-www-form-urlencoded")
+			generator.SetDataForBody()
+		}
+	} else if options.ProcessedData.HasForm() {
+		generator.DataVariable = "&buffer"
+		insertContentTypeHeader(generator, "multipart/form-data")
+		generator.SetFormForBody()
+	}
+	if options.Proxy != "" {
+		generator.Modules["net/url"] = true
+	}
+
 	return "full", *generator
 }
 
+func insertContentTypeHeader(generator *GoGenerator, contentType string) {
+	found := false
+	headers := generator.Options.Header
+	for _, header := range headers {
+		fragments := strings.SplitN(header, ":", 2)
+		if len(fragments) == 2 && strings.TrimSpace(strings.ToLower(fragments[0])) == "content-type" {
+			found = true
+			break
+		}
+	}
+	if !found {
+		generator.Options.Header = append(headers, fmt.Sprintf("Content-Type: %s", contentType))
+	}
+}
+
 func processCurlPostSingleFile(generator *GoGenerator) (string, interface{}) {
+	fileName := generator.Options.ProcessedData[0].Value[1:]
 	contentType := ""
 	headers := generator.Options.Headers()
 	if len(headers) > 0 {
 		contentType = headers[0][1]
 	} else {
-		contentType = mime.TypeByExtension(generator.Options.Transfer)
+		contentType = mime.TypeByExtension(fileName)
 	}
 	var value struct {
 		Url string
@@ -95,7 +125,7 @@ func processCurlPostSingleFile(generator *GoGenerator) (string, interface{}) {
 		ContentType string
 	}
 	value.Url = fmt.Sprintf("\"%s\"", generator.Options.Url)
-	value.FilePath = generator.Options.Transfer
+	value.FilePath = fileName
 	value.ContentType = contentType
 	value.ContentType = contentType
 	return "post_single_file", value
@@ -103,14 +133,14 @@ func processCurlPostSingleFile(generator *GoGenerator) (string, interface{}) {
 
 func processCurlPostForm(generator *GoGenerator) (string, interface{}) {
 	if !canUseSimpleForm(&generator.Options.ProcessedData) {
-		return processCurlPostData(generator, generator.Options.ProcessedData)
+		return processCurlPostData(generator)
 	}
 	generator.Modules["net/url"] = true
 	generator.SetDataForForm()
 	return "post_form", generator
 }
 
-func processCurlPostData(generator *GoGenerator, inputs []httpgen_common.DataOption) (string, interface{}) {
+func processCurlPostData(generator *GoGenerator) (string, interface{}) {
 	generator.DataVariable = "&buffer"
 	var contentType string
 	if generator.Options.ProcessedData.HasForm() {

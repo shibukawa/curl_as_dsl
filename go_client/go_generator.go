@@ -27,6 +27,7 @@ func NewGoGenerator(options *httpgen_common.CurlOptions) *GoGenerator {
 	result.Modules["net/http"] = true
 	result.Modules["log"] = true
 	result.Modules["io/ioutil"] = true
+	result.DataVariable = "nil"
 	return result
 }
 
@@ -42,6 +43,41 @@ func (self GoGenerator) Method() string {
 
 func (self GoGenerator) FilePath() string {
 	return ""
+}
+
+func (self GoGenerator) PrepareClient() string {
+	if self.Options.Proxy != "" {
+		return fmt.Sprintf("proxyUrl, err := url.Parse(\"%s\")", self.Options.Proxy)
+	}
+	return ""
+}
+
+func (self GoGenerator) ClientBody() string {
+	if self.Options.Proxy != "" {
+		return "{Transport: &http.Transport{Proxy: http.ProxyURL(proxyUrl)}}"
+	} else {
+		return "{}"
+	}
+}
+
+func (self GoGenerator) ModifyRequest() string {
+	var buffer bytes.Buffer;
+	isFirst := true
+	// Set headers
+	for _, header := range self.Options.Header {
+		headers := strings.SplitN(header, ":", 2)
+		if len(headers) == 2 {
+			key := strings.TrimSpace(headers[0])
+			value := strings.TrimSpace(headers[1])
+			if isFirst {
+				isFirst = false
+			} else {
+				buffer.WriteString("    ");
+			}
+			buffer.WriteString(fmt.Sprintf("request.Header.Add(\"%s\", \"%s\")\n", key, value))
+		}
+	}
+	return buffer.String()
 }
 
 //--- Setter methods

@@ -84,5 +84,15 @@ echo "case 20: send file in form protocol with explicit type (2)"
 ./httpgen curl -F "file=<test.go;type=text/plain" http://localhost:18888 > test/test.go
 pushd test;go build;./test;popd
 
+echo "case 21: (Full Client) get with aprameter and header"
+./httpgen curl -H "Accept: text/html" -G -d hello=world http://localhost:18888 > test/test.go
+pushd test;go build;./test;popd
 
+echo "case 22: (Full Client) simple post with data and user-agent"
+./httpgen curl --user-agent="Netscape 4.7" -d test http://localhost:18888 > test/test.go
+pushd test;go build;./test;popd
+
+echo "case 23: post url encoded data from local files with compressed option"
+./httpgen curl --compressed --data-urlencode @test.go --data-urlencode @test.go http://localhost:18888 > test/test.go
+pushd test;go build;./test;popd
 

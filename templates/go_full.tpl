@@ -5,10 +5,11 @@ import (
 {{end}})
 
 func main() {
-    client := &http.Client{{ .ClientBody }}{{ if urlprepare}}
-    {{ .UrlPrepare }} {{end}}{{ if bodyprepare }}
-    {{ .BodyPrepare }}
-    request, err := http.NewRequest("{{ .Method }}", "{{ .Url }}{{ .UrlExtra }}", {{ .Body }})
+    {{ .PrepareClient }}
+    client := &http.Client{{ .ClientBody }}
+    {{ .Data }}
+    request, err := http.NewRequest("{{ .Method }}", {{ .Url }}, {{ .DataVariable }})
+    {{ .ModifyRequest }}
     resp, err := client.Do(request)
     if err != nil {
         log.Fatal(err)
