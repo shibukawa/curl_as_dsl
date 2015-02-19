@@ -96,3 +96,7 @@ echo "case 23: post url encoded data from local files with compressed option"
 ./httpgen curl --compressed --data-urlencode @test.go --data-urlencode @test.go http://localhost:18888 > test/test.go
 pushd test;go build;./test;popd
 
+echo "case 24: Basic authentication"
+./httpgen curl -u USER:PASS http://localhost:18888 > test/test.go
+pushd test;go build;./test;popd
+

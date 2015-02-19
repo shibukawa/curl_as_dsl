@@ -1,20 +1,20 @@
 package main
 
 import (
-	"os"
-	"fmt"
-	"log"
-	"github.com/jessevdk/go-flags"
-	"text/template"
-	"bytes"
 	"./go_client"
 	"./httpgen_common"
+	"bytes"
+	"fmt"
+	"github.com/jessevdk/go-flags"
+	"log"
+	"os"
 	"reflect"
+	"text/template"
 )
 
 type GlobalOptions struct {
 	Target string `short:"t" long:"target" value-name:"NAME" description:"Target name of code generator" default:"go_client"`
-	Debug bool `short:"d" long:"debug" description:"Debug option"`
+	Debug  bool   `short:"d" long:"debug" description:"Debug option"`
 }
 
 func render(lang, key string, options interface{}) string {

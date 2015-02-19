@@ -1,27 +1,43 @@
 package main
 
 import (
-	"log"
 	"fmt"
-	"net/http"
 	"io/ioutil"
+	"log"
+	"net/http"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.URL.String(), r.Method)
-	log.Println("Proto:", r.Proto)
+	log.Println("Method:", r.Proto)
 	log.Println("Header", r.Header)
 	fmt.Println("--body--")
 	defer r.Body.Close()
 	byte, _ := ioutil.ReadAll(r.Body)
 	log.Println(string(byte))
 
+	fmt.Fprintf(w, "hello\n")
+}
 
-	fmt.Fprintf(w, "hello")
+func authHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.URL.String(), r.Method)
+	log.Println("Method:", r.Proto)
+	log.Println("Header", r.Header)
+	fmt.Println("--body--")
+	defer r.Body.Close()
+	byte, _ := ioutil.ReadAll(r.Body)
+	log.Println(string(byte))
 
+	if r.Header.Get("Authorization") == "" {
+		w.Header().Add("WWW-Authenticate", `Digest realm="testrealm@host.com", nonce="dcd98b7102dd2f0e8b11d0f600bfb0c093", opaque="5ccc069c403ebaf9f0171e9517f40e41"`)
+		w.WriteHeader(401)
+	} else {
+		fmt.Fprintf(w, "hello\n")
+	}
 }
 
 func main() {
+	http.HandleFunc("/auth", authHandler)
 	http.HandleFunc("/", handler)
 	log.Println("start listening :18888")
 	http.ListenAndServe(":18888", nil)

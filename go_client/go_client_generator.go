@@ -3,9 +3,9 @@ package go_client
 import (
 	"fmt"
 	//"log"
-	"strings"
 	"../httpgen_common"
 	"mime"
+	"strings"
 )
 
 func escapeDQ(src string) string {
@@ -14,6 +14,9 @@ func escapeDQ(src string) string {
 
 func ClientNeeded(options *httpgen_common.CurlOptions) bool {
 	if options.Proxy != "" {
+		return true
+	}
+	if options.User != "" {
 		return true
 	}
 	if options.OnlyHasContentTypeHeader() {
@@ -29,7 +32,7 @@ func ClientNeeded(options *httpgen_common.CurlOptions) bool {
 /*
 	Dispatcher function of curl command
 	This is an exported function and called from httpgen.
- */
+*/
 func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{}) {
 
 	generator := NewGoGenerator(options)
@@ -74,6 +77,7 @@ func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{
 
 func processCurlFullFeatureRequest(generator *GoGenerator) (string, interface{}) {
 	options := generator.Options
+
 	if options.ProcessedData.HasData() {
 		if options.Get {
 			generator.SetDataForUrl()
@@ -90,6 +94,9 @@ func processCurlFullFeatureRequest(generator *GoGenerator) (string, interface{})
 	}
 	if options.Proxy != "" {
 		generator.Modules["net/url"] = true
+	}
+	if options.User != "" {
+		generator.Modules["encoding/base64"] = true
 	}
 
 	return "full", *generator
@@ -120,8 +127,8 @@ func processCurlPostSingleFile(generator *GoGenerator) (string, interface{}) {
 		contentType = mime.TypeByExtension(fileName)
 	}
 	var value struct {
-		Url string
-		FilePath string
+		Url         string
+		FilePath    string
 		ContentType string
 	}
 	value.Url = fmt.Sprintf("\"%s\"", generator.Options.Url)

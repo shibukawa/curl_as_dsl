@@ -1,22 +1,22 @@
 package go_client
 
 import (
-	"os"
 	"fmt"
+	"os"
 	//"log"
+	"../httpgen_common"
 	"bytes"
 	"net/url"
 	"strings"
-	"../httpgen_common"
 )
 
 type GoGenerator struct {
 	Options *httpgen_common.CurlOptions
 	Modules map[string]bool
 
-	Data string
+	Data         string
 	DataVariable string
-	ContentType string
+	ContentType  string
 
 	extraUrl string
 }
@@ -61,7 +61,7 @@ func (self GoGenerator) ClientBody() string {
 }
 
 func (self GoGenerator) ModifyRequest() string {
-	var buffer bytes.Buffer;
+	var buffer bytes.Buffer
 	isFirst := true
 	// Set headers
 	for _, header := range self.Options.Header {
@@ -72,11 +72,20 @@ func (self GoGenerator) ModifyRequest() string {
 			if isFirst {
 				isFirst = false
 			} else {
-				buffer.WriteString("    ");
+				buffer.WriteString("    ")
 			}
 			buffer.WriteString(fmt.Sprintf("request.Header.Add(\"%s\", \"%s\")\n", key, value))
 		}
 	}
+	if self.Options.User != "" {
+		if isFirst {
+			isFirst = false
+		} else {
+			buffer.WriteString("    ")
+		}
+		buffer.WriteString(fmt.Sprintf("request.Header.Add(\"Authorization\", \"Basic \" + base64.StdEncoding.EncodeToString([]byte(\"%s\")))\n", self.Options.User))
+	}
+
 	return buffer.String()
 }
 
