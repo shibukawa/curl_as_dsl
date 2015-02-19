@@ -13,10 +13,10 @@ func escapeDQ(src string) string {
 }
 
 func ClientNeeded(options *httpgen_common.CurlOptions) bool {
-	if options.Proxy != "" {
+	if options.Proxy != "" || options.User != "" || len(options.Cookie) > 0 {
 		return true
 	}
-	if options.User != "" {
+	if len(options.AWSV2) > 0 {
 		return true
 	}
 	if options.OnlyHasContentTypeHeader() {
@@ -98,22 +98,21 @@ func processCurlFullFeatureRequest(generator *GoGenerator) (string, interface{})
 	if options.User != "" {
 		generator.Modules["encoding/base64"] = true
 	}
+	if generator.Options.AWSV2 != "" {
+		generator.Modules["encoding/base64"] = true
+		generator.Modules["crypto/hmac"] = true
+		generator.Modules["crypto/sha1"] = true
+		generator.Modules["time"] = true
+		generator.Modules["fmt"] = true
+	}
 
 	return "full", *generator
 }
 
 func insertContentTypeHeader(generator *GoGenerator, contentType string) {
-	found := false
-	headers := generator.Options.Header
-	for _, header := range headers {
-		fragments := strings.SplitN(header, ":", 2)
-		if len(fragments) == 2 && strings.TrimSpace(strings.ToLower(fragments[0])) == "content-type" {
-			found = true
-			break
-		}
-	}
-	if !found {
-		generator.Options.Header = append(headers, fmt.Sprintf("Content-Type: %s", contentType))
+	contentTypeInHeader := generator.FindContentTypeHeader()
+	if contentTypeInHeader == "" {
+		generator.Options.Header = append(generator.Options.Header, fmt.Sprintf("Content-Type: %s", contentType))
 	}
 }
 

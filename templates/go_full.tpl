@@ -3,7 +3,7 @@ package main
 import (
 {{ range $key, $_ := .Modules }}    "{{ $key }}"
 {{end}})
-
+{{ .AdditionalDeclaration }}
 func main() {
     {{ .PrepareClient }}
     client := &http.Client{{ .ClientBody }}

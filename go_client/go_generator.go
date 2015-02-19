@@ -63,33 +63,90 @@ func (self GoGenerator) ClientBody() string {
 func (self GoGenerator) ModifyRequest() string {
 	var buffer bytes.Buffer
 	isFirst := true
-	// Set headers
-	for _, header := range self.Options.Header {
-		headers := strings.SplitN(header, ":", 2)
-		if len(headers) == 2 {
-			key := strings.TrimSpace(headers[0])
-			value := strings.TrimSpace(headers[1])
-			if isFirst {
-				isFirst = false
-			} else {
-				buffer.WriteString("    ")
-			}
-			buffer.WriteString(fmt.Sprintf("request.Header.Add(\"%s\", \"%s\")\n", key, value))
-		}
-	}
-	if self.Options.User != "" {
+	indent := func() {
 		if isFirst {
 			isFirst = false
 		} else {
 			buffer.WriteString("    ")
 		}
+	}
+	contentTypeInHeader := self.FindContentTypeHeader()
+	if contentTypeInHeader != "" {
+		self.ContentType = contentTypeInHeader
+	}
+
+	// Set headers
+	for _, header := range self.Options.Header {
+		headers := strings.SplitN(header, ":", 2)
+		if len(headers) == 2 {
+			indent()
+			key := strings.TrimSpace(headers[0])
+			value := strings.TrimSpace(headers[1])
+			buffer.WriteString(fmt.Sprintf("request.Header.Add(\"%s\", \"%s\")\n", key, value))
+		}
+	}
+
+	if self.Options.User != "" {
+		indent()
 		buffer.WriteString(fmt.Sprintf("request.Header.Add(\"Authorization\", \"Basic \" + base64.StdEncoding.EncodeToString([]byte(\"%s\")))\n", self.Options.User))
+	}
+
+	for _, cookie := range self.Options.Cookie {
+		fragments := strings.SplitN(cookie, "=", 2)
+		if len(fragments) == 2 {
+			name := strings.TrimSpace(fragments[0])
+			value := strings.TrimSpace(fragments[1])
+			buffer.WriteString(fmt.Sprintf("request.AddCookie(&http.Cookie{Name: \"%s\", Value: \"%s\"})\n", name, value))
+		}
+	}
+
+	if self.Options.AWSV2 != "" {
+		indent()
+		buffer.WriteString(fmt.Sprintf("SignAWSV2(request, \"\", \"%s\")\n", self.ContentType))
 	}
 
 	return buffer.String()
 }
 
-//--- Setter methods
+func (self GoGenerator) AdditionalDeclaration() string {
+	var buffer bytes.Buffer
+
+	if self.Options.AWSV2 != "" {
+		fragments := strings.SplitN(self.Options.AWSV2, ":", 2)
+		if len(fragments) == 2 {
+			buffer.WriteString(fmt.Sprintf(`
+func SignAWSV2(req *http.Request, md5, contentType string) {
+    dateStr := time.Now().UTC().Format(time.RFC1123Z)
+    req.Header.Set("Date", dateStr)
+    if md5 != "" {
+        req.Header.Set("Content-MD5", md5)
+    }
+    strToSign := fmt.Sprintf("%%s\n%%s\n%%s\n%%s\n%%s", req.Method, md5, contentType, dateStr, req.URL.Path)
+    hash := hmac.New(sha1.New, []byte("%s"))
+    hash.Write([]byte(strToSign))
+    signature := make([]byte, base64.StdEncoding.EncodedLen(hash.Size()))
+    base64.StdEncoding.Encode(signature, hash.Sum(nil))
+    req.Header.Set("Authorization", fmt.Sprintf("AWS %%s:%%s", "%s", string(signature)))
+}
+`, fragments[1], fragments[0]))
+		}
+	}
+
+	return buffer.String()
+}
+
+//--- Setter/Getter methods
+
+func (generator *GoGenerator) FindContentTypeHeader() string {
+	headers := generator.Options.Header
+	for _, header := range headers {
+		fragments := strings.SplitN(header, ":", 2)
+		if len(fragments) == 2 && strings.TrimSpace(strings.ToLower(fragments[0])) == "content-type" {
+			return strings.TrimSpace(fragments[1])
+		}
+	}
+	return ""
+}
 
 func (self *GoGenerator) SetDataForBody() {
 	var buffer bytes.Buffer
