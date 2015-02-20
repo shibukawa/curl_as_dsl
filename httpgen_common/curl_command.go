@@ -206,3 +206,32 @@ func (self *CurlOptions) OnlyHasContentTypeHeader() bool {
 	return false
 }
 
+func (self *CurlOptions) FindContentTypeHeader() string {
+	headers := self.Header
+	for _, header := range headers {
+		fragments := strings.SplitN(header, ":", 2)
+		if len(fragments) == 2 && strings.TrimSpace(strings.ToLower(fragments[0])) == "content-type" {
+			return strings.TrimSpace(fragments[1])
+		}
+	}
+	return ""
+}
+
+func (self *CurlOptions) InsertContentTypeHeader(contentType string) {
+	contentTypeInHeader := self.FindContentTypeHeader()
+	if contentTypeInHeader == "" {
+		self.Header = append(self.Header, fmt.Sprintf("Content-Type: %s", contentType))
+	}
+}
+
+func (self *CurlOptions) CanUseSimpleForm() bool {
+	for _, form := range self.ProcessedData {
+		if form.UseExternalFile() {
+			return false
+		}
+		if strings.Index(form.Value, "=") == -1 {
+			return false
+		}
+	}
+	return true
+}

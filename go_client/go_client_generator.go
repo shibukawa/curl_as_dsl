@@ -84,12 +84,12 @@ func processCurlFullFeatureRequest(generator *GoGenerator) (string, interface{})
 			generator.DataVariable = "nil"
 		} else {
 			generator.DataVariable = "&buffer"
-			insertContentTypeHeader(generator, "application/x-www-form-urlencoded")
+			generator.Options.InsertContentTypeHeader("application/x-www-form-urlencoded")
 			generator.SetDataForBody()
 		}
 	} else if options.ProcessedData.HasForm() {
 		generator.DataVariable = "&buffer"
-		insertContentTypeHeader(generator, "multipart/form-data")
+		generator.Options.InsertContentTypeHeader("multipart/form-data")
 		generator.SetFormForBody()
 	}
 	if options.Proxy != "" {
@@ -109,13 +109,6 @@ func processCurlFullFeatureRequest(generator *GoGenerator) (string, interface{})
 	return "full", *generator
 }
 
-func insertContentTypeHeader(generator *GoGenerator, contentType string) {
-	contentTypeInHeader := generator.FindContentTypeHeader()
-	if contentTypeInHeader == "" {
-		generator.Options.Header = append(generator.Options.Header, fmt.Sprintf("Content-Type: %s", contentType))
-	}
-}
-
 func processCurlPostSingleFile(generator *GoGenerator) (string, interface{}) {
 	fileName := generator.Options.ProcessedData[0].Value[1:]
 	contentType := ""
@@ -133,12 +126,11 @@ func processCurlPostSingleFile(generator *GoGenerator) (string, interface{}) {
 	value.Url = fmt.Sprintf("\"%s\"", generator.Options.Url)
 	value.FilePath = fileName
 	value.ContentType = contentType
-	value.ContentType = contentType
 	return "post_single_file", value
 }
 
 func processCurlPostForm(generator *GoGenerator) (string, interface{}) {
-	if !canUseSimpleForm(&generator.Options.ProcessedData) {
+	if generator.Options.CanUseSimpleForm() {
 		return processCurlPostData(generator)
 	}
 	generator.Modules["net/url"] = true
@@ -182,16 +174,4 @@ func processCurlSimple(generator *GoGenerator) (string, interface{}) {
 	} else { // "POST"
 		return "simple_post", *generator
 	}
-}
-
-func canUseSimpleForm(dataOptions *httpgen_common.DataOptions) bool {
-	for _, form := range *dataOptions {
-		if form.UseExternalFile() {
-			return false
-		}
-		if strings.Index(form.Value, "=") == -1 {
-			return false
-		}
-	}
-	return true
 }

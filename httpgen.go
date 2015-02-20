@@ -3,6 +3,7 @@ package main
 import (
 	"./go_client"
 	"./httpgen_common"
+	"./python_client"
 	"bytes"
 	"fmt"
 	"github.com/jessevdk/go-flags"
@@ -15,6 +16,15 @@ import (
 type GlobalOptions struct {
 	Target string `short:"t" long:"target" value-name:"NAME" description:"Target name of code generator" default:"go_client"`
 	Debug  bool   `short:"d" long:"debug" description:"Debug option"`
+}
+
+func PrintLangHelp(target string) {
+	fmt.Fprintf(os.Stderr, `
+'%s' is not supported as a target.
+This program supports one of the following targets:
+* go (default) : Go standard library (net/http)
+* python       : Python standard library (http.client)
+`, target)
 }
 
 func render(lang, key string, options interface{}) string {
@@ -62,6 +72,21 @@ func main() {
 		case "go_client":
 			langName = "go"
 			templateName, option = go_client.ProcessCurlCommand(&curlOptions)
+		case "go":
+			langName = "go"
+			templateName, option = go_client.ProcessCurlCommand(&curlOptions)
+		case "python_client":
+			langName = "python"
+			templateName, option = python_client.ProcessCurlCommand(&curlOptions)
+		case "python":
+			langName = "python"
+			templateName, option = python_client.ProcessCurlCommand(&curlOptions)
+		case "py":
+			langName = "python"
+			templateName, option = python_client.ProcessCurlCommand(&curlOptions)
+		default:
+			PrintLangHelp(globalOptions.Target)
+			os.Exit(1)
 		}
 		if templateName != "" {
 			if globalOptions.Debug {
