@@ -1,7 +1,7 @@
-Curl as DSL
+cURL as DSL
 ===================
 
-This command generates source code from curl command line options.
+This command generates source code from cURL command line options.
 
 Install
 ---------
