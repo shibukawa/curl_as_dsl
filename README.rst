@@ -28,7 +28,7 @@ Global Options
        py, python_client : Python 3 code (http.client)
 
 
-Supported Curl Options
+Supported cURL Options
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: none
@@ -37,8 +37,6 @@ Supported Curl Options
 
           --basic                             Use HTTP Basic Authentication (H)
           --compressed                        Request compressed response (using deflate or gzip)
-      -b, --cookie=STRING/FILE                Read cookies from STRING/FILE (H)
-      -c, --cookie-jar=FILE                   Write cookies to FILE after operation (H)
       -d, --data=DATA                         HTTP POST data (H)
           --data-ascii=DATA                   HTTP POST ASCII data (H)
           --data-binary=DATA                  HTTP POST binary data (H)
