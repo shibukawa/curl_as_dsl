@@ -43,6 +43,22 @@ func (self *DataOption) UseExternalFile() bool {
 	return false
 }
 
+func (self *DataOption) SendAsFormFile() bool {
+	if self.Type == FormType {
+		index := strings.Index(self.Value, "=")
+		if index == -1 {
+			return false
+		}
+		if index < len(self.Value) - 1 {
+			nextChar := self.Value[index + 1:index + 2]
+			if nextChar == "@" {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 type DataOptions []DataOption
 
 func (self *DataOptions) Append(data string, typeEmum DataType) {
@@ -144,7 +160,7 @@ func (self *CurlOptions) Init() {
 	}
 
 	self.Transfer = func (data string) {
-		self.ProcessedData.Append(fmt.Sprintf("@%s", data), DataAsciiType)
+		self.ProcessedData.Append(fmt.Sprintf("@%s", data), DataBinaryType)
 		if self.Request == "" {
 			self.Request = "PUT"
 		}

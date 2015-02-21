@@ -130,7 +130,7 @@ func processCurlPostSingleFile(generator *GoGenerator) (string, interface{}) {
 }
 
 func processCurlPostForm(generator *GoGenerator) (string, interface{}) {
-	if generator.Options.CanUseSimpleForm() {
+	if !generator.Options.CanUseSimpleForm() {
 		return processCurlPostData(generator)
 	}
 	generator.Modules["net/url"] = true
