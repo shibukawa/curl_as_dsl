@@ -90,6 +90,8 @@ func processCurlFullFeatureRequest(generator *GoGenerator) (string, interface{})
 	} else if options.ProcessedData.HasForm() {
 		generator.DataVariable = "&buffer"
 		generator.Options.InsertContentTypeHeader("multipart/form-data")
+		generator.HasBoundary = true
+
 		generator.SetFormForBody()
 	}
 	if options.Proxy != "" {
@@ -144,6 +146,7 @@ func processCurlPostData(generator *GoGenerator) (string, interface{}) {
 	if generator.Options.ProcessedData.HasForm() {
 		contentType = "multipart/form-data"
 		generator.SetFormForBody()
+		generator.HasBoundary = true
 	} else {
 		contentType = "application/x-www-form-urlencoded"
 		generator.SetDataForBody()

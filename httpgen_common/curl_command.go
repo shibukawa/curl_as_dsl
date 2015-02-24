@@ -1,8 +1,8 @@
 package httpgen_common
 
 import (
-	"os"
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -18,7 +18,7 @@ const (
 
 type DataOption struct {
 	Value string
-	Type DataType
+	Type  DataType
 }
 
 func (self *DataOption) IsFormStyle() bool {
@@ -35,10 +35,10 @@ func (self *DataOption) FileName() string {
 		if index == -1 {
 			return ""
 		}
-		if index < len(self.Value) - 1 {
-			nextChar := self.Value[index + 1:index + 2]
+		if index < len(self.Value)-1 {
+			nextChar := self.Value[index+1 : index+2]
 			if nextChar == "@" || nextChar == "<" {
-				return strings.Split(self.Value[index + 2:], ";")[0]
+				return strings.Split(self.Value[index+2:], ";")[0]
 			}
 		}
 	} else if self.Type != FormStringType {
@@ -55,8 +55,8 @@ func (self *DataOption) SendAsFormFile() bool {
 		if index == -1 {
 			return false
 		}
-		if index < len(self.Value) - 1 {
-			nextChar := self.Value[index + 1:index + 2]
+		if index < len(self.Value)-1 {
+			nextChar := self.Value[index+1 : index+2]
 			if nextChar == "@" {
 				return true
 			}
@@ -68,7 +68,7 @@ func (self *DataOption) SendAsFormFile() bool {
 type DataOptions []DataOption
 
 func (self *DataOptions) Append(data string, typeEmum DataType) {
-	*self = append(*self, DataOption{Value:data, Type:typeEmum})
+	*self = append(*self, DataOption{Value: data, Type: typeEmum})
 }
 
 func (self *DataOptions) HasAnyData() bool {
@@ -113,30 +113,30 @@ func (self *DataOptions) ExternalFileCount() int {
 
 type CurlOptions struct {
 	// Example of verbosity with level
-	Basic bool `long:"basic" description:"Use HTTP Basic Authentication (H)"`
-    Compressed func() `long:"compressed" description:"Request compressed response (using deflate or gzip)"`
-	Cookie []string `short:"b" long:"cookie" value-name:"STRING/FILE" description:"Read cookies from STRING/FILE (H)"`
-	CookieJar string `short:"c" long:"cookie-jar" value-name:"FILE" description:"Write cookies to FILE after operation (H)"`
-	Data func(string) `short:"d" long:"data" value-name:"DATA" description:"HTTP POST data (H)"`
-	DataAscii func(string) `long:"data-ascii" value-name:"DATA" description:"HTTP POST ASCII data (H)"`
-	DataBinary func(string) `long:"data-binary" value-name:"DATA" description:"HTTP POST binary data (H)"`
+	Basic         bool         `long:"basic" description:"Use HTTP Basic Authentication (H)"`
+	Compressed    func()       `long:"compressed" description:"Request compressed response (using deflate or gzip)"`
+	Cookie        []string     `short:"b" long:"cookie" value-name:"STRING/FILE" description:"Read cookies from STRING/FILE (H)"`
+	CookieJar     string       `short:"c" long:"cookie-jar" value-name:"FILE" description:"Write cookies to FILE after operation (H)"`
+	Data          func(string) `short:"d" long:"data" value-name:"DATA" description:"HTTP POST data (H)"`
+	DataAscii     func(string) `long:"data-ascii" value-name:"DATA" description:"HTTP POST ASCII data (H)"`
+	DataBinary    func(string) `long:"data-binary" value-name:"DATA" description:"HTTP POST binary data (H)"`
 	DataUrlEncode func(string) `long:"data-urlencode" value-name:"DATA" description:"HTTP POST data url encoded (H)"`
 	//Digest bool `long:"digest" description:"Use HTTP Digest Authentication (H)"`
-	Get bool `short:"G" long:"get" description:"Send the -d data with a HTTP GET (H)"`
-	Form func(string) `short:"F" long:"form" value-name:"KEY=VALUE" description:"Specify HTTP multipart POST data (H)"`
+	Get        bool         `short:"G" long:"get" description:"Send the -d data with a HTTP GET (H)"`
+	Form       func(string) `short:"F" long:"form" value-name:"KEY=VALUE" description:"Specify HTTP multipart POST data (H)"`
 	FormString func(string) `long:"form-string" value-name:"KEY=VALUE" description:"Specify HTTP multipart POST data (H)"`
-	Header []string `short:"H" long:"header" value-name:"LINE" description:"Pass custom header LINE to server (H)"`
-	Head bool `short:"I" long:"head" description:"Show document info only"`
+	Header     []string     `short:"H" long:"header" value-name:"LINE" description:"Pass custom header LINE to server (H)"`
+	Head       bool         `short:"I" long:"head" description:"Show document info only"`
 	//Http11 bool `long:"http1.1" description:"Use HTTP 1.1 (H)"`
 	//Http2 bool `long:"http2" description:"Use HTTP 2 (H)"`
-	Proxy string `short:"x" long:"proxy" value-name:"[PROTOCOL://]HOST[:PORT]" description:"Use proxy on given port"`
-	Referer func(string) `short:"e" long:"referer" description:"Referer URL (H)"`
-	Request string `short:"X" long:"request" value-name:"COMMAND" description:"Specify request command to use"`
-	TrEncoding func() `long:"tr-encoding" description:"Request compressed transfer encoding (H)"`
-	Transfer func(string) `short:"T" long:"upload-file" value-name:"FILE" description:"Transfer FILE to destination"`
-	Url string `long:"url" value-name:"URL" description:"URL to work with"`
-	User string `short:"u" long:"user" value-name:"USER[:PASSWORD]" description:"Server user and password"`
-	UserAgent func(string) `short:"A" long:"user-agent" value-name:"STRING" description:"User-Agent to send to server (H)"`
+	Proxy      string       `short:"x" long:"proxy" value-name:"[PROTOCOL://]HOST[:PORT]" description:"Use proxy on given port"`
+	Referer    func(string) `short:"e" long:"referer" description:"Referer URL (H)"`
+	Request    string       `short:"X" long:"request" value-name:"COMMAND" description:"Specify request command to use"`
+	TrEncoding func()       `long:"tr-encoding" description:"Request compressed transfer encoding (H)"`
+	Transfer   func(string) `short:"T" long:"upload-file" value-name:"FILE" description:"Transfer FILE to destination"`
+	Url        string       `long:"url" value-name:"URL" description:"URL to work with"`
+	User       string       `short:"u" long:"user" value-name:"USER[:PASSWORD]" description:"Server user and password"`
+	UserAgent  func(string) `short:"A" long:"user-agent" value-name:"STRING" description:"User-Agent to send to server (H)"`
 
 	// Original parameter
 	AWSV2 string `long:"awsv2" value-name:"ACCESS-KEY:SECRET-KEY" description:"AWS V2 style authentication (original)"`
@@ -146,55 +146,55 @@ type CurlOptions struct {
 }
 
 func (self *CurlOptions) Init() {
-	self.Compressed = func () {
+	self.Compressed = func() {
 		self.Header = append(self.Header, "Accept-Encoding: deflate")
 		self.Header = append(self.Header, "Accept-Encoding: gzip")
 	}
 
-	self.Data = func (data string) {
+	self.Data = func(data string) {
 		self.ProcessedData.Append(data, DataAsciiType)
 	}
-	self.DataAscii = self.Data;
+	self.DataAscii = self.Data
 
-	self.DataBinary = func (data string) {
+	self.DataBinary = func(data string) {
 		self.ProcessedData.Append(data, DataBinaryType)
 	}
 
-	self.DataUrlEncode = func (data string) {
+	self.DataUrlEncode = func(data string) {
 		self.ProcessedData.Append(data, DataUrlEncodeType)
 	}
 
-	self.Form = func (data string) {
+	self.Form = func(data string) {
 		self.ProcessedData.Append(data, FormType)
 	}
 
-	self.FormString = func (data string) {
+	self.FormString = func(data string) {
 		self.ProcessedData.Append(data, FormStringType)
 	}
 
-	self.Referer = func (data string) {
+	self.Referer = func(data string) {
 		self.Header = append(self.Header, fmt.Sprintf("Referer: %s", data))
 	}
 
-	self.Transfer = func (data string) {
+	self.Transfer = func(data string) {
 		self.ProcessedData.Append(fmt.Sprintf("@%s", data), DataBinaryType)
 		if self.Request == "" {
 			self.Request = "PUT"
 		}
 	}
 
-	self.TrEncoding = func () {
+	self.TrEncoding = func() {
 		self.Header = append(self.Header, "Te: gzip")
 	}
 
-	self.UserAgent = func (data string) {
+	self.UserAgent = func(data string) {
 		self.Header = append(self.Header, fmt.Sprintf("User-Agent: %s", data))
 	}
 
 }
 
 func (self *CurlOptions) CheckError() error {
-	if self.ProcessedData.HasData() && self.ProcessedData.HasData(){
+	if self.ProcessedData.HasData() && self.ProcessedData.HasData() {
 		return fmt.Errorf("Warning: You can only select one HTTP request!")
 	}
 	return nil
@@ -219,7 +219,7 @@ func (self *CurlOptions) Method() string {
 }
 
 func (self *CurlOptions) Headers() [][]string {
-	result := make([][]string, 0)
+	var result [][]string
 	for _, header := range self.Header {
 		words := strings.SplitN(header, ":", 2)
 		if len(words) != 2 {
@@ -233,14 +233,14 @@ func (self *CurlOptions) Headers() [][]string {
 }
 
 type HeaderGroup struct {
-	Key string
+	Key    string
 	Values []string
 }
 
 func (self *CurlOptions) GroupedHeaders() []HeaderGroup {
 	headers := self.Headers()
 	index := make(map[string]int)
-	result := make([]HeaderGroup, 0)
+	var result []HeaderGroup
 
 	for _, header := range headers {
 		key := strings.ToLower(header[0])

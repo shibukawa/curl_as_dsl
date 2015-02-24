@@ -193,11 +193,7 @@ func (self *PythonGenerator) SetDataForForm() {
 	for _, data := range self.Options.ProcessedData {
 		singleData, _ := url.ParseQuery(data.Value)
 		for key, values := range singleData {
-			entry, ok := entries[key]
-			if !ok {
-				entry = make([]string, 0)
-			}
-			entries[key] = append(entry, values[0])
+			entries[key] = append(entries[key], values[0])
 		}
 	}
 
@@ -222,8 +218,8 @@ func (self *PythonGenerator) SetDataForForm() {
 
 func (self *PythonGenerator) SetFormForBody() {
 	self.AddMultiPartCode()
-	fields := make([]string, 0)
-	files := make([]string, 0)
+	var fields []string
+	var files []string
 
 	for _, data := range self.Options.ProcessedData {
 		if data.SendAsFormFile() {

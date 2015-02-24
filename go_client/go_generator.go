@@ -17,6 +17,7 @@ type GoGenerator struct {
 	Data         string
 	DataVariable string
 	ContentType  string
+	HasBoundary  bool
 
 	extraUrl string
 }
@@ -82,7 +83,11 @@ func (self GoGenerator) ModifyRequest() string {
 			indent()
 			key := strings.TrimSpace(headers[0])
 			value := strings.TrimSpace(headers[1])
-			buffer.WriteString(fmt.Sprintf("request.Header.Add(\"%s\", \"%s\")\n", key, value))
+			if strings.ToLower(key) == "content-type" && self.HasBoundary {
+				buffer.WriteString(fmt.Sprintf("request.Header.Add(\"%s\", \"%s; boundary=\" + writer.Boundary())\n", key, value))
+			} else {
+				buffer.WriteString(fmt.Sprintf("request.Header.Add(\"%s\", \"%s\")\n", key, value))
+			}
 		}
 	}
 
@@ -184,11 +189,7 @@ func (self *GoGenerator) SetDataForForm() {
 	for _, data := range self.Options.ProcessedData {
 		singleData, _ := url.ParseQuery(data.Value)
 		for key, values := range singleData {
-			entry, ok := entries[key]
-			if !ok {
-				entry = make([]string, 0)
-			}
-			entries[key] = append(entry, values[0])
+			entries[key] = append(entries[key], values[0])
 		}
 	}
 

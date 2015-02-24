@@ -6,7 +6,7 @@ import (
 
 func main() {
     {{ .Data }}
-    resp, err := http.Post({{ .Url }}, "{{ .ContentType }}", {{ .DataVariable }})
+    resp, err := http.Post({{ .Url }}, "{{ .ContentType }}{{if .HasBoundary }}; boundary=" + writer.Boundary(){{else}}"{{end}}, {{ .DataVariable }})
     if err != nil {
         log.Fatal(err)
     }

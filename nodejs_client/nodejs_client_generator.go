@@ -42,10 +42,6 @@ type NodeJsGenerator struct {
 func NewNodeJsGenerator(options *httpgen_common.CurlOptions) *NodeJsGenerator {
 	result := &NodeJsGenerator{Options: options}
 	result.Modules = make(map[string]bool)
-	result.BodyLines = make([]string, 0)
-	result.ExternalFiles = make([]ExternalFile, 0)
-
-	//result.Modules["http.client"] = true
 
 	return result
 }
@@ -185,13 +181,13 @@ func (self *NodeJsGenerator) SetDataForUrl() {
 	if self.Options.CanUseSimpleForm() {
 		self.SetDataForForm(false)
 		self.extraUrl = strings.Join(self.BodyLines, "")
-		self.BodyLines = make([]string, 0)
+		self.BodyLines = nil
 		self.HasBody = false
 	} else {
 		// Use bytes.Buffer to create URL option string
 		self.SetDataForBody()
 		self.extraUrl = strings.Join(self.BodyLines, "")
-		self.BodyLines = make([]string, 0)
+		self.BodyLines = nil
 		self.HasBody = false
 	}
 }
@@ -222,11 +218,7 @@ func (self *NodeJsGenerator) SetDataForForm(hasIndent bool) {
 	for _, data := range self.Options.ProcessedData {
 		singleData, _ := url.ParseQuery(data.Value)
 		for key, values := range singleData {
-			entry, ok := entries[key]
-			if !ok {
-				entry = make([]string, 0)
-			}
-			entries[key] = append(entry, values[0])
+			entries[key] = append(entries[key], values[0])
 		}
 	}
 
@@ -262,8 +254,8 @@ func (self *NodeJsGenerator) SetDataForForm(hasIndent bool) {
 
 func (self *NodeJsGenerator) SetFormForBody() {
 	self.AddMultiPartCode()
-	fields := make([]string, 0)
-	files := make([]string, 0)
+	var fields []string
+	var files []string
 
 	for _, data := range self.Options.ProcessedData {
 		if data.SendAsFormFile() {
