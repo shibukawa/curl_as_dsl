@@ -26,21 +26,27 @@ func (self *DataOption) IsFormStyle() bool {
 }
 
 func (self *DataOption) UseExternalFile() bool {
+	return self.FileName() != ""
+}
+
+func (self *DataOption) FileName() string {
 	if self.Type == FormType {
 		index := strings.Index(self.Value, "=")
 		if index == -1 {
-			return false
+			return ""
 		}
 		if index < len(self.Value) - 1 {
 			nextChar := self.Value[index + 1:index + 2]
 			if nextChar == "@" || nextChar == "<" {
-				return true
+				return strings.Split(self.Value[index + 2:], ";")[0]
 			}
 		}
 	} else if self.Type != FormStringType {
-		return strings.HasPrefix(self.Value, "@")
+		if strings.HasPrefix(self.Value, "@") {
+			return strings.Split(self.Value[1:], ";")[0]
+		}
 	}
-	return false
+	return ""
 }
 
 func (self *DataOption) SendAsFormFile() bool {
@@ -94,6 +100,17 @@ func (self *DataOptions) HasForm() bool {
 	}
 	return false
 }
+
+func (self *DataOptions) ExternalFileCount() int {
+	count := 0
+	for _, data := range *self {
+		if data.UseExternalFile() {
+			count++
+		}
+	}
+	return count
+}
+
 type CurlOptions struct {
 	// Example of verbosity with level
 	Basic bool `long:"basic" description:"Use HTTP Basic Authentication (H)"`
@@ -206,10 +223,36 @@ func (self *CurlOptions) Headers() [][]string {
 	for _, header := range self.Header {
 		words := strings.SplitN(header, ":", 2)
 		if len(words) != 2 {
-			fmt.Fprintln(os.Stderr, "[warning] %s is wrong style header.\n", header)
+			fmt.Fprintf(os.Stderr, "[warning] %s is wrong style header.\n", header)
 			continue
 		}
+		words[1] = strings.TrimSpace(words[1])
 		result = append(result, words)
+	}
+	return result
+}
+
+type HeaderGroup struct {
+	Key string
+	Values []string
+}
+
+func (self *CurlOptions) GroupedHeaders() []HeaderGroup {
+	headers := self.Headers()
+	index := make(map[string]int)
+	result := make([]HeaderGroup, 0)
+
+	for _, header := range headers {
+		key := strings.ToLower(header[0])
+		i, ok := index[key]
+		if ok {
+			result[i].Values = append(result[i].Values, header[1])
+		} else {
+			headerGroup := HeaderGroup{Key: key, Values: make([]string, 1)}
+			headerGroup.Values[0] = header[1]
+			index[key] = len(result)
+			result = append(result, headerGroup)
+		}
 	}
 	return result
 }

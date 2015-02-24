@@ -15,12 +15,12 @@ type PythonGenerator struct {
 	Options *httpgen_common.CurlOptions
 	Modules map[string]bool
 
-	HasBody       bool
-	Body          string
-	PrepareBody   string
-	extraUrl      string
+	HasBody               bool
+	Body                  string
+	PrepareBody           string
+	extraUrl              string
 	AdditionalDeclaration string
-	specialHeaders []string
+	specialHeaders        []string
 }
 
 func NewPythonGenerator(options *httpgen_common.CurlOptions) *PythonGenerator {
@@ -75,7 +75,6 @@ func (self PythonGenerator) HasHeader() bool {
 	return len(self.Options.Header) != 0 || len(self.specialHeaders) != 0
 }
 
-
 func (self PythonGenerator) Header() string {
 	if len(self.Options.Header) == 0 && len(self.specialHeaders) == 0 {
 		return ""
@@ -99,7 +98,6 @@ func (self PythonGenerator) PrepareHeader() string {
 	buffer.WriteString("    }\n    ")
 	return buffer.String()
 }
-
 
 func (self PythonGenerator) Method() string {
 	return self.Options.Method()

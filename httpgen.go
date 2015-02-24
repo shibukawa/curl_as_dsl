@@ -3,6 +3,7 @@ package main
 import (
 	"./go_client"
 	"./httpgen_common"
+	"./nodejs_client"
 	"./python_client"
 	"bytes"
 	"fmt"
@@ -84,6 +85,15 @@ func main() {
 		case "py":
 			langName = "python"
 			templateName, option = python_client.ProcessCurlCommand(&curlOptions)
+		case "nodejs_client":
+			langName = "nodejs"
+			templateName, option = nodejs_client.ProcessCurlCommand(&curlOptions)
+		case "nodejs":
+			langName = "nodejs"
+			templateName, option = nodejs_client.ProcessCurlCommand(&curlOptions)
+		case "node":
+			langName = "nodejs"
+			templateName, option = nodejs_client.ProcessCurlCommand(&curlOptions)
 		default:
 			PrintLangHelp(globalOptions.Target)
 			os.Exit(1)
