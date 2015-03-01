@@ -41,6 +41,10 @@ echo "case 10: post form"
 ./httpgen curl -F hello=world http://localhost:18888 > test/test.go
 pushd test;go build;./test;popd
 
+echo "case 10-2: post form (2)"
+./httpgen curl -F hello=world -F good=morning http://localhost:18888 > test/test.go
+pushd test;go build;./test;popd
+
 echo "case 11: post text data from local file"
 ./httpgen curl --data-ascii @test.go http://localhost:18888 > test/test.go
 pushd test;go build;./test;popd

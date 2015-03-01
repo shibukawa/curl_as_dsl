@@ -271,7 +271,7 @@ func (self *NodeJsGenerator) SetFormForBody() {
 		for _, value := range fields {
 			buffer.WriteString(value)
 		}
-		buffer.WriteString("    ];\n    ")
+		buffer.WriteString("];\n")
 	}
 	if len(files) > 0 {
 		if len(fields) > 0 {
@@ -284,7 +284,7 @@ func (self *NodeJsGenerator) SetFormForBody() {
 		for _, value := range files {
 			buffer.WriteString(value)
 		}
-		buffer.WriteString("    ];\n    ")
+		buffer.WriteString("];\n")
 	} else {
 		self.BodyLines = append(self.BodyLines, "encodeMultiPartFormData(fields, [])")
 	}

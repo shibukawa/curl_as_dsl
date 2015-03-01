@@ -15,16 +15,16 @@ type JavaGenerator struct {
 	Options *httpgen_common.CurlOptions
 	Modules map[string]bool
 
-	Url                   string
-	IsHttps				  bool
-	HasBody               bool
-	Body                  string
-	PrepareBody           string
-	AdditionalDeclaration string
-	specialHeaders        [][]string
-	commonInitialize	  []string
-	mimeCounter			  int
-	formFileContentCounter	  int
+	Url                    string
+	IsHttps                bool
+	HasBody                bool
+	Body                   string
+	PrepareBody            string
+	AdditionalDeclaration  string
+	specialHeaders         [][]string
+	commonInitialize       []string
+	mimeCounter            int
+	formFileContentCounter int
 }
 
 func NewJavaGenerator(options *httpgen_common.CurlOptions) *JavaGenerator {
@@ -155,7 +155,6 @@ func (self *JavaGenerator) MimeTypeVariable() string {
 	return fmt.Sprintf("mimeType%d", self.mimeCounter)
 }
 
-
 func (self *JavaGenerator) FormFileContentVariable() string {
 	if self.Options.ProcessedData.ExternalFileCount() == 0 {
 		return "fileContent"
@@ -274,7 +273,7 @@ func (self *JavaGenerator) SetDataForUrl() {
 					indent()
 				}
 				if forWriter != "" {
-					fmt.Fprintf(&buffer, "writer.write(%s);\n", )
+					fmt.Fprintf(&buffer, "writer.write(%s);\n")
 				}
 			}
 			indent()
@@ -543,7 +542,7 @@ func StringForData(generator *JavaGenerator, data *httpgen_common.DataOption) ([
 		} else {
 			resultForWriter = fmt.Sprintf("URLEncoder.encode(\"%s\", \"UTF-8\")", data.Value)
 		}
-	generator.Modules["java.net.URLEncoder"] = true
+		generator.Modules["java.net.URLEncoder"] = true
 	default:
 		panic(fmt.Sprintf("unknown type: %d", data.Type))
 	}

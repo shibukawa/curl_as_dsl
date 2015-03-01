@@ -41,6 +41,10 @@ echo "case 10: post form"
 ./httpgen -t node curl -F hello=world http://localhost:18888 > test/test.js
 pushd test;node test.js;popd
 
+echo "case 10-2: post form (2)"
+./httpgen -t node curl -F hello=world -F good=morning http://localhost:18888 > test/test.js
+pushd test;node test.js;popd
+
 echo "case 11: post text data from local file"
 ./httpgen -t node curl --data-ascii @test.js http://localhost:18888 > test/test.js
 pushd test;node test.js;popd

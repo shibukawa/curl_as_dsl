@@ -165,7 +165,7 @@ func (self *GoGenerator) SetDataForBody() {
 func (self *GoGenerator) SetDataForUrl() {
 	if self.Options.CanUseSimpleForm() {
 		// Use url.Values to create URL option string
-		self.SetDataForForm()
+		self.SetDataForPostForm()
 		self.extraUrl = " + \"?\" + values.Encode()"
 	} else {
 		// Use bytes.Buffer to create URL option string
@@ -184,7 +184,7 @@ func (self *GoGenerator) SetFormForBody() {
 	self.Data = buffer.String()
 }
 
-func (self *GoGenerator) SetDataForForm() {
+func (self *GoGenerator) SetDataForPostForm() {
 	entries := make(map[string][]string)
 	for _, data := range self.Options.ProcessedData {
 		singleData, _ := url.ParseQuery(data.Value)
@@ -198,8 +198,6 @@ func (self *GoGenerator) SetDataForForm() {
 	for key, values := range entries {
 		if count == 0 {
 			buffer.WriteString("values := url.Values{\n")
-		} else {
-			buffer.WriteString(", \"")
 		}
 		buffer.WriteString("        \"" + key)
 		buffer.WriteString("\": {")

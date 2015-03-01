@@ -54,7 +54,7 @@ func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{
 				return processCurlPostData(generator)
 			}
 		} else if options.ProcessedData.HasForm() {
-			return processCurlPostForm(generator)
+			return processCurlPostData(generator)
 		} else {
 			return processCurlSimple(generator)
 		}
@@ -131,29 +131,26 @@ func processCurlPostSingleFile(generator *GoGenerator) (string, interface{}) {
 	return "post_single_file", value
 }
 
-func processCurlPostForm(generator *GoGenerator) (string, interface{}) {
-	if !generator.Options.CanUseSimpleForm() {
-		return processCurlPostData(generator)
-	}
-	generator.Modules["net/url"] = true
-	generator.SetDataForForm()
-	return "post_form", generator
-}
-
 func processCurlPostData(generator *GoGenerator) (string, interface{}) {
-	generator.DataVariable = "&buffer"
 	var contentType string
+	headers := generator.Options.Headers()
+	if len(headers) > 0 {
+		contentType = headers[0][1]
+	}
+	if !generator.Options.ProcessedData.HasForm() && generator.Options.CanUseSimpleForm() && contentType == "" {
+		generator.Modules["net/url"] = true
+		generator.SetDataForPostForm()
+		return "post_form", generator
+	}
 	if generator.Options.ProcessedData.HasForm() {
+		generator.DataVariable = "&buffer"
 		contentType = "multipart/form-data"
 		generator.SetFormForBody()
 		generator.HasBoundary = true
 	} else {
+		generator.DataVariable = "&buffer"
 		contentType = "application/x-www-form-urlencoded"
 		generator.SetDataForBody()
-	}
-	headers := generator.Options.Headers()
-	if len(headers) > 0 {
-		contentType = headers[0][1]
 	}
 
 	generator.ContentType = contentType

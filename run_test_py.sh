@@ -41,6 +41,10 @@ echo "case 10: post form"
 ./httpgen -t py curl -F hello=world http://localhost:18888 > test/test.py
 pushd test;python3 test.py;popd
 
+echo "case 10-2: post form (2)"
+./httpgen -t py curl -F hello=world -F good=morning http://localhost:18888 > test/test.py
+pushd test;python3 test.py;popd
+
 echo "case 11: post text data from local file"
 ./httpgen -t py curl --data-ascii @test.py http://localhost:18888 > test/test.py
 pushd test;python3 test.py;popd

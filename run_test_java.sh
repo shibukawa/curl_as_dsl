@@ -41,6 +41,10 @@ echo "case 10: post form"
 ./httpgen -t java curl -F hello=world http://localhost:18888 > test/Main.java
 pushd test;javac Main.java;java Main;popd
 
+echo "case 10-2: post form (2)"
+./httpgen -t java curl -F hello=world -F good=morning http://localhost:18888 > test/Main.java
+pushd test;javac Main.java;java Main;popd
+
 echo "case 11: post text data from local file"
 ./httpgen -t java curl --data-ascii @Main.java http://localhost:18888 > test/Main.java
 pushd test;javac Main.java;java Main;popd

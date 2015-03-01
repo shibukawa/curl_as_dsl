@@ -2,6 +2,7 @@ package httpgen_common
 
 import (
 	"fmt"
+	"net/url"
 	"os"
 	"strings"
 )
@@ -284,12 +285,18 @@ func (self *CurlOptions) InsertContentTypeHeader(contentType string) {
 }
 
 func (self *CurlOptions) CanUseSimpleForm() bool {
-	for _, form := range self.ProcessedData {
-		if form.UseExternalFile() {
+	for _, data := range self.ProcessedData {
+		if data.UseExternalFile() {
 			return false
 		}
-		if strings.Index(form.Value, "=") == -1 {
+		singleData, err := url.ParseQuery(data.Value)
+		if len(singleData) == 0 || err != nil {
 			return false
+		}
+		for _, values := range singleData {
+			if len(values) == 1 && values[0] == "" {
+				return false
+			}
 		}
 	}
 	return true
