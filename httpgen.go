@@ -5,6 +5,7 @@ import (
 	"./httpgen_common"
 	"./java_client"
 	"./nodejs_client"
+	"./objc_client"
 	"./python_client"
 	"bytes"
 	"fmt"
@@ -98,6 +99,9 @@ func main() {
 		case "java":
 			langName = "java"
 			templateName, option = java_client.ProcessCurlCommand(&curlOptions)
+		case "objc":
+			langName = "objc"
+			templateName, option = objc_client.ProcessCurlCommand(&curlOptions)
 		default:
 			PrintLangHelp(globalOptions.Target)
 			os.Exit(1)

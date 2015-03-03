@@ -5,7 +5,20 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+    "os"
 )
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.URL.String(), r.Method)
+	log.Println("Method:", r.Proto)
+	log.Println("Header", r.Header)
+	fmt.Println("--body--")
+	defer r.Body.Close()
+	byte, _ := ioutil.ReadAll(r.Body)
+	log.Println(string(byte))
+
+	fmt.Fprintf(w, "hello\n")
+}
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.URL.String(), r.Method)
@@ -39,6 +52,7 @@ func authHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/auth", authHandler)
 	http.HandleFunc("/", handler)
+	http.HandleFunc("/js", jsHandler)
 	log.Println("start listening :18888")
 	http.ListenAndServe(":18888", nil)
 }
