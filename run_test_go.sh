@@ -1,5 +1,6 @@
 #!/bin/bash
 
+rm test/*
 set -e
 echo "case 1: simple get"
 ./httpgen curl http://localhost:18888 > test/test.go

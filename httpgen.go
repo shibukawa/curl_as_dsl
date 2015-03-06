@@ -7,6 +7,7 @@ import (
 	"./nodejs_client"
 	"./objc_client"
 	"./python_client"
+	"./xhr_client"
 	"bytes"
 	"fmt"
 	"github.com/jessevdk/go-flags"
@@ -27,6 +28,10 @@ func PrintLangHelp(target string) {
 This program supports one of the following targets:
 * go (default) : Go standard library (net/http)
 * python       : Python standard library (http.client)
+* nodejs       : Node.js standard library (http/https.request)
+* xhr          : JavaScript for browsers standard API (XMLHttpRequest)
+* java         : Java standard library (HttpURLConnection/HttpsURLConnection)
+* objc         : Objective-C standard library (NSURLConnection)
 `, target)
 }
 
@@ -102,6 +107,12 @@ func main() {
 		case "objc":
 			langName = "objc"
 			templateName, option = objc_client.ProcessCurlCommand(&curlOptions)
+		case "xhr":
+			langName = "xhr"
+			templateName, option = xhr_client.ProcessCurlCommand(&curlOptions)
+		case "browser":
+			langName = "xhr"
+			templateName, option = xhr_client.ProcessCurlCommand(&curlOptions)
 		default:
 			PrintLangHelp(globalOptions.Target)
 			os.Exit(1)

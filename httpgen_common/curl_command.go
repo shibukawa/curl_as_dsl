@@ -148,8 +148,7 @@ type CurlOptions struct {
 
 func (self *CurlOptions) Init() {
 	self.Compressed = func() {
-		self.Header = append(self.Header, "Accept-Encoding: deflate")
-		self.Header = append(self.Header, "Accept-Encoding: gzip")
+		self.Header = append(self.Header, "Accept-Encoding: deflate", "Accept-Encoding: gzip")
 	}
 
 	self.Data = func(data string) {

@@ -9,3 +9,4 @@ set -e
 ./run_test_py.sh
 ./run_test_nodejs.sh
 ./run_test_java.sh
+./run_test_objc.sh

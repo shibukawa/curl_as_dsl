@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
-    "os"
+	"os"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -20,16 +21,29 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "hello\n")
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func jsHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.URL.String(), r.Method)
 	log.Println("Method:", r.Proto)
-	log.Println("Header", r.Header)
-	fmt.Println("--body--")
-	defer r.Body.Close()
-	byte, _ := ioutil.ReadAll(r.Body)
-	log.Println(string(byte))
 
-	fmt.Fprintf(w, "hello\n")
+	filename := "test.html"
+
+	if _, err := os.Stat(filename); os.IsNotExist(err) {
+		fmt.Printf("no such file or directory: %s", filename)
+		w.WriteHeader(404)
+		fmt.Fprint(w, "404 Not Found (1)\n")
+		return
+	}
+
+	in, err := os.Open(filename)
+	if err != nil {
+		fmt.Printf("file read errory: %v", err)
+		w.WriteHeader(404)
+		fmt.Fprint(w, "404 Not Found (2)\n")
+		return
+	}
+	defer in.Close()
+	w.Header().Add("Access-Control-Allow-Origin", "*")
+	io.Copy(w, in)
 }
 
 func authHandler(w http.ResponseWriter, r *http.Request) {
