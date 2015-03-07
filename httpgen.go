@@ -11,28 +11,47 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/jessevdk/go-flags"
+	"go/format"
 	"log"
 	"os"
 	"reflect"
 	"text/template"
-	"go/format"
 )
 
 type GlobalOptions struct {
-	Target string `short:"t" long:"target" value-name:"NAME" description:"Target name of code generator" default:"go_client"`
+	Target string `short:"t" long:"target" value-name:"NAME" description:"Target name of code generator" default:"go"`
 	Debug  bool   `short:"d" long:"debug" description:"Debug option"`
+}
+
+var LanguageMap map[string]string = map[string]string{
+	"go":                 "go",
+	"golang":             "go",
+	"py":                 "python",
+	"python":             "python",
+	"node":               "node",
+	"nodejs":             "node",
+	"js.node":            "node",
+	"javascript.node":    "node",
+	"xhr":                "xhr",
+	"js.xhr":             "xhr",
+	"javascript.xhr":     "xhr",
+	"js.browser":         "xhr",
+	"javascript.browser": "xhr",
+	"java":               "java",
+	"objc":               "objc",
+	"objc.urlconnection": "objc",
 }
 
 func PrintLangHelp(target string) {
 	fmt.Fprintf(os.Stderr, `
 '%s' is not supported as a target.
 This program supports one of the following targets:
-* go (default) : Go standard library (net/http)
-* python       : Python standard library (http.client)
-* nodejs       : Node.js standard library (http/https.request)
-* xhr          : JavaScript for browsers standard API (XMLHttpRequest)
-* java         : Java standard library (HttpURLConnection/HttpsURLConnection)
-* objc         : Objective-C standard library (NSURLConnection)
+* go (default)       : Go standard library (net/http)
+* python             : Python standard library (http.client)
+* js.node            : Node.js standard library (http/https.request)
+* js.xhr             : JavaScript for browsers standard API (XMLHttpRequest)
+* java               : Java standard library (HttpURLConnection/HttpsURLConnection)
+* objc               : Objective-C standard library (NSURLConnection)
 `, target)
 }
 
@@ -84,28 +103,20 @@ func main() {
 		var templateName string
 		var option interface{}
 
-		switch globalOptions.Target {
-		case "go_client":
-			langName = "go"
-			templateName, option = go_client.ProcessCurlCommand(&curlOptions)
+		lang, ok := LanguageMap[globalOptions.Target]
+
+		if !ok {
+			PrintLangHelp(globalOptions.Target)
+			os.Exit(1)
+		}
+
+		switch lang {
 		case "go":
 			langName = "go"
 			templateName, option = go_client.ProcessCurlCommand(&curlOptions)
-		case "python_client":
-			langName = "python"
-			templateName, option = python_client.ProcessCurlCommand(&curlOptions)
 		case "python":
 			langName = "python"
 			templateName, option = python_client.ProcessCurlCommand(&curlOptions)
-		case "py":
-			langName = "python"
-			templateName, option = python_client.ProcessCurlCommand(&curlOptions)
-		case "nodejs_client":
-			langName = "nodejs"
-			templateName, option = nodejs_client.ProcessCurlCommand(&curlOptions)
-		case "nodejs":
-			langName = "nodejs"
-			templateName, option = nodejs_client.ProcessCurlCommand(&curlOptions)
 		case "node":
 			langName = "nodejs"
 			templateName, option = nodejs_client.ProcessCurlCommand(&curlOptions)
@@ -118,12 +129,7 @@ func main() {
 		case "xhr":
 			langName = "xhr"
 			templateName, option = xhr_client.ProcessCurlCommand(&curlOptions)
-		case "browser":
-			langName = "xhr"
-			templateName, option = xhr_client.ProcessCurlCommand(&curlOptions)
 		default:
-			PrintLangHelp(globalOptions.Target)
-			os.Exit(1)
 		}
 		if templateName != "" {
 			if globalOptions.Debug {
