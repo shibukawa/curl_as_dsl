@@ -15,6 +15,7 @@ import (
 	"os"
 	"reflect"
 	"text/template"
+	"go/format"
 )
 
 type GlobalOptions struct {
@@ -42,6 +43,13 @@ func render(lang, key string, options interface{}) string {
 	err := tpl.Execute(&buffer, options)
 	if err != nil {
 		log.Fatal(err)
+	}
+	if lang == "go" {
+		gosrc, err := format.Source(buffer.Bytes())
+		if err != nil {
+			log.Fatal(err)
+		}
+		return string(gosrc)
 	}
 	return buffer.String()
 }
