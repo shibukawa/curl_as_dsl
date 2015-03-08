@@ -63,14 +63,6 @@ func (self GoGenerator) ClientBody() string {
 
 func (self GoGenerator) ModifyRequest() string {
 	var buffer bytes.Buffer
-	isFirst := true
-	indent := func() {
-		if isFirst {
-			isFirst = false
-		} else {
-			buffer.WriteString("    ")
-		}
-	}
 	contentTypeInHeader := self.Options.FindContentTypeHeader()
 	if contentTypeInHeader != "" {
 		self.ContentType = contentTypeInHeader
@@ -80,20 +72,18 @@ func (self GoGenerator) ModifyRequest() string {
 	for _, header := range self.Options.Header {
 		headers := strings.SplitN(header, ":", 2)
 		if len(headers) == 2 {
-			indent()
 			key := strings.TrimSpace(headers[0])
 			value := strings.TrimSpace(headers[1])
 			if strings.ToLower(key) == "content-type" && self.HasBoundary {
-				buffer.WriteString(fmt.Sprintf("request.Header.Add(\"%s\", \"%s; boundary=\" + writer.Boundary())\n", key, value))
+				fmt.Fprintf(&buffer, "request.Header.Add(\"%s\", \"%s; boundary=\" + writer.Boundary())\n", key, value)
 			} else {
-				buffer.WriteString(fmt.Sprintf("request.Header.Add(\"%s\", \"%s\")\n", key, value))
+				fmt.Fprintf(&buffer, "request.Header.Add(\"%s\", \"%s\")\n", key, value)
 			}
 		}
 	}
 
 	if self.Options.User != "" {
-		indent()
-		buffer.WriteString(fmt.Sprintf("request.Header.Add(\"Authorization\", \"Basic \" + base64.StdEncoding.EncodeToString([]byte(\"%s\")))\n", self.Options.User))
+		fmt.Fprintf(&buffer, "request.Header.Add(\"Authorization\", \"Basic \" + base64.StdEncoding.EncodeToString([]byte(\"%s\")))\n", self.Options.User)
 	}
 
 	for _, cookie := range self.Options.Cookie {
@@ -101,12 +91,11 @@ func (self GoGenerator) ModifyRequest() string {
 		if len(fragments) == 2 {
 			name := strings.TrimSpace(fragments[0])
 			value := strings.TrimSpace(fragments[1])
-			buffer.WriteString(fmt.Sprintf("request.AddCookie(&http.Cookie{Name: \"%s\", Value: \"%s\"})\n", name, value))
+			fmt.Fprintf(&buffer, "request.AddCookie(&http.Cookie{Name: \"%s\", Value: \"%s\"})\n", name, value)
 		}
 	}
 
 	if self.Options.AWSV2 != "" {
-		indent()
 		buffer.WriteString(fmt.Sprintf("SignAWSV2(request, \"\", \"%s\")\n", self.ContentType))
 	}
 
@@ -119,21 +108,21 @@ func (self GoGenerator) AdditionalDeclaration() string {
 	if self.Options.AWSV2 != "" {
 		fragments := strings.SplitN(self.Options.AWSV2, ":", 2)
 		if len(fragments) == 2 {
-			buffer.WriteString(fmt.Sprintf(`
-func SignAWSV2(req *http.Request, md5, contentType string) {
-    dateStr := time.Now().UTC().Format(time.RFC1123Z)
-    req.Header.Set("Date", dateStr)
-    if md5 != "" {
-        req.Header.Set("Content-MD5", md5)
-    }
-    strToSign := fmt.Sprintf("%%s\n%%s\n%%s\n%%s\n%%s", req.Method, md5, contentType, dateStr, req.URL.Path)
-    hash := hmac.New(sha1.New, []byte("%s"))
-    hash.Write([]byte(strToSign))
-    signature := make([]byte, base64.StdEncoding.EncodedLen(hash.Size()))
-    base64.StdEncoding.Encode(signature, hash.Sum(nil))
-    req.Header.Set("Authorization", fmt.Sprintf("AWS %%s:%%s", "%s", string(signature)))
-}
-`, fragments[1], fragments[0]))
+			fmt.Fprintf(&buffer, `
+				func SignAWSV2(req *http.Request, md5, contentType string) {
+					dateStr := time.Now().UTC().Format(time.RFC1123Z)
+					req.Header.Set("Date", dateStr)
+					if md5 != "" {
+						req.Header.Set("Content-MD5", md5)
+					}
+					strToSign := fmt.Sprintf("%%s\n%%s\n%%s\n%%s\n%%s", req.Method, md5, contentType, dateStr, req.URL.Path)
+					hash := hmac.New(sha1.New, []byte("%s"))
+					hash.Write([]byte(strToSign))
+					signature := make([]byte, base64.StdEncoding.EncodedLen(hash.Size()))
+					base64.StdEncoding.Encode(signature, hash.Sum(nil))
+					req.Header.Set("Authorization", fmt.Sprintf("AWS %%s:%%s", "%s", string(signature)))
+				}
+			`, fragments[1], fragments[0])
 		}
 	}
 
@@ -151,7 +140,7 @@ func (self *GoGenerator) SetDataForBody() {
 	} else {
 		for i, data := range self.Options.ProcessedData {
 			if i > 0 {
-				buffer.WriteString("    buffer.WriteByte('&')\n")
+				buffer.WriteString("buffer.WriteByte('&')\n")
 			} else {
 				buffer.WriteString("var buffer bytes.Buffer\n")
 			}
@@ -199,21 +188,21 @@ func (self *GoGenerator) SetDataForPostForm() {
 		if count == 0 {
 			buffer.WriteString("values := url.Values{\n")
 		}
-		buffer.WriteString("        \"" + key)
-		buffer.WriteString("\": {")
+		buffer.WriteString(`"` + key)
+		buffer.WriteString(`": {`)
 		for j, value := range values {
 			if j == 0 {
-				buffer.WriteString("\"")
+				buffer.WriteString(`"`)
 			} else {
-				buffer.WriteString(", \"")
+				buffer.WriteString(`, "`)
 			}
 			buffer.WriteString(value)
-			buffer.WriteString("\"")
+			buffer.WriteString(`"`)
 		}
 		count++
 		buffer.WriteString("},\n")
 	}
-	buffer.WriteString("    }\n")
+	buffer.WriteString("}\n")
 
 	self.Data = buffer.String()
 	self.DataVariable = "values"
@@ -228,13 +217,11 @@ func NewStringForData(generator *GoGenerator, data *httpgen_common.DataOption) (
 		if strings.HasPrefix(data.Value, "@") {
 			var buffer bytes.Buffer
 			buffer.WriteString("var buffer bytes.Buffer\n")
-			buffer.WriteString("    content, err := ioutil.ReadFile(\"")
-			buffer.WriteString(data.Value[1:])
-			buffer.WriteString("\")\n")
-			buffer.WriteString("    if err != nil {\n")
-			buffer.WriteString("        log.Fatal(err)\n")
-			buffer.WriteString("    }\n")
-			buffer.WriteString("    buffer.WriteString(strings.Replace(string(content), \"\\n\", \"\", -1))")
+			fmt.Fprintf(&buffer, "content, err := ioutil.ReadFile(\"%s\")\n", data.Value[1:])
+			buffer.WriteString("if err != nil {\n")
+			buffer.WriteString("    log.Fatal(err)\n")
+			buffer.WriteString("}\n")
+			buffer.WriteString("buffer.WriteString(strings.Replace(string(content), \"\\n\", \"\", -1))")
 			result = buffer.String()
 			name = "&buffer"
 			generator.Modules["strings"] = true
@@ -246,12 +233,10 @@ func NewStringForData(generator *GoGenerator, data *httpgen_common.DataOption) (
 	case httpgen_common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			var buffer bytes.Buffer
-			buffer.WriteString("file, err := os.Open(\"")
-			buffer.WriteString(data.Value[1:])
-			buffer.WriteString("\")\n")
-			buffer.WriteString("    if err != nil {\n")
-			buffer.WriteString("        log.Fatal(err)\n")
-			buffer.WriteString("    }\n")
+			fmt.Fprintf(&buffer, "file, err := os.Open(\"%s\")\n", data.Value[1:])
+			buffer.WriteString("if err != nil {\n")
+			buffer.WriteString("    log.Fatal(err)\n")
+			buffer.WriteString("}\n")
 			result = buffer.String()
 			name = "file"
 			generator.Modules["os"] = true
@@ -264,13 +249,11 @@ func NewStringForData(generator *GoGenerator, data *httpgen_common.DataOption) (
 		if strings.HasPrefix(data.Value, "@") {
 			var buffer bytes.Buffer
 			buffer.WriteString("var buffer bytes.Buffer\n")
-			buffer.WriteString("    content, err := ioutil.ReadFile(\"")
-			buffer.WriteString(data.Value[1:])
-			buffer.WriteString("\")\n")
-			buffer.WriteString("    if err != nil {\n")
-			buffer.WriteString("        log.Fatal(err)\n")
-			buffer.WriteString("    }\n")
-			buffer.WriteString("    buffer.WriteString(url.QueryEscape(string(content)))")
+			fmt.Fprintf(&buffer, "content, err := ioutil.ReadFile(\"%s\")\n", data.Value[1:])
+			buffer.WriteString("if err != nil {\n")
+			buffer.WriteString("    log.Fatal(err)\n")
+			buffer.WriteString("}\n")
+			buffer.WriteString("buffer.WriteString(url.QueryEscape(string(content)))")
 			result = buffer.String()
 			name = "&buffer"
 		} else {
@@ -291,13 +274,13 @@ func StringForData(generator *GoGenerator, data *httpgen_common.DataOption) stri
 	case httpgen_common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			var buffer bytes.Buffer
-			buffer.WriteString("    {\n")
-			buffer.WriteString(fmt.Sprintf("        content, err := ioutil.ReadFile(\"%s\")\n", data.Value[1:]))
-			buffer.WriteString("        if err != nil {\n")
-			buffer.WriteString("            log.Fatal(err)\n")
-			buffer.WriteString("        }\n")
-			buffer.WriteString("        buffer.WriteString(strings.Replace(string(content), \"\\n\", \"\", -1))\n")
-			buffer.WriteString("    }\n")
+			buffer.WriteString("{\n")
+			fmt.Fprintf(&buffer, "content, err := ioutil.ReadFile(\"%s\")\n", data.Value[1:])
+			buffer.WriteString("if err != nil {\n")
+			buffer.WriteString("    log.Fatal(err)\n")
+			buffer.WriteString("}\n")
+			buffer.WriteString("buffer.WriteString(strings.Replace(string(content), \"\\n\", \"\", -1))\n")
+			buffer.WriteString("}\n")
 			result = buffer.String()
 			generator.Modules["strings"] = true
 		} else {
@@ -306,32 +289,32 @@ func StringForData(generator *GoGenerator, data *httpgen_common.DataOption) stri
 	case httpgen_common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			var buffer bytes.Buffer
-			buffer.WriteString("    {\n")
-			buffer.WriteString(fmt.Sprintf("        file, err := os.Open(\"%s\")\n", data.Value[1:]))
-			buffer.WriteString("        if err != nil {\n")
-			buffer.WriteString("            log.Fatal(err)\n")
-			buffer.WriteString("        }\n")
-			buffer.WriteString("        io.Copy(&buffer, file)\n")
-			buffer.WriteString("    }\n")
+			buffer.WriteString("{\n")
+			fmt.Fprintf(&buffer, "file, err := os.Open(\"%s\")\n", data.Value[1:])
+			buffer.WriteString("if err != nil {\n")
+			buffer.WriteString("    log.Fatal(err)\n")
+			buffer.WriteString("}\n")
+			buffer.WriteString("io.Copy(&buffer, file)\n")
+			buffer.WriteString("}\n")
 			result = buffer.String()
 			generator.Modules["os"] = true
 			generator.Modules["io"] = true
 		} else {
-			result = fmt.Sprintf("    buffer.WriteString(\"%s\")\n", escapeDQ(data.Value))
+			result = fmt.Sprintf("buffer.WriteString(\"%s\")\n", escapeDQ(data.Value))
 		}
 	case httpgen_common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			var buffer bytes.Buffer
-			buffer.WriteString("    {\n")
-			buffer.WriteString(fmt.Sprintf("        content, err := ioutil.ReadFile(\"%s\")\n", data.Value[1:]))
-			buffer.WriteString("        if err != nil {\n")
-			buffer.WriteString("            log.Fatal(err)\n")
-			buffer.WriteString("        }\n")
-			buffer.WriteString("        buffer.WriteString(url.QueryEscape(string(content)))\n")
-			buffer.WriteString("    }\n")
+			buffer.WriteString("{\n")
+			fmt.Fprintf(&buffer, "content, err := ioutil.ReadFile(\"%s\")\n", data.Value[1:])
+			buffer.WriteString("if err != nil {\n")
+			buffer.WriteString("    log.Fatal(err)\n")
+			buffer.WriteString("}\n")
+			buffer.WriteString("buffer.WriteString(url.QueryEscape(string(content)))\n")
+			buffer.WriteString("}\n")
 			result = buffer.String()
 		} else {
-			result = fmt.Sprintf("    buffer.WriteString(url.QueryEscape(\"%s\"))\n", escapeDQ(data.Value))
+			result = fmt.Sprintf("buffer.WriteString(url.QueryEscape(\"%s\"))\n", escapeDQ(data.Value))
 		}
 		generator.Modules["net/url"] = true
 	default:
@@ -363,28 +346,28 @@ func FormString(generator *GoGenerator, data *httpgen_common.DataOption) string 
 					contentType = fragment[5:]
 				}
 			}
-			buffer.WriteString("    {\n")
+			buffer.WriteString("{\n")
 			if contentType != "" {
-				buffer.WriteString("        header := make(textproto.MIMEHeader)\n")
-				buffer.WriteString(fmt.Sprintf("        header.Add(\"Content-Disposition\", \"form-data; name=\\\"%s\\\"; filename=\\\"%s\\\"\")\n", field[0], sentFileName))
-				buffer.WriteString(fmt.Sprintf("        header.Add(\"Content-Type\", \"%s\")\n", contentType))
-				buffer.WriteString("        fileWriter, err := writer.CreatePart(header)\n")
-				buffer.WriteString("        if err != nil {\n")
-				buffer.WriteString("            log.Fatal(err)\n")
-				buffer.WriteString("        }\n")
+				buffer.WriteString("header := make(textproto.MIMEHeader)\n")
+				fmt.Fprintf(&buffer, "header.Add(\"Content-Disposition\", \"form-data; name=\\\"%s\\\"; filename=\\\"%s\\\"\")\n", field[0], sentFileName)
+				fmt.Fprintf(&buffer, "header.Add(\"Content-Type\", \"%s\")\n", contentType)
+				buffer.WriteString("fileWriter, err := writer.CreatePart(header)\n")
+				buffer.WriteString("if err != nil {\n")
+				buffer.WriteString("    log.Fatal(err)\n")
+				buffer.WriteString("}\n")
 				generator.Modules["net/textproto"] = true
 			} else {
-				buffer.WriteString(fmt.Sprintf("        fileWriter, err := writer.CreateFormFile(\"%s\", \"%s\")\n", field[0], sentFileName))
-				buffer.WriteString("        if err != nil {\n")
-				buffer.WriteString("            log.Fatal(err)\n")
-				buffer.WriteString("        }\n")
+				fmt.Fprintf(&buffer, "fileWriter, err := writer.CreateFormFile(\"%s\", \"%s\")\n", field[0], sentFileName)
+				buffer.WriteString("if err != nil {\n")
+				buffer.WriteString("    log.Fatal(err)\n")
+				buffer.WriteString("}\n")
 			}
-			buffer.WriteString(fmt.Sprintf("        file, err := os.Open(\"%s\")\n", sourceFile))
-			buffer.WriteString("        if err != nil {\n")
-			buffer.WriteString("            log.Fatal(err)\n")
-			buffer.WriteString("        }\n")
-			buffer.WriteString("        io.Copy(fileWriter, file)\n")
-			buffer.WriteString("    }\n")
+			fmt.Fprintf(&buffer, "file, err := os.Open(\"%s\")\n", sourceFile)
+			buffer.WriteString("if err != nil {\n")
+			buffer.WriteString("    log.Fatal(err)\n")
+			buffer.WriteString("}\n")
+			buffer.WriteString("io.Copy(fileWriter, file)\n")
+			buffer.WriteString("}\n")
 			result = buffer.String()
 			generator.Modules["os"] = true
 			generator.Modules["io"] = true
@@ -398,28 +381,28 @@ func FormString(generator *GoGenerator, data *httpgen_common.DataOption) string 
 					contentType = fragment[5:]
 				}
 			}
-			buffer.WriteString("    {\n")
-			buffer.WriteString("        header := make(textproto.MIMEHeader)\n")
-			buffer.WriteString(fmt.Sprintf("        header.Add(\"Content-Disposition\", \"form-data; name=\\\"%s\\\"\")\n", field[0]))
+			buffer.WriteString("{\n")
+			buffer.WriteString("header := make(textproto.MIMEHeader)\n")
+			fmt.Fprintf(&buffer, "header.Add(\"Content-Disposition\", \"form-data; name=\\\"%s\\\"\")\n", field[0])
 			if contentType != "" {
-				buffer.WriteString(fmt.Sprintf("        header.Add(\"Content-Type\", \"%s\")\n", contentType))
+				fmt.Fprintf(&buffer, "header.Add(\"Content-Type\", \"%s\")\n", contentType)
 			}
-			buffer.WriteString("        fileWriter, err := writer.CreatePart(header)\n")
-			buffer.WriteString("        if err != nil {\n")
-			buffer.WriteString("            log.Fatal(err)\n")
-			buffer.WriteString("        }\n")
-			buffer.WriteString(fmt.Sprintf("        file, err := os.Open(\"%s\")\n", sourceFile))
-			buffer.WriteString("        if err != nil {\n")
-			buffer.WriteString("            log.Fatal(err)\n")
-			buffer.WriteString("        }\n")
-			buffer.WriteString("        io.Copy(fileWriter, file)\n")
-			buffer.WriteString("    }\n")
+			buffer.WriteString("fileWriter, err := writer.CreatePart(header)\n")
+			buffer.WriteString("if err != nil {\n")
+			buffer.WriteString("    log.Fatal(err)\n")
+			buffer.WriteString("}\n")
+			fmt.Fprintf(&buffer, "file, err := os.Open(\"%s\")\n", sourceFile)
+			buffer.WriteString("if err != nil {\n")
+			buffer.WriteString("    log.Fatal(err)\n")
+			buffer.WriteString("}\n")
+			buffer.WriteString("io.Copy(fileWriter, file)\n")
+			buffer.WriteString("}\n")
 			result = buffer.String()
 			generator.Modules["net/textproto"] = true
 			generator.Modules["os"] = true
 			generator.Modules["io"] = true
 		} else {
-			result = fmt.Sprintf("    writer.WriteField(\"%s\", \"%s\")\n", field[0], field[1])
+			result = fmt.Sprintf("writer.WriteField(\"%s\", \"%s\")\n", field[0], field[1])
 		}
 	case httpgen_common.FormStringType:
 		field := strings.SplitN(data.Value, "=", 2)
@@ -427,7 +410,7 @@ func FormString(generator *GoGenerator, data *httpgen_common.DataOption) string 
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")
 			os.Exit(1)
 		}
-		result = fmt.Sprintf("    writer.WriteField(\"%s\", \"%s\")\n", field[0], field[1])
+		result = fmt.Sprintf("writer.WriteField(\"%s\", \"%s\")\n", field[0], field[1])
 	}
 	generator.Modules["bytes"] = true
 	generator.Modules["mime/multipart"] = true
