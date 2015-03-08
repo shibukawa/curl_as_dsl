@@ -24,9 +24,13 @@ Global Options
 
    -t, --target     Code generator name. Now it supports the following generators:
 
-       go, go_client     : Golang code (net/http)
-       py, python_client : Python 3 code (http.client)
-
+       go, golang         : Golang      (net/http)
+       py, python         : Python 3    (http.client)
+       node, js.node      : Node.js     (http.request)
+       xhr, js.xhr        : Browser     (XMLHttpRequest)
+       java               : Java        (java.net.HttpURLConnection)
+       objc, objc.session : Objective-C (NSURLSession)
+       objc.connection    :             (NSURLConnection)
 
 Supported cURL Options
 ~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,0 +1,8 @@
+testserver/testserver
+testserver/test.html
+httpgen
+curl_as_dsl
+.idea
+test/
+*.iml
+*.js.map

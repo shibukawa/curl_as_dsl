@@ -13,9 +13,9 @@ BOOL shouldKeepRunning = YES;
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    NSHTTPURLResponse *httpResopnse = (NSHTTPURLResponse *)response;
-    NSLog(@"Status: %ld", httpResopnse.statusCode);
-    NSDictionary *headers = httpResopnse.allHeaderFields;
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    NSLog(@"Status: %ld", httpResponse.statusCode);
+    NSDictionary *headers = httpResponse.allHeaderFields;
     for (id key in headers) {
         NSLog(@"%@: %@", key, [headers objectForKey:key]);
     }

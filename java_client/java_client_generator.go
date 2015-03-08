@@ -32,7 +32,7 @@ func NewJavaGenerator(options *httpgen_common.CurlOptions) *JavaGenerator {
 	result.Url = fmt.Sprintf("\"%s\"", options.Url)
 	result.Modules = make(map[string]bool)
 	result.Modules["java.net.URL"] = true
-	result.Modules["java.net.HttpURLConnection"] = true
+	result.Modules[fmt.Sprintf("java.net.%s", result.ConnectionClass())] = true
 	result.Modules["java.net.MalformedURLException"] = true
 	result.Modules["java.io.IOException"] = true
 	result.Modules["java.io.BufferedReader"] = true

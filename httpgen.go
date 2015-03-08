@@ -38,21 +38,25 @@ var LanguageMap map[string]string = map[string]string{
 	"js.browser":         "xhr",
 	"javascript.browser": "xhr",
 	"java":               "java",
-	"objc":               "objc",
-	"objc.urlconnection": "objc",
+	"objc":               "objc_nsurlsession",
+	"objc.session":       "objc_nsurlsession",
+	"objc.nsurlsession":  "objc_nsurlsession",
+	"objc.connection":    "objc_nsurlconnection",
+	"objc.urlconnection": "objc_nsurlconnection",
 }
 
 func PrintLangHelp(target string) {
 	fmt.Fprintf(os.Stderr, `
 '%s' is not supported as a target.
 This program supports one of the following targets:
-* go (default)       : Go standard library (net/http)
-* python             : Python standard library (http.client)
-* js.node            : Node.js standard library (http/https.request)
-* js.xhr             : JavaScript for browsers standard API (XMLHttpRequest)
-* java               : Java standard library (HttpURLConnection/HttpsURLConnection)
-* objc               : Objective-C standard library (NSURLConnection)
-`, target)
+
+* go, golang         : Golang      (net/http)
+* py, python         : Python 3    (http.client)
+* node, js.node      : node.js     (http.request)
+* xhr, js.xhr        : Browser     (XMLHttpRequest)
+* java               : Java        (java.net.HttpURLConnection)
+* objc, objc.session : Objective-C (NSURLSession)
+* objc.connection    :             (NSURLConnection)`, target)
 }
 
 func render(lang, key string, options interface{}) string {
@@ -104,7 +108,6 @@ func main() {
 		var option interface{}
 
 		lang, ok := LanguageMap[globalOptions.Target]
-
 		if !ok {
 			PrintLangHelp(globalOptions.Target)
 			os.Exit(1)
@@ -123,8 +126,11 @@ func main() {
 		case "java":
 			langName = "java"
 			templateName, option = java_client.ProcessCurlCommand(&curlOptions)
-		case "objc":
-			langName = "objc"
+		case "objc_nsurlsession":
+			langName = "objc_nsurlsession"
+			templateName, option = objc_client.ProcessCurlCommand(&curlOptions)
+		case "objc_nsurlconnection":
+			langName = "objc_nsurlconnection"
 			templateName, option = objc_client.ProcessCurlCommand(&curlOptions)
 		case "xhr":
 			langName = "xhr"
@@ -135,7 +141,7 @@ func main() {
 			if globalOptions.Debug {
 				st := reflect.TypeOf(option)
 				v := reflect.ValueOf(option)
-				fmt.Fprintf(os.Stderr, "Debug: template name=%s\n", templateName)
+				fmt.Fprintf(os.Stderr, "Debug: template name=%s_%s\n", langName, templateName)
 				fmt.Fprintf(os.Stderr, "Debug: template context=%s\n", st.Name())
 				num := st.NumField()
 				for i := 0; i < num; i++ {
