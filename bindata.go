@@ -616,6 +616,33 @@ func templates_objc_nsurlsession_full_tpl() ([]byte, error) {
 	)
 }
 
+func templates_php_full_tpl() ([]byte, error) {
+	return bindata_read([]byte{
+		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x00, 0xff, 0x74, 0x8e,
+		0x4f, 0x4b, 0xc5, 0x40, 0x0c, 0xc4, 0xef, 0xfd, 0x14, 0x61, 0x79, 0x87,
+		0x2d, 0x14, 0xbf, 0x80, 0x56, 0xf1, 0xcf, 0xc1, 0x8b, 0xe0, 0xc5, 0x93,
+		0x3c, 0x96, 0xb0, 0x9b, 0xda, 0x42, 0xdb, 0x5d, 0xd2, 0x28, 0x95, 0xc7,
+		0xfb, 0xee, 0x26, 0xad, 0x0a, 0x1e, 0x3c, 0xfe, 0x66, 0x26, 0x93, 0xb9,
+		0xba, 0x29, 0x7d, 0x39, 0x9d, 0xe0, 0xe2, 0x36, 0xa5, 0x41, 0x86, 0x3c,
+		0xe3, 0xf8, 0x40, 0x71, 0x44, 0x46, 0x03, 0x38, 0x9f, 0xcd, 0x7b, 0x66,
+		0x2a, 0xc8, 0x74, 0x97, 0xd3, 0xe7, 0x5f, 0xe5, 0x91, 0x30, 0x11, 0xab,
+		0x56, 0x1d, 0xa2, 0xac, 0xd0, 0xc2, 0x22, 0x4c, 0x38, 0x85, 0x98, 0x67,
+		0xa1, 0x55, 0x42, 0x54, 0x12, 0xf2, 0xaf, 0x15, 0x80, 0xeb, 0x45, 0x8a,
+		0x83, 0xf6, 0x1a, 0x8c, 0x94, 0x27, 0x92, 0x3e, 0xa7, 0x4d, 0x71, 0x56,
+		0xf9, 0xb4, 0xb1, 0x76, 0x6d, 0xf4, 0xdb, 0x6c, 0x70, 0x6f, 0x75, 0xb3,
+		0xd8, 0x1f, 0x80, 0x63, 0x75, 0xac, 0x2f, 0xab, 0x43, 0x57, 0xf4, 0x5d,
+		0x97, 0x0b, 0xcd, 0xde, 0x22, 0x2f, 0x3c, 0xaa, 0xdd, 0x80, 0x63, 0xd7,
+		0x40, 0x87, 0xe3, 0x42, 0x0d, 0xd8, 0x26, 0x8d, 0x0e, 0x1d, 0xf8, 0x2d,
+		0xde, 0xb6, 0xbb, 0x53, 0x6b, 0x0b, 0xad, 0x83, 0x78, 0x35, 0x3f, 0x90,
+		0x43, 0x7a, 0x9f, 0x8a, 0xff, 0x5e, 0xfe, 0x46, 0x12, 0x74, 0x19, 0x86,
+		0x84, 0x82, 0x76, 0x56, 0xff, 0x13, 0x8a, 0xfb, 0xa6, 0xe5, 0x27, 0xf3,
+		0x15, 0x00, 0x00, 0xff, 0xff, 0xb4, 0x0c, 0x94, 0x89, 0x49, 0x01, 0x00,
+		0x00,
+	},
+		"templates/php_full.tpl",
+	)
+}
+
 func templates_python_full_tpl() ([]byte, error) {
 	return bindata_read([]byte{
 		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x00, 0xff, 0x5c, 0x91,
@@ -833,27 +860,29 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() ([]byte, error){
-	"templates/go_full.tpl": templates_go_full_tpl,
-	"templates/go_get_with_data_url.tpl": templates_go_get_with_data_url_tpl,
-	"templates/go_post_form.tpl": templates_go_post_form_tpl,
-	"templates/go_post_single_file.tpl": templates_go_post_single_file_tpl,
-	"templates/go_post_text.tpl": templates_go_post_text_tpl,
-	"templates/go_post_with_data_url.tpl": templates_go_post_with_data_url_tpl,
-	"templates/go_simple_get.tpl": templates_go_simple_get_tpl,
-	"templates/go_simple_method.tpl": templates_go_simple_method_tpl,
-	"templates/go_simple_post.tpl": templates_go_simple_post_tpl,
-	"templates/java_full.tpl": templates_java_full_tpl,
-	"templates/nodejs_external_file.tpl": templates_nodejs_external_file_tpl,
-	"templates/nodejs_external_files.tpl": templates_nodejs_external_files_tpl,
-	"templates/nodejs_full.tpl": templates_nodejs_full_tpl,
-	"templates/nodejs_simple_get.tpl": templates_nodejs_simple_get_tpl,
+	"templates/go_full.tpl":                   templates_go_full_tpl,
+	"templates/go_get_with_data_url.tpl":      templates_go_get_with_data_url_tpl,
+	"templates/go_post_form.tpl":              templates_go_post_form_tpl,
+	"templates/go_post_single_file.tpl":       templates_go_post_single_file_tpl,
+	"templates/go_post_text.tpl":              templates_go_post_text_tpl,
+	"templates/go_post_with_data_url.tpl":     templates_go_post_with_data_url_tpl,
+	"templates/go_simple_get.tpl":             templates_go_simple_get_tpl,
+	"templates/go_simple_method.tpl":          templates_go_simple_method_tpl,
+	"templates/go_simple_post.tpl":            templates_go_simple_post_tpl,
+	"templates/java_full.tpl":                 templates_java_full_tpl,
+	"templates/nodejs_external_file.tpl":      templates_nodejs_external_file_tpl,
+	"templates/nodejs_external_files.tpl":     templates_nodejs_external_files_tpl,
+	"templates/nodejs_full.tpl":               templates_nodejs_full_tpl,
+	"templates/nodejs_simple_get.tpl":         templates_nodejs_simple_get_tpl,
 	"templates/objc_nsurlconnection_full.tpl": templates_objc_nsurlconnection_full_tpl,
-	"templates/objc_nsurlsession_full.tpl": templates_objc_nsurlsession_full_tpl,
-	"templates/python_full.tpl": templates_python_full_tpl,
-	"templates/xhr_external_file.tpl": templates_xhr_external_file_tpl,
-	"templates/xhr_external_files.tpl": templates_xhr_external_files_tpl,
-	"templates/xhr_simple.tpl": templates_xhr_simple_tpl,
+	"templates/objc_nsurlsession_full.tpl":    templates_objc_nsurlsession_full_tpl,
+	"templates/php_full.tpl":                  templates_php_full_tpl,
+	"templates/python_full.tpl":               templates_python_full_tpl,
+	"templates/xhr_external_file.tpl":         templates_xhr_external_file_tpl,
+	"templates/xhr_external_files.tpl":        templates_xhr_external_files_tpl,
+	"templates/xhr_simple.tpl":                templates_xhr_simple_tpl,
 }
+
 // AssetDir returns the file names below a certain
 // directory embedded in the file by go-bindata.
 // For example if you run go-bindata on data/... and data contains the
@@ -890,50 +919,32 @@ func AssetDir(name string) ([]string, error) {
 }
 
 type _bintree_t struct {
-	Func func() ([]byte, error)
+	Func     func() ([]byte, error)
 	Children map[string]*_bintree_t
 }
+
 var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 	"templates": &_bintree_t{nil, map[string]*_bintree_t{
-		"go_full.tpl": &_bintree_t{templates_go_full_tpl, map[string]*_bintree_t{
-		}},
-		"go_simple_method.tpl": &_bintree_t{templates_go_simple_method_tpl, map[string]*_bintree_t{
-		}},
-		"nodejs_external_file.tpl": &_bintree_t{templates_nodejs_external_file_tpl, map[string]*_bintree_t{
-		}},
-		"xhr_simple.tpl": &_bintree_t{templates_xhr_simple_tpl, map[string]*_bintree_t{
-		}},
-		"nodejs_simple_get.tpl": &_bintree_t{templates_nodejs_simple_get_tpl, map[string]*_bintree_t{
-		}},
-		"xhr_external_file.tpl": &_bintree_t{templates_xhr_external_file_tpl, map[string]*_bintree_t{
-		}},
-		"go_post_text.tpl": &_bintree_t{templates_go_post_text_tpl, map[string]*_bintree_t{
-		}},
-		"go_simple_get.tpl": &_bintree_t{templates_go_simple_get_tpl, map[string]*_bintree_t{
-		}},
-		"nodejs_external_files.tpl": &_bintree_t{templates_nodejs_external_files_tpl, map[string]*_bintree_t{
-		}},
-		"objc_nsurlconnection_full.tpl": &_bintree_t{templates_objc_nsurlconnection_full_tpl, map[string]*_bintree_t{
-		}},
-		"xhr_external_files.tpl": &_bintree_t{templates_xhr_external_files_tpl, map[string]*_bintree_t{
-		}},
-		"go_get_with_data_url.tpl": &_bintree_t{templates_go_get_with_data_url_tpl, map[string]*_bintree_t{
-		}},
-		"go_post_form.tpl": &_bintree_t{templates_go_post_form_tpl, map[string]*_bintree_t{
-		}},
-		"go_post_single_file.tpl": &_bintree_t{templates_go_post_single_file_tpl, map[string]*_bintree_t{
-		}},
-		"go_post_with_data_url.tpl": &_bintree_t{templates_go_post_with_data_url_tpl, map[string]*_bintree_t{
-		}},
-		"go_simple_post.tpl": &_bintree_t{templates_go_simple_post_tpl, map[string]*_bintree_t{
-		}},
-		"java_full.tpl": &_bintree_t{templates_java_full_tpl, map[string]*_bintree_t{
-		}},
-		"nodejs_full.tpl": &_bintree_t{templates_nodejs_full_tpl, map[string]*_bintree_t{
-		}},
-		"objc_nsurlsession_full.tpl": &_bintree_t{templates_objc_nsurlsession_full_tpl, map[string]*_bintree_t{
-		}},
-		"python_full.tpl": &_bintree_t{templates_python_full_tpl, map[string]*_bintree_t{
-		}},
+		"go_simple_post.tpl":            &_bintree_t{templates_go_simple_post_tpl, map[string]*_bintree_t{}},
+		"java_full.tpl":                 &_bintree_t{templates_java_full_tpl, map[string]*_bintree_t{}},
+		"python_full.tpl":               &_bintree_t{templates_python_full_tpl, map[string]*_bintree_t{}},
+		"go_full.tpl":                   &_bintree_t{templates_go_full_tpl, map[string]*_bintree_t{}},
+		"go_get_with_data_url.tpl":      &_bintree_t{templates_go_get_with_data_url_tpl, map[string]*_bintree_t{}},
+		"go_post_with_data_url.tpl":     &_bintree_t{templates_go_post_with_data_url_tpl, map[string]*_bintree_t{}},
+		"nodejs_simple_get.tpl":         &_bintree_t{templates_nodejs_simple_get_tpl, map[string]*_bintree_t{}},
+		"php_full.tpl":                  &_bintree_t{templates_php_full_tpl, map[string]*_bintree_t{}},
+		"go_post_single_file.tpl":       &_bintree_t{templates_go_post_single_file_tpl, map[string]*_bintree_t{}},
+		"go_simple_get.tpl":             &_bintree_t{templates_go_simple_get_tpl, map[string]*_bintree_t{}},
+		"nodejs_external_files.tpl":     &_bintree_t{templates_nodejs_external_files_tpl, map[string]*_bintree_t{}},
+		"go_simple_method.tpl":          &_bintree_t{templates_go_simple_method_tpl, map[string]*_bintree_t{}},
+		"objc_nsurlsession_full.tpl":    &_bintree_t{templates_objc_nsurlsession_full_tpl, map[string]*_bintree_t{}},
+		"xhr_simple.tpl":                &_bintree_t{templates_xhr_simple_tpl, map[string]*_bintree_t{}},
+		"nodejs_full.tpl":               &_bintree_t{templates_nodejs_full_tpl, map[string]*_bintree_t{}},
+		"objc_nsurlconnection_full.tpl": &_bintree_t{templates_objc_nsurlconnection_full_tpl, map[string]*_bintree_t{}},
+		"xhr_external_file.tpl":         &_bintree_t{templates_xhr_external_file_tpl, map[string]*_bintree_t{}},
+		"xhr_external_files.tpl":        &_bintree_t{templates_xhr_external_files_tpl, map[string]*_bintree_t{}},
+		"go_post_form.tpl":              &_bintree_t{templates_go_post_form_tpl, map[string]*_bintree_t{}},
+		"go_post_text.tpl":              &_bintree_t{templates_go_post_text_tpl, map[string]*_bintree_t{}},
+		"nodejs_external_file.tpl":      &_bintree_t{templates_nodejs_external_file_tpl, map[string]*_bintree_t{}},
 	}},
 }}

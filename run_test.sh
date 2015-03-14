@@ -11,3 +11,4 @@ set -e
 ./run_test_java.sh
 ./run_test_objc.sh
 ./run_test_objc_connection.sh
+./run_test_php.sh

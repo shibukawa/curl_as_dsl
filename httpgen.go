@@ -6,6 +6,7 @@ import (
 	"./java_client"
 	"./nodejs_client"
 	"./objc_client"
+	"./php_client"
 	"./python_client"
 	"./xhr_client"
 	"bytes"
@@ -43,6 +44,7 @@ var LanguageMap map[string]string = map[string]string{
 	"objc.nsurlsession":  "objc_nsurlsession",
 	"objc.connection":    "objc_nsurlconnection",
 	"objc.urlconnection": "objc_nsurlconnection",
+	"php":                "php",
 }
 
 func PrintLangHelp(target string) {
@@ -56,7 +58,8 @@ This program supports one of the following targets:
 * xhr, js.xhr        : Browser     (XMLHttpRequest)
 * java               : Java        (java.net.HttpURLConnection)
 * objc, objc.session : Objective-C (NSURLSession)
-* objc.connection    :             (NSURLConnection)`, target)
+* objc.connection    : Objective-C (NSURLConnection)
+* php                : PHP         (fopen)`, target)
 }
 
 func render(lang, key string, options interface{}) string {
@@ -135,6 +138,9 @@ func main() {
 		case "xhr":
 			langName = "xhr"
 			templateName, option = xhr_client.ProcessCurlCommand(&curlOptions)
+		case "php":
+			langName = "php"
+			templateName, option = php_client.ProcessCurlCommand(&curlOptions)
 		default:
 		}
 		if templateName != "" {
