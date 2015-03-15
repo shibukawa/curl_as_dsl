@@ -6,3 +6,4 @@ curl_as_dsl
 test/
 *.iml
 *.js.map
+webui/*.js
