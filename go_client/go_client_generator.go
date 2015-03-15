@@ -2,8 +2,7 @@ package go_client
 
 import (
 	"fmt"
-	//"log"
-	"../httpgen_common"
+	"github.com/shibukawa/curl_as_dsl/httpgen_common"
 	"mime"
 	"strings"
 )

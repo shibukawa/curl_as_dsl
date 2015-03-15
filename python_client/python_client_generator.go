@@ -1,11 +1,10 @@
 package python_client
 
 import (
-	"../httpgen_common"
-	"fmt"
-	"log"
-	//"mime"
 	"bytes"
+	"fmt"
+	"github.com/shibukawa/curl_as_dsl/httpgen_common"
+	"log"
 	"net/url"
 	"os"
 	"strings"
@@ -90,7 +89,7 @@ func (self PythonGenerator) PrepareHeader() string {
 	buffer.WriteString("headers = {\n")
 	for _, header := range self.Options.Header {
 		headers := strings.Split(header, ":")
-		buffer.WriteString(fmt.Sprintf("        \"%s\": \"%s\",\n", strings.TrimSpace(headers[0]), strings.TrimSpace(headers[1])))
+		fmt.Fprintf(&buffer, "        \"%s\": \"%s\",\n", strings.TrimSpace(headers[0]), strings.TrimSpace(headers[1]))
 	}
 	for _, header := range self.specialHeaders {
 		buffer.WriteString(header)
@@ -205,7 +204,7 @@ func (self *PythonGenerator) SetDataForForm() {
 		} else {
 			buffer.WriteString(", \"")
 		}
-		buffer.WriteString(fmt.Sprintf("        \"%s\": \"%s\",\n", key, values[0]))
+		fmt.Fprintf(&buffer, "        \"%s\": \"%s\",\n", key, values[0])
 		count++
 	}
 	buffer.WriteString("    })\n    ")
@@ -361,7 +360,7 @@ func FormString(generator *PythonGenerator, data *httpgen_common.DataOption) str
 			fragments := strings.Split(field[1][1:], ";")
 
 			// field name, source file name
-			buffer.WriteString(fmt.Sprintf("        (r'%s', r'%s', ", field[0], fragments[0]))
+			fmt.Fprintf(&buffer, "        (r'%s', r'%s', ", field[0], fragments[0])
 
 			var contentType string
 			sentFileName := fragments[0]
@@ -373,13 +372,13 @@ func FormString(generator *PythonGenerator, data *httpgen_common.DataOption) str
 				}
 			}
 			// sent file name
-			buffer.WriteString(fmt.Sprintf("r'%s', ", sentFileName))
+			fmt.Fprintf(&buffer, "r'%s', ", sentFileName)
 
 			// sent file name
 			if contentType != "" {
-				buffer.WriteString(fmt.Sprintf("r'%s'", contentType))
+				fmt.Fprintf(&buffer, "r'%s'", contentType)
 			} else {
-				buffer.WriteString(fmt.Sprintf("mimetypes.guess_type(r'%s')[0] or 'application/octet-stream'", fragments[0]))
+				fmt.Fprintf(&buffer, "mimetypes.guess_type(r'%s')[0] or 'application/octet-stream'", fragments[0])
 				generator.Modules["mimetypes"] = true
 			}
 			buffer.WriteString("),\n")
@@ -390,7 +389,7 @@ func FormString(generator *PythonGenerator, data *httpgen_common.DataOption) str
 			fragments := strings.Split(field[1][1:], ";")
 
 			// field name, content
-			buffer.WriteString(fmt.Sprintf("        (r'%s', open(r'%s').read(), ", field[0], fragments[0]))
+			fmt.Fprintf(&buffer, "        (r'%s', open(r'%s').read(), ", field[0], fragments[0])
 
 			var contentType string
 			for _, fragment := range fragments[1:] {
@@ -401,7 +400,7 @@ func FormString(generator *PythonGenerator, data *httpgen_common.DataOption) str
 			if contentType == "" {
 				buffer.WriteString("None")
 			} else {
-				buffer.WriteString(fmt.Sprintf("r'%s'", contentType))
+				fmt.Fprintf(&buffer, "r'%s'", contentType)
 			}
 			buffer.WriteString("),\n")
 			result = buffer.String()

@@ -1,10 +1,9 @@
 package xhr_client
 
 import (
-	"../httpgen_common"
-	"fmt"
-	//"mime"
 	"bytes"
+	"fmt"
+	"github.com/shibukawa/curl_as_dsl/httpgen_common"
 	"net/url"
 	"os"
 	"strings"

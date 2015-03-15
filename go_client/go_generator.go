@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 	//"log"
-	"../httpgen_common"
 	"bytes"
+	"github.com/shibukawa/curl_as_dsl/httpgen_common"
 	"net/url"
 	"strings"
 )

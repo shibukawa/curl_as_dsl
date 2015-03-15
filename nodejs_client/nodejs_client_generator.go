@@ -1,11 +1,10 @@
 package nodejs_client
 
 import (
-	"../httpgen_common"
-	"fmt"
-	"log"
-	//"mime"
 	"bytes"
+	"fmt"
+	"github.com/shibukawa/curl_as_dsl/httpgen_common"
+	"log"
 	"net/url"
 	"os"
 	"strconv"

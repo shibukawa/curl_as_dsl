@@ -1,50 +1,18 @@
 package main
 
 import (
-	"./go_client"
-	"./httpgen_common"
-	"./java_client"
-	"./nodejs_client"
-	"./objc_client"
-	"./php_client"
-	"./python_client"
-	"./xhr_client"
-	"bytes"
 	"fmt"
 	"github.com/jessevdk/go-flags"
-	"go/format"
+	"github.com/shibukawa/curl_as_dsl/httpgen_common"
+	"github.com/shibukawa/curl_as_dsl/httpgen_generator"
 	"log"
 	"os"
 	"reflect"
-	"text/template"
 )
 
 type GlobalOptions struct {
 	Target string `short:"t" long:"target" value-name:"NAME" description:"Target name of code generator" default:"go"`
 	Debug  bool   `short:"d" long:"debug" description:"Debug option"`
-}
-
-var LanguageMap map[string]string = map[string]string{
-	"go":                 "go",
-	"golang":             "go",
-	"py":                 "python",
-	"python":             "python",
-	"node":               "node",
-	"nodejs":             "node",
-	"js.node":            "node",
-	"javascript.node":    "node",
-	"xhr":                "xhr",
-	"js.xhr":             "xhr",
-	"javascript.xhr":     "xhr",
-	"js.browser":         "xhr",
-	"javascript.browser": "xhr",
-	"java":               "java",
-	"objc":               "objc_nsurlsession",
-	"objc.session":       "objc_nsurlsession",
-	"objc.nsurlsession":  "objc_nsurlsession",
-	"objc.connection":    "objc_nsurlconnection",
-	"objc.urlconnection": "objc_nsurlconnection",
-	"php":                "php",
 }
 
 func PrintLangHelp(target string) {
@@ -60,24 +28,6 @@ This program supports one of the following targets:
 * objc, objc.session : Objective-C (NSURLSession)
 * objc.connection    : Objective-C (NSURLConnection)
 * php                : PHP         (fopen)`, target)
-}
-
-func render(lang, key string, options interface{}) string {
-	src, _ := Asset(fmt.Sprintf("templates/%s_%s.tpl", lang, key))
-	tpl := template.Must(template.New(key).Parse(string(src)))
-	var buffer bytes.Buffer
-	err := tpl.Execute(&buffer, options)
-	if err != nil {
-		log.Fatal(err)
-	}
-	if lang == "go" {
-		gosrc, err := format.Source(buffer.Bytes())
-		if err != nil {
-			log.Fatal(err)
-		}
-		return string(gosrc)
-	}
-	return buffer.String()
 }
 
 func main() {
@@ -106,43 +56,7 @@ func main() {
 				log.Fatalln("Both --url option and url parameters are missing")
 			}
 		}
-		var langName string
-		var templateName string
-		var option interface{}
-
-		lang, ok := LanguageMap[globalOptions.Target]
-		if !ok {
-			PrintLangHelp(globalOptions.Target)
-			os.Exit(1)
-		}
-
-		switch lang {
-		case "go":
-			langName = "go"
-			templateName, option = go_client.ProcessCurlCommand(&curlOptions)
-		case "python":
-			langName = "python"
-			templateName, option = python_client.ProcessCurlCommand(&curlOptions)
-		case "node":
-			langName = "nodejs"
-			templateName, option = nodejs_client.ProcessCurlCommand(&curlOptions)
-		case "java":
-			langName = "java"
-			templateName, option = java_client.ProcessCurlCommand(&curlOptions)
-		case "objc_nsurlsession":
-			langName = "objc_nsurlsession"
-			templateName, option = objc_client.ProcessCurlCommand(&curlOptions)
-		case "objc_nsurlconnection":
-			langName = "objc_nsurlconnection"
-			templateName, option = objc_client.ProcessCurlCommand(&curlOptions)
-		case "xhr":
-			langName = "xhr"
-			templateName, option = xhr_client.ProcessCurlCommand(&curlOptions)
-		case "php":
-			langName = "php"
-			templateName, option = php_client.ProcessCurlCommand(&curlOptions)
-		default:
-		}
+		sourceCode, langName, templateName, option := httpgen_generator.GenerateCode(globalOptions.Target, &curlOptions)
 		if templateName != "" {
 			if globalOptions.Debug {
 				st := reflect.TypeOf(option)
@@ -154,7 +68,10 @@ func main() {
 					fmt.Fprintf(os.Stderr, "    %s: %s\n", st.Field(i).Name, v.Field(i).String())
 				}
 			}
-			fmt.Println(render(langName, templateName, option))
+			fmt.Println(sourceCode)
+		} else {
+			PrintLangHelp(globalOptions.Target)
+			os.Exit(1)
 		}
 	}
 }
