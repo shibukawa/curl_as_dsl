@@ -41,9 +41,11 @@ var LanguageMap map[string]string = map[string]string{
 
 func render(lang, key string, options interface{}) string {
 	src, _ := Asset(fmt.Sprintf("templates/%s_%s.tpl", lang, key))
-	tpl := template.Must(template.New(key).Parse(string(src)))
 	var buffer bytes.Buffer
-	err := tpl.Execute(&buffer, options)
+	var err error
+	tmpTpl, err := template.New(key).Parse(string(src))
+	tpl := template.Must(tmpTpl, err)
+	err = tpl.Execute(&buffer, options)
 	if err != nil {
 		log.Fatal(err)
 	}

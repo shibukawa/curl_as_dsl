@@ -1,16 +1,17 @@
 package main
 
 import (
-	"fmt"
-	"honnef.co/go/js/console"
-    "github.com/gopherjs/gopherjs/js"
+	"github.com/gopherjs/gopherjs/js"
 	"github.com/jessevdk/go-flags"
-	"github.com/shibukawa/optstring_parser"
 	"github.com/shibukawa/curl_as_dsl/httpgen_common"
 	"github.com/shibukawa/curl_as_dsl/httpgen_generator"
+	"github.com/shibukawa/optstring_parser"
+	"honnef.co/go/js/console"
+	"html"
+	"strings"
 )
 
-type GlobalOptions struct {}
+type GlobalOptions struct{}
 
 func GenerateCode(target, options string) (string, string) {
 	var globalOptions GlobalOptions
@@ -21,11 +22,12 @@ func GenerateCode(target, options string) (string, string) {
 	curlCommand, err := parser.AddCommand("curl",
 		"Generate code from curl options",
 		"This command has almost same options of curl and generate code",
-	&curlOptions)
+		&curlOptions)
 
-
-	commandLine := fmt.Sprintf("httpgen -t %s curl %s", target, options)
-	args := optstring_parser.Parse(commandLine)
+	if !strings.HasPrefix(options, "curl ") {
+		options = "curl " + options
+	}
+	args := optstring_parser.Parse(options)
 
 	urls, err := parser.ParseArgs(args)
 	if err != nil {
@@ -33,7 +35,7 @@ func GenerateCode(target, options string) (string, string) {
 		return "", err.Error()
 	}
 	if len(urls) > 1 {
-		return "", "It accept only one url. Remained urls are ignored."
+		return "", "It accept only one url. Remained urls are ignored:" + strings.Join(urls, ", ")
 	}
 	if parser.Active == curlCommand {
 		// --url option has higher priority than params.
@@ -46,13 +48,13 @@ func GenerateCode(target, options string) (string, string) {
 			}
 		}
 		sourceCode, _, _, _ := httpgen_generator.GenerateCode(target, &curlOptions)
-		return sourceCode, ""
+		return html.EscapeString(sourceCode), ""
 	}
 	return "", ""
 }
 
 func main() {
-    js.Global.Set("CurlAsDsl", map[string]interface{}{
-        "Generate": GenerateCode,
-    })
+	js.Global.Set("CurlAsDsl", map[string]interface{}{
+		"generate": GenerateCode,
+	})
 }
