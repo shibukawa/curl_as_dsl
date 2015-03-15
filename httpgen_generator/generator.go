@@ -1,11 +1,8 @@
 package httpgen_generator
 
 import (
-	"log"
-	"fmt"
 	"bytes"
-	"go/format"
-	"text/template"
+	"fmt"
 	"github.com/shibukawa/curl_as_dsl/go_client"
 	"github.com/shibukawa/curl_as_dsl/httpgen_common"
 	"github.com/shibukawa/curl_as_dsl/java_client"
@@ -14,6 +11,9 @@ import (
 	"github.com/shibukawa/curl_as_dsl/php_client"
 	"github.com/shibukawa/curl_as_dsl/python_client"
 	"github.com/shibukawa/curl_as_dsl/xhr_client"
+	"go/format"
+	"log"
+	"text/template"
 )
 
 var LanguageMap map[string]string = map[string]string{
@@ -68,31 +68,31 @@ func GenerateCode(target string, curlOptions *httpgen_common.CurlOptions) (strin
 	}
 
 	switch lang {
-		case "go":
+	case "go":
 		langName = "go"
 		templateName, option = go_client.ProcessCurlCommand(curlOptions)
-		case "python":
+	case "python":
 		langName = "python"
 		templateName, option = python_client.ProcessCurlCommand(curlOptions)
-		case "node":
+	case "node":
 		langName = "nodejs"
 		templateName, option = nodejs_client.ProcessCurlCommand(curlOptions)
-		case "java":
+	case "java":
 		langName = "java"
 		templateName, option = java_client.ProcessCurlCommand(curlOptions)
-		case "objc_nsurlsession":
+	case "objc_nsurlsession":
 		langName = "objc_nsurlsession"
 		templateName, option = objc_client.ProcessCurlCommand(curlOptions)
-		case "objc_nsurlconnection":
+	case "objc_nsurlconnection":
 		langName = "objc_nsurlconnection"
 		templateName, option = objc_client.ProcessCurlCommand(curlOptions)
-		case "xhr":
+	case "xhr":
 		langName = "xhr"
 		templateName, option = xhr_client.ProcessCurlCommand(curlOptions)
-		case "php":
+	case "php":
 		langName = "php"
 		templateName, option = php_client.ProcessCurlCommand(curlOptions)
-		default:
+	default:
 	}
 	sourceCode := render(langName, templateName, option)
 	return sourceCode, langName, templateName, option
