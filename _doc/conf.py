@@ -280,3 +280,9 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+def setup(app):
+    app.add_stylesheet('default.css')
+    app.add_javascript('highlight.pack.js')
+    app.add_javascript('webui.js')
+    app.add_javascript('curlasdsl.js')

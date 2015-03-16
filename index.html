@@ -28,10 +28,12 @@
   
 
   
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+  
 
   
     <link rel="top" title="cURL as DSL 1.0 documentation" href="#"/>
-        <link rel="next" title="What is this?" href="what_is_this.html"/> 
+        <link rel="next" title="Generators" href="generators/index.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -63,10 +65,6 @@
           
           
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="what_is_this.html">What is this?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="what_is_this.html#faq">FAQ</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="generators/index.html">Generators</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="generators/golang.html">Golang</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators/python3.html">Python3</a></li>
@@ -75,6 +73,15 @@
 <li class="toctree-l2"><a class="reference internal" href="generators/java.html">Java</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators/objc.html">Objective-C</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators/php.html">PHP</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="what_is_this.html">What is this?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="what_is_this.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html#license">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="development.html#the-mit-license-mit">The MIT License (MIT)</a></li>
 </ul>
 </li>
 </ul>
@@ -114,12 +121,65 @@
             
   <div class="section" id="curl-as-dsl">
 <h1>cURL as DSL<a class="headerlink" href="#curl-as-dsl" title="Permalink to this headline">¶</a></h1>
+<style>
+#codeblock {
+  white-space: pre;
+}
+#command {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+</style>
+<label>Target:</label>
+<select id="lang">
+  <option value="go">Golang</option>
+  <option value="python">Python 3</option>
+  <option value="php">PHP</option>
+  <option value="xhr">JavaScript (XMLHttpRequest)</option>
+  <option value="nodejs">JavaScript (node.js)</option>
+  <option value="java">Java</option>
+  <option value="objc">Objective-C (NSURLSession)</option>
+  <option value="objc.connection">Objective-C (NSURLConnection)</option>
+</select>
+<label>Curl Command:</label>
+<input type="text" value='curl -F "name=John" -F "photo=@photo.jpg;type=image/jpeg" -H "Accept: text/html" --compressed http://localhost' id="command">
+<pre id="result"><code id="codeblock">Result code is printed here. </code></pre><div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Select target envirionment and type curl command in above text box.
+You gets source code that works as same as curl command. Enjoy!</p>
+<div class="section" id="supported-options">
+<h3>Supported Options<a class="headerlink" href="#supported-options" title="Permalink to this headline">¶</a></h3>
+<p>It doens&#8217;t support fully options of cURL. It supports only options for http 1.1.</p>
+<div class="highlight-none"><div class="highlight"><pre>[usage]
+
+       --basic                             Use HTTP Basic Authentication (H)
+       --compressed                        Request compressed response (using deflate or gzip)
+   -d, --data=DATA                         HTTP POST data (H)
+       --data-ascii=DATA                   HTTP POST ASCII data (H)
+       --data-binary=DATA                  HTTP POST binary data (H)
+       --data-urlencode=DATA               HTTP POST data url encoded (H)
+   -G, --get                               Send the -d data with a HTTP GET (H)
+   -F, --form=KEY=VALUE                    Specify HTTP multipart POST data (H)
+       --form-string=KEY=VALUE             Specify HTTP multipart POST data (H)
+   -H, --header=LINE                       Pass custom header LINE to server (H)
+   -I, --head                              Show document info only
+   -x, --proxy=[PROTOCOL://]HOST[:PORT]    Use proxy on given port
+   -e, --referer=                          Referer URL (H)
+   -X, --request=COMMAND                   Specify request command to use
+       --tr-encoding                       Request compressed transfer encoding (H)
+   -T, --upload-file=FILE                  Transfer FILE to destination
+       --url=URL                           URL to work with
+   -u, --user=USER[:PASSWORD]              Server user and password
+   -A, --user-agent=STRING                 User-Agent to send to server (H)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="document">
+<h2>Document<a class="headerlink" href="#document" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="what_is_this.html">What is this?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="what_is_this.html#faq">FAQ</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="generators/index.html">Generators</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="generators/golang.html">Golang</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generators/python3.html">Python3</a></li>
@@ -130,12 +190,19 @@
 <li class="toctree-l2"><a class="reference internal" href="generators/php.html">PHP</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="what_is_this.html">What is this?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="what_is_this.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html#license">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="development.html#the-mit-license-mit">The MIT License (MIT)</a></li>
+</ul>
+</li>
 </ul>
 </div>
-<script src="webui/webui.js"></script>
-<form>
-<input type="text" value="curl ">
-</form></div>
+</div>
+</div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
@@ -151,7 +218,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="what_is_this.html" class="btn btn-neutral float-right" title="What is this?">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="generators/index.html" class="btn btn-neutral float-right" title="Generators">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
@@ -191,6 +258,9 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/highlight.pack.js"></script>
+      <script type="text/javascript" src="_static/webui.js"></script>
+      <script type="text/javascript" src="_static/curlasdsl.js"></script>
 
   
 
