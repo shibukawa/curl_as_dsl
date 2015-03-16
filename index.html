@@ -149,14 +149,15 @@
 <input type="text" value='curl -F "name=John" -F "photo=@photo.jpg" -H "Accept: text/html" --compressed http://localhost' id="command">
 </p>
 <button id="button">Generate Code</button>
+<button id="reset">Reset</button>
 <pre id="result"><code id="codeblock">Result code is printed here. </code></pre><div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Select target envirionment and type curl command in above text box.
 You gets source code that works as same as curl command. Enjoy!</p>
 <div class="section" id="supported-options">
 <h3>Supported Options<a class="headerlink" href="#supported-options" title="Permalink to this headline">¶</a></h3>
-<p>It doens&#8217;t support fully options of cURL. It supports only options for http 1.1.</p>
-<div class="highlight-none"><div class="highlight"><pre>[usage]
+<p>It doens&#8217;t support fully options of cURL. It supports only options for http 1.x in the following list:</p>
+<div class="highlight-none"><div class="highlight"><pre>[supported options:]
 
        --basic                             Use HTTP Basic Authentication (H)
        --compressed                        Request compressed response (using deflate or gzip)

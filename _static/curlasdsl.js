@@ -42,4 +42,7 @@ $(document).ready(function () {
         }
     });
     $('#button').on('click', updateSnippet);
+    $('#reset').on('click', function () {
+        $('#codeblock').html('Result code is printed here.');
+    });
 });

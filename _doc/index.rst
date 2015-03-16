@@ -36,6 +36,7 @@ cURL as DSL
    <input type="text" value='curl -F "name=John" -F "photo=@photo.jpg" -H "Accept: text/html" --compressed http://localhost' id="command">
    </p>
    <button id="button">Generate Code</button>
+   <button id="reset">Reset</button>
    <pre id="result"><code id="codeblock">Result code is printed here. </code></pre>
 
 Usage
@@ -47,11 +48,11 @@ You gets source code that works as same as curl command. Enjoy!
 Supported Options
 ~~~~~~~~~~~~~~~~~~~~~
 
-It doens't support fully options of cURL. It supports only options for http 1.1.
+It doens't support fully options of cURL. It supports only options for http 1.x in the following list:
 
 .. code-block:: none
 
-   [usage]
+   [supported options:]
 
           --basic                             Use HTTP Basic Authentication (H)
           --compressed                        Request compressed response (using deflate or gzip)
