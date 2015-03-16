@@ -57,9 +57,11 @@ func (self NodeJsGenerator) Host() string {
 		log.Fatal(err)
 	}
 	fragments := strings.SplitN(u.Host, ":", 2)
-	_, err = strconv.Atoi(fragments[1])
-	if err != nil {
-		return u.Host
+	if len(fragments) > 1 {
+		_, err = strconv.Atoi(fragments[1])
+		if err != nil {
+			return u.Host
+		}
 	}
 	return fragments[0]
 }
@@ -70,11 +72,17 @@ func (self NodeJsGenerator) Port() int {
 		log.Fatal(err)
 	}
 	fragments := strings.SplitN(u.Host, ":", 2)
-	port, err := strconv.Atoi(fragments[1])
-	if err != nil {
-		return 0
+	if len(fragments) > 1 {
+		port, err := strconv.Atoi(fragments[1])
+		if err != nil {
+			return 0
+		}
+		return port
 	}
-	return port
+	if u.Scheme == "http" {
+		return 80
+	}
+	return 443
 }
 
 func (self NodeJsGenerator) Method() string {

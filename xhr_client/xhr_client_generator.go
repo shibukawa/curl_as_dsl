@@ -61,15 +61,23 @@ func (self XHRGenerator) Method() string {
 func (self XHRGenerator) PrepareOptions() string {
 	var buffer bytes.Buffer
 	if len(self.processedHeaders) != 0 || len(self.specialHeaders) != 0 {
+		first := true
 		for _, header := range self.processedHeaders {
-			for i, value := range header.Values {
-				if i != 0 {
+			for _, value := range header.Values {
+				if first {
+					first = false
+				} else {
 					buffer.WriteString("    ")
 				}
 				fmt.Fprintf(&buffer, "xhr.setRequestHeader(\"%s\", \"%s\")\n", header.Key, value)
 			}
 		}
 		for _, headers := range self.specialHeaders {
+			if first {
+				first = false
+			} else {
+				buffer.WriteString("    ")
+			}
 			fmt.Fprintf(&buffer, "xhr.setRequestHeader(\"%s\", %s)\n", headers[0], headers[1])
 		}
 	}
@@ -196,7 +204,9 @@ func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{
 	}
 
 	if len(generator.ExternalFiles) == 1 {
-		generator.ExternalFiles[0].VariableName = "file"
+		for _, externalFile := range generator.ExternalFiles {
+			externalFile.VariableName = "file"
+		}
 	} else {
 		for i, externalFile := range generator.ExternalFiles {
 			externalFile.VariableName = fmt.Sprintf("file_%d", i+1)
