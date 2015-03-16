@@ -18,7 +18,8 @@ cURL as DSL
      font-family: monospace;
    }
    </style>
-   <label>Target:</label>
+   <p>
+   <label for="lang">Target:</label>
    <select id="lang">
      <option value="go">Golang</option>
      <option value="python">Python 3</option>
@@ -29,8 +30,12 @@ cURL as DSL
      <option value="objc">Objective-C (NSURLSession)</option>
      <option value="objc.connection">Objective-C (NSURLConnection)</option>
    </select>
-   <label>Curl Command:</label>
-   <input type="text" value='curl -F "name=John" -F "photo=@photo.jpg;type=image/jpeg" -H "Accept: text/html" --compressed http://localhost' id="command">
+   </p>
+   <p>
+   <label for-"command">Curl Command:</label>
+   <input type="text" value='curl -F "name=John" -F "photo=@photo.jpg" -H "Accept: text/html" --compressed http://localhost' id="command">
+   </p>
+   <button id="button">Generate Code</button>
    <pre id="result"><code id="codeblock">Result code is printed here. </code></pre>
 
 Usage

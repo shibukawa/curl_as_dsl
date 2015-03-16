@@ -3,7 +3,7 @@ $(document).ready(function () {
         go: "go",
         python: "python",
         php: "php",
-        xhr: "javascript",
+        xhr: "html",
         nodejs: "javascript",
         java: "java",
         objc: "objectivec",
@@ -36,4 +36,10 @@ $(document).ready(function () {
     hljs.initHighlightingOnLoad();
     $('#lang').on('change', updateSnippet);
     $('#command').on('change', updateSnippet);
+    $('#command').on('keypress', function (event) {
+        if (event.which === 13) {
+            updateSnippet(event);
+        }
+    });
+    $('#button').on('click', updateSnippet);
 });
