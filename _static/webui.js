@@ -25595,14 +25595,14 @@ $packages["net/url"] = (function() {
 	};
 	return $pkg;
 })();
-$packages["github.com/shibukawa/curl_as_dsl/httpgen_common"] = (function() {
+$packages["github.com/shibukawa/curl_as_dsl/common"] = (function() {
 	var $pkg = {}, $init, fmt, url, os, strings, DataType, DataOption, DataOptions, CurlOptions, HeaderGroup, ptrType, sliceType, sliceType$1, sliceType$2, sliceType$3, ptrType$1, ptrType$2, funcType, funcType$1;
 	fmt = $packages["fmt"];
 	url = $packages["net/url"];
 	os = $packages["os"];
 	strings = $packages["strings"];
-	DataType = $pkg.DataType = $newType(4, $kindInt, "httpgen_common.DataType", "DataType", "github.com/shibukawa/curl_as_dsl/httpgen_common", null);
-	DataOption = $pkg.DataOption = $newType(0, $kindStruct, "httpgen_common.DataOption", "DataOption", "github.com/shibukawa/curl_as_dsl/httpgen_common", function(Value_, Type_) {
+	DataType = $pkg.DataType = $newType(4, $kindInt, "common.DataType", "DataType", "github.com/shibukawa/curl_as_dsl/common", null);
+	DataOption = $pkg.DataOption = $newType(0, $kindStruct, "common.DataOption", "DataOption", "github.com/shibukawa/curl_as_dsl/common", function(Value_, Type_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Value = "";
@@ -25612,8 +25612,8 @@ $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"] = (function() {
 		this.Value = Value_;
 		this.Type = Type_;
 	});
-	DataOptions = $pkg.DataOptions = $newType(12, $kindSlice, "httpgen_common.DataOptions", "DataOptions", "github.com/shibukawa/curl_as_dsl/httpgen_common", null);
-	CurlOptions = $pkg.CurlOptions = $newType(0, $kindStruct, "httpgen_common.CurlOptions", "CurlOptions", "github.com/shibukawa/curl_as_dsl/httpgen_common", function(Basic_, Compressed_, Cookie_, CookieJar_, Data_, DataAscii_, DataBinary_, DataUrlEncode_, Get_, Form_, FormString_, Header_, Head_, Proxy_, Referer_, Request_, TrEncoding_, Transfer_, Url_, User_, UserAgent_, AWSV2_, ProcessedData_) {
+	DataOptions = $pkg.DataOptions = $newType(12, $kindSlice, "common.DataOptions", "DataOptions", "github.com/shibukawa/curl_as_dsl/common", null);
+	CurlOptions = $pkg.CurlOptions = $newType(0, $kindStruct, "common.CurlOptions", "CurlOptions", "github.com/shibukawa/curl_as_dsl/common", function(Basic_, Compressed_, Cookie_, CookieJar_, Data_, DataAscii_, DataBinary_, DataUrlEncode_, Get_, Form_, FormString_, Header_, Head_, Proxy_, Referer_, Request_, TrEncoding_, Transfer_, Url_, User_, UserAgent_, AWSV2_, ProcessedData_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Basic = false;
@@ -25665,7 +25665,7 @@ $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"] = (function() {
 		this.AWSV2 = AWSV2_;
 		this.ProcessedData = ProcessedData_;
 	});
-	HeaderGroup = $pkg.HeaderGroup = $newType(0, $kindStruct, "httpgen_common.HeaderGroup", "HeaderGroup", "github.com/shibukawa/curl_as_dsl/httpgen_common", function(Key_, Values_) {
+	HeaderGroup = $pkg.HeaderGroup = $newType(0, $kindStruct, "common.HeaderGroup", "HeaderGroup", "github.com/shibukawa/curl_as_dsl/common", function(Key_, Values_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Key = "";
@@ -28131,16 +28131,16 @@ $packages["mime"] = (function() {
 	};
 	return $pkg;
 })();
-$packages["github.com/shibukawa/curl_as_dsl/go_client"] = (function() {
-	var $pkg = {}, $init, bytes, fmt, httpgen_common, mime, url, os, strings, GoGenerator, ptrType, structType, sliceType, ptrType$1, sliceType$1, ptrType$2, mapType, escapeDQ, ClientNeeded, ProcessCurlCommand, processCurlFullFeatureRequest, processCurlPostSingleFile, processCurlPostData, processCurlPostDataWithUrl, processCurlGetDataWithUrl, processCurlSimple, NewGoGenerator, NewStringForData, StringForData, FormString;
+$packages["github.com/shibukawa/curl_as_dsl/client/golang"] = (function() {
+	var $pkg = {}, $init, bytes, fmt, common, mime, url, os, strings, GoGenerator, ptrType, structType, sliceType, ptrType$1, sliceType$1, ptrType$2, mapType, escapeDQ, ClientNeeded, ProcessCurlCommand, processCurlFullFeatureRequest, processCurlPostSingleFile, processCurlPostData, processCurlPostDataWithUrl, processCurlGetDataWithUrl, processCurlSimple, NewGoGenerator, NewStringForData, StringForData, FormString;
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
-	httpgen_common = $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"];
+	common = $packages["github.com/shibukawa/curl_as_dsl/common"];
 	mime = $packages["mime"];
 	url = $packages["net/url"];
 	os = $packages["os"];
 	strings = $packages["strings"];
-	GoGenerator = $pkg.GoGenerator = $newType(0, $kindStruct, "go_client.GoGenerator", "GoGenerator", "github.com/shibukawa/curl_as_dsl/go_client", function(Options_, Modules_, Data_, DataVariable_, ContentType_, HasBoundary_, extraUrl_) {
+	GoGenerator = $pkg.GoGenerator = $newType(0, $kindStruct, "golang.GoGenerator", "GoGenerator", "github.com/shibukawa/curl_as_dsl/client/golang", function(Options_, Modules_, Data_, DataVariable_, ContentType_, HasBoundary_, extraUrl_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Options = ptrType$1.nil;
@@ -28160,10 +28160,10 @@ $packages["github.com/shibukawa/curl_as_dsl/go_client"] = (function() {
 		this.HasBoundary = HasBoundary_;
 		this.extraUrl = extraUrl_;
 	});
-	ptrType = $ptrType(httpgen_common.DataOptions);
+	ptrType = $ptrType(common.DataOptions);
 	structType = $structType([{prop: "Url", name: "Url", pkg: "", typ: $String, tag: ""}, {prop: "FilePath", name: "FilePath", pkg: "", typ: $String, tag: ""}, {prop: "ContentType", name: "ContentType", pkg: "", typ: $String, tag: ""}]);
 	sliceType = $sliceType($emptyInterface);
-	ptrType$1 = $ptrType(httpgen_common.CurlOptions);
+	ptrType$1 = $ptrType(common.CurlOptions);
 	sliceType$1 = $sliceType($String);
 	ptrType$2 = $ptrType(GoGenerator);
 	mapType = $mapType($String, $Bool);
@@ -28556,7 +28556,7 @@ $packages["github.com/shibukawa/curl_as_dsl/go_client"] = (function() {
 			/* while (true) { */ case 5:
 				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 6; continue; }
 				i = _i;
-				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 				if (i > 0) {
 					buffer.WriteString("buffer.WriteByte('&')\n");
 				} else {
@@ -28601,7 +28601,7 @@ $packages["github.com/shibukawa/curl_as_dsl/go_client"] = (function() {
 		_i = 0;
 		/* while (true) { */ case 1:
 			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 2; continue; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			_r = FormString(self, data); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 			_r$1 = buffer.WriteString(_r); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
 			_r$1;
@@ -28619,7 +28619,7 @@ $packages["github.com/shibukawa/curl_as_dsl/go_client"] = (function() {
 		_i = 0;
 		while (true) {
 			if (!(_i < _ref.$length)) { break; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			_tuple = url.ParseQuery(data.Value); singleData = _tuple[0];
 			_ref$1 = singleData;
 			_i$1 = 0;
@@ -28760,7 +28760,7 @@ $packages["github.com/shibukawa/curl_as_dsl/go_client"] = (function() {
 			_key$5 = "net/url"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[_key$5] = { k: _key$5, v: true };
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType([new common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			$panic(new $String(_r$6));
 		/* } */ case 5:
 		return [result, name];
@@ -28840,7 +28840,7 @@ $packages["github.com/shibukawa/curl_as_dsl/go_client"] = (function() {
 			_key$3 = "net/url"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[_key$3] = { k: _key$3, v: true };
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType([new common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			$panic(new $String(_r$6));
 		/* } */ case 5:
 		_key$4 = "bytes"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[_key$4] = { k: _key$4, v: true };
@@ -28983,13 +28983,13 @@ $packages["github.com/shibukawa/curl_as_dsl/go_client"] = (function() {
 	};
 	GoGenerator.methods = [{prop: "Url", name: "Url", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Method", name: "Method", pkg: "", typ: $funcType([], [$String], false)}, {prop: "FilePath", name: "FilePath", pkg: "", typ: $funcType([], [$String], false)}, {prop: "PrepareClient", name: "PrepareClient", pkg: "", typ: $funcType([], [$String], false)}, {prop: "ClientBody", name: "ClientBody", pkg: "", typ: $funcType([], [$String], false)}, {prop: "ModifyRequest", name: "ModifyRequest", pkg: "", typ: $funcType([], [$String], false)}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$2.methods = [{prop: "SetDataForBody", name: "SetDataForBody", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForUrl", name: "SetDataForUrl", pkg: "", typ: $funcType([], [], false)}, {prop: "SetFormForBody", name: "SetFormForBody", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForPostForm", name: "SetDataForPostForm", pkg: "", typ: $funcType([], [], false)}];
-	GoGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType$1, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}, {prop: "Data", name: "Data", pkg: "", typ: $String, tag: ""}, {prop: "DataVariable", name: "DataVariable", pkg: "", typ: $String, tag: ""}, {prop: "ContentType", name: "ContentType", pkg: "", typ: $String, tag: ""}, {prop: "HasBoundary", name: "HasBoundary", pkg: "", typ: $Bool, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/go_client", typ: $String, tag: ""}]);
+	GoGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType$1, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}, {prop: "Data", name: "Data", pkg: "", typ: $String, tag: ""}, {prop: "DataVariable", name: "DataVariable", pkg: "", typ: $String, tag: ""}, {prop: "ContentType", name: "ContentType", pkg: "", typ: $String, tag: ""}, {prop: "HasBoundary", name: "HasBoundary", pkg: "", typ: $Bool, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/client/golang", typ: $String, tag: ""}]);
 	$init = $pkg.$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = bytes.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = fmt.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = httpgen_common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = mime.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = url.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = os.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -29311,16 +29311,16 @@ $packages["log"] = (function() {
 	};
 	return $pkg;
 })();
-$packages["github.com/shibukawa/curl_as_dsl/java_client"] = (function() {
-	var $pkg = {}, $init, bytes, fmt, httpgen_common, log, url, os, strings, JavaGenerator, ptrType, sliceType, sliceType$1, sliceType$2, ptrType$1, ptrType$2, mapType, NewJavaGenerator, ProcessCurlCommand, NewStringForData, StringForData, FormString;
+$packages["github.com/shibukawa/curl_as_dsl/client/java"] = (function() {
+	var $pkg = {}, $init, bytes, fmt, common, log, url, os, strings, JavaGenerator, ptrType, sliceType, sliceType$1, sliceType$2, ptrType$1, ptrType$2, mapType, NewJavaGenerator, ProcessCurlCommand, NewStringForData, StringForData, FormString;
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
-	httpgen_common = $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"];
+	common = $packages["github.com/shibukawa/curl_as_dsl/common"];
 	log = $packages["log"];
 	url = $packages["net/url"];
 	os = $packages["os"];
 	strings = $packages["strings"];
-	JavaGenerator = $pkg.JavaGenerator = $newType(0, $kindStruct, "java_client.JavaGenerator", "JavaGenerator", "github.com/shibukawa/curl_as_dsl/java_client", function(Options_, Modules_, Url_, IsHttps_, HasBody_, Body_, PrepareBody_, AdditionalDeclaration_, specialHeaders_, commonInitialize_, mimeCounter_, formFileContentCounter_) {
+	JavaGenerator = $pkg.JavaGenerator = $newType(0, $kindStruct, "java.JavaGenerator", "JavaGenerator", "github.com/shibukawa/curl_as_dsl/client/java", function(Options_, Modules_, Url_, IsHttps_, HasBody_, Body_, PrepareBody_, AdditionalDeclaration_, specialHeaders_, commonInitialize_, mimeCounter_, formFileContentCounter_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Options = ptrType.nil;
@@ -29350,11 +29350,11 @@ $packages["github.com/shibukawa/curl_as_dsl/java_client"] = (function() {
 		this.mimeCounter = mimeCounter_;
 		this.formFileContentCounter = formFileContentCounter_;
 	});
-	ptrType = $ptrType(httpgen_common.CurlOptions);
+	ptrType = $ptrType(common.CurlOptions);
 	sliceType = $sliceType($String);
 	sliceType$1 = $sliceType(sliceType);
 	sliceType$2 = $sliceType($emptyInterface);
-	ptrType$1 = $ptrType(httpgen_common.DataOptions);
+	ptrType$1 = $ptrType(common.DataOptions);
 	ptrType$2 = $ptrType(JavaGenerator);
 	mapType = $mapType($String, $Bool);
 	NewJavaGenerator = $pkg.NewJavaGenerator = function $blocking_NewJavaGenerator(options) {
@@ -29600,7 +29600,7 @@ $packages["github.com/shibukawa/curl_as_dsl/java_client"] = (function() {
 			/* while (true) { */ case 8:
 				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 9; continue; }
 				i = _i;
-				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 				/* */ if (!((i === 0))) { $s = 10; continue; }
 				/* */ $s = 11; continue;
 				/* if (!((i === 0))) { */ case 10:
@@ -29660,7 +29660,7 @@ $packages["github.com/shibukawa/curl_as_dsl/java_client"] = (function() {
 				/* while (true) { */ case 29:
 					/* if (!(_i$3 < _ref$3.$length)) { break; } */ if(!(_i$3 < _ref$3.$length)) { $s = 30; continue; }
 					i$1 = _i$3;
-					data$1 = $clone(((_i$3 < 0 || _i$3 >= _ref$3.$length) ? $throwRuntimeError("index out of range") : _ref$3.$array[_ref$3.$offset + _i$3]), httpgen_common.DataOption);
+					data$1 = $clone(((_i$3 < 0 || _i$3 >= _ref$3.$length) ? $throwRuntimeError("index out of range") : _ref$3.$array[_ref$3.$offset + _i$3]), common.DataOption);
 					/* */ if (!((i$1 === 0))) { $s = 31; continue; }
 					/* */ $s = 32; continue;
 					/* if (!((i$1 === 0))) { */ case 31:
@@ -29733,7 +29733,7 @@ $packages["github.com/shibukawa/curl_as_dsl/java_client"] = (function() {
 			/* while (true) { */ case 10:
 				/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 11; continue; }
 				i = _i$1;
-				data = $clone(((_i$1 < 0 || _i$1 >= _ref$1.$length) ? $throwRuntimeError("index out of range") : _ref$1.$array[_ref$1.$offset + _i$1]), httpgen_common.DataOption);
+				data = $clone(((_i$1 < 0 || _i$1 >= _ref$1.$length) ? $throwRuntimeError("index out of range") : _ref$1.$array[_ref$1.$offset + _i$1]), common.DataOption);
 				/* */ if (!((i === 0))) { $s = 12; continue; }
 				/* */ $s = 13; continue;
 				/* if (!((i === 0))) { */ case 12:
@@ -29786,7 +29786,7 @@ $packages["github.com/shibukawa/curl_as_dsl/java_client"] = (function() {
 		/* while (true) { */ case 1:
 			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 2; continue; }
 			i = _i;
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			/* */ if (!((i === 0))) { $s = 3; continue; }
 			/* */ $s = 4; continue;
 			/* if (!((i === 0))) { */ case 3:
@@ -29833,7 +29833,7 @@ $packages["github.com/shibukawa/curl_as_dsl/java_client"] = (function() {
 		_i = 0;
 		/* while (true) { */ case 2:
 			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 3; continue; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			/* */ if (data.SendAsFormFile()) { $s = 4; continue; }
 			/* */ $s = 5; continue;
 			/* if (data.SendAsFormFile()) { */ case 4:
@@ -30013,7 +30013,7 @@ $packages["github.com/shibukawa/curl_as_dsl/java_client"] = (function() {
 			_key$6 = "java.net.URLEncoder"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[_key$6] = { k: _key$6, v: true };
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$2([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$2([new common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			$panic(new $String(_r$6));
 		/* } */ case 5:
 		return [result, resultForWriter];
@@ -30096,7 +30096,7 @@ $packages["github.com/shibukawa/curl_as_dsl/java_client"] = (function() {
 			_key$4 = "java.net.URLEncoder"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[_key$4] = { k: _key$4, v: true };
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$2([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$2([new common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			$panic(new $String(_r$6));
 		/* } */ case 5:
 		return [result, resultForWriter];
@@ -30240,13 +30240,13 @@ $packages["github.com/shibukawa/curl_as_dsl/java_client"] = (function() {
 	};
 	JavaGenerator.methods = [{prop: "ConnectionClass", name: "ConnectionClass", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Proxy", name: "Proxy", pkg: "", typ: $funcType([], [$String], false)}, {prop: "CommonInitialize", name: "CommonInitialize", pkg: "", typ: $funcType([], [$String], false)}, {prop: "PrepareConnection", name: "PrepareConnection", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$2.methods = [{prop: "AppendCommonInitialize", name: "AppendCommonInitialize", pkg: "", typ: $funcType([$String, $Bool], [], false)}, {prop: "MimeTypeVariable", name: "MimeTypeVariable", pkg: "", typ: $funcType([], [$String], false)}, {prop: "FormFileContentVariable", name: "FormFileContentVariable", pkg: "", typ: $funcType([], [$String], false)}, {prop: "AddMultiPartCode", name: "AddMultiPartCode", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForUrl", name: "SetDataForUrl", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForBody", name: "SetDataForBody", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForForm", name: "SetDataForForm", pkg: "", typ: $funcType([], [], false)}, {prop: "SetFormForBody", name: "SetFormForBody", pkg: "", typ: $funcType([], [], false)}];
-	JavaGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}, {prop: "Url", name: "Url", pkg: "", typ: $String, tag: ""}, {prop: "IsHttps", name: "IsHttps", pkg: "", typ: $Bool, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/java_client", typ: sliceType$1, tag: ""}, {prop: "commonInitialize", name: "commonInitialize", pkg: "github.com/shibukawa/curl_as_dsl/java_client", typ: sliceType, tag: ""}, {prop: "mimeCounter", name: "mimeCounter", pkg: "github.com/shibukawa/curl_as_dsl/java_client", typ: $Int, tag: ""}, {prop: "formFileContentCounter", name: "formFileContentCounter", pkg: "github.com/shibukawa/curl_as_dsl/java_client", typ: $Int, tag: ""}]);
+	JavaGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}, {prop: "Url", name: "Url", pkg: "", typ: $String, tag: ""}, {prop: "IsHttps", name: "IsHttps", pkg: "", typ: $Bool, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/java", typ: sliceType$1, tag: ""}, {prop: "commonInitialize", name: "commonInitialize", pkg: "github.com/shibukawa/curl_as_dsl/client/java", typ: sliceType, tag: ""}, {prop: "mimeCounter", name: "mimeCounter", pkg: "github.com/shibukawa/curl_as_dsl/client/java", typ: $Int, tag: ""}, {prop: "formFileContentCounter", name: "formFileContentCounter", pkg: "github.com/shibukawa/curl_as_dsl/client/java", typ: $Int, tag: ""}]);
 	$init = $pkg.$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = bytes.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = fmt.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = httpgen_common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = log.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = url.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = os.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -30255,17 +30255,17 @@ $packages["github.com/shibukawa/curl_as_dsl/java_client"] = (function() {
 	};
 	return $pkg;
 })();
-$packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
-	var $pkg = {}, $init, bytes, fmt, httpgen_common, log, url, os, strconv, strings, ExternalFile, NodeJsGenerator, ptrType, sliceType, sliceType$1, sliceType$2, sliceType$3, ptrType$1, ptrType$2, mapType, escapeDQ, NewNodeJsGenerator, ProcessCurlCommand, NewStringForData, StringForData, FormString;
+$packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
+	var $pkg = {}, $init, bytes, fmt, common, log, url, os, strconv, strings, ExternalFile, NodeJsGenerator, ptrType, sliceType, sliceType$1, sliceType$2, sliceType$3, ptrType$1, ptrType$2, mapType, escapeDQ, NewNodeJsGenerator, ProcessCurlCommand, NewStringForData, StringForData, FormString;
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
-	httpgen_common = $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"];
+	common = $packages["github.com/shibukawa/curl_as_dsl/common"];
 	log = $packages["log"];
 	url = $packages["net/url"];
 	os = $packages["os"];
 	strconv = $packages["strconv"];
 	strings = $packages["strings"];
-	ExternalFile = $pkg.ExternalFile = $newType(0, $kindStruct, "nodejs_client.ExternalFile", "ExternalFile", "github.com/shibukawa/curl_as_dsl/nodejs_client", function(FileName_, TextType_) {
+	ExternalFile = $pkg.ExternalFile = $newType(0, $kindStruct, "nodejs.ExternalFile", "ExternalFile", "github.com/shibukawa/curl_as_dsl/client/nodejs", function(FileName_, TextType_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.FileName = "";
@@ -30275,7 +30275,7 @@ $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
 		this.FileName = FileName_;
 		this.TextType = TextType_;
 	});
-	NodeJsGenerator = $pkg.NodeJsGenerator = $newType(0, $kindStruct, "nodejs_client.NodeJsGenerator", "NodeJsGenerator", "github.com/shibukawa/curl_as_dsl/nodejs_client", function(Options_, Modules_, ClientModule_, PrepareBody_, HasBody_, BodyLines_, ExternalFiles_, usedFile_, extraUrl_, AdditionalDeclaration_, processedHeaders_, specialHeaders_, UseSimpleGet_) {
+	NodeJsGenerator = $pkg.NodeJsGenerator = $newType(0, $kindStruct, "nodejs.NodeJsGenerator", "NodeJsGenerator", "github.com/shibukawa/curl_as_dsl/client/nodejs", function(Options_, Modules_, ClientModule_, PrepareBody_, HasBody_, BodyLines_, ExternalFiles_, usedFile_, extraUrl_, AdditionalDeclaration_, processedHeaders_, specialHeaders_, UseSimpleGet_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Options = ptrType.nil;
@@ -30307,12 +30307,12 @@ $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
 		this.specialHeaders = specialHeaders_;
 		this.UseSimpleGet = UseSimpleGet_;
 	});
-	ptrType = $ptrType(httpgen_common.CurlOptions);
+	ptrType = $ptrType(common.CurlOptions);
 	sliceType = $sliceType($String);
 	sliceType$1 = $sliceType(ExternalFile);
-	sliceType$2 = $sliceType(httpgen_common.HeaderGroup);
+	sliceType$2 = $sliceType(common.HeaderGroup);
 	sliceType$3 = $sliceType($emptyInterface);
-	ptrType$1 = $ptrType(httpgen_common.DataOptions);
+	ptrType$1 = $ptrType(common.DataOptions);
 	ptrType$2 = $ptrType(NodeJsGenerator);
 	mapType = $mapType($String, $Bool);
 	escapeDQ = function(src) {
@@ -30446,7 +30446,7 @@ $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
 			_i = 0;
 			/* while (true) { */ case 6:
 				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 7; continue; }
-				header = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.HeaderGroup);
+				header = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.HeaderGroup);
 				/* */ if (header.Values.$length === 1) { $s = 8; continue; }
 				/* */ $s = 9; continue;
 				/* if (header.Values.$length === 1) { */ case 8:
@@ -30568,7 +30568,7 @@ $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
 			/* while (true) { */ case 5:
 				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 6; continue; }
 				i = _i;
-				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 				if (!((i === 0))) {
 					self.BodyLines = $append(self.BodyLines, "\"&\"");
 				}
@@ -30598,7 +30598,7 @@ $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
 		_i = 0;
 		while (true) {
 			if (!(_i < _ref.$length)) { break; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			_tuple = url.ParseQuery(data.Value); singleData = _tuple[0];
 			_ref$1 = singleData;
 			_i$1 = 0;
@@ -30709,7 +30709,7 @@ $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
 		_i = 0;
 		/* while (true) { */ case 2:
 			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 3; continue; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			/* */ if (data.SendAsFormFile()) { $s = 4; continue; }
 			/* */ $s = 5; continue;
 			/* if (data.SendAsFormFile()) { */ case 4:
@@ -30775,7 +30775,7 @@ $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
 		_i = 0;
 		while (true) {
 			if (!(_i < _ref.$length)) { break; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			fileName = data.FileName();
 			if (!(fileName === "")) {
 				isText = data.Type === 0;
@@ -30877,7 +30877,7 @@ $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
 			/* } */ case 19:
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$8 = fmt.Sprintf("unknown type: %d", new sliceType$3([new httpgen_common.DataType(data.Type)])); /* */ $s = 23; case 23: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+			_r$8 = fmt.Sprintf("unknown type: %d", new sliceType$3([new common.DataType(data.Type)])); /* */ $s = 23; case 23: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
 			$panic(new $String(_r$8));
 		/* } */ case 5:
 		return result;
@@ -30935,7 +30935,7 @@ $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
 			/* } */ case 20:
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$9 = fmt.Sprintf("unknown type: %d", new sliceType$3([new httpgen_common.DataType(data.Type)])); /* */ $s = 24; case 24: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+			_r$9 = fmt.Sprintf("unknown type: %d", new sliceType$3([new common.DataType(data.Type)])); /* */ $s = 24; case 24: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
 			$panic(new $String(_r$9));
 		/* } */ case 5:
 		return result;
@@ -31044,13 +31044,13 @@ $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
 	NodeJsGenerator.methods = [{prop: "Url", name: "Url", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Host", name: "Host", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Port", name: "Port", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Method", name: "Method", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Path", name: "Path", pkg: "", typ: $funcType([], [$String], false)}, {prop: "PrepareOptions", name: "PrepareOptions", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$2.methods = [{prop: "AddMultiPartCode", name: "AddMultiPartCode", pkg: "", typ: $funcType([], [], false)}, {prop: "FileContent", name: "FileContent", pkg: "", typ: $funcType([], [$String], false)}, {prop: "SetDataForUrl", name: "SetDataForUrl", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForBody", name: "SetDataForBody", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForForm", name: "SetDataForForm", pkg: "", typ: $funcType([$Bool], [], false)}, {prop: "SetFormForBody", name: "SetFormForBody", pkg: "", typ: $funcType([], [], false)}];
 	ExternalFile.init([{prop: "FileName", name: "FileName", pkg: "", typ: $String, tag: ""}, {prop: "TextType", name: "TextType", pkg: "", typ: $Bool, tag: ""}]);
-	NodeJsGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}, {prop: "ClientModule", name: "ClientModule", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "BodyLines", name: "BodyLines", pkg: "", typ: sliceType, tag: ""}, {prop: "ExternalFiles", name: "ExternalFiles", pkg: "", typ: sliceType$1, tag: ""}, {prop: "usedFile", name: "usedFile", pkg: "github.com/shibukawa/curl_as_dsl/nodejs_client", typ: $Int, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/nodejs_client", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "processedHeaders", name: "processedHeaders", pkg: "github.com/shibukawa/curl_as_dsl/nodejs_client", typ: sliceType$2, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/nodejs_client", typ: sliceType, tag: ""}, {prop: "UseSimpleGet", name: "UseSimpleGet", pkg: "", typ: $Bool, tag: ""}]);
+	NodeJsGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}, {prop: "ClientModule", name: "ClientModule", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "BodyLines", name: "BodyLines", pkg: "", typ: sliceType, tag: ""}, {prop: "ExternalFiles", name: "ExternalFiles", pkg: "", typ: sliceType$1, tag: ""}, {prop: "usedFile", name: "usedFile", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: $Int, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "processedHeaders", name: "processedHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: sliceType$2, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: sliceType, tag: ""}, {prop: "UseSimpleGet", name: "UseSimpleGet", pkg: "", typ: $Bool, tag: ""}]);
 	$init = $pkg.$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = bytes.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = fmt.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = httpgen_common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = log.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = url.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = os.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -31060,16 +31060,16 @@ $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
 	};
 	return $pkg;
 })();
-$packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
-	var $pkg = {}, $init, bytes, fmt, httpgen_common, log, url, os, strings, ObjCGenerator, ptrType, sliceType, sliceType$1, sliceType$2, ptrType$1, ptrType$2, mapType, NewObjCGenerator, ProcessCurlCommand, NewBinaryForData, BinaryForData, NewStringForData, StringForData, FormString;
+$packages["github.com/shibukawa/curl_as_dsl/client/objc"] = (function() {
+	var $pkg = {}, $init, bytes, fmt, common, log, url, os, strings, ObjCGenerator, ptrType, sliceType, sliceType$1, sliceType$2, ptrType$1, ptrType$2, mapType, NewObjCGenerator, ProcessCurlCommand, NewBinaryForData, BinaryForData, NewStringForData, StringForData, FormString;
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
-	httpgen_common = $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"];
+	common = $packages["github.com/shibukawa/curl_as_dsl/common"];
 	log = $packages["log"];
 	url = $packages["net/url"];
 	os = $packages["os"];
 	strings = $packages["strings"];
-	ObjCGenerator = $pkg.ObjCGenerator = $newType(0, $kindStruct, "objc_client.ObjCGenerator", "ObjCGenerator", "github.com/shibukawa/curl_as_dsl/objc_client", function(Options_, Url_, IsHttps_, HasBody_, Body_, PrepareBody_, AdditionalDeclaration_, specialHeaders_, commonInitialize_, Modules_) {
+	ObjCGenerator = $pkg.ObjCGenerator = $newType(0, $kindStruct, "objc.ObjCGenerator", "ObjCGenerator", "github.com/shibukawa/curl_as_dsl/client/objc", function(Options_, Url_, IsHttps_, HasBody_, Body_, PrepareBody_, AdditionalDeclaration_, specialHeaders_, commonInitialize_, Modules_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Options = ptrType.nil;
@@ -31095,11 +31095,11 @@ $packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
 		this.commonInitialize = commonInitialize_;
 		this.Modules = Modules_;
 	});
-	ptrType = $ptrType(httpgen_common.CurlOptions);
+	ptrType = $ptrType(common.CurlOptions);
 	sliceType = $sliceType($String);
 	sliceType$1 = $sliceType(sliceType);
 	sliceType$2 = $sliceType($emptyInterface);
-	ptrType$1 = $ptrType(httpgen_common.DataOptions);
+	ptrType$1 = $ptrType(common.DataOptions);
 	ptrType$2 = $ptrType(ObjCGenerator);
 	mapType = $mapType($String, $Bool);
 	NewObjCGenerator = $pkg.NewObjCGenerator = function $blocking_NewObjCGenerator(options) {
@@ -31277,7 +31277,7 @@ $packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
 			/* while (true) { */ case 7:
 				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 8; continue; }
 				i = _i;
-				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 				/* */ if (!((i === 0))) { $s = 9; continue; }
 				/* */ $s = 10; continue;
 				/* if (!((i === 0))) { */ case 9:
@@ -31337,7 +31337,7 @@ $packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
 				/* while (true) { */ case 28:
 					/* if (!(_i$3 < _ref$3.$length)) { break; } */ if(!(_i$3 < _ref$3.$length)) { $s = 29; continue; }
 					i$1 = _i$3;
-					data$1 = $clone(((_i$3 < 0 || _i$3 >= _ref$3.$length) ? $throwRuntimeError("index out of range") : _ref$3.$array[_ref$3.$offset + _i$3]), httpgen_common.DataOption);
+					data$1 = $clone(((_i$3 < 0 || _i$3 >= _ref$3.$length) ? $throwRuntimeError("index out of range") : _ref$3.$array[_ref$3.$offset + _i$3]), common.DataOption);
 					/* */ if (!((i$1 === 0))) { $s = 30; continue; }
 					/* */ $s = 31; continue;
 					/* if (!((i$1 === 0))) { */ case 30:
@@ -31412,7 +31412,7 @@ $packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
 			/* while (true) { */ case 12:
 				/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 13; continue; }
 				i = _i$1;
-				data = $clone(((_i$1 < 0 || _i$1 >= _ref$1.$length) ? $throwRuntimeError("index out of range") : _ref$1.$array[_ref$1.$offset + _i$1]), httpgen_common.DataOption);
+				data = $clone(((_i$1 < 0 || _i$1 >= _ref$1.$length) ? $throwRuntimeError("index out of range") : _ref$1.$array[_ref$1.$offset + _i$1]), common.DataOption);
 				/* */ if (!((i === 0))) { $s = 14; continue; }
 				/* */ $s = 15; continue;
 				/* if (!((i === 0))) { */ case 14:
@@ -31462,7 +31462,7 @@ $packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
 		/* while (true) { */ case 1:
 			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 2; continue; }
 			i = _i;
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			/* */ if (!((i === 0))) { $s = 3; continue; }
 			/* */ $s = 4; continue;
 			/* if (!((i === 0))) { */ case 3:
@@ -31508,7 +31508,7 @@ $packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
 		_i = 0;
 		/* while (true) { */ case 1:
 			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 2; continue; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			/* */ if (data.SendAsFormFile()) { $s = 3; continue; }
 			/* */ $s = 4; continue;
 			/* if (data.SendAsFormFile()) { */ case 3:
@@ -31659,7 +31659,7 @@ $packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
 			/* } */ case 18:
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$2([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$2([new common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			$panic(new $String(_r$6));
 		/* } */ case 5:
 		return [result, resultForWriter];
@@ -31712,7 +31712,7 @@ $packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
 			/* } */ case 18:
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$2([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$2([new common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			$panic(new $String(_r$6));
 		/* } */ case 5:
 		return [result, resultForWriter];
@@ -31741,7 +31741,7 @@ $packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
 			resultForWriter = _r$2;
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$3 = fmt.Sprintf("unknown type: %d", new sliceType$2([new httpgen_common.DataType(data.Type)])); /* */ $s = 9; case 9: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+			_r$3 = fmt.Sprintf("unknown type: %d", new sliceType$2([new common.DataType(data.Type)])); /* */ $s = 9; case 9: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 			$panic(new $String(_r$3));
 		/* } */ case 5:
 		return [result, resultForWriter];
@@ -31770,7 +31770,7 @@ $packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
 			resultForWriter = _r$2;
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$3 = fmt.Sprintf("unknown type: %d", new sliceType$2([new httpgen_common.DataType(data.Type)])); /* */ $s = 9; case 9: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+			_r$3 = fmt.Sprintf("unknown type: %d", new sliceType$2([new common.DataType(data.Type)])); /* */ $s = 9; case 9: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 			$panic(new $String(_r$3));
 		/* } */ case 5:
 		return [result, resultForWriter];
@@ -31877,13 +31877,13 @@ $packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
 	};
 	ObjCGenerator.methods = [{prop: "Proxy", name: "Proxy", pkg: "", typ: $funcType([], [$String], false)}, {prop: "CommonInitialize", name: "CommonInitialize", pkg: "", typ: $funcType([], [$String], false)}, {prop: "ModifyRequest", name: "ModifyRequest", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$2.methods = [{prop: "AppendCommonInitialize", name: "AppendCommonInitialize", pkg: "", typ: $funcType([$String, $Bool], [], false)}, {prop: "AddMultiPartCode", name: "AddMultiPartCode", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForUrl", name: "SetDataForUrl", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForBody", name: "SetDataForBody", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForForm", name: "SetDataForForm", pkg: "", typ: $funcType([], [], false)}, {prop: "SetFormForBody", name: "SetFormForBody", pkg: "", typ: $funcType([], [], false)}];
-	ObjCGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "Url", name: "Url", pkg: "", typ: $String, tag: ""}, {prop: "IsHttps", name: "IsHttps", pkg: "", typ: $Bool, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/objc_client", typ: sliceType$1, tag: ""}, {prop: "commonInitialize", name: "commonInitialize", pkg: "github.com/shibukawa/curl_as_dsl/objc_client", typ: sliceType, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}]);
+	ObjCGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "Url", name: "Url", pkg: "", typ: $String, tag: ""}, {prop: "IsHttps", name: "IsHttps", pkg: "", typ: $Bool, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/objc", typ: sliceType$1, tag: ""}, {prop: "commonInitialize", name: "commonInitialize", pkg: "github.com/shibukawa/curl_as_dsl/client/objc", typ: sliceType, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}]);
 	$init = $pkg.$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = bytes.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = fmt.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = httpgen_common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = log.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = url.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = os.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -31892,15 +31892,15 @@ $packages["github.com/shibukawa/curl_as_dsl/objc_client"] = (function() {
 	};
 	return $pkg;
 })();
-$packages["github.com/shibukawa/curl_as_dsl/php_client"] = (function() {
-	var $pkg = {}, $init, bytes, fmt, httpgen_common, url, os, strings, PHPGenerator, ptrType, sliceType, sliceType$1, sliceType$2, ptrType$1, ptrType$2, NewPHPGenerator, ProcessCurlCommand, NewStringForData, StringForData, FormString;
+$packages["github.com/shibukawa/curl_as_dsl/client/php"] = (function() {
+	var $pkg = {}, $init, bytes, fmt, common, url, os, strings, PHPGenerator, ptrType, sliceType, sliceType$1, sliceType$2, ptrType$1, ptrType$2, NewPHPGenerator, ProcessCurlCommand, NewStringForData, StringForData, FormString;
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
-	httpgen_common = $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"];
+	common = $packages["github.com/shibukawa/curl_as_dsl/common"];
 	url = $packages["net/url"];
 	os = $packages["os"];
 	strings = $packages["strings"];
-	PHPGenerator = $pkg.PHPGenerator = $newType(0, $kindStruct, "php_client.PHPGenerator", "PHPGenerator", "github.com/shibukawa/curl_as_dsl/php_client", function(Options_, HasBody_, Body_, PrepareBody_, queries_, extraUrl_, AdditionalDeclaration_, specialHeaders_) {
+	PHPGenerator = $pkg.PHPGenerator = $newType(0, $kindStruct, "php.PHPGenerator", "PHPGenerator", "github.com/shibukawa/curl_as_dsl/client/php", function(Options_, HasBody_, Body_, PrepareBody_, queries_, extraUrl_, AdditionalDeclaration_, specialHeaders_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Options = ptrType.nil;
@@ -31922,11 +31922,11 @@ $packages["github.com/shibukawa/curl_as_dsl/php_client"] = (function() {
 		this.AdditionalDeclaration = AdditionalDeclaration_;
 		this.specialHeaders = specialHeaders_;
 	});
-	ptrType = $ptrType(httpgen_common.CurlOptions);
+	ptrType = $ptrType(common.CurlOptions);
 	sliceType = $sliceType($String);
 	sliceType$1 = $sliceType(sliceType);
 	sliceType$2 = $sliceType($emptyInterface);
-	ptrType$1 = $ptrType(httpgen_common.DataOptions);
+	ptrType$1 = $ptrType(common.DataOptions);
 	ptrType$2 = $ptrType(PHPGenerator);
 	NewPHPGenerator = $pkg.NewPHPGenerator = function(options) {
 		var $ptr, options, result;
@@ -32068,7 +32068,7 @@ $packages["github.com/shibukawa/curl_as_dsl/php_client"] = (function() {
 			_i = 0;
 			while (true) {
 				if (!(_i < _ref.$length)) { break; }
-				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 				_tuple = url.ParseQuery(data.Value); singleData = _tuple[0];
 				_ref$1 = singleData;
 				_i$1 = 0;
@@ -32129,7 +32129,7 @@ $packages["github.com/shibukawa/curl_as_dsl/php_client"] = (function() {
 				/* while (true) { */ case 14:
 					/* if (!(_i$3 < _ref$3.$length)) { break; } */ if(!(_i$3 < _ref$3.$length)) { $s = 15; continue; }
 					i = _i$3;
-					data$1 = $clone(((_i$3 < 0 || _i$3 >= _ref$3.$length) ? $throwRuntimeError("index out of range") : _ref$3.$array[_ref$3.$offset + _i$3]), httpgen_common.DataOption);
+					data$1 = $clone(((_i$3 < 0 || _i$3 >= _ref$3.$length) ? $throwRuntimeError("index out of range") : _ref$3.$array[_ref$3.$offset + _i$3]), common.DataOption);
 					if (i === 0) {
 						buffer.WriteString("\n$query = \n  ");
 					}
@@ -32166,7 +32166,7 @@ $packages["github.com/shibukawa/curl_as_dsl/php_client"] = (function() {
 			/* while (true) { */ case 5:
 				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 6; continue; }
 				i = _i;
-				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 				/* */ if (i === 0) { $s = 7; continue; }
 				/* */ $s = 8; continue;
 				/* if (i === 0) { */ case 7:
@@ -32197,7 +32197,7 @@ $packages["github.com/shibukawa/curl_as_dsl/php_client"] = (function() {
 		_i = 0;
 		while (true) {
 			if (!(_i < _ref.$length)) { break; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			_tuple = url.ParseQuery(data.Value); singleData = _tuple[0];
 			_ref$1 = singleData;
 			_i$1 = 0;
@@ -32259,7 +32259,7 @@ $packages["github.com/shibukawa/curl_as_dsl/php_client"] = (function() {
 		_i = 0;
 		/* while (true) { */ case 2:
 			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 3; continue; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			/* */ if (data.SendAsFormFile()) { $s = 4; continue; }
 			/* */ $s = 5; continue;
 			/* if (data.SendAsFormFile()) { */ case 4:
@@ -32385,7 +32385,7 @@ $packages["github.com/shibukawa/curl_as_dsl/php_client"] = (function() {
 			/* } */ case 18:
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$2([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$2([new common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			$panic(new $String(_r$6));
 		/* } */ case 5:
 		return result;
@@ -32437,7 +32437,7 @@ $packages["github.com/shibukawa/curl_as_dsl/php_client"] = (function() {
 			/* } */ case 18:
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$2([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$2([new common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			$panic(new $String(_r$6));
 		/* } */ case 5:
 		return result;
@@ -32544,13 +32544,13 @@ $packages["github.com/shibukawa/curl_as_dsl/php_client"] = (function() {
 	};
 	PHPGenerator.methods = [{prop: "Url", name: "Url", pkg: "", typ: $funcType([], [$String], false)}, {prop: "HasHeader", name: "HasHeader", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "Header", name: "Header", pkg: "", typ: $funcType([], [$String], false)}, {prop: "PrepareHeader", name: "PrepareHeader", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Method", name: "Method", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Content", name: "Content", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$2.methods = [{prop: "AddMultiPartCode", name: "AddMultiPartCode", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForUrl", name: "SetDataForUrl", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForBody", name: "SetDataForBody", pkg: "", typ: $funcType([$String], [], false)}, {prop: "SetDataForForm", name: "SetDataForForm", pkg: "", typ: $funcType([$String], [], false)}, {prop: "SetFormForBody", name: "SetFormForBody", pkg: "", typ: $funcType([], [], false)}];
-	PHPGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "queries", name: "queries", pkg: "github.com/shibukawa/curl_as_dsl/php_client", typ: sliceType$1, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/php_client", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/php_client", typ: sliceType, tag: ""}]);
+	PHPGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "queries", name: "queries", pkg: "github.com/shibukawa/curl_as_dsl/client/php", typ: sliceType$1, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/client/php", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/php", typ: sliceType, tag: ""}]);
 	$init = $pkg.$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = bytes.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = fmt.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = httpgen_common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = url.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = os.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = strings.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -32558,16 +32558,16 @@ $packages["github.com/shibukawa/curl_as_dsl/php_client"] = (function() {
 	};
 	return $pkg;
 })();
-$packages["github.com/shibukawa/curl_as_dsl/python_client"] = (function() {
-	var $pkg = {}, $init, bytes, fmt, httpgen_common, log, url, os, strings, PythonGenerator, ptrType, sliceType, sliceType$1, ptrType$1, ptrType$2, mapType, NewPythonGenerator, ProcessCurlCommand, NewStringForData, StringForData, FormString;
+$packages["github.com/shibukawa/curl_as_dsl/client/python"] = (function() {
+	var $pkg = {}, $init, bytes, fmt, common, log, url, os, strings, PythonGenerator, ptrType, sliceType, sliceType$1, ptrType$1, ptrType$2, mapType, NewPythonGenerator, ProcessCurlCommand, NewStringForData, StringForData, FormString;
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
-	httpgen_common = $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"];
+	common = $packages["github.com/shibukawa/curl_as_dsl/common"];
 	log = $packages["log"];
 	url = $packages["net/url"];
 	os = $packages["os"];
 	strings = $packages["strings"];
-	PythonGenerator = $pkg.PythonGenerator = $newType(0, $kindStruct, "python_client.PythonGenerator", "PythonGenerator", "github.com/shibukawa/curl_as_dsl/python_client", function(Options_, Modules_, HasBody_, Body_, PrepareBody_, extraUrl_, AdditionalDeclaration_, specialHeaders_) {
+	PythonGenerator = $pkg.PythonGenerator = $newType(0, $kindStruct, "python.PythonGenerator", "PythonGenerator", "github.com/shibukawa/curl_as_dsl/client/python", function(Options_, Modules_, HasBody_, Body_, PrepareBody_, extraUrl_, AdditionalDeclaration_, specialHeaders_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Options = ptrType.nil;
@@ -32589,10 +32589,10 @@ $packages["github.com/shibukawa/curl_as_dsl/python_client"] = (function() {
 		this.AdditionalDeclaration = AdditionalDeclaration_;
 		this.specialHeaders = specialHeaders_;
 	});
-	ptrType = $ptrType(httpgen_common.CurlOptions);
+	ptrType = $ptrType(common.CurlOptions);
 	sliceType = $sliceType($String);
 	sliceType$1 = $sliceType($emptyInterface);
-	ptrType$1 = $ptrType(httpgen_common.DataOptions);
+	ptrType$1 = $ptrType(common.DataOptions);
 	ptrType$2 = $ptrType(PythonGenerator);
 	mapType = $mapType($String, $Bool);
 	NewPythonGenerator = $pkg.NewPythonGenerator = function(options) {
@@ -32799,7 +32799,7 @@ $packages["github.com/shibukawa/curl_as_dsl/python_client"] = (function() {
 			/* while (true) { */ case 5:
 				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 6; continue; }
 				i = _i;
-				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 				if (i === 0) {
 					buffer.WriteString("body = [\n");
 				}
@@ -32825,7 +32825,7 @@ $packages["github.com/shibukawa/curl_as_dsl/python_client"] = (function() {
 		_i = 0;
 		while (true) {
 			if (!(_i < _ref.$length)) { break; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			_tuple = url.ParseQuery(data.Value); singleData = _tuple[0];
 			_ref$1 = singleData;
 			_i$1 = 0;
@@ -32887,7 +32887,7 @@ $packages["github.com/shibukawa/curl_as_dsl/python_client"] = (function() {
 		_i = 0;
 		/* while (true) { */ case 2:
 			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 3; continue; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			/* */ if (data.SendAsFormFile()) { $s = 4; continue; }
 			/* */ $s = 5; continue;
 			/* if (data.SendAsFormFile()) { */ case 4:
@@ -33023,7 +33023,7 @@ $packages["github.com/shibukawa/curl_as_dsl/python_client"] = (function() {
 			_key = "urllib.parse"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[_key] = { k: _key, v: true };
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$1([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$1([new common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			$panic(new $String(_r$6));
 		/* } */ case 5:
 		return [result, name];
@@ -33076,7 +33076,7 @@ $packages["github.com/shibukawa/curl_as_dsl/python_client"] = (function() {
 			_key = "urllib.parse"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[_key] = { k: _key, v: true };
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$1([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$1([new common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			$panic(new $String(_r$6));
 		/* } */ case 5:
 		return result;
@@ -33187,13 +33187,13 @@ $packages["github.com/shibukawa/curl_as_dsl/python_client"] = (function() {
 	};
 	PythonGenerator.methods = [{prop: "ConnectionClass", name: "ConnectionClass", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Host", name: "Host", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Proxy", name: "Proxy", pkg: "", typ: $funcType([], [$String], false)}, {prop: "HasHeader", name: "HasHeader", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "Header", name: "Header", pkg: "", typ: $funcType([], [$String], false)}, {prop: "PrepareHeader", name: "PrepareHeader", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Method", name: "Method", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Path", name: "Path", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$2.methods = [{prop: "AddMultiPartCode", name: "AddMultiPartCode", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForUrl", name: "SetDataForUrl", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForBody", name: "SetDataForBody", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForForm", name: "SetDataForForm", pkg: "", typ: $funcType([], [], false)}, {prop: "SetFormForBody", name: "SetFormForBody", pkg: "", typ: $funcType([], [], false)}];
-	PythonGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/python_client", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/python_client", typ: sliceType, tag: ""}]);
+	PythonGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/client/python", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/python", typ: sliceType, tag: ""}]);
 	$init = $pkg.$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = bytes.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = fmt.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = httpgen_common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = log.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = url.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = os.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -33202,16 +33202,16 @@ $packages["github.com/shibukawa/curl_as_dsl/python_client"] = (function() {
 	};
 	return $pkg;
 })();
-$packages["github.com/shibukawa/curl_as_dsl/vim_script_client"] = (function() {
-	var $pkg = {}, $init, bytes, fmt, httpgen_common, log, url, os, strings, VimScriptGenerator, ptrType, sliceType, sliceType$1, ptrType$1, ptrType$2, escapeDQ, NewVimScriptGenerator, ProcessCurlCommand, StringForData, FormString;
+$packages["github.com/shibukawa/curl_as_dsl/client/vimscript"] = (function() {
+	var $pkg = {}, $init, bytes, fmt, common, log, url, os, strings, VimScriptGenerator, ptrType, sliceType, sliceType$1, ptrType$1, ptrType$2, escapeDQ, NewVimScriptGenerator, ProcessCurlCommand, StringForData, FormString;
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
-	httpgen_common = $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"];
+	common = $packages["github.com/shibukawa/curl_as_dsl/common"];
 	log = $packages["log"];
 	url = $packages["net/url"];
 	os = $packages["os"];
 	strings = $packages["strings"];
-	VimScriptGenerator = $pkg.VimScriptGenerator = $newType(0, $kindStruct, "vim_script_client.VimScriptGenerator", "VimScriptGenerator", "github.com/shibukawa/curl_as_dsl/vim_script_client", function(Options_, HasBody_, Body_, PrepareBody_, FinalizeBodyBuffer_, AdditionalDeclaration_, specialHeaders_) {
+	VimScriptGenerator = $pkg.VimScriptGenerator = $newType(0, $kindStruct, "vimscript.VimScriptGenerator", "VimScriptGenerator", "github.com/shibukawa/curl_as_dsl/client/vimscript", function(Options_, HasBody_, Body_, PrepareBody_, FinalizeBodyBuffer_, AdditionalDeclaration_, specialHeaders_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Options = ptrType.nil;
@@ -33231,10 +33231,10 @@ $packages["github.com/shibukawa/curl_as_dsl/vim_script_client"] = (function() {
 		this.AdditionalDeclaration = AdditionalDeclaration_;
 		this.specialHeaders = specialHeaders_;
 	});
-	ptrType = $ptrType(httpgen_common.CurlOptions);
+	ptrType = $ptrType(common.CurlOptions);
 	sliceType = $sliceType($String);
 	sliceType$1 = $sliceType($emptyInterface);
-	ptrType$1 = $ptrType(httpgen_common.DataOptions);
+	ptrType$1 = $ptrType(common.DataOptions);
 	ptrType$2 = $ptrType(VimScriptGenerator);
 	escapeDQ = function(src) {
 		var $ptr, src;
@@ -33298,7 +33298,7 @@ $packages["github.com/shibukawa/curl_as_dsl/vim_script_client"] = (function() {
 		_i = 0;
 		/* while (true) { */ case 2:
 			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 3; continue; }
-			header = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.HeaderGroup);
+			header = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.HeaderGroup);
 			if (first) {
 				first = false;
 			} else {
@@ -33390,7 +33390,7 @@ $packages["github.com/shibukawa/curl_as_dsl/vim_script_client"] = (function() {
 			/* while (true) { */ case 7:
 				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 8; continue; }
 				i = _i;
-				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 				if (i === 0) {
 					buffer.WriteString("let s:body = join([\n  \\");
 				} else {
@@ -33419,7 +33419,7 @@ $packages["github.com/shibukawa/curl_as_dsl/vim_script_client"] = (function() {
 		_i = 0;
 		while (true) {
 			if (!(_i < _ref.$length)) { break; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			_tuple = url.ParseQuery(data.Value); singleData = _tuple[0];
 			_ref$1 = singleData;
 			_i$1 = 0;
@@ -33480,7 +33480,7 @@ $packages["github.com/shibukawa/curl_as_dsl/vim_script_client"] = (function() {
 		_i = 0;
 		/* while (true) { */ case 2:
 			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 3; continue; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			/* */ if (data.SendAsFormFile()) { $s = 4; continue; }
 			/* */ $s = 5; continue;
 			/* if (data.SendAsFormFile()) { */ case 4:
@@ -33601,7 +33601,7 @@ $packages["github.com/shibukawa/curl_as_dsl/vim_script_client"] = (function() {
 			/* } */ case 18:
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$1([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$1([new common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			$panic(new $String(_r$6));
 		/* } */ case 5:
 		return result;
@@ -33707,13 +33707,13 @@ $packages["github.com/shibukawa/curl_as_dsl/vim_script_client"] = (function() {
 	};
 	VimScriptGenerator.methods = [{prop: "Url", name: "Url", pkg: "", typ: $funcType([], [$String], false)}, {prop: "HasHeader", name: "HasHeader", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "BodyContent", name: "BodyContent", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Header", name: "Header", pkg: "", typ: $funcType([], [$String], false)}, {prop: "PrepareHeader", name: "PrepareHeader", pkg: "", typ: $funcType([], [$String], false)}, {prop: "FinalizeBody", name: "FinalizeBody", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Method", name: "Method", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$2.methods = [{prop: "AddMultiPartCode", name: "AddMultiPartCode", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForBody", name: "SetDataForBody", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForForm", name: "SetDataForForm", pkg: "", typ: $funcType([], [], false)}, {prop: "SetFormForBody", name: "SetFormForBody", pkg: "", typ: $funcType([], [], false)}];
-	VimScriptGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "FinalizeBodyBuffer", name: "FinalizeBodyBuffer", pkg: "", typ: bytes.Buffer, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/vim_script_client", typ: sliceType, tag: ""}]);
+	VimScriptGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "FinalizeBodyBuffer", name: "FinalizeBodyBuffer", pkg: "", typ: bytes.Buffer, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/vimscript", typ: sliceType, tag: ""}]);
 	$init = $pkg.$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = bytes.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = fmt.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = httpgen_common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = log.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = url.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = os.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -33722,15 +33722,15 @@ $packages["github.com/shibukawa/curl_as_dsl/vim_script_client"] = (function() {
 	};
 	return $pkg;
 })();
-$packages["github.com/shibukawa/curl_as_dsl/xhr_client"] = (function() {
-	var $pkg = {}, $init, bytes, fmt, httpgen_common, url, os, strings, ExternalFile, XHRGenerator, ptrType, sliceType, sliceType$1, sliceType$2, sliceType$3, ptrType$1, ptrType$2, ptrType$3, ptrType$4, mapType, escapeDQ, NewXHRGenerator, ProcessCurlCommand, NewStringForData, StringForData, FormString;
+$packages["github.com/shibukawa/curl_as_dsl/client/xhr"] = (function() {
+	var $pkg = {}, $init, bytes, fmt, common, url, os, strings, ExternalFile, XHRGenerator, ptrType, sliceType, sliceType$1, sliceType$2, sliceType$3, ptrType$1, ptrType$2, ptrType$3, ptrType$4, mapType, escapeDQ, NewXHRGenerator, ProcessCurlCommand, NewStringForData, StringForData, FormString;
 	bytes = $packages["bytes"];
 	fmt = $packages["fmt"];
-	httpgen_common = $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"];
+	common = $packages["github.com/shibukawa/curl_as_dsl/common"];
 	url = $packages["net/url"];
 	os = $packages["os"];
 	strings = $packages["strings"];
-	ExternalFile = $pkg.ExternalFile = $newType(0, $kindStruct, "xhr_client.ExternalFile", "ExternalFile", "github.com/shibukawa/curl_as_dsl/xhr_client", function(Data_, FileName_, VariableName_, TextType_) {
+	ExternalFile = $pkg.ExternalFile = $newType(0, $kindStruct, "xhr.ExternalFile", "ExternalFile", "github.com/shibukawa/curl_as_dsl/client/xhr", function(Data_, FileName_, VariableName_, TextType_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Data = ptrType$1.nil;
@@ -33744,7 +33744,7 @@ $packages["github.com/shibukawa/curl_as_dsl/xhr_client"] = (function() {
 		this.VariableName = VariableName_;
 		this.TextType = TextType_;
 	});
-	XHRGenerator = $pkg.XHRGenerator = $newType(0, $kindStruct, "xhr_client.XHRGenerator", "XHRGenerator", "github.com/shibukawa/curl_as_dsl/xhr_client", function(Options_, prepareFile_, PrepareBody_, Body_, HasBody_, ExternalFiles_, usedFile_, extraUrl_, AdditionalDeclaration_, processedHeaders_, specialHeaders_, UseSimpleGet_) {
+	XHRGenerator = $pkg.XHRGenerator = $newType(0, $kindStruct, "xhr.XHRGenerator", "XHRGenerator", "github.com/shibukawa/curl_as_dsl/client/xhr", function(Options_, prepareFile_, PrepareBody_, Body_, HasBody_, ExternalFiles_, usedFile_, extraUrl_, AdditionalDeclaration_, processedHeaders_, specialHeaders_, UseSimpleGet_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Options = ptrType.nil;
@@ -33774,13 +33774,13 @@ $packages["github.com/shibukawa/curl_as_dsl/xhr_client"] = (function() {
 		this.specialHeaders = specialHeaders_;
 		this.UseSimpleGet = UseSimpleGet_;
 	});
-	ptrType = $ptrType(httpgen_common.CurlOptions);
-	sliceType = $sliceType(httpgen_common.HeaderGroup);
+	ptrType = $ptrType(common.CurlOptions);
+	sliceType = $sliceType(common.HeaderGroup);
 	sliceType$1 = $sliceType($String);
 	sliceType$2 = $sliceType(sliceType$1);
 	sliceType$3 = $sliceType($emptyInterface);
-	ptrType$1 = $ptrType(httpgen_common.DataOption);
-	ptrType$2 = $ptrType(httpgen_common.DataOptions);
+	ptrType$1 = $ptrType(common.DataOption);
+	ptrType$2 = $ptrType(common.DataOptions);
 	ptrType$3 = $ptrType(XHRGenerator);
 	ptrType$4 = $ptrType(ExternalFile);
 	mapType = $mapType($Int, ptrType$4);
@@ -33830,7 +33830,7 @@ $packages["github.com/shibukawa/curl_as_dsl/xhr_client"] = (function() {
 			_i = 0;
 			/* while (true) { */ case 3:
 				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 4; continue; }
-				header = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.HeaderGroup);
+				header = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.HeaderGroup);
 				_ref$1 = header.Values;
 				_i$1 = 0;
 				/* while (true) { */ case 5:
@@ -33969,7 +33969,7 @@ $packages["github.com/shibukawa/curl_as_dsl/xhr_client"] = (function() {
 			_i = 0;
 			/* while (true) { */ case 5:
 				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 6; continue; }
-				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 				_r$1 = StringForData(self, data); /* */ $s = 7; case 7: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
 				_tuple$1 = _r$1; dataStr = _tuple$1[0];
 				_r$2 = fmt.Fprintf(buffer, "        %s,\n", new sliceType$3([new $String(dataStr)])); /* */ $s = 8; case 8: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
@@ -33994,7 +33994,7 @@ $packages["github.com/shibukawa/curl_as_dsl/xhr_client"] = (function() {
 		_i = 0;
 		/* while (true) { */ case 1:
 			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 2; continue; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			_tuple = url.ParseQuery(data.Value); singleData = _tuple[0];
 			_ref$1 = singleData;
 			_i$1 = 0;
@@ -34041,7 +34041,7 @@ $packages["github.com/shibukawa/curl_as_dsl/xhr_client"] = (function() {
 		_i = 0;
 		/* while (true) { */ case 1:
 			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 2; continue; }
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			_r = FormString(self, data); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 			_tuple = _r; body = _tuple[0]; prepareFile = _tuple[1];
 			buffer.WriteString(body);
@@ -34063,7 +34063,7 @@ $packages["github.com/shibukawa/curl_as_dsl/xhr_client"] = (function() {
 		while (true) {
 			if (!(_i < _ref.$length)) { break; }
 			i = _i;
-			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.DataOption);
 			fileName = data.FileName();
 			if (!(fileName === "")) {
 				isText = data.Type === 0;
@@ -34192,7 +34192,7 @@ $packages["github.com/shibukawa/curl_as_dsl/xhr_client"] = (function() {
 			/* } */ case 16:
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$3 = fmt.Sprintf("unknown type: %d", new sliceType$3([new httpgen_common.DataType(data.Type)])); /* */ $s = 18; case 18: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+			_r$3 = fmt.Sprintf("unknown type: %d", new sliceType$3([new common.DataType(data.Type)])); /* */ $s = 18; case 18: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 			$panic(new $String(_r$3));
 		/* } */ case 5:
 		return [result, prepare.String()];
@@ -34247,7 +34247,7 @@ $packages["github.com/shibukawa/curl_as_dsl/xhr_client"] = (function() {
 			/* } */ case 18:
 			$s = 5; continue;
 		/* } else { */ case 4:
-			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$3([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$3([new common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			$panic(new $String(_r$6));
 		/* } */ case 5:
 		return [result, prepare.String()];
@@ -34373,13 +34373,13 @@ $packages["github.com/shibukawa/curl_as_dsl/xhr_client"] = (function() {
 	XHRGenerator.methods = [{prop: "Url", name: "Url", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Method", name: "Method", pkg: "", typ: $funcType([], [$String], false)}, {prop: "PrepareOptions", name: "PrepareOptions", pkg: "", typ: $funcType([], [$String], false)}, {prop: "FileNames", name: "FileNames", pkg: "", typ: $funcType([], [sliceType$1], false)}, {prop: "PrepareFile", name: "PrepareFile", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$3.methods = [{prop: "FileReader", name: "FileReader", pkg: "", typ: $funcType([], [$String], false)}, {prop: "SetDataForUrl", name: "SetDataForUrl", pkg: "", typ: $funcType([], [], false)}, {prop: "VariableName", name: "VariableName", pkg: "", typ: $funcType([ptrType$1], [$String], false)}, {prop: "SetDataForBody", name: "SetDataForBody", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForForm", name: "SetDataForForm", pkg: "", typ: $funcType([$Bool], [], false)}, {prop: "SetFormForBody", name: "SetFormForBody", pkg: "", typ: $funcType([], [], false)}];
 	ExternalFile.init([{prop: "Data", name: "Data", pkg: "", typ: ptrType$1, tag: ""}, {prop: "FileName", name: "FileName", pkg: "", typ: $String, tag: ""}, {prop: "VariableName", name: "VariableName", pkg: "", typ: $String, tag: ""}, {prop: "TextType", name: "TextType", pkg: "", typ: $Bool, tag: ""}]);
-	XHRGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "prepareFile", name: "prepareFile", pkg: "github.com/shibukawa/curl_as_dsl/xhr_client", typ: bytes.Buffer, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "ExternalFiles", name: "ExternalFiles", pkg: "", typ: mapType, tag: ""}, {prop: "usedFile", name: "usedFile", pkg: "github.com/shibukawa/curl_as_dsl/xhr_client", typ: $Int, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/xhr_client", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "processedHeaders", name: "processedHeaders", pkg: "github.com/shibukawa/curl_as_dsl/xhr_client", typ: sliceType, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/xhr_client", typ: sliceType$2, tag: ""}, {prop: "UseSimpleGet", name: "UseSimpleGet", pkg: "", typ: $Bool, tag: ""}]);
+	XHRGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "prepareFile", name: "prepareFile", pkg: "github.com/shibukawa/curl_as_dsl/client/xhr", typ: bytes.Buffer, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "ExternalFiles", name: "ExternalFiles", pkg: "", typ: mapType, tag: ""}, {prop: "usedFile", name: "usedFile", pkg: "github.com/shibukawa/curl_as_dsl/client/xhr", typ: $Int, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/client/xhr", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "processedHeaders", name: "processedHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/xhr", typ: sliceType, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/xhr", typ: sliceType$2, tag: ""}, {prop: "UseSimpleGet", name: "UseSimpleGet", pkg: "", typ: $Bool, tag: ""}]);
 	$init = $pkg.$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = bytes.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = fmt.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = httpgen_common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = url.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = os.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = strings.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -53426,20 +53426,20 @@ $packages["text/template"] = (function() {
 	};
 	return $pkg;
 })();
-$packages["github.com/shibukawa/curl_as_dsl/httpgen_generator"] = (function() {
-	var $pkg = {}, $init, bytes, gzip, fmt, go_client, httpgen_common, java_client, nodejs_client, objc_client, php_client, python_client, vim_script_client, xhr_client, format, io, log, strings, template, sliceType, sliceType$1, _bindata, _map, _key, _map$25, _key$25, bindata_read, templates_go_full_tpl, templates_go_get_with_data_url_tpl, templates_go_post_form_tpl, templates_go_post_single_file_tpl, templates_go_post_text_tpl, templates_go_post_with_data_url_tpl, templates_go_simple_get_tpl, templates_go_simple_method_tpl, templates_go_simple_post_tpl, templates_java_full_tpl, templates_nodejs_external_file_tpl, templates_nodejs_external_files_tpl, templates_nodejs_full_tpl, templates_nodejs_simple_get_tpl, templates_objc_nsurlconnection_full_tpl, templates_objc_nsurlsession_full_tpl, templates_php_full_tpl, templates_python_full_tpl, templates_vim_script_full_tpl, templates_xhr_external_file_tpl, templates_xhr_external_files_tpl, templates_xhr_simple_tpl, Asset, render, GenerateCode;
+$packages["github.com/shibukawa/curl_as_dsl/generator"] = (function() {
+	var $pkg = {}, $init, bytes, gzip, fmt, golang, java, nodejs, objc, php, python, vimscript, xhr, common, format, io, log, strings, template, sliceType, sliceType$1, _bindata, _map, _key, _map$25, _key$25, bindata_read, templates_go_full_tpl, templates_go_get_with_data_url_tpl, templates_go_post_form_tpl, templates_go_post_single_file_tpl, templates_go_post_text_tpl, templates_go_post_with_data_url_tpl, templates_go_simple_get_tpl, templates_go_simple_method_tpl, templates_go_simple_post_tpl, templates_java_full_tpl, templates_nodejs_external_file_tpl, templates_nodejs_external_files_tpl, templates_nodejs_full_tpl, templates_nodejs_simple_get_tpl, templates_objc_nsurlconnection_full_tpl, templates_objc_nsurlsession_full_tpl, templates_php_full_tpl, templates_python_full_tpl, templates_vim_script_full_tpl, templates_xhr_external_file_tpl, templates_xhr_external_files_tpl, templates_xhr_simple_tpl, Asset, render, GenerateCode;
 	bytes = $packages["bytes"];
 	gzip = $packages["compress/gzip"];
 	fmt = $packages["fmt"];
-	go_client = $packages["github.com/shibukawa/curl_as_dsl/go_client"];
-	httpgen_common = $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"];
-	java_client = $packages["github.com/shibukawa/curl_as_dsl/java_client"];
-	nodejs_client = $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"];
-	objc_client = $packages["github.com/shibukawa/curl_as_dsl/objc_client"];
-	php_client = $packages["github.com/shibukawa/curl_as_dsl/php_client"];
-	python_client = $packages["github.com/shibukawa/curl_as_dsl/python_client"];
-	vim_script_client = $packages["github.com/shibukawa/curl_as_dsl/vim_script_client"];
-	xhr_client = $packages["github.com/shibukawa/curl_as_dsl/xhr_client"];
+	golang = $packages["github.com/shibukawa/curl_as_dsl/client/golang"];
+	java = $packages["github.com/shibukawa/curl_as_dsl/client/java"];
+	nodejs = $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"];
+	objc = $packages["github.com/shibukawa/curl_as_dsl/client/objc"];
+	php = $packages["github.com/shibukawa/curl_as_dsl/client/php"];
+	python = $packages["github.com/shibukawa/curl_as_dsl/client/python"];
+	vimscript = $packages["github.com/shibukawa/curl_as_dsl/client/vimscript"];
+	xhr = $packages["github.com/shibukawa/curl_as_dsl/client/xhr"];
+	common = $packages["github.com/shibukawa/curl_as_dsl/common"];
 	format = $packages["go/format"];
 	io = $packages["io"];
 	log = $packages["log"];
@@ -53697,47 +53697,47 @@ $packages["github.com/shibukawa/curl_as_dsl/httpgen_generator"] = (function() {
 		/* */ $s = 10; continue;
 		/* if (_ref === "go") { */ case 1:
 			langName = "go";
-			_r = go_client.ProcessCurlCommand(curlOptions); /* */ $s = 12; case 12: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			_r = golang.ProcessCurlCommand(curlOptions); /* */ $s = 12; case 12: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 			_tuple$1 = _r; templateName = _tuple$1[0]; option = _tuple$1[1];
 			$s = 11; continue;
 		/* } else if (_ref === "python") { */ case 2:
 			langName = "python";
-			_r$1 = python_client.ProcessCurlCommand(curlOptions); /* */ $s = 13; case 13: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			_r$1 = python.ProcessCurlCommand(curlOptions); /* */ $s = 13; case 13: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
 			_tuple$2 = _r$1; templateName = _tuple$2[0]; option = _tuple$2[1];
 			$s = 11; continue;
 		/* } else if (_ref === "node") { */ case 3:
 			langName = "nodejs";
-			_r$2 = nodejs_client.ProcessCurlCommand(curlOptions); /* */ $s = 14; case 14: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			_r$2 = nodejs.ProcessCurlCommand(curlOptions); /* */ $s = 14; case 14: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
 			_tuple$3 = _r$2; templateName = _tuple$3[0]; option = _tuple$3[1];
 			$s = 11; continue;
 		/* } else if (_ref === "java") { */ case 4:
 			langName = "java";
-			_r$3 = java_client.ProcessCurlCommand(curlOptions); /* */ $s = 15; case 15: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+			_r$3 = java.ProcessCurlCommand(curlOptions); /* */ $s = 15; case 15: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 			_tuple$4 = _r$3; templateName = _tuple$4[0]; option = _tuple$4[1];
 			$s = 11; continue;
 		/* } else if (_ref === "objc_nsurlsession") { */ case 5:
 			langName = "objc_nsurlsession";
-			_r$4 = objc_client.ProcessCurlCommand(curlOptions); /* */ $s = 16; case 16: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+			_r$4 = objc.ProcessCurlCommand(curlOptions); /* */ $s = 16; case 16: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 			_tuple$5 = _r$4; templateName = _tuple$5[0]; option = _tuple$5[1];
 			$s = 11; continue;
 		/* } else if (_ref === "objc_nsurlconnection") { */ case 6:
 			langName = "objc_nsurlconnection";
-			_r$5 = objc_client.ProcessCurlCommand(curlOptions); /* */ $s = 17; case 17: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_r$5 = objc.ProcessCurlCommand(curlOptions); /* */ $s = 17; case 17: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 			_tuple$6 = _r$5; templateName = _tuple$6[0]; option = _tuple$6[1];
 			$s = 11; continue;
 		/* } else if (_ref === "xhr") { */ case 7:
 			langName = "xhr";
-			_r$6 = xhr_client.ProcessCurlCommand(curlOptions); /* */ $s = 18; case 18: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = xhr.ProcessCurlCommand(curlOptions); /* */ $s = 18; case 18: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			_tuple$7 = _r$6; templateName = _tuple$7[0]; option = _tuple$7[1];
 			$s = 11; continue;
 		/* } else if (_ref === "php") { */ case 8:
 			langName = "php";
-			_r$7 = php_client.ProcessCurlCommand(curlOptions); /* */ $s = 19; case 19: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+			_r$7 = php.ProcessCurlCommand(curlOptions); /* */ $s = 19; case 19: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
 			_tuple$8 = _r$7; templateName = _tuple$8[0]; option = _tuple$8[1];
 			$s = 11; continue;
 		/* } else if (_ref === "vim") { */ case 9:
 			langName = "vim_script";
-			_r$8 = vim_script_client.ProcessCurlCommand(curlOptions); /* */ $s = 20; case 20: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+			_r$8 = vimscript.ProcessCurlCommand(curlOptions); /* */ $s = 20; case 20: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
 			_tuple$9 = _r$8; templateName = _tuple$9[0]; option = _tuple$9[1];
 			$s = 11; continue;
 		/* } else { */ case 10:
@@ -53753,15 +53753,15 @@ $packages["github.com/shibukawa/curl_as_dsl/httpgen_generator"] = (function() {
 		$r = bytes.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = gzip.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = fmt.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = go_client.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = httpgen_common.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = java_client.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = nodejs_client.$init(); /* */ $s = 7; case 7: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = objc_client.$init(); /* */ $s = 8; case 8: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = php_client.$init(); /* */ $s = 9; case 9: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = python_client.$init(); /* */ $s = 10; case 10: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = vim_script_client.$init(); /* */ $s = 11; case 11: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = xhr_client.$init(); /* */ $s = 12; case 12: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = golang.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = java.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = nodejs.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = objc.$init(); /* */ $s = 7; case 7: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = php.$init(); /* */ $s = 8; case 8: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = python.$init(); /* */ $s = 9; case 9: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = vimscript.$init(); /* */ $s = 10; case 10: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = xhr.$init(); /* */ $s = 11; case 11: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = common.$init(); /* */ $s = 12; case 12: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = format.$init(); /* */ $s = 13; case 13: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = io.$init(); /* */ $s = 14; case 14: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = log.$init(); /* */ $s = 15; case 15: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -53920,11 +53920,11 @@ $packages["html"] = (function() {
 	return $pkg;
 })();
 $packages["main"] = (function() {
-	var $pkg = {}, $init, js, flags, httpgen_common, httpgen_generator, optstring_parser, console, html, strings, GlobalOptions, sliceType, funcType, mapType, GenerateCode, main;
+	var $pkg = {}, $init, js, flags, common, generator, optstring_parser, console, html, strings, GlobalOptions, sliceType, funcType, mapType, GenerateCode, main;
 	js = $packages["github.com/gopherjs/gopherjs/js"];
 	flags = $packages["github.com/jessevdk/go-flags"];
-	httpgen_common = $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"];
-	httpgen_generator = $packages["github.com/shibukawa/curl_as_dsl/httpgen_generator"];
+	common = $packages["github.com/shibukawa/curl_as_dsl/common"];
+	generator = $packages["github.com/shibukawa/curl_as_dsl/generator"];
 	optstring_parser = $packages["github.com/shibukawa/optstring_parser"];
 	console = $packages["honnef.co/go/js/console"];
 	html = $packages["html"];
@@ -53942,7 +53942,7 @@ $packages["main"] = (function() {
 		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _tuple, _tuple$1, _tuple$2, args, curlCommand, curlOptions, err, globalOptions, options, parser, sourceCode, target, urls, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; args = $f.args; curlCommand = $f.curlCommand; curlOptions = $f.curlOptions; err = $f.err; globalOptions = $f.globalOptions; options = $f.options; parser = $f.parser; sourceCode = $f.sourceCode; target = $f.target; urls = $f.urls; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		globalOptions = $clone(new GlobalOptions.ptr(), GlobalOptions);
-		curlOptions = $clone(new httpgen_common.CurlOptions.ptr(), httpgen_common.CurlOptions);
+		curlOptions = $clone(new common.CurlOptions.ptr(), common.CurlOptions);
 		curlOptions.Init();
 		_r = flags.NewParser(globalOptions, 22); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		parser = _r;
@@ -53975,7 +53975,7 @@ $packages["main"] = (function() {
 					return ["", "Both --url option and url parameters are missing"];
 				}
 			}
-			_r$4 = httpgen_generator.GenerateCode(target, curlOptions); /* */ $s = 9; case 9: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+			_r$4 = generator.GenerateCode(target, curlOptions); /* */ $s = 9; case 9: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 			_tuple$2 = _r$4; sourceCode = _tuple$2[0];
 			_r$5 = html.EscapeString(sourceCode); /* */ $s = 10; case 10: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 			return [_r$5, ""];
@@ -53993,8 +53993,8 @@ $packages["main"] = (function() {
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = js.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = flags.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = httpgen_common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = httpgen_generator.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = generator.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = optstring_parser.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = console.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = html.$init(); /* */ $s = 7; case 7: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }

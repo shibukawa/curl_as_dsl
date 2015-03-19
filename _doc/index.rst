@@ -8,6 +8,17 @@ cURL as DSL
 
 .. raw:: html
 
+   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+   <!-- shibukawa.github.com -->
+   <ins class="adsbygoogle"
+        style="display:block"
+             data-ad-client="ca-pub-8499969180632615"
+                  data-ad-slot="4621303502"
+                       data-ad-format="auto"></ins>
+                       <script>
+                       (adsbygoogle = window.adsbygoogle || []).push({});
+                       </script>
+
    <style>
    #codeblock {
      white-space: pre;
