@@ -10,6 +10,7 @@ import (
 	"github.com/shibukawa/curl_as_dsl/objc_client"
 	"github.com/shibukawa/curl_as_dsl/php_client"
 	"github.com/shibukawa/curl_as_dsl/python_client"
+	"github.com/shibukawa/curl_as_dsl/vim_script_client"
 	"github.com/shibukawa/curl_as_dsl/xhr_client"
 	"go/format"
 	"log"
@@ -37,6 +38,7 @@ var LanguageMap map[string]string = map[string]string{
 	"objc.connection":    "objc_nsurlconnection",
 	"objc.urlconnection": "objc_nsurlconnection",
 	"php":                "php",
+	"vim":                "vim",
 }
 
 func render(lang, key string, options interface{}) string {
@@ -94,6 +96,9 @@ func GenerateCode(target string, curlOptions *httpgen_common.CurlOptions) (strin
 	case "php":
 		langName = "php"
 		templateName, option = php_client.ProcessCurlCommand(curlOptions)
+	case "vim":
+		langName = "vim_script"
+		templateName, option = vim_script_client.ProcessCurlCommand(curlOptions)
 	default:
 	}
 	sourceCode := render(langName, templateName, option)

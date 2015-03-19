@@ -27,7 +27,8 @@ This program supports one of the following targets:
 * java               : Java        (java.net.HttpURLConnection)
 * objc, objc.session : Objective-C (NSURLSession)
 * objc.connection    : Objective-C (NSURLConnection)
-* php                : PHP         (fopen)`, target)
+* php                : PHP         (fopen)
+* vim                : Vim Script  (webapi-vim)`, target)
 }
 
 func main() {
