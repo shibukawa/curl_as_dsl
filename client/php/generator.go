@@ -1,16 +1,16 @@
-package php_client
+package php
 
 import (
 	"bytes"
 	"fmt"
-	"github.com/shibukawa/curl_as_dsl/httpgen_common"
+	"github.com/shibukawa/curl_as_dsl/common"
 	"net/url"
 	"os"
 	"strings"
 )
 
 type PHPGenerator struct {
-	Options *httpgen_common.CurlOptions
+	Options *common.CurlOptions
 
 	HasBody               bool
 	Body                  string
@@ -21,7 +21,7 @@ type PHPGenerator struct {
 	specialHeaders        []string
 }
 
-func NewPHPGenerator(options *httpgen_common.CurlOptions) *PHPGenerator {
+func NewPHPGenerator(options *common.CurlOptions) *PHPGenerator {
 	result := &PHPGenerator{Options: options}
 
 	return result
@@ -258,7 +258,7 @@ func (self *PHPGenerator) SetFormForBody() {
 	Dispatcher function of curl command
 	This is an exported function and called from httpgen.
 */
-func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{}) {
+func ProcessCurlCommand(options *common.CurlOptions) (string, interface{}) {
 	generator := NewPHPGenerator(options)
 
 	if options.ProcessedData.HasData() {
@@ -280,22 +280,22 @@ func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{
 
 // helper functions
 
-func NewStringForData(generator *PHPGenerator, data *httpgen_common.DataOption) string {
+func NewStringForData(generator *PHPGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf(`str_replace(array("\r\n", "\n", "\r"), "", file_get_contents("%s"))`, data.Value[1:])
 		} else {
 			result = fmt.Sprintf(`"%s"`, strings.Replace(data.Value, "\n", "", -1))
 		}
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf(`file_get_contents("%s")`, data.Value[1:])
 		} else {
 			result = fmt.Sprintf(`"%s"`, data.Value)
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("urlencode(file_get_contents('%s'))", data.Value[1:])
 		} else {
@@ -307,22 +307,22 @@ func NewStringForData(generator *PHPGenerator, data *httpgen_common.DataOption) 
 	return result
 }
 
-func StringForData(generator *PHPGenerator, data *httpgen_common.DataOption) string {
+func StringForData(generator *PHPGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("str_replace(array(\"\\r\\n\", \"\\n\", \"\\r\"), '', file_get_contents('%s'))", data.Value[1:])
 		} else {
 			result = fmt.Sprintf(`"%s"`, strings.Replace(data.Value, "\n", "", -1))
 		}
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("file_get_contents(\"%s\")", data.Value[1:])
 		} else {
 			result = fmt.Sprintf(`"%s"`, data.Value)
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("urlencode(file_get_contents(\"%s\"))", data.Value[1:])
 		} else {
@@ -334,10 +334,10 @@ func StringForData(generator *PHPGenerator, data *httpgen_common.DataOption) str
 	return result
 }
 
-func FormString(generator *PHPGenerator, data *httpgen_common.DataOption) string {
+func FormString(generator *PHPGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.FormType:
+	case common.FormType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")
@@ -392,7 +392,7 @@ func FormString(generator *PHPGenerator, data *httpgen_common.DataOption) string
 		} else {
 			result = fmt.Sprintf("  array(\"key\"=>\"%s\", \"value\"=>\"%s\", \"content_type\"=>\"\"),\n", field[0], field[1])
 		}
-	case httpgen_common.FormStringType:
+	case common.FormStringType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")

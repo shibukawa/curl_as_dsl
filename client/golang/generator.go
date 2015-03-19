@@ -1,8 +1,8 @@
-package go_client
+package golang
 
 import (
 	"fmt"
-	"github.com/shibukawa/curl_as_dsl/httpgen_common"
+	"github.com/shibukawa/curl_as_dsl/common"
 	"mime"
 	"strings"
 )
@@ -11,7 +11,7 @@ func escapeDQ(src string) string {
 	return strings.Replace(strings.Replace(src, "\"", "\\\"", -1), "\\", "\\\\", -1)
 }
 
-func ClientNeeded(options *httpgen_common.CurlOptions) bool {
+func ClientNeeded(options *common.CurlOptions) bool {
 	if options.Proxy != "" || options.User != "" || len(options.Cookie) > 0 {
 		return true
 	}
@@ -32,7 +32,7 @@ func ClientNeeded(options *httpgen_common.CurlOptions) bool {
 	Dispatcher function of curl command
 	This is an exported function and called from httpgen.
 */
-func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{}) {
+func ProcessCurlCommand(options *common.CurlOptions) (string, interface{}) {
 
 	generator := NewGoGenerator(options)
 

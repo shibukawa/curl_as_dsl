@@ -1,9 +1,9 @@
-package objc_client
+package objc
 
 import (
 	"bytes"
 	"fmt"
-	"github.com/shibukawa/curl_as_dsl/httpgen_common"
+	"github.com/shibukawa/curl_as_dsl/common"
 	"log"
 	"net/url"
 	"os"
@@ -11,7 +11,7 @@ import (
 )
 
 type ObjCGenerator struct {
-	Options *httpgen_common.CurlOptions
+	Options *common.CurlOptions
 
 	Url                   string
 	IsHttps               bool
@@ -24,7 +24,7 @@ type ObjCGenerator struct {
 	Modules               map[string]bool
 }
 
-func NewObjCGenerator(options *httpgen_common.CurlOptions) *ObjCGenerator {
+func NewObjCGenerator(options *common.CurlOptions) *ObjCGenerator {
 	result := &ObjCGenerator{Options: options}
 	result.Url = fmt.Sprintf(`@"%s"`, options.Url)
 	result.Modules = make(map[string]bool)
@@ -365,9 +365,9 @@ func (self *ObjCGenerator) SetFormForBody() {
 
 /*
 	Dispatcher function of curl command
-	This is an exported function and called from httpgen.
+	This is an exported function and called from common.
 */
-func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{}) {
+func ProcessCurlCommand(options *common.CurlOptions) (string, interface{}) {
 	generator := NewObjCGenerator(options)
 
 	if options.ProcessedData.HasData() {
@@ -394,11 +394,11 @@ func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{
 
 // helper functions
 
-func NewBinaryForData(generator *ObjCGenerator, data *httpgen_common.DataOption) ([]string, string) {
+func NewBinaryForData(generator *ObjCGenerator, data *common.DataOption) ([]string, string) {
 	var result []string
 	var resultForWriter string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = append(result,
 				`NSMutableData* content = [NSMutableData data];`,
@@ -409,13 +409,13 @@ func NewBinaryForData(generator *ObjCGenerator, data *httpgen_common.DataOption)
 		} else {
 			resultForWriter = fmt.Sprintf(`[@"%s" dataUsingEncoding:NSUTF8StringEncoding]`, strings.Replace(data.Value, "\n", "", -1))
 		}
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			resultForWriter = fmt.Sprintf(`[NSData dataWithContentsOfFile:@"%s"]`, data.Value[1:])
 		} else {
 			resultForWriter = fmt.Sprintf(`@"%s"`, data.Value)
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = append(result,
 				`NSError *error = nil;`,
@@ -431,11 +431,11 @@ func NewBinaryForData(generator *ObjCGenerator, data *httpgen_common.DataOption)
 	return result, resultForWriter
 }
 
-func BinaryForData(generator *ObjCGenerator, data *httpgen_common.DataOption) ([]string, string) {
+func BinaryForData(generator *ObjCGenerator, data *common.DataOption) ([]string, string) {
 	var result []string
 	var resultForWriter string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = append(result,
 				"{",
@@ -447,13 +447,13 @@ func BinaryForData(generator *ObjCGenerator, data *httpgen_common.DataOption) ([
 		} else {
 			resultForWriter = fmt.Sprintf(`[@"%s" dataUsingEncoding:NSUTF8StringEncoding]`, strings.Replace(data.Value, "\n", "", -1))
 		}
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = append(result, fmt.Sprintf(`[content appendData:[NSData dataWithContentsOfFile:@"%s"]];`, data.Value[1:]))
 		} else {
 			resultForWriter = fmt.Sprintf(`[@"%s" dataUsingEncoding:NSUTF8StringEncoding]`, data.Value)
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = append(result,
 				"{",
@@ -471,15 +471,15 @@ func BinaryForData(generator *ObjCGenerator, data *httpgen_common.DataOption) ([
 	return result, resultForWriter
 }
 
-func NewStringForData(generator *ObjCGenerator, data *httpgen_common.DataOption) ([]string, string) {
+func NewStringForData(generator *ObjCGenerator, data *common.DataOption) ([]string, string) {
 	var result []string
 	var resultForWriter string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		resultForWriter = fmt.Sprintf(`@"%s"`, strings.Replace(data.Value, "\n", "", -1))
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		resultForWriter = fmt.Sprintf(`@"%s"`, data.Value)
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		resultForWriter = fmt.Sprintf(`[[@"%s"
 		stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]] dataUsingEncoding:NSUTF8StringEncoding]`, data.Value)
 	default:
@@ -488,15 +488,15 @@ func NewStringForData(generator *ObjCGenerator, data *httpgen_common.DataOption)
 	return result, resultForWriter
 }
 
-func StringForData(generator *ObjCGenerator, data *httpgen_common.DataOption) ([]string, string) {
+func StringForData(generator *ObjCGenerator, data *common.DataOption) ([]string, string) {
 	var result []string
 	var resultForWriter string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		resultForWriter = fmt.Sprintf(`[@"%s" dataUsingEncoding:NSUTF8StringEncoding]`, strings.Replace(data.Value, "\n", "", -1))
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		resultForWriter = fmt.Sprintf(`[@"%s" dataUsingEncoding:NSUTF8StringEncoding]`, data.Value)
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		resultForWriter = fmt.Sprintf("URLEncoder.encode(\"%s\", \"UTF-8\")", data.Value)
 	default:
 		panic(fmt.Sprintf("unknown type: %d", data.Type))
@@ -504,10 +504,10 @@ func StringForData(generator *ObjCGenerator, data *httpgen_common.DataOption) ([
 	return result, resultForWriter
 }
 
-func FormString(generator *ObjCGenerator, data *httpgen_common.DataOption) string {
+func FormString(generator *ObjCGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.FormType:
+	case common.FormType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")
@@ -562,7 +562,7 @@ func FormString(generator *ObjCGenerator, data *httpgen_common.DataOption) strin
 		} else {
 			result = fmt.Sprintf("    [NSArray arrayWithObjects:@\"%s\", @\"%s\", nil],\n", field[0], field[1])
 		}
-	case httpgen_common.FormStringType:
+	case common.FormStringType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")

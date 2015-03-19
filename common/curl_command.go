@@ -1,4 +1,4 @@
-package httpgen_common
+package common
 
 import (
 	"fmt"

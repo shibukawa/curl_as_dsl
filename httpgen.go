@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/jessevdk/go-flags"
-	"github.com/shibukawa/curl_as_dsl/httpgen_common"
-	"github.com/shibukawa/curl_as_dsl/httpgen_generator"
+	"github.com/shibukawa/curl_as_dsl/common"
+	"github.com/shibukawa/curl_as_dsl/generator"
 	"log"
 	"os"
 	"reflect"
@@ -33,7 +33,7 @@ This program supports one of the following targets:
 
 func main() {
 	var globalOptions GlobalOptions
-	var curlOptions httpgen_common.CurlOptions
+	var curlOptions common.CurlOptions
 	curlOptions.Init()
 
 	parser := flags.NewParser(&globalOptions, flags.Default)
@@ -57,7 +57,7 @@ func main() {
 				log.Fatalln("Both --url option and url parameters are missing")
 			}
 		}
-		sourceCode, langName, templateName, option := httpgen_generator.GenerateCode(globalOptions.Target, &curlOptions)
+		sourceCode, langName, templateName, option := generator.GenerateCode(globalOptions.Target, &curlOptions)
 		if templateName != "" {
 			if globalOptions.Debug {
 				st := reflect.TypeOf(option)

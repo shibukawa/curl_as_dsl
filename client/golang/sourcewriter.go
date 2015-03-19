@@ -1,17 +1,17 @@
-package go_client
+package golang
 
 import (
 	"fmt"
 	"os"
 	//"log"
 	"bytes"
-	"github.com/shibukawa/curl_as_dsl/httpgen_common"
+	"github.com/shibukawa/curl_as_dsl/common"
 	"net/url"
 	"strings"
 )
 
 type GoGenerator struct {
-	Options *httpgen_common.CurlOptions
+	Options *common.CurlOptions
 	Modules map[string]bool
 
 	Data         string
@@ -22,7 +22,7 @@ type GoGenerator struct {
 	extraUrl string
 }
 
-func NewGoGenerator(options *httpgen_common.CurlOptions) *GoGenerator {
+func NewGoGenerator(options *common.CurlOptions) *GoGenerator {
 	result := &GoGenerator{Options: options}
 	result.Modules = make(map[string]bool)
 	result.Modules["net/http"] = true
@@ -209,11 +209,11 @@ func (self *GoGenerator) SetDataForPostForm() {
 	self.Modules["net/url"] = true
 }
 
-func NewStringForData(generator *GoGenerator, data *httpgen_common.DataOption) (string, string) {
+func NewStringForData(generator *GoGenerator, data *common.DataOption) (string, string) {
 	var result string
 	var name string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			var buffer bytes.Buffer
 			buffer.WriteString("var buffer bytes.Buffer\n")
@@ -230,7 +230,7 @@ func NewStringForData(generator *GoGenerator, data *httpgen_common.DataOption) (
 			name = "buffer"
 		}
 		generator.Modules["bytes"] = true
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			var buffer bytes.Buffer
 			fmt.Fprintf(&buffer, "file, err := os.Open(\"%s\")\n", data.Value[1:])
@@ -245,7 +245,7 @@ func NewStringForData(generator *GoGenerator, data *httpgen_common.DataOption) (
 			name = "buffer"
 			generator.Modules["bytes"] = true
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			var buffer bytes.Buffer
 			buffer.WriteString("var buffer bytes.Buffer\n")
@@ -268,10 +268,10 @@ func NewStringForData(generator *GoGenerator, data *httpgen_common.DataOption) (
 	return result, name
 }
 
-func StringForData(generator *GoGenerator, data *httpgen_common.DataOption) string {
+func StringForData(generator *GoGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			var buffer bytes.Buffer
 			buffer.WriteString("{\n")
@@ -286,7 +286,7 @@ func StringForData(generator *GoGenerator, data *httpgen_common.DataOption) stri
 		} else {
 			result = fmt.Sprintf("    buffer.WriteString(\"%s\")\n", escapeDQ(strings.Replace(data.Value, "\n", "", -1)))
 		}
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			var buffer bytes.Buffer
 			buffer.WriteString("{\n")
@@ -302,7 +302,7 @@ func StringForData(generator *GoGenerator, data *httpgen_common.DataOption) stri
 		} else {
 			result = fmt.Sprintf("buffer.WriteString(\"%s\")\n", escapeDQ(data.Value))
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			var buffer bytes.Buffer
 			buffer.WriteString("{\n")
@@ -324,10 +324,10 @@ func StringForData(generator *GoGenerator, data *httpgen_common.DataOption) stri
 	return result
 }
 
-func FormString(generator *GoGenerator, data *httpgen_common.DataOption) string {
+func FormString(generator *GoGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.FormType:
+	case common.FormType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")
@@ -404,7 +404,7 @@ func FormString(generator *GoGenerator, data *httpgen_common.DataOption) string 
 		} else {
 			result = fmt.Sprintf("writer.WriteField(\"%s\", \"%s\")\n", field[0], field[1])
 		}
-	case httpgen_common.FormStringType:
+	case common.FormStringType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")

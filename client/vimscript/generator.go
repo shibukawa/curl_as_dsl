@@ -1,9 +1,9 @@
-package vim_script_client
+package vimscript
 
 import (
 	"bytes"
 	"fmt"
-	"github.com/shibukawa/curl_as_dsl/httpgen_common"
+	"github.com/shibukawa/curl_as_dsl/common"
 	"log"
 	"net/url"
 	"os"
@@ -15,7 +15,7 @@ func escapeDQ(src string) string {
 }
 
 type VimScriptGenerator struct {
-	Options *httpgen_common.CurlOptions
+	Options *common.CurlOptions
 
 	HasBody               bool
 	Body                  string
@@ -25,7 +25,7 @@ type VimScriptGenerator struct {
 	specialHeaders        []string
 }
 
-func NewVimScriptGenerator(options *httpgen_common.CurlOptions) *VimScriptGenerator {
+func NewVimScriptGenerator(options *common.CurlOptions) *VimScriptGenerator {
 	return &VimScriptGenerator{Options: options}
 }
 
@@ -223,7 +223,7 @@ func (self *VimScriptGenerator) SetFormForBody() {
 	Dispatcher function of curl command
 	This is an exported function and called from httpgen.
 */
-func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{}) {
+func ProcessCurlCommand(options *common.CurlOptions) (string, interface{}) {
 	generator := NewVimScriptGenerator(options)
 
 	if options.ProcessedData.HasData() {
@@ -241,22 +241,22 @@ func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{
 
 // helper functions
 
-func StringForData(generator *VimScriptGenerator, data *httpgen_common.DataOption) string {
+func StringForData(generator *VimScriptGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("join(readfile('%s'), '')", data.Value[1:])
 		} else {
 			result = fmt.Sprintf(`"%s"`, escapeDQ(strings.Replace(data.Value, "\n", "", -1)))
 		}
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("join(readfile('%s'), \"\\n\")", data.Value[1:])
 		} else {
 			result = fmt.Sprintf(`"%s"`, escapeDQ(data.Value))
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("webapi#http#encodeURIComponent(join(readfile('%s'), \"\\n\"))", data.Value[1:])
 		} else {
@@ -268,10 +268,10 @@ func StringForData(generator *VimScriptGenerator, data *httpgen_common.DataOptio
 	return result
 }
 
-func FormString(generator *VimScriptGenerator, data *httpgen_common.DataOption) string {
+func FormString(generator *VimScriptGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.FormType:
+	case common.FormType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")
@@ -326,7 +326,7 @@ func FormString(generator *VimScriptGenerator, data *httpgen_common.DataOption) 
 		} else {
 			result = fmt.Sprintf("  \\{'key': '%s', 'value': \"%s\"},\n", field[0], escapeDQ(field[1]))
 		}
-	case httpgen_common.FormStringType:
+	case common.FormStringType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")

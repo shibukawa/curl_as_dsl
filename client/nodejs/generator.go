@@ -1,9 +1,9 @@
-package nodejs_client
+package nodejs
 
 import (
 	"bytes"
 	"fmt"
-	"github.com/shibukawa/curl_as_dsl/httpgen_common"
+	"github.com/shibukawa/curl_as_dsl/common"
 	"log"
 	"net/url"
 	"os"
@@ -21,7 +21,7 @@ type ExternalFile struct {
 }
 
 type NodeJsGenerator struct {
-	Options *httpgen_common.CurlOptions
+	Options *common.CurlOptions
 	Modules map[string]bool
 
 	ClientModule          string
@@ -32,13 +32,13 @@ type NodeJsGenerator struct {
 	usedFile              int
 	extraUrl              string
 	AdditionalDeclaration string
-	processedHeaders      []httpgen_common.HeaderGroup
+	processedHeaders      []common.HeaderGroup
 	specialHeaders        []string
 
 	UseSimpleGet bool
 }
 
-func NewNodeJsGenerator(options *httpgen_common.CurlOptions) *NodeJsGenerator {
+func NewNodeJsGenerator(options *common.CurlOptions) *NodeJsGenerator {
 	result := &NodeJsGenerator{Options: options}
 	result.Modules = make(map[string]bool)
 
@@ -301,7 +301,7 @@ func (self *NodeJsGenerator) SetFormForBody() {
 	Dispatcher function of curl command
 	This is an exported function and called from httpgen.
 */
-func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{}) {
+func ProcessCurlCommand(options *common.CurlOptions) (string, interface{}) {
 	generator := NewNodeJsGenerator(options)
 	if strings.HasPrefix(options.Url, "https") {
 		generator.Modules["https"] = true
@@ -314,7 +314,7 @@ func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{
 	for _, data := range options.ProcessedData {
 		fileName := data.FileName()
 		if fileName != "" {
-			isText := data.Type == httpgen_common.DataAsciiType
+			isText := data.Type == common.DataAsciiType
 			generator.ExternalFiles = append(generator.ExternalFiles, ExternalFile{FileName: fileName, TextType: isText})
 		}
 	}
@@ -355,22 +355,22 @@ func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{
 
 // helper functions
 
-func NewStringForData(generator *NodeJsGenerator, data *httpgen_common.DataOption) string {
+func NewStringForData(generator *NodeJsGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("%s.replace('\\n', '')", generator.FileContent())
 		} else {
 			result = fmt.Sprintf("\"%s\"", escapeDQ(strings.Replace(data.Value, "\n", "", -1)))
 		}
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = generator.FileContent()
 		} else {
 			result = fmt.Sprintf("\"%s\"", escapeDQ(data.Value))
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("encodeURIComponent(%s)", generator.FileContent())
 		} else {
@@ -382,22 +382,22 @@ func NewStringForData(generator *NodeJsGenerator, data *httpgen_common.DataOptio
 	return result
 }
 
-func StringForData(generator *NodeJsGenerator, data *httpgen_common.DataOption) string {
+func StringForData(generator *NodeJsGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("%s.replace('\\n', '')", generator.FileContent())
 		} else {
 			result = fmt.Sprintf("\"%s\"", escapeDQ(strings.Replace(data.Value, "\n", "", -1)))
 		}
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("%s", generator.FileContent())
 		} else {
 			result = fmt.Sprintf("\"%s\"", escapeDQ(data.Value))
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("encodeURIComponent(%s)", generator.FileContent())
 		} else {
@@ -409,10 +409,10 @@ func StringForData(generator *NodeJsGenerator, data *httpgen_common.DataOption) 
 	return result
 }
 
-func FormString(generator *NodeJsGenerator, data *httpgen_common.DataOption) string {
+func FormString(generator *NodeJsGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.FormType:
+	case common.FormType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")
@@ -460,7 +460,7 @@ func FormString(generator *NodeJsGenerator, data *httpgen_common.DataOption) str
 		} else {
 			result = fmt.Sprintf("    {key: \"%s\", value: \"%s\"},\n", field[0], field[1])
 		}
-	case httpgen_common.FormStringType:
+	case common.FormStringType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")

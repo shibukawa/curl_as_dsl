@@ -1,9 +1,9 @@
-package xhr_client
+package xhr
 
 import (
 	"bytes"
 	"fmt"
-	"github.com/shibukawa/curl_as_dsl/httpgen_common"
+	"github.com/shibukawa/curl_as_dsl/common"
 	"net/url"
 	"os"
 	"strings"
@@ -14,14 +14,14 @@ func escapeDQ(src string) string {
 }
 
 type ExternalFile struct {
-	Data         *httpgen_common.DataOption
+	Data         *common.DataOption
 	FileName     string
 	VariableName string
 	TextType     bool
 }
 
 type XHRGenerator struct {
-	Options               *httpgen_common.CurlOptions
+	Options               *common.CurlOptions
 	prepareFile           bytes.Buffer
 	PrepareBody           string
 	Body                  string
@@ -30,13 +30,13 @@ type XHRGenerator struct {
 	usedFile              int
 	extraUrl              string
 	AdditionalDeclaration string
-	processedHeaders      []httpgen_common.HeaderGroup
+	processedHeaders      []common.HeaderGroup
 	specialHeaders        [][]string
 
 	UseSimpleGet bool
 }
 
-func NewXHRGenerator(options *httpgen_common.CurlOptions) *XHRGenerator {
+func NewXHRGenerator(options *common.CurlOptions) *XHRGenerator {
 	result := &XHRGenerator{
 		Options:       options,
 		ExternalFiles: make(map[int]*ExternalFile),
@@ -122,7 +122,7 @@ func (self *XHRGenerator) SetDataForUrl() {
 	}
 }
 
-func (self *XHRGenerator) VariableName(data *httpgen_common.DataOption) string {
+func (self *XHRGenerator) VariableName(data *common.DataOption) string {
 	for _, file := range self.ExternalFiles {
 		if file.Data == data {
 			return file.VariableName
@@ -187,13 +187,13 @@ func (self *XHRGenerator) SetFormForBody() {
 	Dispatcher function of curl command
 	This is an exported function and called from httpgen.
 */
-func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{}) {
+func ProcessCurlCommand(options *common.CurlOptions) (string, interface{}) {
 	generator := NewXHRGenerator(options)
 
 	for i, data := range options.ProcessedData {
 		fileName := data.FileName()
 		if fileName != "" {
-			isText := data.Type == httpgen_common.DataAsciiType
+			isText := data.Type == common.DataAsciiType
 			file := &ExternalFile{
 				Data:     &data,
 				FileName: fileName,
@@ -246,11 +246,11 @@ func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{
 
 // helper functions
 
-func NewStringForData(generator *XHRGenerator, data *httpgen_common.DataOption) (string, string) {
+func NewStringForData(generator *XHRGenerator, data *common.DataOption) (string, string) {
 	var result string
 	var prepare bytes.Buffer
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = "file"
 			prepare.WriteString(`
@@ -264,7 +264,7 @@ func NewStringForData(generator *XHRGenerator, data *httpgen_common.DataOption) 
 		} else {
 			result = fmt.Sprintf("\"%s\"", escapeDQ(data.Value))
 		}
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = "file"
 			prepare.WriteString(`
@@ -278,7 +278,7 @@ func NewStringForData(generator *XHRGenerator, data *httpgen_common.DataOption) 
 		} else {
 			result = fmt.Sprintf("\"%s\"", escapeDQ(data.Value))
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = "file"
 			prepare.WriteString(`
@@ -298,25 +298,25 @@ func NewStringForData(generator *XHRGenerator, data *httpgen_common.DataOption) 
 	return result, prepare.String()
 }
 
-func StringForData(generator *XHRGenerator, data *httpgen_common.DataOption) (string, string) {
+func StringForData(generator *XHRGenerator, data *common.DataOption) (string, string) {
 	var result string
 	var prepare bytes.Buffer
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			fmt.Fprintf(os.Stderr, "XHR generator doesn't support sending multiple files except form(-F).")
 			os.Exit(1)
 		} else {
 			result = fmt.Sprintf("\"%s\"", escapeDQ(data.Value))
 		}
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			fmt.Fprintf(os.Stderr, "XHR generator doesn't support sending multiple files except form(-F).")
 			os.Exit(1)
 		} else {
 			result = fmt.Sprintf("\"%s\"", escapeDQ(data.Value))
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("encodeURIComponent(%s)", "@@")
 		} else {
@@ -328,11 +328,11 @@ func StringForData(generator *XHRGenerator, data *httpgen_common.DataOption) (st
 	return result, prepare.String()
 }
 
-func FormString(generator *XHRGenerator, data *httpgen_common.DataOption) (string, string) {
+func FormString(generator *XHRGenerator, data *common.DataOption) (string, string) {
 	var buffer bytes.Buffer
 	var prepare bytes.Buffer
 	switch data.Type {
-	case httpgen_common.FormType:
+	case common.FormType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")
@@ -392,7 +392,7 @@ func FormString(generator *XHRGenerator, data *httpgen_common.DataOption) (strin
 		} else {
 			fmt.Fprintf(&buffer, "    form.append(\"%s\", \"%s\");\n", field[0], field[1])
 		}
-	case httpgen_common.FormStringType:
+	case common.FormStringType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")

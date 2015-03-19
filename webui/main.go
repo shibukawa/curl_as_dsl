@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/gopherjs/gopherjs/js"
 	"github.com/jessevdk/go-flags"
-	"github.com/shibukawa/curl_as_dsl/httpgen_common"
-	"github.com/shibukawa/curl_as_dsl/httpgen_generator"
+	"github.com/shibukawa/curl_as_dsl/common"
+	"github.com/shibukawa/curl_as_dsl/generator"
 	"github.com/shibukawa/optstring_parser"
 	"honnef.co/go/js/console"
 	"html"
@@ -15,7 +15,7 @@ type GlobalOptions struct{}
 
 func GenerateCode(target, options string) (string, string) {
 	var globalOptions GlobalOptions
-	var curlOptions httpgen_common.CurlOptions
+	var curlOptions common.CurlOptions
 	curlOptions.Init()
 
 	parser := flags.NewParser(&globalOptions, flags.Default)
@@ -47,7 +47,7 @@ func GenerateCode(target, options string) (string, string) {
 				return "", "Both --url option and url parameters are missing"
 			}
 		}
-		sourceCode, _, _, _ := httpgen_generator.GenerateCode(target, &curlOptions)
+		sourceCode, _, _, _ := generator.GenerateCode(target, &curlOptions)
 		return html.EscapeString(sourceCode), ""
 	}
 	return "", ""

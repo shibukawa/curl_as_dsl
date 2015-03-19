@@ -1,17 +1,17 @@
-package httpgen_generator
+package generator
 
 import (
 	"bytes"
 	"fmt"
-	"github.com/shibukawa/curl_as_dsl/go_client"
-	"github.com/shibukawa/curl_as_dsl/httpgen_common"
-	"github.com/shibukawa/curl_as_dsl/java_client"
-	"github.com/shibukawa/curl_as_dsl/nodejs_client"
-	"github.com/shibukawa/curl_as_dsl/objc_client"
-	"github.com/shibukawa/curl_as_dsl/php_client"
-	"github.com/shibukawa/curl_as_dsl/python_client"
-	"github.com/shibukawa/curl_as_dsl/vim_script_client"
-	"github.com/shibukawa/curl_as_dsl/xhr_client"
+	"github.com/shibukawa/curl_as_dsl/client/golang"
+	"github.com/shibukawa/curl_as_dsl/client/java"
+	"github.com/shibukawa/curl_as_dsl/client/nodejs"
+	"github.com/shibukawa/curl_as_dsl/client/objc"
+	"github.com/shibukawa/curl_as_dsl/client/php"
+	"github.com/shibukawa/curl_as_dsl/client/python"
+	"github.com/shibukawa/curl_as_dsl/client/vimscript"
+	"github.com/shibukawa/curl_as_dsl/client/xhr"
+	"github.com/shibukawa/curl_as_dsl/common"
 	"go/format"
 	"log"
 	"text/template"
@@ -61,7 +61,7 @@ func render(lang, key string, options interface{}) string {
 	return buffer.String()
 }
 
-func GenerateCode(target string, curlOptions *httpgen_common.CurlOptions) (string, string, string, interface{}) {
+func GenerateCode(target string, curlOptions *common.CurlOptions) (string, string, string, interface{}) {
 	var langName string
 	var templateName string
 	var option interface{}
@@ -74,31 +74,31 @@ func GenerateCode(target string, curlOptions *httpgen_common.CurlOptions) (strin
 	switch lang {
 	case "go":
 		langName = "go"
-		templateName, option = go_client.ProcessCurlCommand(curlOptions)
+		templateName, option = golang.ProcessCurlCommand(curlOptions)
 	case "python":
 		langName = "python"
-		templateName, option = python_client.ProcessCurlCommand(curlOptions)
+		templateName, option = python.ProcessCurlCommand(curlOptions)
 	case "node":
 		langName = "nodejs"
-		templateName, option = nodejs_client.ProcessCurlCommand(curlOptions)
+		templateName, option = nodejs.ProcessCurlCommand(curlOptions)
 	case "java":
 		langName = "java"
-		templateName, option = java_client.ProcessCurlCommand(curlOptions)
+		templateName, option = java.ProcessCurlCommand(curlOptions)
 	case "objc_nsurlsession":
 		langName = "objc_nsurlsession"
-		templateName, option = objc_client.ProcessCurlCommand(curlOptions)
+		templateName, option = objc.ProcessCurlCommand(curlOptions)
 	case "objc_nsurlconnection":
 		langName = "objc_nsurlconnection"
-		templateName, option = objc_client.ProcessCurlCommand(curlOptions)
+		templateName, option = objc.ProcessCurlCommand(curlOptions)
 	case "xhr":
 		langName = "xhr"
-		templateName, option = xhr_client.ProcessCurlCommand(curlOptions)
+		templateName, option = xhr.ProcessCurlCommand(curlOptions)
 	case "php":
 		langName = "php"
-		templateName, option = php_client.ProcessCurlCommand(curlOptions)
+		templateName, option = php.ProcessCurlCommand(curlOptions)
 	case "vim":
 		langName = "vim_script"
-		templateName, option = vim_script_client.ProcessCurlCommand(curlOptions)
+		templateName, option = vimscript.ProcessCurlCommand(curlOptions)
 	default:
 	}
 	sourceCode := render(langName, templateName, option)

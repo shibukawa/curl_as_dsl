@@ -1,9 +1,9 @@
-package python_client
+package python
 
 import (
 	"bytes"
 	"fmt"
-	"github.com/shibukawa/curl_as_dsl/httpgen_common"
+	"github.com/shibukawa/curl_as_dsl/common"
 	"log"
 	"net/url"
 	"os"
@@ -11,7 +11,7 @@ import (
 )
 
 type PythonGenerator struct {
-	Options *httpgen_common.CurlOptions
+	Options *common.CurlOptions
 	Modules map[string]bool
 
 	HasBody               bool
@@ -22,7 +22,7 @@ type PythonGenerator struct {
 	specialHeaders        []string
 }
 
-func NewPythonGenerator(options *httpgen_common.CurlOptions) *PythonGenerator {
+func NewPythonGenerator(options *common.CurlOptions) *PythonGenerator {
 	result := &PythonGenerator{Options: options}
 	result.Modules = make(map[string]bool)
 	result.Modules["http.client"] = true
@@ -255,7 +255,7 @@ func (self *PythonGenerator) SetFormForBody() {
 	Dispatcher function of curl command
 	This is an exported function and called from httpgen.
 */
-func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{}) {
+func ProcessCurlCommand(options *common.CurlOptions) (string, interface{}) {
 	generator := NewPythonGenerator(options)
 
 	if options.ProcessedData.HasData() {
@@ -279,11 +279,11 @@ func ProcessCurlCommand(options *httpgen_common.CurlOptions) (string, interface{
 
 // helper functions
 
-func NewStringForData(generator *PythonGenerator, data *httpgen_common.DataOption) (string, string) {
+func NewStringForData(generator *PythonGenerator, data *common.DataOption) (string, string) {
 	var result string
 	var name string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = ""
 			name = fmt.Sprintf("open(r'%s').read().replace('\\n', '')", data.Value[1:])
@@ -291,7 +291,7 @@ func NewStringForData(generator *PythonGenerator, data *httpgen_common.DataOptio
 			result = ""
 			name = fmt.Sprintf("r'%s'", strings.Replace(data.Value, "\n", "", -1))
 		}
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = ""
 			name = fmt.Sprintf("open(r'%s').read()", data.Value[1:])
@@ -299,7 +299,7 @@ func NewStringForData(generator *PythonGenerator, data *httpgen_common.DataOptio
 			result = ""
 			name = fmt.Sprintf("'%s'", data.Value)
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = ""
 			name = fmt.Sprintf("urllib.parse.quote_plus(open(r'%s').read())", data.Value[1:])
@@ -314,22 +314,22 @@ func NewStringForData(generator *PythonGenerator, data *httpgen_common.DataOptio
 	return result, name
 }
 
-func StringForData(generator *PythonGenerator, data *httpgen_common.DataOption) string {
+func StringForData(generator *PythonGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.DataAsciiType:
+	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("        open('%s').read().replace('\\n', ''),\n", data.Value[1:])
 		} else {
 			result = fmt.Sprintf("        r'%s',\n", strings.Replace(data.Value, "\n", "", -1))
 		}
-	case httpgen_common.DataBinaryType:
+	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("        open('%s').read(),\n", data.Value[1:])
 		} else {
 			result = fmt.Sprintf("        r'%s',\n", data.Value)
 		}
-	case httpgen_common.DataUrlEncodeType:
+	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
 			result = fmt.Sprintf("        urllib.parse.quote_plus(open(r'%s').read()),\n", data.Value[1:])
 		} else {
@@ -342,10 +342,10 @@ func StringForData(generator *PythonGenerator, data *httpgen_common.DataOption) 
 	return result
 }
 
-func FormString(generator *PythonGenerator, data *httpgen_common.DataOption) string {
+func FormString(generator *PythonGenerator, data *common.DataOption) string {
 	var result string
 	switch data.Type {
-	case httpgen_common.FormType:
+	case common.FormType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")
@@ -403,7 +403,7 @@ func FormString(generator *PythonGenerator, data *httpgen_common.DataOption) str
 		} else {
 			result = fmt.Sprintf("        (\"%s\", \"%s\", None),\n", field[0], field[1])
 		}
-	case httpgen_common.FormStringType:
+	case common.FormStringType:
 		field := strings.SplitN(data.Value, "=", 2)
 		if len(field) != 2 {
 			fmt.Fprintln(os.Stderr, "Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")
