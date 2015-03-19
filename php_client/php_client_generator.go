@@ -119,8 +119,9 @@ function encode_multipart_formdata($fields, $files, $boundary) {
     } else {
       $result .= "Content-Type: " . finfo_file($finfo, $file["source_file"]) . "\r\n";
     }
-    $result .= "\r\n" . file_get_contents($file["source_file"]) . "\r\n" . $boundary . "--\r\n";
+    $result .= "\r\n" . file_get_contents($file["source_file"]) . "\r\n";
   }
+  $result .= $boundary . "--\r\n";
   return $result;
 }
 `

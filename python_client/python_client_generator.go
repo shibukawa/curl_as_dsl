@@ -126,10 +126,6 @@ func (self *PythonGenerator) AddMultiPartCode() {
 BOUNDARY = '----------ThIs_Is_tHe_bouNdaRY_$'
 
 def encode_multipart_formdata(fields, files):
-    """
-    http://code.activestate.com/recipes/146306-http-client-to-post-using-multipartform-data/
-    """
-    CRLF = '\r\n'
     L = []
     for key, value, contenttype in fields:
         L.append('--' + BOUNDARY)
@@ -144,9 +140,9 @@ def encode_multipart_formdata(fields, files):
         L.append('Content-Type: %s' % contenttype)
         L.append('')
         L.append(open(sourcefile).read())
-        L.append('--' + BOUNDARY + '--')
         L.append('')
-    return CRLF.join(L)
+    L.append('--' + BOUNDARY + '--')
+    return '\r\n'.join(L)
 `
 	boundary := "----------ThIs_Is_tHe_bouNdaRY_$"
 	self.Options.InsertContentTypeHeader(fmt.Sprintf("multipart/form-data; boundary=%s", boundary))

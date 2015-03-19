@@ -146,8 +146,7 @@ func (self *NodeJsGenerator) AddMultiPartCode() {
 BOUNDARY = '----------ThIs_Is_tHe_bouNdaRY_$';
 
 function encodeMultiPartFormData(fields, files) {
-    CRLF = "\r\n";
-    L = [];
+    var L = [];
     for (var i = 0; i < fields.length; i++) {
         var field = fields[i];
         L.push('--' + BOUNDARY);
@@ -165,9 +164,8 @@ function encodeMultiPartFormData(fields, files) {
         L.push('Content-Type: ' + file.contentType);
         L.push('');
         L.push(file.content);
-        L.push('--' + BOUNDARY + '--');
-        L.push('');
     }
+    L.push('--' + BOUNDARY + '--');
     return L.join("\r\n");
 }
 `

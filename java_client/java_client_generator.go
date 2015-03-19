@@ -203,10 +203,10 @@ func (self *JavaGenerator) AddMultiPartCode() {
                 for (int n = 0; -1 != (n = input.read(buffer));) {
                     writer.write(buffer, 0, n);
                 }
-                writer.write("--");
-                writer.write(BOUNDARY);
-                writer.write("--\r\n\r\n");
             }
+            writer.write("--");
+            writer.write(BOUNDARY);
+            writer.write("--\r\n\r\n");
             return writer.toString();
         } catch (IOException e) {
             e.printStackTrace();
