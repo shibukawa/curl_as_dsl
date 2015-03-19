@@ -29567,7 +29567,7 @@ $packages["github.com/shibukawa/curl_as_dsl/java_client"] = (function() {
 		var $ptr, _key, _key$1, _r, boundary, self, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _key = $f._key; _key$1 = $f._key$1; _r = $f._r; boundary = $f.boundary; self = $f.self; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		self = this;
-		self.AdditionalDeclaration = "\n    static String BOUNDARY = \"----------ThIs_Is_tHe_bouNdaRY_$\";\n    static String encodeMultiPartFormData(String[][] fields, String[][] files) {\n        try {\n            StringWriter writer = new StringWriter();\n            char[] buffer = new char[1024];\n\n            for (int i = 0; i < fields.length; i++) {\n                String[] field = fields[i];\n                writer.write(\"--\");\n                writer.write(BOUNDARY);\n                writer.write(\"\\r\\n\");\n                writer.write(\"Content-Disposition: form-data; name=\\\"\");\n                writer.write(field[0]);\n                writer.write(\"\\\"\\r\\n\");\n                if (!field[2].equals(\"\")) {\n                    writer.write(\"Content-Type: \");\n                    writer.write(field[2]);\n                    writer.write(\"\\r\\n\");\n                }\n                writer.write(\"\\r\\n\");\n                writer.write(field[1]);\n            }\n            for (int i = 0; i < files.length; i++) {\n                String[] file = files[i];\n                writer.write(\"--\");\n                writer.write(BOUNDARY);\n                writer.write(\"\\r\\n\");\n                writer.write(\"Content-Disposition: form-data; name=\\\"\");\n                writer.write(file[0]);\n                writer.write(\"\\\"; filename=\\\"\");\n                writer.write(file[2]);\n                writer.write(\"\\\"\\r\\nContent-Type: \");\n                writer.write(file[3]);\n                writer.write(\"\\r\\n\\r\\n\");\n                FileReader input = new FileReader(file[1]);\n\n                for (int n = 0; -1 != (n = input.read(buffer));) {\n                    writer.write(buffer, 0, n);\n                }\n                writer.write(\"--\");\n                writer.write(BOUNDARY);\n                writer.write(\"--\\r\\n\\r\\n\");\n            }\n            return writer.toString();\n        } catch (IOException e) {\n            e.printStackTrace();\n            return \"\";\n        }\n    }\n";
+		self.AdditionalDeclaration = "\n    static String BOUNDARY = \"----------ThIs_Is_tHe_bouNdaRY_$\";\n    static String encodeMultiPartFormData(String[][] fields, String[][] files) {\n        try {\n            StringWriter writer = new StringWriter();\n            char[] buffer = new char[1024];\n\n            for (int i = 0; i < fields.length; i++) {\n                String[] field = fields[i];\n                writer.write(\"--\");\n                writer.write(BOUNDARY);\n                writer.write(\"\\r\\n\");\n                writer.write(\"Content-Disposition: form-data; name=\\\"\");\n                writer.write(field[0]);\n                writer.write(\"\\\"\\r\\n\");\n                if (!field[2].equals(\"\")) {\n                    writer.write(\"Content-Type: \");\n                    writer.write(field[2]);\n                    writer.write(\"\\r\\n\");\n                }\n                writer.write(\"\\r\\n\");\n                writer.write(field[1]);\n            }\n            for (int i = 0; i < files.length; i++) {\n                String[] file = files[i];\n                writer.write(\"--\");\n                writer.write(BOUNDARY);\n                writer.write(\"\\r\\n\");\n                writer.write(\"Content-Disposition: form-data; name=\\\"\");\n                writer.write(file[0]);\n                writer.write(\"\\\"; filename=\\\"\");\n                writer.write(file[2]);\n                writer.write(\"\\\"\\r\\nContent-Type: \");\n                writer.write(file[3]);\n                writer.write(\"\\r\\n\\r\\n\");\n                FileReader input = new FileReader(file[1]);\n\n                for (int n = 0; -1 != (n = input.read(buffer));) {\n                    writer.write(buffer, 0, n);\n                }\n            }\n            writer.write(\"--\");\n            writer.write(BOUNDARY);\n            writer.write(\"--\\r\\n\\r\\n\");\n            return writer.toString();\n        } catch (IOException e) {\n            e.printStackTrace();\n            return \"\";\n        }\n    }\n";
 		boundary = "----------ThIs_Is_tHe_bouNdaRY_$";
 		_r = fmt.Sprintf("multipart/form-data; boundary=%s", new sliceType$2([new $String(boundary)])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		$r = self.Options.InsertContentTypeHeader(_r); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -30510,7 +30510,7 @@ $packages["github.com/shibukawa/curl_as_dsl/nodejs_client"] = (function() {
 		var $ptr, _r, boundary, self, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; boundary = $f.boundary; self = $f.self; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		self = this;
-		self.AdditionalDeclaration = "\nBOUNDARY = '----------ThIs_Is_tHe_bouNdaRY_$';\n\nfunction encodeMultiPartFormData(fields, files) {\n    CRLF = \"\\r\\n\";\n    L = [];\n    for (var i = 0; i < fields.length; i++) {\n        var field = fields[i];\n        L.push('--' + BOUNDARY);\n        L.push('Content-Disposition: form-data; name=\"' + field.key + '\"');\n        if (field.contentType) {\n            L.push('Content-Type: ' + field.contentType);\n        }\n        L.push('');\n        L.push(field.value);\n    }\n    for (var i = 0; i < files.length; i++) {\n    \tvar file = files[i];\n        L.push('--' + BOUNDARY);\n        L.push('Content-Disposition: form-data; name=\"' + file.key + '\"; filename=\"' + file.filename + '\"');\n        L.push('Content-Type: ' + file.contentType);\n        L.push('');\n        L.push(file.content);\n        L.push('--' + BOUNDARY + '--');\n        L.push('');\n    }\n    return L.join(\"\\r\\n\");\n}\n";
+		self.AdditionalDeclaration = "\nBOUNDARY = '----------ThIs_Is_tHe_bouNdaRY_$';\n\nfunction encodeMultiPartFormData(fields, files) {\n    var L = [];\n    for (var i = 0; i < fields.length; i++) {\n        var field = fields[i];\n        L.push('--' + BOUNDARY);\n        L.push('Content-Disposition: form-data; name=\"' + field.key + '\"');\n        if (field.contentType) {\n            L.push('Content-Type: ' + field.contentType);\n        }\n        L.push('');\n        L.push(field.value);\n    }\n    for (var i = 0; i < files.length; i++) {\n    \tvar file = files[i];\n        L.push('--' + BOUNDARY);\n        L.push('Content-Disposition: form-data; name=\"' + file.key + '\"; filename=\"' + file.filename + '\"');\n        L.push('Content-Type: ' + file.contentType);\n        L.push('');\n        L.push(file.content);\n    }\n    L.push('--' + BOUNDARY + '--');\n    return L.join(\"\\r\\n\");\n}\n";
 		boundary = "----------ThIs_Is_tHe_bouNdaRY_$";
 		_r = fmt.Sprintf("multipart/form-data; boundary=%s", new sliceType$3([new $String(boundary)])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		$r = self.Options.InsertContentTypeHeader(_r); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -32050,7 +32050,7 @@ $packages["github.com/shibukawa/curl_as_dsl/php_client"] = (function() {
 		var $ptr, self, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; self = $f.self; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		self = this;
-		self.AdditionalDeclaration = "\n$BOUNDARY = \"---------------------\".substr(md5(rand(0,32000)), 0, 10);\n\nfunction encode_multipart_formdata($fields, $files, $boundary) {\n  $result = \"\";\n  $finfo = finfo_open(FILEINFO_MIME_TYPE);\n  foreach($fields as $field) {\n    $result .= \"--\" . $boundary . \"\\r\\n\";\n    $result .= \"Content-Disposition: form-data; name=\\\"\" . $field[\"key\"] . \"\\\"\\r\\n\";\n    if ($field[\"content_type\"] != '') {\n      $result .= \"Content-Type: \" . $field[\"content_type\"] . \"\\r\\n\";\n    }\n    $result .= \"\\r\\n\" . $field[\"value\"] . \"\\r\\n\";\n  }\n  foreach($files as $file) {\n    $result .= \"--\" . $boundary . \"\\r\\n\";\n    $result .= \"Content-Disposition: form-data; name=\\\"\" . $file[\"key\"] . \"\\\"; filename=\\\"\" . $file[\"filename\"] . \"\\\"\\r\\n\";\n    if ($file[\"content_type\"] != '') {\n      $result .= \"Content-Type: \" . $file[\"content_type\"] . \"\\r\\n\";\n    } else {\n      $result .= \"Content-Type: \" . finfo_file($finfo, $file[\"source_file\"]) . \"\\r\\n\";\n    }\n    $result .= \"\\r\\n\" . file_get_contents($file[\"source_file\"]) . \"\\r\\n\" . $boundary . \"--\\r\\n\";\n  }\n  return $result;\n}\n";
+		self.AdditionalDeclaration = "\n$BOUNDARY = \"---------------------\".substr(md5(rand(0,32000)), 0, 10);\n\nfunction encode_multipart_formdata($fields, $files, $boundary) {\n  $result = \"\";\n  $finfo = finfo_open(FILEINFO_MIME_TYPE);\n  foreach($fields as $field) {\n    $result .= \"--\" . $boundary . \"\\r\\n\";\n    $result .= \"Content-Disposition: form-data; name=\\\"\" . $field[\"key\"] . \"\\\"\\r\\n\";\n    if ($field[\"content_type\"] != '') {\n      $result .= \"Content-Type: \" . $field[\"content_type\"] . \"\\r\\n\";\n    }\n    $result .= \"\\r\\n\" . $field[\"value\"] . \"\\r\\n\";\n  }\n  foreach($files as $file) {\n    $result .= \"--\" . $boundary . \"\\r\\n\";\n    $result .= \"Content-Disposition: form-data; name=\\\"\" . $file[\"key\"] . \"\\\"; filename=\\\"\" . $file[\"filename\"] . \"\\\"\\r\\n\";\n    if ($file[\"content_type\"] != '') {\n      $result .= \"Content-Type: \" . $file[\"content_type\"] . \"\\r\\n\";\n    } else {\n      $result .= \"Content-Type: \" . finfo_file($finfo, $file[\"source_file\"]) . \"\\r\\n\";\n    }\n    $result .= \"\\r\\n\" . file_get_contents($file[\"source_file\"]) . \"\\r\\n\";\n  }\n  $result .= $boundary . \"--\\r\\n\";\n  return $result;\n}\n";
 		$r = self.Options.InsertContentTypeHeader("multipart/form-data; boundary={$BOUNDARY}"); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_AddMultiPartCode }; } $f.$ptr = $ptr; $f.self = self; $f.$s = $s; $f.$r = $r; return $f;
 	};
@@ -32752,7 +32752,7 @@ $packages["github.com/shibukawa/curl_as_dsl/python_client"] = (function() {
 		var $ptr, _r, boundary, self, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; boundary = $f.boundary; self = $f.self; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		self = this;
-		self.AdditionalDeclaration = "\nBOUNDARY = '----------ThIs_Is_tHe_bouNdaRY_$'\n\ndef encode_multipart_formdata(fields, files):\n    \"\"\"\n    http://code.activestate.com/recipes/146306-http-client-to-post-using-multipartform-data/\n    \"\"\"\n    CRLF = '\\r\\n'\n    L = []\n    for key, value, contenttype in fields:\n        L.append('--' + BOUNDARY)\n        L.append('Content-Disposition: form-data; name=\"%s\"' % key)\n        if contenttype:\n            L.append('Content-Type: %s' % contenttype)\n        L.append('')\n        L.append(value)\n    for key, sourcefile, filename, contenttype in files:\n        L.append('--' + BOUNDARY)\n        L.append('Content-Disposition: form-data; name=\"%s\"; filename=\"%s\"' % (key, filename))\n        L.append('Content-Type: %s' % contenttype)\n        L.append('')\n        L.append(open(sourcefile).read())\n        L.append('--' + BOUNDARY + '--')\n        L.append('')\n    return CRLF.join(L)\n";
+		self.AdditionalDeclaration = "\nBOUNDARY = '----------ThIs_Is_tHe_bouNdaRY_$'\n\ndef encode_multipart_formdata(fields, files):\n    L = []\n    for key, value, contenttype in fields:\n        L.append('--' + BOUNDARY)\n        L.append('Content-Disposition: form-data; name=\"%s\"' % key)\n        if contenttype:\n            L.append('Content-Type: %s' % contenttype)\n        L.append('')\n        L.append(value)\n    for key, sourcefile, filename, contenttype in files:\n        L.append('--' + BOUNDARY)\n        L.append('Content-Disposition: form-data; name=\"%s\"; filename=\"%s\"' % (key, filename))\n        L.append('Content-Type: %s' % contenttype)\n        L.append('')\n        L.append(open(sourcefile).read())\n        L.append('')\n    L.append('--' + BOUNDARY + '--')\n    return '\\r\\n'.join(L)\n";
 		boundary = "----------ThIs_Is_tHe_bouNdaRY_$";
 		_r = fmt.Sprintf("multipart/form-data; boundary=%s", new sliceType$1([new $String(boundary)])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		$r = self.Options.InsertContentTypeHeader(_r); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
@@ -33188,6 +33188,526 @@ $packages["github.com/shibukawa/curl_as_dsl/python_client"] = (function() {
 	PythonGenerator.methods = [{prop: "ConnectionClass", name: "ConnectionClass", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Host", name: "Host", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Proxy", name: "Proxy", pkg: "", typ: $funcType([], [$String], false)}, {prop: "HasHeader", name: "HasHeader", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "Header", name: "Header", pkg: "", typ: $funcType([], [$String], false)}, {prop: "PrepareHeader", name: "PrepareHeader", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Method", name: "Method", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Path", name: "Path", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$2.methods = [{prop: "AddMultiPartCode", name: "AddMultiPartCode", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForUrl", name: "SetDataForUrl", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForBody", name: "SetDataForBody", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForForm", name: "SetDataForForm", pkg: "", typ: $funcType([], [], false)}, {prop: "SetFormForBody", name: "SetFormForBody", pkg: "", typ: $funcType([], [], false)}];
 	PythonGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/python_client", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/python_client", typ: sliceType, tag: ""}]);
+	$init = $pkg.$init = function() {
+		$pkg.$init = function() {};
+		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		$r = bytes.$init(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = fmt.$init(); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = httpgen_common.$init(); /* */ $s = 3; case 3: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = log.$init(); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = url.$init(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = os.$init(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = strings.$init(); /* */ $s = 7; case 7: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		/* */ } return; } if ($f === undefined) { $f = { $blk: $init }; } $f.$s = $s; $f.$r = $r; return $f;
+	};
+	return $pkg;
+})();
+$packages["github.com/shibukawa/curl_as_dsl/vim_script_client"] = (function() {
+	var $pkg = {}, $init, bytes, fmt, httpgen_common, log, url, os, strings, VimScriptGenerator, ptrType, sliceType, sliceType$1, ptrType$1, ptrType$2, escapeDQ, NewVimScriptGenerator, ProcessCurlCommand, StringForData, FormString;
+	bytes = $packages["bytes"];
+	fmt = $packages["fmt"];
+	httpgen_common = $packages["github.com/shibukawa/curl_as_dsl/httpgen_common"];
+	log = $packages["log"];
+	url = $packages["net/url"];
+	os = $packages["os"];
+	strings = $packages["strings"];
+	VimScriptGenerator = $pkg.VimScriptGenerator = $newType(0, $kindStruct, "vim_script_client.VimScriptGenerator", "VimScriptGenerator", "github.com/shibukawa/curl_as_dsl/vim_script_client", function(Options_, HasBody_, Body_, PrepareBody_, FinalizeBodyBuffer_, AdditionalDeclaration_, specialHeaders_) {
+		this.$val = this;
+		if (arguments.length === 0) {
+			this.Options = ptrType.nil;
+			this.HasBody = false;
+			this.Body = "";
+			this.PrepareBody = "";
+			this.FinalizeBodyBuffer = new bytes.Buffer.ptr();
+			this.AdditionalDeclaration = "";
+			this.specialHeaders = sliceType.nil;
+			return;
+		}
+		this.Options = Options_;
+		this.HasBody = HasBody_;
+		this.Body = Body_;
+		this.PrepareBody = PrepareBody_;
+		this.FinalizeBodyBuffer = FinalizeBodyBuffer_;
+		this.AdditionalDeclaration = AdditionalDeclaration_;
+		this.specialHeaders = specialHeaders_;
+	});
+	ptrType = $ptrType(httpgen_common.CurlOptions);
+	sliceType = $sliceType($String);
+	sliceType$1 = $sliceType($emptyInterface);
+	ptrType$1 = $ptrType(httpgen_common.DataOptions);
+	ptrType$2 = $ptrType(VimScriptGenerator);
+	escapeDQ = function(src) {
+		var $ptr, src;
+		return strings.Replace(strings.Replace(src, "\"", "\\\"", -1), "\\", "\\\\", -1);
+	};
+	NewVimScriptGenerator = $pkg.NewVimScriptGenerator = function(options) {
+		var $ptr, options;
+		return new VimScriptGenerator.ptr(options, false, "", "", new bytes.Buffer.ptr(), "", sliceType.nil);
+	};
+	VimScriptGenerator.ptr.prototype.Url = function $blocking_Url() {
+		var $ptr, _r, self, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; self = $f.self; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		self = $clone(this, VimScriptGenerator);
+		_r = fmt.Sprintf("'%s'", new sliceType$1([new $String(self.Options.Url)])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		return _r;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_Url }; } $f.$ptr = $ptr; $f._r = _r; $f.self = self; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	VimScriptGenerator.prototype.Url = function() { return this.$val.Url(); };
+	VimScriptGenerator.ptr.prototype.HasHeader = function() {
+		var $ptr, self;
+		self = $clone(this, VimScriptGenerator);
+		return !((self.Options.Header.$length === 0)) || !((self.specialHeaders.$length === 0));
+	};
+	VimScriptGenerator.prototype.HasHeader = function() { return this.$val.HasHeader(); };
+	VimScriptGenerator.ptr.prototype.BodyContent = function $blocking_BodyContent() {
+		var $ptr, _r, self, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; self = $f.self; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		self = $clone(this, VimScriptGenerator);
+		if (self.Body === "") {
+			return ", ''";
+		}
+		_r = fmt.Sprintf(", %s", new sliceType$1([new $String(self.Body)])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		return _r;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_BodyContent }; } $f.$ptr = $ptr; $f._r = _r; $f.self = self; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	VimScriptGenerator.prototype.BodyContent = function() { return this.$val.BodyContent(); };
+	VimScriptGenerator.ptr.prototype.Header = function $blocking_Header() {
+		var $ptr, _r, self, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; self = $f.self; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		self = $clone(this, VimScriptGenerator);
+		if ((self.Options.Header.$length === 0) && (self.specialHeaders.$length === 0)) {
+			return "";
+		}
+		_r = fmt.Sprintf(", s:headers", new sliceType$1([])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		return _r;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_Header }; } $f.$ptr = $ptr; $f._r = _r; $f.self = self; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	VimScriptGenerator.prototype.Header = function() { return this.$val.Header(); };
+	VimScriptGenerator.ptr.prototype.PrepareHeader = function $blocking_PrepareHeader() {
+		var $ptr, _arg, _arg$1, _arg$2, _i, _i$1, _r, _r$1, _r$2, _r$3, _ref, _ref$1, buffer, first, header, header$1, self, x, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _ref = $f._ref; _ref$1 = $f._ref$1; buffer = $f.buffer; first = $f.first; header = $f.header; header$1 = $f.header$1; self = $f.self; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		self = $clone(this, VimScriptGenerator);
+		if ((self.Options.Header.$length === 0) && (self.specialHeaders.$length === 0)) {
+			return "";
+		}
+		buffer = $clone(new bytes.Buffer.ptr(), bytes.Buffer);
+		buffer.WriteString("let s:headers = {\n  ");
+		first = true;
+		_r = self.Options.GroupedHeaders(); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_ref = _r;
+		_i = 0;
+		/* while (true) { */ case 2:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 3; continue; }
+			header = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.HeaderGroup);
+			if (first) {
+				first = false;
+			} else {
+				buffer.WriteString(",\n  ");
+			}
+			_arg = buffer;
+			_r$1 = strings.TrimSpace(header.Key); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			_arg$1 = new $String(_r$1);
+			_r$2 = strings.TrimSpace((x = header.Values, (0 >= x.$length ? $throwRuntimeError("index out of range") : x.$array[x.$offset + 0]))); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			_arg$2 = new $String(_r$2);
+			_r$3 = fmt.Fprintf(_arg, "\\\"%s\": \"%s\"", new sliceType$1([_arg$1, _arg$2])); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+			_r$3;
+			_i++;
+		/* } */ $s = 2; continue; case 3:
+		_ref$1 = self.specialHeaders;
+		_i$1 = 0;
+		while (true) {
+			if (!(_i$1 < _ref$1.$length)) { break; }
+			header$1 = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? $throwRuntimeError("index out of range") : _ref$1.$array[_ref$1.$offset + _i$1]);
+			if (first) {
+				first = false;
+			} else {
+				buffer.WriteString(",\n  ");
+			}
+			buffer.WriteString(header$1);
+			_i$1++;
+		}
+		buffer.WriteString("\n  \\}\n");
+		return buffer.String();
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_PrepareHeader }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._ref = _ref; $f._ref$1 = _ref$1; $f.buffer = buffer; $f.first = first; $f.header = header; $f.header$1 = header$1; $f.self = self; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	VimScriptGenerator.prototype.PrepareHeader = function() { return this.$val.PrepareHeader(); };
+	VimScriptGenerator.ptr.prototype.FinalizeBody = function() {
+		var $ptr, self;
+		self = $clone(this, VimScriptGenerator);
+		if (self.FinalizeBodyBuffer.Len() > 0) {
+			return "\n" + self.FinalizeBodyBuffer.String();
+		}
+		return "";
+	};
+	VimScriptGenerator.prototype.FinalizeBody = function() { return this.$val.FinalizeBody(); };
+	VimScriptGenerator.ptr.prototype.Method = function $blocking_Method() {
+		var $ptr, _r, _r$1, method, self, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; method = $f.method; self = $f.self; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		self = $clone(this, VimScriptGenerator);
+		_r = self.Options.Method(); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r$1 = strings.ToLower(_r); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		method = _r$1;
+		/* */ if (!(method === "get") && !(method === "post")) { $s = 3; continue; }
+		/* */ $s = 4; continue;
+		/* if (!(method === "get") && !(method === "post")) { */ case 3:
+			$r = log.Fatal(new sliceType$1([new $String("VimScript only supports get, post")])); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		/* } */ case 4:
+		return method;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_Method }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f.method = method; $f.self = self; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	VimScriptGenerator.prototype.Method = function() { return this.$val.Method(); };
+	VimScriptGenerator.ptr.prototype.AddMultiPartCode = function $blocking_AddMultiPartCode() {
+		var $ptr, _r, boundary, self, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; boundary = $f.boundary; self = $f.self; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		self = this;
+		self.AdditionalDeclaration = "let s:BOUNDARY = '----------ThIs_Is_tHe_bouNdaRY_$'\n\nfunction! s:encode_multipart_formdata(fields, files)\n    let lines = []\n    for field in a:fields\n        call add(lines, '--'. s:BOUNDARY)\n        call add(lines, printf('Content-Disposition: form-data; name=\"%s\"', field.key))\n        if has_key(field, 'contenttype')\n            call add(lines, 'Content-Type: '. field.contenttype)\n        endif\n        call add(lines, '')\n        call add(lines, field.value)\n    endfor\n    for file in a:files\n        call add(lines, '--'. s:BOUNDARY)\n        call add(lines, printf('Content-Disposition: form-data; name=\"%s\"; filename=\"%s\"', file.key, file.filename))\n        call add(lines, 'Content-Type: '. file.contenttype)\n        call add(lines, '')\n        call add(lines, join(readfile(file.sourcefile), \"\\n\"))\n    endfor\n    call add(lines, '--'. s:BOUNDARY. '--')\n    return join(lines, \"\\r\\n\")\nendfunction\n";
+		boundary = "----------ThIs_Is_tHe_bouNdaRY_$";
+		_r = fmt.Sprintf("multipart/form-data; boundary=%s", new sliceType$1([new $String(boundary)])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		$r = self.Options.InsertContentTypeHeader(_r); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_AddMultiPartCode }; } $f.$ptr = $ptr; $f._r = _r; $f.boundary = boundary; $f.self = self; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	VimScriptGenerator.prototype.AddMultiPartCode = function() { return this.$val.AddMultiPartCode(); };
+	VimScriptGenerator.ptr.prototype.SetDataForBody = function $blocking_SetDataForBody() {
+		var $ptr, _i, _r, _r$1, _r$2, _ref, buffer, data, i, self, x, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _ref = $f._ref; buffer = $f.buffer; data = $f.data; i = $f.i; self = $f.self; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		self = this;
+		buffer = $clone(new bytes.Buffer.ptr(), bytes.Buffer);
+		/* */ if (self.Options.CanUseSimpleForm()) { $s = 1; continue; }
+		/* */ if (self.Options.ProcessedData.$length === 1) { $s = 2; continue; }
+		/* */ $s = 3; continue;
+		/* if (self.Options.CanUseSimpleForm()) { */ case 1:
+			$r = self.SetDataForForm(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+			self.FinalizeBodyBuffer.WriteString("unlet! s:body\n");
+			$s = 4; continue;
+		/* } else if (self.Options.ProcessedData.$length === 1) { */ case 2:
+			_r = StringForData(self, (x = self.Options.ProcessedData, (0 >= x.$length ? $throwRuntimeError("index out of range") : x.$array[x.$offset + 0]))); /* */ $s = 6; case 6: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			self.Body = _r;
+			self.PrepareBody = buffer.String();
+			$s = 4; continue;
+		/* } else { */ case 3:
+			_ref = self.Options.ProcessedData;
+			_i = 0;
+			/* while (true) { */ case 7:
+				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 8; continue; }
+				i = _i;
+				data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+				if (i === 0) {
+					buffer.WriteString("let s:body = join([\n  \\");
+				} else {
+					buffer.WriteString(",\n  \\");
+				}
+				_r$1 = StringForData(self, data); /* */ $s = 9; case 9: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+				_r$2 = buffer.WriteString(_r$1); /* */ $s = 10; case 10: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+				_r$2;
+				_i++;
+			/* } */ $s = 7; continue; case 8:
+			buffer.WriteString("\n  \\], \"&\")\n");
+			self.Body = "s:body";
+			self.FinalizeBodyBuffer.WriteString("unlet! s:body\n");
+			self.PrepareBody = buffer.String();
+		/* } */ case 4:
+		self.HasBody = true;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_SetDataForBody }; } $f.$ptr = $ptr; $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._ref = _ref; $f.buffer = buffer; $f.data = data; $f.i = i; $f.self = self; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	VimScriptGenerator.prototype.SetDataForBody = function() { return this.$val.SetDataForBody(); };
+	VimScriptGenerator.ptr.prototype.SetDataForForm = function $blocking_SetDataForForm() {
+		var $ptr, _entry, _entry$1, _entry$2, _i, _i$1, _i$2, _key, _keys, _keys$1, _r, _ref, _ref$1, _ref$2, _tuple, buffer, count, data, entries, key, key$1, self, singleData, values, values$1, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _entry = $f._entry; _entry$1 = $f._entry$1; _entry$2 = $f._entry$2; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _key = $f._key; _keys = $f._keys; _keys$1 = $f._keys$1; _r = $f._r; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; _tuple = $f._tuple; buffer = $f.buffer; count = $f.count; data = $f.data; entries = $f.entries; key = $f.key; key$1 = $f.key$1; self = $f.self; singleData = $f.singleData; values = $f.values; values$1 = $f.values$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		self = this;
+		entries = new $Map();
+		_ref = self.Options.ProcessedData;
+		_i = 0;
+		while (true) {
+			if (!(_i < _ref.$length)) { break; }
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			_tuple = url.ParseQuery(data.Value); singleData = _tuple[0];
+			_ref$1 = singleData;
+			_i$1 = 0;
+			_keys = $keys(_ref$1);
+			while (true) {
+				if (!(_i$1 < _keys.length)) { break; }
+				_entry = _ref$1[_keys[_i$1]];
+				if (_entry === undefined) {
+					_i$1++;
+					continue;
+				}
+				key = _entry.k;
+				values = _entry.v;
+				_key = key; (entries || $throwRuntimeError("assignment to entry in nil map"))[_key] = { k: _key, v: $append((_entry$1 = entries[key], _entry$1 !== undefined ? _entry$1.v : sliceType.nil), (0 >= values.$length ? $throwRuntimeError("index out of range") : values.$array[values.$offset + 0])) };
+				_i$1++;
+			}
+			_i++;
+		}
+		buffer = $clone(new bytes.Buffer.ptr(), bytes.Buffer);
+		count = 1;
+		_ref$2 = entries;
+		_i$2 = 0;
+		_keys$1 = $keys(_ref$2);
+		/* while (true) { */ case 1:
+			/* if (!(_i$2 < _keys$1.length)) { break; } */ if(!(_i$2 < _keys$1.length)) { $s = 2; continue; }
+			_entry$2 = _ref$2[_keys$1[_i$2]];
+			if (_entry$2 === undefined) {
+				_i$2++;
+				/* continue; */ $s = 1; continue;
+			}
+			key$1 = _entry$2.k;
+			values$1 = _entry$2.v;
+			if (count === 1) {
+				buffer.WriteString("let s:body = {");
+			} else {
+				buffer.WriteString(", ");
+			}
+			_r = fmt.Fprintf(buffer, "\"%s\": \"%s\"", new sliceType$1([new $String(key$1), new $String((0 >= values$1.$length ? $throwRuntimeError("index out of range") : values$1.$array[values$1.$offset + 0]))])); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			_r;
+			count = count + (1) >> 0;
+			_i$2++;
+		/* } */ $s = 1; continue; case 2:
+		buffer.WriteString("}\n");
+		self.PrepareBody = buffer.String();
+		self.HasBody = true;
+		self.Body = "s:body";
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_SetDataForForm }; } $f.$ptr = $ptr; $f._entry = _entry; $f._entry$1 = _entry$1; $f._entry$2 = _entry$2; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._key = _key; $f._keys = _keys; $f._keys$1 = _keys$1; $f._r = _r; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f._tuple = _tuple; $f.buffer = buffer; $f.count = count; $f.data = data; $f.entries = entries; $f.key = key; $f.key$1 = key$1; $f.self = self; $f.singleData = singleData; $f.values = values; $f.values$1 = values$1; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	VimScriptGenerator.prototype.SetDataForForm = function() { return this.$val.SetDataForForm(); };
+	VimScriptGenerator.ptr.prototype.SetFormForBody = function $blocking_SetFormForBody() {
+		var $ptr, _i, _i$1, _i$2, _r, _r$1, _ref, _ref$1, _ref$2, buffer, data, fields, files, self, value, value$1, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _r = $f._r; _r$1 = $f._r$1; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; buffer = $f.buffer; data = $f.data; fields = $f.fields; files = $f.files; self = $f.self; value = $f.value; value$1 = $f.value$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		self = this;
+		$r = self.AddMultiPartCode(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		fields = sliceType.nil;
+		files = sliceType.nil;
+		_ref = self.Options.ProcessedData;
+		_i = 0;
+		/* while (true) { */ case 2:
+			/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 3; continue; }
+			data = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), httpgen_common.DataOption);
+			/* */ if (data.SendAsFormFile()) { $s = 4; continue; }
+			/* */ $s = 5; continue;
+			/* if (data.SendAsFormFile()) { */ case 4:
+				_r = FormString(self, data); /* */ $s = 7; case 7: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+				files = $append(files, _r);
+				$s = 6; continue;
+			/* } else { */ case 5:
+				_r$1 = FormString(self, data); /* */ $s = 8; case 8: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+				fields = $append(fields, _r$1);
+			/* } */ case 6:
+			_i++;
+		/* } */ $s = 2; continue; case 3:
+		buffer = $clone(new bytes.Buffer.ptr(), bytes.Buffer);
+		if (fields.$length > 0) {
+			buffer.WriteString("\nlet s:fields = [\n");
+			_ref$1 = fields;
+			_i$1 = 0;
+			while (true) {
+				if (!(_i$1 < _ref$1.$length)) { break; }
+				value = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? $throwRuntimeError("index out of range") : _ref$1.$array[_ref$1.$offset + _i$1]);
+				buffer.WriteString(value);
+				_i$1++;
+			}
+			buffer.WriteString("  \\]\n");
+			self.FinalizeBodyBuffer.WriteString("unlet! s:fields\n");
+		}
+		if (files.$length > 0) {
+			if (fields.$length > 0) {
+				self.Body = "s:encode_multipart_formdata(s:fields, s:files)";
+			} else {
+				self.Body = "s:encode_multipart_formdata([], s:files)";
+			}
+			buffer.WriteString("\nlet s:files = [\n");
+			_ref$2 = files;
+			_i$2 = 0;
+			while (true) {
+				if (!(_i$2 < _ref$2.$length)) { break; }
+				value$1 = ((_i$2 < 0 || _i$2 >= _ref$2.$length) ? $throwRuntimeError("index out of range") : _ref$2.$array[_ref$2.$offset + _i$2]);
+				buffer.WriteString(value$1);
+				_i$2++;
+			}
+			buffer.WriteString("  \\]\n");
+			self.FinalizeBodyBuffer.WriteString("unlet! s:files\n");
+		} else {
+			self.Body = "s:encode_multipart_formdata(s:fields, [])";
+		}
+		self.PrepareBody = buffer.String();
+		self.HasBody = true;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_SetFormForBody }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.data = data; $f.fields = fields; $f.files = files; $f.self = self; $f.value = value; $f.value$1 = value$1; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	VimScriptGenerator.prototype.SetFormForBody = function() { return this.$val.SetFormForBody(); };
+	ProcessCurlCommand = $pkg.ProcessCurlCommand = function $blocking_ProcessCurlCommand(options) {
+		var $ptr, _r, generator, options, x, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; generator = $f.generator; options = $f.options; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		generator = NewVimScriptGenerator(options);
+		/* */ if ((options.$ptr_ProcessedData || (options.$ptr_ProcessedData = new ptrType$1(function() { return this.$target.ProcessedData; }, function($v) { this.$target.ProcessedData = $v; }, options))).HasData()) { $s = 1; continue; }
+		/* */ if ((options.$ptr_ProcessedData || (options.$ptr_ProcessedData = new ptrType$1(function() { return this.$target.ProcessedData; }, function($v) { this.$target.ProcessedData = $v; }, options))).HasForm()) { $s = 2; continue; }
+		/* */ $s = 3; continue;
+		/* if ((options.$ptr_ProcessedData || (options.$ptr_ProcessedData = new ptrType$1(function() { return this.$target.ProcessedData; }, function($v) { this.$target.ProcessedData = $v; }, options))).HasData()) { */ case 1:
+			$r = generator.Options.InsertContentTypeHeader("application/x-www-form-urlencoded"); /* */ $s = 4; case 4: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+			$r = generator.SetDataForBody(); /* */ $s = 5; case 5: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+			$s = 3; continue;
+		/* } else if ((options.$ptr_ProcessedData || (options.$ptr_ProcessedData = new ptrType$1(function() { return this.$target.ProcessedData; }, function($v) { this.$target.ProcessedData = $v; }, options))).HasForm()) { */ case 2:
+			$r = generator.SetFormForBody(); /* */ $s = 6; case 6: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		/* } */ case 3:
+		/* */ if (!(generator.Options.User === "")) { $s = 7; continue; }
+		/* */ $s = 8; continue;
+		/* if (!(generator.Options.User === "")) { */ case 7:
+			_r = fmt.Sprintf("\\'Authorization': 'Basic '. webapi#base64#b64encode('%s')", new sliceType$1([new $String(generator.Options.User)])); /* */ $s = 9; case 9: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			generator.specialHeaders = $append(generator.specialHeaders, _r);
+		/* } */ case 8:
+		return ["full", (x = generator, new x.constructor.elem(x))];
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_ProcessCurlCommand }; } $f.$ptr = $ptr; $f._r = _r; $f.generator = generator; $f.options = options; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	StringForData = $pkg.StringForData = function $blocking_StringForData(generator, data) {
+		var $ptr, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _ref, data, generator, result, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _ref = $f._ref; data = $f.data; generator = $f.generator; result = $f.result; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		result = "";
+		_ref = data.Type;
+		/* */ if (_ref === 0) { $s = 1; continue; }
+		/* */ if (_ref === 1) { $s = 2; continue; }
+		/* */ if (_ref === 2) { $s = 3; continue; }
+		/* */ $s = 4; continue;
+		/* if (_ref === 0) { */ case 1:
+			/* */ if (strings.HasPrefix(data.Value, "@")) { $s = 6; continue; }
+			/* */ $s = 7; continue;
+			/* if (strings.HasPrefix(data.Value, "@")) { */ case 6:
+				_r = fmt.Sprintf("join(readfile('%s'), '')", new sliceType$1([new $String(data.Value.substring(1))])); /* */ $s = 9; case 9: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+				result = _r;
+				$s = 8; continue;
+			/* } else { */ case 7:
+				_r$1 = fmt.Sprintf("\"%s\"", new sliceType$1([new $String(escapeDQ(strings.Replace(data.Value, "\n", "", -1)))])); /* */ $s = 10; case 10: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+				result = _r$1;
+			/* } */ case 8:
+			$s = 5; continue;
+		/* } else if (_ref === 1) { */ case 2:
+			/* */ if (strings.HasPrefix(data.Value, "@")) { $s = 11; continue; }
+			/* */ $s = 12; continue;
+			/* if (strings.HasPrefix(data.Value, "@")) { */ case 11:
+				_r$2 = fmt.Sprintf("join(readfile('%s'), \"\\n\")", new sliceType$1([new $String(data.Value.substring(1))])); /* */ $s = 14; case 14: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+				result = _r$2;
+				$s = 13; continue;
+			/* } else { */ case 12:
+				_r$3 = fmt.Sprintf("\"%s\"", new sliceType$1([new $String(escapeDQ(data.Value))])); /* */ $s = 15; case 15: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+				result = _r$3;
+			/* } */ case 13:
+			$s = 5; continue;
+		/* } else if (_ref === 2) { */ case 3:
+			/* */ if (strings.HasPrefix(data.Value, "@")) { $s = 16; continue; }
+			/* */ $s = 17; continue;
+			/* if (strings.HasPrefix(data.Value, "@")) { */ case 16:
+				_r$4 = fmt.Sprintf("webapi#http#encodeURIComponent(join(readfile('%s'), \"\\n\"))", new sliceType$1([new $String(data.Value.substring(1))])); /* */ $s = 19; case 19: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+				result = _r$4;
+				$s = 18; continue;
+			/* } else { */ case 17:
+				_r$5 = fmt.Sprintf("webapi#http#encodeURIComponent(\"%s\")", new sliceType$1([new $String(escapeDQ(data.Value))])); /* */ $s = 20; case 20: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+				result = _r$5;
+			/* } */ case 18:
+			$s = 5; continue;
+		/* } else { */ case 4:
+			_r$6 = fmt.Sprintf("unknown type: %d", new sliceType$1([new httpgen_common.DataType(data.Type)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			$panic(new $String(_r$6));
+		/* } */ case 5:
+		return result;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_StringForData }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._ref = _ref; $f.data = data; $f.generator = generator; $f.result = result; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	FormString = $pkg.FormString = function $blocking_FormString(generator, data) {
+		var $ptr, _i, _i$1, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _ref, _ref$1, _ref$2, buffer, buffer$1, contentType, contentType$1, data, field, field$1, fragment, fragment$1, fragments, fragments$1, generator, result, sentFileName, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; buffer = $f.buffer; buffer$1 = $f.buffer$1; contentType = $f.contentType; contentType$1 = $f.contentType$1; data = $f.data; field = $f.field; field$1 = $f.field$1; fragment = $f.fragment; fragment$1 = $f.fragment$1; fragments = $f.fragments; fragments$1 = $f.fragments$1; generator = $f.generator; result = $f.result; sentFileName = $f.sentFileName; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		result = "";
+		_ref = data.Type;
+		/* */ if (_ref === 3) { $s = 1; continue; }
+		/* */ if (_ref === 4) { $s = 2; continue; }
+		/* */ $s = 3; continue;
+		/* if (_ref === 3) { */ case 1:
+			field = strings.SplitN(data.Value, "=", 2);
+			/* */ if (!((field.$length === 2))) { $s = 4; continue; }
+			/* */ $s = 5; continue;
+			/* if (!((field.$length === 2))) { */ case 4:
+				_r = fmt.Fprintln(os.Stderr, new sliceType$1([new $String("Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")])); /* */ $s = 6; case 6: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+				_r;
+				os.Exit(1);
+			/* } */ case 5:
+			/* */ if (strings.HasPrefix((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]), "@")) { $s = 7; continue; }
+			/* */ if (strings.HasPrefix((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]), "<")) { $s = 8; continue; }
+			/* */ $s = 9; continue;
+			/* if (strings.HasPrefix((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]), "@")) { */ case 7:
+				buffer = $clone(new bytes.Buffer.ptr(), bytes.Buffer);
+				fragments = strings.Split((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]).substring(1), ";");
+				_r$1 = fmt.Fprintf(buffer, "  \\{'key': '%s', 'sourcefile': '%s', ", new sliceType$1([new $String((0 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 0])), new $String((0 >= fragments.$length ? $throwRuntimeError("index out of range") : fragments.$array[fragments.$offset + 0]))])); /* */ $s = 11; case 11: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+				_r$1;
+				contentType = "";
+				sentFileName = (0 >= fragments.$length ? $throwRuntimeError("index out of range") : fragments.$array[fragments.$offset + 0]);
+				_ref$1 = $subslice(fragments, 1);
+				_i = 0;
+				while (true) {
+					if (!(_i < _ref$1.$length)) { break; }
+					fragment = ((_i < 0 || _i >= _ref$1.$length) ? $throwRuntimeError("index out of range") : _ref$1.$array[_ref$1.$offset + _i]);
+					if (strings.HasPrefix(fragment, "filename=")) {
+						sentFileName = fragment.substring(9);
+					} else if (strings.HasPrefix(fragment, "type=")) {
+						contentType = fragment.substring(5);
+					}
+					_i++;
+				}
+				_r$2 = fmt.Fprintf(buffer, "'filename': '%s', ", new sliceType$1([new $String(sentFileName)])); /* */ $s = 12; case 12: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+				_r$2;
+				/* */ if (!(contentType === "")) { $s = 13; continue; }
+				/* */ $s = 14; continue;
+				/* if (!(contentType === "")) { */ case 13:
+					_r$3 = fmt.Fprintf(buffer, "'contenttype': '%s'", new sliceType$1([new $String(contentType)])); /* */ $s = 16; case 16: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+					_r$3;
+					$s = 15; continue;
+				/* } else { */ case 14:
+					buffer.WriteString("'contenttype': 'application/octet-stream'");
+				/* } */ case 15:
+				buffer.WriteString("},\n");
+				result = buffer.String();
+				$s = 10; continue;
+			/* } else if (strings.HasPrefix((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]), "<")) { */ case 8:
+				buffer$1 = $clone(new bytes.Buffer.ptr(), bytes.Buffer);
+				fragments$1 = strings.Split((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]).substring(1), ";");
+				_r$4 = fmt.Fprintf(buffer$1, "  \\{'key':'%s', 'value': join(readfile('%s'), \"\\n\")", new sliceType$1([new $String((0 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 0])), new $String((0 >= fragments$1.$length ? $throwRuntimeError("index out of range") : fragments$1.$array[fragments$1.$offset + 0]))])); /* */ $s = 17; case 17: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+				_r$4;
+				contentType$1 = "";
+				_ref$2 = $subslice(fragments$1, 1);
+				_i$1 = 0;
+				while (true) {
+					if (!(_i$1 < _ref$2.$length)) { break; }
+					fragment$1 = ((_i$1 < 0 || _i$1 >= _ref$2.$length) ? $throwRuntimeError("index out of range") : _ref$2.$array[_ref$2.$offset + _i$1]);
+					if (strings.HasPrefix(fragment$1, "type=")) {
+						contentType$1 = fragment$1.substring(5);
+					}
+					_i$1++;
+				}
+				/* */ if (!(contentType$1 === "")) { $s = 18; continue; }
+				/* */ $s = 19; continue;
+				/* if (!(contentType$1 === "")) { */ case 18:
+					_r$5 = fmt.Fprintf(buffer$1, ", 'contenttype': '%s'", new sliceType$1([new $String(contentType$1)])); /* */ $s = 20; case 20: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+					_r$5;
+				/* } */ case 19:
+				buffer$1.WriteString("},\n");
+				result = buffer$1.String();
+				$s = 10; continue;
+			/* } else { */ case 9:
+				_r$6 = fmt.Sprintf("  \\{'key': '%s', 'value': \"%s\"},\n", new sliceType$1([new $String((0 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 0])), new $String(escapeDQ((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1])))])); /* */ $s = 21; case 21: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+				result = _r$6;
+			/* } */ case 10:
+			$s = 3; continue;
+		/* } else if (_ref === 4) { */ case 2:
+			field$1 = strings.SplitN(data.Value, "=", 2);
+			/* */ if (!((field$1.$length === 2))) { $s = 22; continue; }
+			/* */ $s = 23; continue;
+			/* if (!((field$1.$length === 2))) { */ case 22:
+				_r$7 = fmt.Fprintln(os.Stderr, new sliceType$1([new $String("Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")])); /* */ $s = 24; case 24: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+				_r$7;
+				os.Exit(1);
+			/* } */ case 23:
+			_r$8 = fmt.Sprintf("  \\{'key': '%s', 'value': \"%s\"},\n", new sliceType$1([new $String((0 >= field$1.$length ? $throwRuntimeError("index out of range") : field$1.$array[field$1.$offset + 0])), new $String(escapeDQ((1 >= field$1.$length ? $throwRuntimeError("index out of range") : field$1.$array[field$1.$offset + 1])))])); /* */ $s = 25; case 25: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+			result = _r$8;
+		/* } */ case 3:
+		return result;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_FormString }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.buffer$1 = buffer$1; $f.contentType = contentType; $f.contentType$1 = contentType$1; $f.data = data; $f.field = field; $f.field$1 = field$1; $f.fragment = fragment; $f.fragment$1 = fragment$1; $f.fragments = fragments; $f.fragments$1 = fragments$1; $f.generator = generator; $f.result = result; $f.sentFileName = sentFileName; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	VimScriptGenerator.methods = [{prop: "Url", name: "Url", pkg: "", typ: $funcType([], [$String], false)}, {prop: "HasHeader", name: "HasHeader", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "BodyContent", name: "BodyContent", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Header", name: "Header", pkg: "", typ: $funcType([], [$String], false)}, {prop: "PrepareHeader", name: "PrepareHeader", pkg: "", typ: $funcType([], [$String], false)}, {prop: "FinalizeBody", name: "FinalizeBody", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Method", name: "Method", pkg: "", typ: $funcType([], [$String], false)}];
+	ptrType$2.methods = [{prop: "AddMultiPartCode", name: "AddMultiPartCode", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForBody", name: "SetDataForBody", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForForm", name: "SetDataForForm", pkg: "", typ: $funcType([], [], false)}, {prop: "SetFormForBody", name: "SetFormForBody", pkg: "", typ: $funcType([], [], false)}];
+	VimScriptGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "Body", name: "Body", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "FinalizeBodyBuffer", name: "FinalizeBodyBuffer", pkg: "", typ: bytes.Buffer, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/vim_script_client", typ: sliceType, tag: ""}]);
 	$init = $pkg.$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -52907,7 +53427,7 @@ $packages["text/template"] = (function() {
 	return $pkg;
 })();
 $packages["github.com/shibukawa/curl_as_dsl/httpgen_generator"] = (function() {
-	var $pkg = {}, $init, bytes, gzip, fmt, go_client, httpgen_common, java_client, nodejs_client, objc_client, php_client, python_client, xhr_client, format, io, log, strings, template, sliceType, sliceType$1, _bindata, _map, _key, _map$24, _key$24, bindata_read, templates_go_full_tpl, templates_go_get_with_data_url_tpl, templates_go_post_form_tpl, templates_go_post_single_file_tpl, templates_go_post_text_tpl, templates_go_post_with_data_url_tpl, templates_go_simple_get_tpl, templates_go_simple_method_tpl, templates_go_simple_post_tpl, templates_java_full_tpl, templates_nodejs_external_file_tpl, templates_nodejs_external_files_tpl, templates_nodejs_full_tpl, templates_nodejs_simple_get_tpl, templates_objc_nsurlconnection_full_tpl, templates_objc_nsurlsession_full_tpl, templates_php_full_tpl, templates_python_full_tpl, templates_xhr_external_file_tpl, templates_xhr_external_files_tpl, templates_xhr_simple_tpl, Asset, render, GenerateCode;
+	var $pkg = {}, $init, bytes, gzip, fmt, go_client, httpgen_common, java_client, nodejs_client, objc_client, php_client, python_client, vim_script_client, xhr_client, format, io, log, strings, template, sliceType, sliceType$1, _bindata, _map, _key, _map$25, _key$25, bindata_read, templates_go_full_tpl, templates_go_get_with_data_url_tpl, templates_go_post_form_tpl, templates_go_post_single_file_tpl, templates_go_post_text_tpl, templates_go_post_with_data_url_tpl, templates_go_simple_get_tpl, templates_go_simple_method_tpl, templates_go_simple_post_tpl, templates_java_full_tpl, templates_nodejs_external_file_tpl, templates_nodejs_external_files_tpl, templates_nodejs_full_tpl, templates_nodejs_simple_get_tpl, templates_objc_nsurlconnection_full_tpl, templates_objc_nsurlsession_full_tpl, templates_php_full_tpl, templates_python_full_tpl, templates_vim_script_full_tpl, templates_xhr_external_file_tpl, templates_xhr_external_files_tpl, templates_xhr_simple_tpl, Asset, render, GenerateCode;
 	bytes = $packages["bytes"];
 	gzip = $packages["compress/gzip"];
 	fmt = $packages["fmt"];
@@ -52918,6 +53438,7 @@ $packages["github.com/shibukawa/curl_as_dsl/httpgen_generator"] = (function() {
 	objc_client = $packages["github.com/shibukawa/curl_as_dsl/objc_client"];
 	php_client = $packages["github.com/shibukawa/curl_as_dsl/php_client"];
 	python_client = $packages["github.com/shibukawa/curl_as_dsl/python_client"];
+	vim_script_client = $packages["github.com/shibukawa/curl_as_dsl/vim_script_client"];
 	xhr_client = $packages["github.com/shibukawa/curl_as_dsl/xhr_client"];
 	format = $packages["go/format"];
 	io = $packages["io"];
@@ -53077,6 +53598,13 @@ $packages["github.com/shibukawa/curl_as_dsl/httpgen_generator"] = (function() {
 		return _r;
 		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_templates_python_full_tpl }; } $f.$ptr = $ptr; $f._r = _r; $f.$s = $s; $f.$r = $r; return $f;
 	};
+	templates_vim_script_full_tpl = function $blocking_templates_vim_script_full_tpl() {
+		var $ptr, _r, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = bindata_read(new sliceType([31, 139, 8, 0, 0, 9, 110, 136, 0, 255, 84, 143, 193, 142, 194, 32, 20, 69, 247, 253, 10, 38, 221, 204, 108, 250, 1, 147, 204, 98, 212, 24, 55, 38, 110, 252, 128, 103, 185, 10, 9, 66, 3, 175, 49, 74, 248, 119, 65, 170, 214, 229, 59, 247, 230, 192, 141, 81, 116, 255, 82, 106, 214, 206, 146, 89, 161, 55, 228, 169, 28, 34, 165, 146, 237, 60, 6, 242, 88, 56, 121, 253, 36, 27, 144, 132, 207, 204, 128, 69, 248, 245, 8, 226, 79, 92, 112, 160, 65, 183, 138, 121, 104, 75, 119, 11, 86, 78, 230, 210, 119, 185, 246, 222, 76, 142, 162, 91, 58, 203, 176, 60, 145, 151, 238, 167, 65, 175, 92, 53, 118, 129, 137, 199, 48, 39, 103, 132, 64, 39, 204, 81, 95, 69, 205, 104, 243, 87, 190, 42, 140, 81, 31, 179, 148, 66, 245, 166, 244, 78, 213, 131, 228, 6, 172, 172, 111, 175, 117, 158, 174, 111, 207, 145, 247, 0, 0, 0, 255, 255, 94, 141, 68, 219, 19, 1, 0, 0]), "templates/vim_script_full.tpl"); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		return _r;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_templates_vim_script_full_tpl }; } $f.$ptr = $ptr; $f._r = _r; $f.$s = $s; $f.$r = $r; return $f;
+	};
 	templates_xhr_external_file_tpl = function $blocking_templates_xhr_external_file_tpl() {
 		var $ptr, _r, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -53147,8 +53675,8 @@ $packages["github.com/shibukawa/curl_as_dsl/httpgen_generator"] = (function() {
 		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_render }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.buffer = buffer; $f.err = err; $f.err$1 = err$1; $f.gosrc = gosrc; $f.key = key; $f.lang = lang; $f.options = options; $f.src = src; $f.tmpTpl = tmpTpl; $f.tpl = tpl; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	GenerateCode = $pkg.GenerateCode = function $blocking_GenerateCode(target, curlOptions) {
-		var $ptr, _entry, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _ref, _tuple, _tuple$1, _tuple$2, _tuple$3, _tuple$4, _tuple$5, _tuple$6, _tuple$7, _tuple$8, curlOptions, lang, langName, ok, option, sourceCode, target, templateName, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _entry = $f._entry; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _ref = $f._ref; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; _tuple$4 = $f._tuple$4; _tuple$5 = $f._tuple$5; _tuple$6 = $f._tuple$6; _tuple$7 = $f._tuple$7; _tuple$8 = $f._tuple$8; curlOptions = $f.curlOptions; lang = $f.lang; langName = $f.langName; ok = $f.ok; option = $f.option; sourceCode = $f.sourceCode; target = $f.target; templateName = $f.templateName; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _entry, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _tuple, _tuple$1, _tuple$2, _tuple$3, _tuple$4, _tuple$5, _tuple$6, _tuple$7, _tuple$8, _tuple$9, curlOptions, lang, langName, ok, option, sourceCode, target, templateName, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _entry = $f._entry; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; _tuple$3 = $f._tuple$3; _tuple$4 = $f._tuple$4; _tuple$5 = $f._tuple$5; _tuple$6 = $f._tuple$6; _tuple$7 = $f._tuple$7; _tuple$8 = $f._tuple$8; _tuple$9 = $f._tuple$9; curlOptions = $f.curlOptions; lang = $f.lang; langName = $f.langName; ok = $f.ok; option = $f.option; sourceCode = $f.sourceCode; target = $f.target; templateName = $f.templateName; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		langName = "";
 		templateName = "";
 		option = $ifaceNil;
@@ -53165,53 +53693,59 @@ $packages["github.com/shibukawa/curl_as_dsl/httpgen_generator"] = (function() {
 		/* */ if (_ref === "objc_nsurlconnection") { $s = 6; continue; }
 		/* */ if (_ref === "xhr") { $s = 7; continue; }
 		/* */ if (_ref === "php") { $s = 8; continue; }
-		/* */ $s = 9; continue;
+		/* */ if (_ref === "vim") { $s = 9; continue; }
+		/* */ $s = 10; continue;
 		/* if (_ref === "go") { */ case 1:
 			langName = "go";
-			_r = go_client.ProcessCurlCommand(curlOptions); /* */ $s = 11; case 11: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			_r = go_client.ProcessCurlCommand(curlOptions); /* */ $s = 12; case 12: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 			_tuple$1 = _r; templateName = _tuple$1[0]; option = _tuple$1[1];
-			$s = 10; continue;
+			$s = 11; continue;
 		/* } else if (_ref === "python") { */ case 2:
 			langName = "python";
-			_r$1 = python_client.ProcessCurlCommand(curlOptions); /* */ $s = 12; case 12: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			_r$1 = python_client.ProcessCurlCommand(curlOptions); /* */ $s = 13; case 13: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
 			_tuple$2 = _r$1; templateName = _tuple$2[0]; option = _tuple$2[1];
-			$s = 10; continue;
+			$s = 11; continue;
 		/* } else if (_ref === "node") { */ case 3:
 			langName = "nodejs";
-			_r$2 = nodejs_client.ProcessCurlCommand(curlOptions); /* */ $s = 13; case 13: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+			_r$2 = nodejs_client.ProcessCurlCommand(curlOptions); /* */ $s = 14; case 14: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
 			_tuple$3 = _r$2; templateName = _tuple$3[0]; option = _tuple$3[1];
-			$s = 10; continue;
+			$s = 11; continue;
 		/* } else if (_ref === "java") { */ case 4:
 			langName = "java";
-			_r$3 = java_client.ProcessCurlCommand(curlOptions); /* */ $s = 14; case 14: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+			_r$3 = java_client.ProcessCurlCommand(curlOptions); /* */ $s = 15; case 15: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 			_tuple$4 = _r$3; templateName = _tuple$4[0]; option = _tuple$4[1];
-			$s = 10; continue;
+			$s = 11; continue;
 		/* } else if (_ref === "objc_nsurlsession") { */ case 5:
 			langName = "objc_nsurlsession";
-			_r$4 = objc_client.ProcessCurlCommand(curlOptions); /* */ $s = 15; case 15: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+			_r$4 = objc_client.ProcessCurlCommand(curlOptions); /* */ $s = 16; case 16: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 			_tuple$5 = _r$4; templateName = _tuple$5[0]; option = _tuple$5[1];
-			$s = 10; continue;
+			$s = 11; continue;
 		/* } else if (_ref === "objc_nsurlconnection") { */ case 6:
 			langName = "objc_nsurlconnection";
-			_r$5 = objc_client.ProcessCurlCommand(curlOptions); /* */ $s = 16; case 16: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_r$5 = objc_client.ProcessCurlCommand(curlOptions); /* */ $s = 17; case 17: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 			_tuple$6 = _r$5; templateName = _tuple$6[0]; option = _tuple$6[1];
-			$s = 10; continue;
+			$s = 11; continue;
 		/* } else if (_ref === "xhr") { */ case 7:
 			langName = "xhr";
-			_r$6 = xhr_client.ProcessCurlCommand(curlOptions); /* */ $s = 17; case 17: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6 = xhr_client.ProcessCurlCommand(curlOptions); /* */ $s = 18; case 18: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 			_tuple$7 = _r$6; templateName = _tuple$7[0]; option = _tuple$7[1];
-			$s = 10; continue;
+			$s = 11; continue;
 		/* } else if (_ref === "php") { */ case 8:
 			langName = "php";
-			_r$7 = php_client.ProcessCurlCommand(curlOptions); /* */ $s = 18; case 18: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+			_r$7 = php_client.ProcessCurlCommand(curlOptions); /* */ $s = 19; case 19: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
 			_tuple$8 = _r$7; templateName = _tuple$8[0]; option = _tuple$8[1];
-			$s = 10; continue;
-		/* } else { */ case 9:
-		/* } */ case 10:
-		_r$8 = render(langName, templateName, option); /* */ $s = 19; case 19: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
-		sourceCode = _r$8;
+			$s = 11; continue;
+		/* } else if (_ref === "vim") { */ case 9:
+			langName = "vim_script";
+			_r$8 = vim_script_client.ProcessCurlCommand(curlOptions); /* */ $s = 20; case 20: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+			_tuple$9 = _r$8; templateName = _tuple$9[0]; option = _tuple$9[1];
+			$s = 11; continue;
+		/* } else { */ case 10:
+		/* } */ case 11:
+		_r$9 = render(langName, templateName, option); /* */ $s = 21; case 21: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+		sourceCode = _r$9;
 		return [sourceCode, langName, templateName, option];
-		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_GenerateCode }; } $f.$ptr = $ptr; $f._entry = _entry; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._ref = _ref; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f._tuple$4 = _tuple$4; $f._tuple$5 = _tuple$5; $f._tuple$6 = _tuple$6; $f._tuple$7 = _tuple$7; $f._tuple$8 = _tuple$8; $f.curlOptions = curlOptions; $f.lang = lang; $f.langName = langName; $f.ok = ok; $f.option = option; $f.sourceCode = sourceCode; $f.target = target; $f.templateName = templateName; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_GenerateCode }; } $f.$ptr = $ptr; $f._entry = _entry; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f._tuple$3 = _tuple$3; $f._tuple$4 = _tuple$4; $f._tuple$5 = _tuple$5; $f._tuple$6 = _tuple$6; $f._tuple$7 = _tuple$7; $f._tuple$8 = _tuple$8; $f._tuple$9 = _tuple$9; $f.curlOptions = curlOptions; $f.lang = lang; $f.langName = langName; $f.ok = ok; $f.option = option; $f.sourceCode = sourceCode; $f.target = target; $f.templateName = templateName; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$init = $pkg.$init = function() {
 		$pkg.$init = function() {};
@@ -53226,14 +53760,15 @@ $packages["github.com/shibukawa/curl_as_dsl/httpgen_generator"] = (function() {
 		$r = objc_client.$init(); /* */ $s = 8; case 8: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = php_client.$init(); /* */ $s = 9; case 9: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		$r = python_client.$init(); /* */ $s = 10; case 10: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = xhr_client.$init(); /* */ $s = 11; case 11: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = format.$init(); /* */ $s = 12; case 12: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = io.$init(); /* */ $s = 13; case 13: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = log.$init(); /* */ $s = 14; case 14: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = strings.$init(); /* */ $s = 15; case 15: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = template.$init(); /* */ $s = 16; case 16: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		_bindata = (_map = new $Map(), _key = "templates/go_full.tpl", _map[_key] = { k: _key, v: templates_go_full_tpl }, _key = "templates/go_get_with_data_url.tpl", _map[_key] = { k: _key, v: templates_go_get_with_data_url_tpl }, _key = "templates/go_post_form.tpl", _map[_key] = { k: _key, v: templates_go_post_form_tpl }, _key = "templates/go_post_single_file.tpl", _map[_key] = { k: _key, v: templates_go_post_single_file_tpl }, _key = "templates/go_post_text.tpl", _map[_key] = { k: _key, v: templates_go_post_text_tpl }, _key = "templates/go_post_with_data_url.tpl", _map[_key] = { k: _key, v: templates_go_post_with_data_url_tpl }, _key = "templates/go_simple_get.tpl", _map[_key] = { k: _key, v: templates_go_simple_get_tpl }, _key = "templates/go_simple_method.tpl", _map[_key] = { k: _key, v: templates_go_simple_method_tpl }, _key = "templates/go_simple_post.tpl", _map[_key] = { k: _key, v: templates_go_simple_post_tpl }, _key = "templates/java_full.tpl", _map[_key] = { k: _key, v: templates_java_full_tpl }, _key = "templates/nodejs_external_file.tpl", _map[_key] = { k: _key, v: templates_nodejs_external_file_tpl }, _key = "templates/nodejs_external_files.tpl", _map[_key] = { k: _key, v: templates_nodejs_external_files_tpl }, _key = "templates/nodejs_full.tpl", _map[_key] = { k: _key, v: templates_nodejs_full_tpl }, _key = "templates/nodejs_simple_get.tpl", _map[_key] = { k: _key, v: templates_nodejs_simple_get_tpl }, _key = "templates/objc_nsurlconnection_full.tpl", _map[_key] = { k: _key, v: templates_objc_nsurlconnection_full_tpl }, _key = "templates/objc_nsurlsession_full.tpl", _map[_key] = { k: _key, v: templates_objc_nsurlsession_full_tpl }, _key = "templates/php_full.tpl", _map[_key] = { k: _key, v: templates_php_full_tpl }, _key = "templates/python_full.tpl", _map[_key] = { k: _key, v: templates_python_full_tpl }, _key = "templates/xhr_external_file.tpl", _map[_key] = { k: _key, v: templates_xhr_external_file_tpl }, _key = "templates/xhr_external_files.tpl", _map[_key] = { k: _key, v: templates_xhr_external_files_tpl }, _key = "templates/xhr_simple.tpl", _map[_key] = { k: _key, v: templates_xhr_simple_tpl }, _map);
-		$pkg.LanguageMap = (_map$24 = new $Map(), _key$24 = "go", _map$24[_key$24] = { k: _key$24, v: "go" }, _key$24 = "golang", _map$24[_key$24] = { k: _key$24, v: "go" }, _key$24 = "py", _map$24[_key$24] = { k: _key$24, v: "python" }, _key$24 = "python", _map$24[_key$24] = { k: _key$24, v: "python" }, _key$24 = "node", _map$24[_key$24] = { k: _key$24, v: "node" }, _key$24 = "nodejs", _map$24[_key$24] = { k: _key$24, v: "node" }, _key$24 = "js.node", _map$24[_key$24] = { k: _key$24, v: "node" }, _key$24 = "javascript.node", _map$24[_key$24] = { k: _key$24, v: "node" }, _key$24 = "xhr", _map$24[_key$24] = { k: _key$24, v: "xhr" }, _key$24 = "js.xhr", _map$24[_key$24] = { k: _key$24, v: "xhr" }, _key$24 = "javascript.xhr", _map$24[_key$24] = { k: _key$24, v: "xhr" }, _key$24 = "js.browser", _map$24[_key$24] = { k: _key$24, v: "xhr" }, _key$24 = "javascript.browser", _map$24[_key$24] = { k: _key$24, v: "xhr" }, _key$24 = "java", _map$24[_key$24] = { k: _key$24, v: "java" }, _key$24 = "objc", _map$24[_key$24] = { k: _key$24, v: "objc_nsurlsession" }, _key$24 = "objc.session", _map$24[_key$24] = { k: _key$24, v: "objc_nsurlsession" }, _key$24 = "objc.nsurlsession", _map$24[_key$24] = { k: _key$24, v: "objc_nsurlsession" }, _key$24 = "objc.connection", _map$24[_key$24] = { k: _key$24, v: "objc_nsurlconnection" }, _key$24 = "objc.urlconnection", _map$24[_key$24] = { k: _key$24, v: "objc_nsurlconnection" }, _key$24 = "php", _map$24[_key$24] = { k: _key$24, v: "php" }, _map$24);
+		$r = vim_script_client.$init(); /* */ $s = 11; case 11: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = xhr_client.$init(); /* */ $s = 12; case 12: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = format.$init(); /* */ $s = 13; case 13: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = io.$init(); /* */ $s = 14; case 14: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = log.$init(); /* */ $s = 15; case 15: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = strings.$init(); /* */ $s = 16; case 16: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		$r = template.$init(); /* */ $s = 17; case 17: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		_bindata = (_map = new $Map(), _key = "templates/go_full.tpl", _map[_key] = { k: _key, v: templates_go_full_tpl }, _key = "templates/go_get_with_data_url.tpl", _map[_key] = { k: _key, v: templates_go_get_with_data_url_tpl }, _key = "templates/go_post_form.tpl", _map[_key] = { k: _key, v: templates_go_post_form_tpl }, _key = "templates/go_post_single_file.tpl", _map[_key] = { k: _key, v: templates_go_post_single_file_tpl }, _key = "templates/go_post_text.tpl", _map[_key] = { k: _key, v: templates_go_post_text_tpl }, _key = "templates/go_post_with_data_url.tpl", _map[_key] = { k: _key, v: templates_go_post_with_data_url_tpl }, _key = "templates/go_simple_get.tpl", _map[_key] = { k: _key, v: templates_go_simple_get_tpl }, _key = "templates/go_simple_method.tpl", _map[_key] = { k: _key, v: templates_go_simple_method_tpl }, _key = "templates/go_simple_post.tpl", _map[_key] = { k: _key, v: templates_go_simple_post_tpl }, _key = "templates/java_full.tpl", _map[_key] = { k: _key, v: templates_java_full_tpl }, _key = "templates/nodejs_external_file.tpl", _map[_key] = { k: _key, v: templates_nodejs_external_file_tpl }, _key = "templates/nodejs_external_files.tpl", _map[_key] = { k: _key, v: templates_nodejs_external_files_tpl }, _key = "templates/nodejs_full.tpl", _map[_key] = { k: _key, v: templates_nodejs_full_tpl }, _key = "templates/nodejs_simple_get.tpl", _map[_key] = { k: _key, v: templates_nodejs_simple_get_tpl }, _key = "templates/objc_nsurlconnection_full.tpl", _map[_key] = { k: _key, v: templates_objc_nsurlconnection_full_tpl }, _key = "templates/objc_nsurlsession_full.tpl", _map[_key] = { k: _key, v: templates_objc_nsurlsession_full_tpl }, _key = "templates/php_full.tpl", _map[_key] = { k: _key, v: templates_php_full_tpl }, _key = "templates/python_full.tpl", _map[_key] = { k: _key, v: templates_python_full_tpl }, _key = "templates/vim_script_full.tpl", _map[_key] = { k: _key, v: templates_vim_script_full_tpl }, _key = "templates/xhr_external_file.tpl", _map[_key] = { k: _key, v: templates_xhr_external_file_tpl }, _key = "templates/xhr_external_files.tpl", _map[_key] = { k: _key, v: templates_xhr_external_files_tpl }, _key = "templates/xhr_simple.tpl", _map[_key] = { k: _key, v: templates_xhr_simple_tpl }, _map);
+		$pkg.LanguageMap = (_map$25 = new $Map(), _key$25 = "go", _map$25[_key$25] = { k: _key$25, v: "go" }, _key$25 = "golang", _map$25[_key$25] = { k: _key$25, v: "go" }, _key$25 = "py", _map$25[_key$25] = { k: _key$25, v: "python" }, _key$25 = "python", _map$25[_key$25] = { k: _key$25, v: "python" }, _key$25 = "node", _map$25[_key$25] = { k: _key$25, v: "node" }, _key$25 = "nodejs", _map$25[_key$25] = { k: _key$25, v: "node" }, _key$25 = "js.node", _map$25[_key$25] = { k: _key$25, v: "node" }, _key$25 = "javascript.node", _map$25[_key$25] = { k: _key$25, v: "node" }, _key$25 = "xhr", _map$25[_key$25] = { k: _key$25, v: "xhr" }, _key$25 = "js.xhr", _map$25[_key$25] = { k: _key$25, v: "xhr" }, _key$25 = "javascript.xhr", _map$25[_key$25] = { k: _key$25, v: "xhr" }, _key$25 = "js.browser", _map$25[_key$25] = { k: _key$25, v: "xhr" }, _key$25 = "javascript.browser", _map$25[_key$25] = { k: _key$25, v: "xhr" }, _key$25 = "java", _map$25[_key$25] = { k: _key$25, v: "java" }, _key$25 = "objc", _map$25[_key$25] = { k: _key$25, v: "objc_nsurlsession" }, _key$25 = "objc.session", _map$25[_key$25] = { k: _key$25, v: "objc_nsurlsession" }, _key$25 = "objc.nsurlsession", _map$25[_key$25] = { k: _key$25, v: "objc_nsurlsession" }, _key$25 = "objc.connection", _map$25[_key$25] = { k: _key$25, v: "objc_nsurlconnection" }, _key$25 = "objc.urlconnection", _map$25[_key$25] = { k: _key$25, v: "objc_nsurlconnection" }, _key$25 = "php", _map$25[_key$25] = { k: _key$25, v: "php" }, _key$25 = "vim", _map$25[_key$25] = { k: _key$25, v: "vim" }, _map$25);
 		/* */ } return; } if ($f === undefined) { $f = { $blk: $init }; } $f.$s = $s; $f.$r = $r; return $f;
 	};
 	return $pkg;

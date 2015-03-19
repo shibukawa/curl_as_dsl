@@ -10,3 +10,4 @@ Generators
    java
    objc
    php
+   vimscript

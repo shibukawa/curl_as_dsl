@@ -7,7 +7,8 @@ $(document).ready(function () {
         nodejs: "javascript",
         java: "java",
         objc: "objectivec",
-        "objc.connection": "objectivec"
+        "objc.connection": "objectivec",
+        vim: "vim"
     };
     function updateSnippet(event) {
         event.stopPropagation();

@@ -54,3 +54,4 @@ What is the future plan of this tool?
 
 If I need to write some HTTP access code in the language that is not supported now, I will add the code generator for the language.
 
+And I am interested in server side code generation, but it is low priority.
