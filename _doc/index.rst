@@ -40,7 +40,7 @@ cURL as DSL
      <option value="java">Java</option>
      <option value="objc">Objective-C (NSURLSession)</option>
      <option value="objc.connection">Objective-C (NSURLConnection)</option>
-     <option value="vim">Vim Script (WebAPI-vim)</option>
+     <option value="vim">Vim script (WebAPI-vim)</option>
    </select>
    </p>
    <p>
