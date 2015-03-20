@@ -1,7 +1,7 @@
-Vim Script
+Vim script
 ==============
 
-Vim Script generator uses `WebAPI-vim <http://www.vim.org/scripts/script.php?script_id=4019>`_ to speak http protocol. You need to install it.
+Vim script generator uses `WebAPI-vim <http://www.vim.org/scripts/script.php?script_id=4019>`_ to speak http protocol. You need to install it.
 
 Restriction
 ---------------
