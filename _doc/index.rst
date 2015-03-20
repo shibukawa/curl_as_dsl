@@ -55,7 +55,7 @@ Usage
 ---------
 
 Select target envirionment and type curl command in above text box.
-You gets source code that works as same as curl command. Enjoy!
+You get source code that works as same as curl command. Enjoy!
 
 Supported Options
 ~~~~~~~~~~~~~~~~~~~~~

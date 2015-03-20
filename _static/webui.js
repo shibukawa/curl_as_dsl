@@ -30419,91 +30419,79 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_Path }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._tuple = _tuple; $f.err = err; $f.path = path; $f.self = self; $f.u = u; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	NodeJsGenerator.prototype.Path = function() { return this.$val.Path(); };
-	NodeJsGenerator.ptr.prototype.PrepareOptions = function $blocking_PrepareOptions() {
-		var $ptr, _arg, _arg$1, _arg$2, _arg$3, _arg$4, _arg$5, _arg$6, _arg$7, _arg$8, _i, _i$1, _i$2, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$14, _r$15, _r$16, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _ref$2, buffer, hasIndent, header, header$1, i, indent, self, value, x, x$1, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _arg$3 = $f._arg$3; _arg$4 = $f._arg$4; _arg$5 = $f._arg$5; _arg$6 = $f._arg$6; _arg$7 = $f._arg$7; _arg$8 = $f._arg$8; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$14 = $f._r$14; _r$15 = $f._r$15; _r$16 = $f._r$16; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; buffer = $f.buffer; hasIndent = $f.hasIndent; header = $f.header; header$1 = $f.header$1; i = $f.i; indent = $f.indent; self = $f.self; value = $f.value; x = $f.x; x$1 = $f.x$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		hasIndent = [hasIndent];
+	NodeJsGenerator.ptr.prototype.indent = function() {
+		var $ptr, hasIndent, self, x;
 		self = $clone(this, NodeJsGenerator);
-		hasIndent[0] = (x = self.Options, (x.$ptr_ProcessedData || (x.$ptr_ProcessedData = new ptrType$1(function() { return this.$target.ProcessedData; }, function($v) { this.$target.ProcessedData = $v; }, x)))).ExternalFileCount() > 0;
-		indent = (function(hasIndent) { return function() {
-			var $ptr;
-			if (hasIndent[0]) {
-				return "    ";
-			} else {
-				return "";
-			}
-		}; })(hasIndent);
+		hasIndent = (x = self.Options, (x.$ptr_ProcessedData || (x.$ptr_ProcessedData = new ptrType$1(function() { return this.$target.ProcessedData; }, function($v) { this.$target.ProcessedData = $v; }, x)))).ExternalFileCount() > 0;
+		if (hasIndent) {
+			return "    ";
+		} else {
+			return "";
+		}
+	};
+	NodeJsGenerator.prototype.indent = function() { return this.$val.indent(); };
+	NodeJsGenerator.ptr.prototype.PrepareOptions = function $blocking_PrepareOptions() {
+		var $ptr, _i, _i$1, _i$2, _r, _r$1, _r$10, _r$11, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _ref$2, buffer, header, header$1, i, indent, self, value, x, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; buffer = $f.buffer; header = $f.header; header$1 = $f.header$1; i = $f.i; indent = $f.indent; self = $f.self; value = $f.value; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		self = $clone(this, NodeJsGenerator);
 		buffer = $clone(new bytes.Buffer.ptr(), bytes.Buffer);
+		indent = self.indent();
 		/* */ if (!((self.processedHeaders.$length === 0)) || !((self.specialHeaders.$length === 0))) { $s = 1; continue; }
 		/* */ $s = 2; continue;
 		/* if (!((self.processedHeaders.$length === 0)) || !((self.specialHeaders.$length === 0))) { */ case 1:
-			_r = indent(); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-			_arg = new $String(_r);
-			_r$1 = fmt.Sprintf("\n%s    headers: {\n", new sliceType$3([_arg])); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-			_r$2 = buffer.WriteString(_r$1); /* */ $s = 5; case 5: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-			_r$2;
+			_r = fmt.Sprintf("\n%s    headers: {\n", new sliceType$3([new $String(indent)])); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			_r$1 = buffer.WriteString(_r); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			_r$1;
 			_ref = self.processedHeaders;
 			_i = 0;
-			/* while (true) { */ case 6:
-				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 7; continue; }
+			/* while (true) { */ case 5:
+				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 6; continue; }
 				header = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.HeaderGroup);
-				/* */ if (header.Values.$length === 1) { $s = 8; continue; }
-				/* */ $s = 9; continue;
-				/* if (header.Values.$length === 1) { */ case 8:
-					_r$3 = indent(); /* */ $s = 11; case 11: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-					_arg$1 = new $String(_r$3);
-					_arg$2 = new $String(header.Key);
-					_arg$3 = new $String((x$1 = header.Values, (0 >= x$1.$length ? $throwRuntimeError("index out of range") : x$1.$array[x$1.$offset + 0])));
-					_r$4 = fmt.Sprintf("%s        \"%s\": \"%s\",\n", new sliceType$3([_arg$1, _arg$2, _arg$3])); /* */ $s = 12; case 12: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+				/* */ if (header.Values.$length === 1) { $s = 7; continue; }
+				/* */ $s = 8; continue;
+				/* if (header.Values.$length === 1) { */ case 7:
+					_r$2 = fmt.Sprintf("%s        \"%s\": \"%s\",\n", new sliceType$3([new $String(indent), new $String(header.Key), new $String((x = header.Values, (0 >= x.$length ? $throwRuntimeError("index out of range") : x.$array[x.$offset + 0])))])); /* */ $s = 10; case 10: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+					_r$3 = buffer.WriteString(_r$2); /* */ $s = 11; case 11: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+					_r$3;
+					$s = 9; continue;
+				/* } else { */ case 8:
+					_r$4 = fmt.Sprintf("%s        \"%s\": [", new sliceType$3([new $String(indent), new $String(header.Key)])); /* */ $s = 12; case 12: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 					_r$5 = buffer.WriteString(_r$4); /* */ $s = 13; case 13: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 					_r$5;
-					$s = 10; continue;
-				/* } else { */ case 9:
-					_r$6 = indent(); /* */ $s = 14; case 14: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-					_arg$4 = new $String(_r$6);
-					_arg$5 = new $String(header.Key);
-					_r$7 = fmt.Sprintf("%s        \"%s\": [", new sliceType$3([_arg$4, _arg$5])); /* */ $s = 15; case 15: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-					_r$8 = buffer.WriteString(_r$7); /* */ $s = 16; case 16: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
-					_r$8;
 					_ref$1 = header.Values;
 					_i$1 = 0;
-					/* while (true) { */ case 17:
-						/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 18; continue; }
+					/* while (true) { */ case 14:
+						/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 15; continue; }
 						i = _i$1;
 						value = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? $throwRuntimeError("index out of range") : _ref$1.$array[_ref$1.$offset + _i$1]);
 						if (!((i === 0))) {
 							buffer.WriteString(", ");
 						}
-						_r$9 = fmt.Sprintf("\"%s\"", new sliceType$3([new $String(value)])); /* */ $s = 19; case 19: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
-						_r$10 = buffer.WriteString(_r$9); /* */ $s = 20; case 20: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
-						_r$10;
+						_r$6 = fmt.Sprintf("\"%s\"", new sliceType$3([new $String(value)])); /* */ $s = 16; case 16: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+						_r$7 = buffer.WriteString(_r$6); /* */ $s = 17; case 17: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+						_r$7;
 						_i$1++;
-					/* } */ $s = 17; continue; case 18:
+					/* } */ $s = 14; continue; case 15:
 					buffer.WriteString("],\n");
-				/* } */ case 10:
+				/* } */ case 9:
 				_i++;
-			/* } */ $s = 6; continue; case 7:
+			/* } */ $s = 5; continue; case 6:
 			_ref$2 = self.specialHeaders;
 			_i$2 = 0;
-			/* while (true) { */ case 21:
-				/* if (!(_i$2 < _ref$2.$length)) { break; } */ if(!(_i$2 < _ref$2.$length)) { $s = 22; continue; }
+			/* while (true) { */ case 18:
+				/* if (!(_i$2 < _ref$2.$length)) { break; } */ if(!(_i$2 < _ref$2.$length)) { $s = 19; continue; }
 				header$1 = ((_i$2 < 0 || _i$2 >= _ref$2.$length) ? $throwRuntimeError("index out of range") : _ref$2.$array[_ref$2.$offset + _i$2]);
-				_r$11 = indent(); /* */ $s = 23; case 23: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
-				_arg$6 = new $String(_r$11);
-				_arg$7 = new $String(header$1);
-				_r$12 = fmt.Sprintf("%s        %s,\n", new sliceType$3([_arg$6, _arg$7])); /* */ $s = 24; case 24: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
-				_r$13 = buffer.WriteString(_r$12); /* */ $s = 25; case 25: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
-				_r$13;
+				_r$8 = fmt.Sprintf("%s        %s,\n", new sliceType$3([new $String(indent), new $String(header$1)])); /* */ $s = 20; case 20: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+				_r$9 = buffer.WriteString(_r$8); /* */ $s = 21; case 21: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+				_r$9;
 				_i$2++;
-			/* } */ $s = 21; continue; case 22:
-			_r$14 = indent(); /* */ $s = 26; case 26: if($c) { $c = false; _r$14 = _r$14.$blk(); } if (_r$14 && _r$14.$blk !== undefined) { break s; }
-			_arg$8 = new $String(_r$14);
-			_r$15 = fmt.Sprintf("%s    },", new sliceType$3([_arg$8])); /* */ $s = 27; case 27: if($c) { $c = false; _r$15 = _r$15.$blk(); } if (_r$15 && _r$15.$blk !== undefined) { break s; }
-			_r$16 = buffer.WriteString(_r$15); /* */ $s = 28; case 28: if($c) { $c = false; _r$16 = _r$16.$blk(); } if (_r$16 && _r$16.$blk !== undefined) { break s; }
-			_r$16;
+			/* } */ $s = 18; continue; case 19:
+			_r$10 = fmt.Sprintf("%s    },", new sliceType$3([new $String(indent)])); /* */ $s = 22; case 22: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
+			_r$11 = buffer.WriteString(_r$10); /* */ $s = 23; case 23: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
+			_r$11;
 		/* } */ case 2:
 		return buffer.String();
-		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_PrepareOptions }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._arg$6 = _arg$6; $f._arg$7 = _arg$7; $f._arg$8 = _arg$8; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$14 = _r$14; $f._r$15 = _r$15; $f._r$16 = _r$16; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.hasIndent = hasIndent; $f.header = header; $f.header$1 = header$1; $f.i = i; $f.indent = indent; $f.self = self; $f.value = value; $f.x = x; $f.x$1 = x$1; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_PrepareOptions }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.header = header; $f.header$1 = header$1; $f.i = i; $f.indent = indent; $f.self = self; $f.value = value; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	NodeJsGenerator.prototype.PrepareOptions = function() { return this.$val.PrepareOptions(); };
 	NodeJsGenerator.ptr.prototype.AddMultiPartCode = function $blocking_AddMultiPartCode() {
@@ -30582,18 +30570,16 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 	};
 	NodeJsGenerator.prototype.SetDataForBody = function() { return this.$val.SetDataForBody(); };
 	NodeJsGenerator.ptr.prototype.SetDataForForm = function $blocking_SetDataForForm(hasIndent) {
-		var $ptr, _arg, _arg$1, _arg$2, _arg$3, _arg$4, _arg$5, _arg$6, _arg$7, _arg$8, _entry, _entry$1, _entry$2, _i, _i$1, _i$2, _i$3, _key, _key$1, _keys, _keys$1, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$14, _r$15, _r$16, _r$17, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _ref$2, _ref$3, _tuple, buffer, count, data, entries, hasIndent, i, indent, key, key$1, self, singleData, value, values, values$1, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _arg$3 = $f._arg$3; _arg$4 = $f._arg$4; _arg$5 = $f._arg$5; _arg$6 = $f._arg$6; _arg$7 = $f._arg$7; _arg$8 = $f._arg$8; _entry = $f._entry; _entry$1 = $f._entry$1; _entry$2 = $f._entry$2; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _i$3 = $f._i$3; _key = $f._key; _key$1 = $f._key$1; _keys = $f._keys; _keys$1 = $f._keys$1; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$14 = $f._r$14; _r$15 = $f._r$15; _r$16 = $f._r$16; _r$17 = $f._r$17; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; _ref$3 = $f._ref$3; _tuple = $f._tuple; buffer = $f.buffer; count = $f.count; data = $f.data; entries = $f.entries; hasIndent = $f.hasIndent; i = $f.i; indent = $f.indent; key = $f.key; key$1 = $f.key$1; self = $f.self; singleData = $f.singleData; value = $f.value; values = $f.values; values$1 = $f.values$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		hasIndent = [hasIndent];
+		var $ptr, _entry, _entry$1, _entry$2, _i, _i$1, _i$2, _i$3, _key, _key$1, _keys, _keys$1, _r, _r$1, _r$10, _r$11, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _ref$2, _ref$3, _tuple, buffer, count, data, entries, hasIndent, i, indent, key, key$1, self, singleData, value, values, values$1, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _entry = $f._entry; _entry$1 = $f._entry$1; _entry$2 = $f._entry$2; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _i$3 = $f._i$3; _key = $f._key; _key$1 = $f._key$1; _keys = $f._keys; _keys$1 = $f._keys$1; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; _ref$3 = $f._ref$3; _tuple = $f._tuple; buffer = $f.buffer; count = $f.count; data = $f.data; entries = $f.entries; hasIndent = $f.hasIndent; i = $f.i; indent = $f.indent; key = $f.key; key$1 = $f.key$1; self = $f.self; singleData = $f.singleData; value = $f.value; values = $f.values; values$1 = $f.values$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		self = this;
 		entries = new $Map();
-		indent = (function(hasIndent) { return function() {
-			var $ptr;
-			if (hasIndent[0]) {
-				return "    ";
-			}
-			return "";
-		}; })(hasIndent);
+		indent = "";
+		if (hasIndent) {
+			indent = "    ";
+		} else {
+			indent = "";
+		}
 		_ref = self.Options.ProcessedData;
 		_i = 0;
 		while (true) {
@@ -30637,72 +30623,58 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 				buffer.WriteString("var query = querystring.stringify({\n");
 				$s = 5; continue;
 			/* } else { */ case 4:
-				_r = indent(); /* */ $s = 6; case 6: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-				_arg = new $String(_r);
-				_r$1 = fmt.Sprintf("%s, \"", new sliceType$3([_arg])); /* */ $s = 7; case 7: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-				_r$2 = buffer.WriteString(_r$1); /* */ $s = 8; case 8: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-				_r$2;
+				_r = fmt.Sprintf("%s, \"", new sliceType$3([new $String(indent)])); /* */ $s = 6; case 6: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+				_r$1 = buffer.WriteString(_r); /* */ $s = 7; case 7: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+				_r$1;
 			/* } */ case 5:
-			/* */ if (values$1.$length === 1) { $s = 9; continue; }
-			/* */ $s = 10; continue;
-			/* if (values$1.$length === 1) { */ case 9:
-				_r$3 = indent(); /* */ $s = 12; case 12: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-				_arg$1 = new $String(_r$3);
-				_arg$2 = new $String(escapeDQ(key$1));
-				_arg$3 = new $String(escapeDQ((0 >= values$1.$length ? $throwRuntimeError("index out of range") : values$1.$array[values$1.$offset + 0])));
-				_r$4 = fmt.Sprintf("%s    \"%s\": \"%s\",\n", new sliceType$3([_arg$1, _arg$2, _arg$3])); /* */ $s = 13; case 13: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+			/* */ if (values$1.$length === 1) { $s = 8; continue; }
+			/* */ $s = 9; continue;
+			/* if (values$1.$length === 1) { */ case 8:
+				_r$2 = fmt.Sprintf("%s    \"%s\": \"%s\",\n", new sliceType$3([new $String(indent), new $String(escapeDQ(key$1)), new $String(escapeDQ((0 >= values$1.$length ? $throwRuntimeError("index out of range") : values$1.$array[values$1.$offset + 0])))])); /* */ $s = 11; case 11: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+				_r$3 = buffer.WriteString(_r$2); /* */ $s = 12; case 12: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+				_r$3;
+				$s = 10; continue;
+			/* } else { */ case 9:
+				_r$4 = fmt.Sprintf("%s    \"%s\": [\n%s         ", new sliceType$3([new $String(indent), new $String(key$1), new $String(indent)])); /* */ $s = 13; case 13: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 				_r$5 = buffer.WriteString(_r$4); /* */ $s = 14; case 14: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 				_r$5;
-				$s = 11; continue;
-			/* } else { */ case 10:
-				_r$6 = indent(); /* */ $s = 15; case 15: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-				_arg$4 = new $String(_r$6);
-				_arg$5 = new $String(key$1);
-				_r$7 = indent(); /* */ $s = 16; case 16: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-				_arg$6 = new $String(_r$7);
-				_r$8 = fmt.Sprintf("%s    \"%s\": [\n%s         ", new sliceType$3([_arg$4, _arg$5, _arg$6])); /* */ $s = 17; case 17: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
-				_r$9 = buffer.WriteString(_r$8); /* */ $s = 18; case 18: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
-				_r$9;
 				_ref$3 = values$1;
 				_i$3 = 0;
-				/* while (true) { */ case 19:
-					/* if (!(_i$3 < _ref$3.$length)) { break; } */ if(!(_i$3 < _ref$3.$length)) { $s = 20; continue; }
+				/* while (true) { */ case 15:
+					/* if (!(_i$3 < _ref$3.$length)) { break; } */ if(!(_i$3 < _ref$3.$length)) { $s = 16; continue; }
 					i = _i$3;
 					value = ((_i$3 < 0 || _i$3 >= _ref$3.$length) ? $throwRuntimeError("index out of range") : _ref$3.$array[_ref$3.$offset + _i$3]);
 					if (!((i === 0))) {
 						buffer.WriteString(", ");
 					}
-					_r$10 = fmt.Sprintf("\"%s\"", new sliceType$3([new $String(escapeDQ(value))])); /* */ $s = 21; case 21: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
-					_r$11 = buffer.WriteString(_r$10); /* */ $s = 22; case 22: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
-					_r$11;
+					_r$6 = fmt.Sprintf("\"%s\"", new sliceType$3([new $String(escapeDQ(value))])); /* */ $s = 17; case 17: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+					_r$7 = buffer.WriteString(_r$6); /* */ $s = 18; case 18: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+					_r$7;
 					_i$3++;
-				/* } */ $s = 19; continue; case 20:
-				_r$12 = indent(); /* */ $s = 23; case 23: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
-				_arg$7 = new $String(_r$12);
-				_r$13 = fmt.Sprintf("],\n%s    ", new sliceType$3([_arg$7])); /* */ $s = 24; case 24: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
-				_r$14 = buffer.WriteString(_r$13); /* */ $s = 25; case 25: if($c) { $c = false; _r$14 = _r$14.$blk(); } if (_r$14 && _r$14.$blk !== undefined) { break s; }
-				_r$14;
-			/* } */ case 11:
+				/* } */ $s = 15; continue; case 16:
+				_r$8 = fmt.Sprintf("],\n%s    ", new sliceType$3([new $String(indent)])); /* */ $s = 19; case 19: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+				_r$9 = buffer.WriteString(_r$8); /* */ $s = 20; case 20: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
+				_r$9;
+			/* } */ case 10:
 			count = count + (1) >> 0;
 			_i$2++;
 		/* } */ $s = 1; continue; case 2:
-		_r$15 = indent(); /* */ $s = 26; case 26: if($c) { $c = false; _r$15 = _r$15.$blk(); } if (_r$15 && _r$15.$blk !== undefined) { break s; }
-		_arg$8 = new $String(_r$15);
-		_r$16 = fmt.Sprintf("});%s\n", new sliceType$3([_arg$8])); /* */ $s = 27; case 27: if($c) { $c = false; _r$16 = _r$16.$blk(); } if (_r$16 && _r$16.$blk !== undefined) { break s; }
-		_r$17 = buffer.WriteString(_r$16); /* */ $s = 28; case 28: if($c) { $c = false; _r$17 = _r$17.$blk(); } if (_r$17 && _r$17.$blk !== undefined) { break s; }
-		_r$17;
+		_r$10 = fmt.Sprintf("});%s\n", new sliceType$3([new $String(indent)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
+		_r$11 = buffer.WriteString(_r$10); /* */ $s = 22; case 22: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
+		_r$11;
 		self.PrepareBody = buffer.String();
 		self.HasBody = true;
 		self.BodyLines = $append(self.BodyLines, "query");
 		_key$1 = "querystring"; (self.Modules || $throwRuntimeError("assignment to entry in nil map"))[_key$1] = { k: _key$1, v: true };
-		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_SetDataForForm }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._arg$6 = _arg$6; $f._arg$7 = _arg$7; $f._arg$8 = _arg$8; $f._entry = _entry; $f._entry$1 = _entry$1; $f._entry$2 = _entry$2; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._i$3 = _i$3; $f._key = _key; $f._key$1 = _key$1; $f._keys = _keys; $f._keys$1 = _keys$1; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$14 = _r$14; $f._r$15 = _r$15; $f._r$16 = _r$16; $f._r$17 = _r$17; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f._ref$3 = _ref$3; $f._tuple = _tuple; $f.buffer = buffer; $f.count = count; $f.data = data; $f.entries = entries; $f.hasIndent = hasIndent; $f.i = i; $f.indent = indent; $f.key = key; $f.key$1 = key$1; $f.self = self; $f.singleData = singleData; $f.value = value; $f.values = values; $f.values$1 = values$1; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_SetDataForForm }; } $f.$ptr = $ptr; $f._entry = _entry; $f._entry$1 = _entry$1; $f._entry$2 = _entry$2; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._i$3 = _i$3; $f._key = _key; $f._key$1 = _key$1; $f._keys = _keys; $f._keys$1 = _keys$1; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f._ref$3 = _ref$3; $f._tuple = _tuple; $f.buffer = buffer; $f.count = count; $f.data = data; $f.entries = entries; $f.hasIndent = hasIndent; $f.i = i; $f.indent = indent; $f.key = key; $f.key$1 = key$1; $f.self = self; $f.singleData = singleData; $f.value = value; $f.values = values; $f.values$1 = values$1; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	NodeJsGenerator.prototype.SetDataForForm = function(hasIndent) { return this.$val.SetDataForForm(hasIndent); };
 	NodeJsGenerator.ptr.prototype.SetFormForBody = function $blocking_SetFormForBody() {
-		var $ptr, _i, _i$1, _i$2, _r, _r$1, _ref, _ref$1, _ref$2, buffer, data, fields, files, self, value, value$1, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _r = $f._r; _r$1 = $f._r$1; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; buffer = $f.buffer; data = $f.data; fields = $f.fields; files = $f.files; self = $f.self; value = $f.value; value$1 = $f.value$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _i, _i$1, _i$2, _r, _r$1, _ref, _ref$1, _ref$2, buffer, data, fields, files, indent, self, value, value$1, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _r = $f._r; _r$1 = $f._r$1; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; buffer = $f.buffer; data = $f.data; fields = $f.fields; files = $f.files; indent = $f.indent; self = $f.self; value = $f.value; value$1 = $f.value$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		self = this;
 		$r = self.AddMultiPartCode(); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		indent = self.indent();
 		fields = sliceType.nil;
 		files = sliceType.nil;
 		_ref = self.Options.ProcessedData;
@@ -30724,40 +30696,45 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 		/* } */ $s = 2; continue; case 3:
 		buffer = $clone(new bytes.Buffer.ptr(), bytes.Buffer);
 		if (fields.$length > 0) {
-			buffer.WriteString("fields = [\n");
+			buffer.WriteString("var fields = [\n");
 			_ref$1 = fields;
 			_i$1 = 0;
 			while (true) {
 				if (!(_i$1 < _ref$1.$length)) { break; }
 				value = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? $throwRuntimeError("index out of range") : _ref$1.$array[_ref$1.$offset + _i$1]);
+				buffer.WriteString(indent);
 				buffer.WriteString(value);
 				_i$1++;
 			}
+			buffer.WriteString(indent);
 			buffer.WriteString("];\n");
+			buffer.WriteString(indent);
 		}
 		if (files.$length > 0) {
 			if (fields.$length > 0) {
-				buffer.WriteString("    ");
 				self.BodyLines = $append(self.BodyLines, "encodeMultiPartFormData(fields, files)");
 			} else {
 				self.BodyLines = $append(self.BodyLines, "encodeMultiPartFormData([], files)");
 			}
-			buffer.WriteString("files = [\n");
+			buffer.WriteString("var files = [\n");
 			_ref$2 = files;
 			_i$2 = 0;
 			while (true) {
 				if (!(_i$2 < _ref$2.$length)) { break; }
 				value$1 = ((_i$2 < 0 || _i$2 >= _ref$2.$length) ? $throwRuntimeError("index out of range") : _ref$2.$array[_ref$2.$offset + _i$2]);
+				buffer.WriteString(indent);
 				buffer.WriteString(value$1);
 				_i$2++;
 			}
+			buffer.WriteString(indent);
 			buffer.WriteString("];\n");
+			buffer.WriteString(indent);
 		} else {
 			self.BodyLines = $append(self.BodyLines, "encodeMultiPartFormData(fields, [])");
 		}
 		self.PrepareBody = buffer.String();
 		self.HasBody = true;
-		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_SetFormForBody }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.data = data; $f.fields = fields; $f.files = files; $f.self = self; $f.value = value; $f.value$1 = value$1; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_SetFormForBody }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.data = data; $f.fields = fields; $f.files = files; $f.indent = indent; $f.self = self; $f.value = value; $f.value$1 = value$1; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	NodeJsGenerator.prototype.SetFormForBody = function() { return this.$val.SetFormForBody(); };
 	ProcessCurlCommand = $pkg.ProcessCurlCommand = function $blocking_ProcessCurlCommand(options) {
@@ -30983,7 +30960,7 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 				_r$1 = generator.FileContent(); /* */ $s = 11; case 11: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
 				_arg$2 = new $String(_r$1);
 				_arg$3 = new $String(contentType);
-				_r$2 = fmt.Sprintf("        {key: \"%s\", filename: \"%s\", content: %s, contentType: \"%s\"},\n", new sliceType$3([_arg, _arg$1, _arg$2, _arg$3])); /* */ $s = 12; case 12: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+				_r$2 = fmt.Sprintf("    {key: \"%s\", filename: \"%s\", content: %s, contentType: \"%s\"},\n", new sliceType$3([_arg, _arg$1, _arg$2, _arg$3])); /* */ $s = 12; case 12: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
 				_r$3 = buffer.WriteString(_r$2); /* */ $s = 13; case 13: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
 				_r$3;
 				result = buffer.String();
@@ -30994,7 +30971,7 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 				_arg$4 = new $String((0 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 0]));
 				_r$4 = generator.FileContent(); /* */ $s = 14; case 14: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 				_arg$5 = new $String(_r$4);
-				_r$5 = fmt.Sprintf("        {key:\"%s\", value: %s", new sliceType$3([_arg$4, _arg$5])); /* */ $s = 15; case 15: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+				_r$5 = fmt.Sprintf("    {key: \"%s\", value: %s", new sliceType$3([_arg$4, _arg$5])); /* */ $s = 15; case 15: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
 				_r$6 = buffer$1.WriteString(_r$5); /* */ $s = 16; case 16: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
 				_r$6;
 				contentType$1 = "";
@@ -31041,7 +31018,7 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 		return result;
 		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: $blocking_FormString }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.buffer$1 = buffer$1; $f.contentType = contentType; $f.contentType$1 = contentType$1; $f.data = data; $f.field = field; $f.field$1 = field$1; $f.fragment = fragment; $f.fragment$1 = fragment$1; $f.fragments = fragments; $f.fragments$1 = fragments$1; $f.generator = generator; $f.result = result; $f.sentFileName = sentFileName; $f.$s = $s; $f.$r = $r; return $f;
 	};
-	NodeJsGenerator.methods = [{prop: "Url", name: "Url", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Host", name: "Host", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Port", name: "Port", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Method", name: "Method", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Path", name: "Path", pkg: "", typ: $funcType([], [$String], false)}, {prop: "PrepareOptions", name: "PrepareOptions", pkg: "", typ: $funcType([], [$String], false)}];
+	NodeJsGenerator.methods = [{prop: "Url", name: "Url", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Host", name: "Host", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Port", name: "Port", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Method", name: "Method", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Path", name: "Path", pkg: "", typ: $funcType([], [$String], false)}, {prop: "indent", name: "indent", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: $funcType([], [$String], false)}, {prop: "PrepareOptions", name: "PrepareOptions", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$2.methods = [{prop: "AddMultiPartCode", name: "AddMultiPartCode", pkg: "", typ: $funcType([], [], false)}, {prop: "FileContent", name: "FileContent", pkg: "", typ: $funcType([], [$String], false)}, {prop: "SetDataForUrl", name: "SetDataForUrl", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForBody", name: "SetDataForBody", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForForm", name: "SetDataForForm", pkg: "", typ: $funcType([$Bool], [], false)}, {prop: "SetFormForBody", name: "SetFormForBody", pkg: "", typ: $funcType([], [], false)}];
 	ExternalFile.init([{prop: "FileName", name: "FileName", pkg: "", typ: $String, tag: ""}, {prop: "TextType", name: "TextType", pkg: "", typ: $Bool, tag: ""}]);
 	NodeJsGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}, {prop: "ClientModule", name: "ClientModule", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "BodyLines", name: "BodyLines", pkg: "", typ: sliceType, tag: ""}, {prop: "ExternalFiles", name: "ExternalFiles", pkg: "", typ: sliceType$1, tag: ""}, {prop: "usedFile", name: "usedFile", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: $Int, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "processedHeaders", name: "processedHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: sliceType$2, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: sliceType, tag: ""}, {prop: "UseSimpleGet", name: "UseSimpleGet", pkg: "", typ: $Bool, tag: ""}]);
@@ -34212,7 +34189,7 @@ $packages["github.com/shibukawa/curl_as_dsl/client/xhr"] = (function() {
 			/* */ if (strings.HasPrefix(data.Value, "@")) { $s = 6; continue; }
 			/* */ $s = 7; continue;
 			/* if (strings.HasPrefix(data.Value, "@")) { */ case 6:
-				_r = fmt.Fprintf(os.Stderr, "XHR generator doesn't support sending multiple files except form(-F).", new sliceType$3([])); /* */ $s = 9; case 9: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+				_r = fmt.Fprintf(os.Stderr, "XHR generator doesn't support sending any file except form(-F).", new sliceType$3([])); /* */ $s = 9; case 9: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 				_r;
 				os.Exit(1);
 				$s = 8; continue;
@@ -34225,7 +34202,7 @@ $packages["github.com/shibukawa/curl_as_dsl/client/xhr"] = (function() {
 			/* */ if (strings.HasPrefix(data.Value, "@")) { $s = 11; continue; }
 			/* */ $s = 12; continue;
 			/* if (strings.HasPrefix(data.Value, "@")) { */ case 11:
-				_r$2 = fmt.Fprintf(os.Stderr, "XHR generator doesn't support sending multiple files except form(-F).", new sliceType$3([])); /* */ $s = 14; case 14: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+				_r$2 = fmt.Fprintf(os.Stderr, "XHR generator doesn't support sending any file except form(-F).", new sliceType$3([])); /* */ $s = 14; case 14: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
 				_r$2;
 				os.Exit(1);
 				$s = 13; continue;
@@ -34238,8 +34215,9 @@ $packages["github.com/shibukawa/curl_as_dsl/client/xhr"] = (function() {
 			/* */ if (strings.HasPrefix(data.Value, "@")) { $s = 16; continue; }
 			/* */ $s = 17; continue;
 			/* if (strings.HasPrefix(data.Value, "@")) { */ case 16:
-				_r$4 = fmt.Sprintf("encodeURIComponent(%s)", new sliceType$3([new $String("@@")])); /* */ $s = 19; case 19: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-				result = _r$4;
+				_r$4 = fmt.Fprintf(os.Stderr, "XHR generator doesn't support sending any file except form(-F).", new sliceType$3([])); /* */ $s = 19; case 19: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+				_r$4;
+				os.Exit(1);
 				$s = 18; continue;
 			/* } else { */ case 17:
 				_r$5 = fmt.Sprintf("encodeURIComponent(\"%s\")", new sliceType$3([new $String(escapeDQ(data.Value))])); /* */ $s = 20; case 20: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
