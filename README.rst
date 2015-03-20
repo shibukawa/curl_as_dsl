@@ -3,6 +3,8 @@ cURL as DSL
 
 This command generates source code from cURL command line options.
 
+WebSite: http://shibukawa.github.io/curl_as_dsl/
+
 Install
 ---------
 

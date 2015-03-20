@@ -304,21 +304,22 @@ func StringForData(generator *XHRGenerator, data *common.DataOption) (string, st
 	switch data.Type {
 	case common.DataAsciiType:
 		if strings.HasPrefix(data.Value, "@") {
-			fmt.Fprintf(os.Stderr, "XHR generator doesn't support sending multiple files except form(-F).")
+			fmt.Fprintf(os.Stderr, "XHR generator doesn't support sending any file except form(-F).")
 			os.Exit(1)
 		} else {
 			result = fmt.Sprintf("\"%s\"", escapeDQ(data.Value))
 		}
 	case common.DataBinaryType:
 		if strings.HasPrefix(data.Value, "@") {
-			fmt.Fprintf(os.Stderr, "XHR generator doesn't support sending multiple files except form(-F).")
+			fmt.Fprintf(os.Stderr, "XHR generator doesn't support sending any file except form(-F).")
 			os.Exit(1)
 		} else {
 			result = fmt.Sprintf("\"%s\"", escapeDQ(data.Value))
 		}
 	case common.DataUrlEncodeType:
 		if strings.HasPrefix(data.Value, "@") {
-			result = fmt.Sprintf("encodeURIComponent(%s)", "@@")
+			fmt.Fprintf(os.Stderr, "XHR generator doesn't support sending any file except form(-F).")
+			os.Exit(1)
 		} else {
 			result = fmt.Sprintf("encodeURIComponent(\"%s\")", escapeDQ(data.Value))
 		}
