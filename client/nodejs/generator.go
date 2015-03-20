@@ -105,23 +105,25 @@ func (self NodeJsGenerator) Path() string {
 	}
 }
 
-func (self NodeJsGenerator) PrepareOptions() string {
+func (self NodeJsGenerator) indent() string {
 	hasIndent := self.Options.ProcessedData.ExternalFileCount() > 0
-	indent := func() string {
-		if hasIndent {
-			return "    "
-		} else {
-			return ""
-		}
+	if hasIndent {
+		return "    "
+	} else {
+		return ""
 	}
+}
+
+func (self NodeJsGenerator) PrepareOptions() string {
 	var buffer bytes.Buffer
+	indent := self.indent()
 	if len(self.processedHeaders) != 0 || len(self.specialHeaders) != 0 {
-		buffer.WriteString(fmt.Sprintf("\n%s    headers: {\n", indent()))
+		buffer.WriteString(fmt.Sprintf("\n%s    headers: {\n", indent))
 		for _, header := range self.processedHeaders {
 			if len(header.Values) == 1 {
-				buffer.WriteString(fmt.Sprintf("%s        \"%s\": \"%s\",\n", indent(), header.Key, header.Values[0]))
+				buffer.WriteString(fmt.Sprintf("%s        \"%s\": \"%s\",\n", indent, header.Key, header.Values[0]))
 			} else {
-				buffer.WriteString(fmt.Sprintf("%s        \"%s\": [", indent(), header.Key))
+				buffer.WriteString(fmt.Sprintf("%s        \"%s\": [", indent, header.Key))
 				for i, value := range header.Values {
 					if i != 0 {
 						buffer.WriteString(", ")
@@ -132,9 +134,9 @@ func (self NodeJsGenerator) PrepareOptions() string {
 			}
 		}
 		for _, header := range self.specialHeaders {
-			buffer.WriteString(fmt.Sprintf("%s        %s,\n", indent(), header))
+			buffer.WriteString(fmt.Sprintf("%s        %s,\n", indent, header))
 		}
-		buffer.WriteString(fmt.Sprintf("%s    },", indent()))
+		buffer.WriteString(fmt.Sprintf("%s    },", indent))
 	}
 	return buffer.String()
 }
@@ -213,11 +215,11 @@ func (self *NodeJsGenerator) SetDataForBody() {
 
 func (self *NodeJsGenerator) SetDataForForm(hasIndent bool) {
 	entries := make(map[string][]string)
-	indent := func() string {
-		if hasIndent {
-			return "    "
-		}
-		return ""
+	var indent string
+	if hasIndent {
+		indent = "    "
+	} else {
+		indent = ""
 	}
 
 	for _, data := range self.Options.ProcessedData {
@@ -233,23 +235,23 @@ func (self *NodeJsGenerator) SetDataForForm(hasIndent bool) {
 		if count == 0 {
 			buffer.WriteString("var query = querystring.stringify({\n")
 		} else {
-			buffer.WriteString(fmt.Sprintf("%s, \"", indent()))
+			buffer.WriteString(fmt.Sprintf("%s, \"", indent))
 		}
 		if len(values) == 1 {
-			buffer.WriteString(fmt.Sprintf("%s    \"%s\": \"%s\",\n", indent(), escapeDQ(key), escapeDQ(values[0])))
+			buffer.WriteString(fmt.Sprintf("%s    \"%s\": \"%s\",\n", indent, escapeDQ(key), escapeDQ(values[0])))
 		} else {
-			buffer.WriteString(fmt.Sprintf("%s    \"%s\": [\n%s         ", indent(), key, indent()))
+			buffer.WriteString(fmt.Sprintf("%s    \"%s\": [\n%s         ", indent, key, indent))
 			for i, value := range values {
 				if i != 0 {
 					buffer.WriteString(", ")
 				}
 				buffer.WriteString(fmt.Sprintf("\"%s\"", escapeDQ(value)))
 			}
-			buffer.WriteString(fmt.Sprintf("],\n%s    ", indent()))
+			buffer.WriteString(fmt.Sprintf("],\n%s    ", indent))
 		}
 		count++
 	}
-	buffer.WriteString(fmt.Sprintf("});%s\n", indent()))
+	buffer.WriteString(fmt.Sprintf("});%s\n", indent))
 
 	self.PrepareBody = buffer.String()
 	self.HasBody = true
@@ -259,6 +261,7 @@ func (self *NodeJsGenerator) SetDataForForm(hasIndent bool) {
 
 func (self *NodeJsGenerator) SetFormForBody() {
 	self.AddMultiPartCode()
+	indent := self.indent()
 	var fields []string
 	var files []string
 
@@ -272,24 +275,29 @@ func (self *NodeJsGenerator) SetFormForBody() {
 
 	var buffer bytes.Buffer
 	if len(fields) > 0 {
-		buffer.WriteString("fields = [\n")
+		buffer.WriteString("var fields = [\n")
 		for _, value := range fields {
+			buffer.WriteString(indent)
 			buffer.WriteString(value)
 		}
+		buffer.WriteString(indent)
 		buffer.WriteString("];\n")
+		buffer.WriteString(indent)
 	}
 	if len(files) > 0 {
 		if len(fields) > 0 {
-			buffer.WriteString("    ")
 			self.BodyLines = append(self.BodyLines, "encodeMultiPartFormData(fields, files)")
 		} else {
 			self.BodyLines = append(self.BodyLines, "encodeMultiPartFormData([], files)")
 		}
-		buffer.WriteString("files = [\n")
+		buffer.WriteString("var files = [\n")
 		for _, value := range files {
+			buffer.WriteString(indent)
 			buffer.WriteString(value)
 		}
+		buffer.WriteString(indent)
 		buffer.WriteString("];\n")
+		buffer.WriteString(indent)
 	} else {
 		self.BodyLines = append(self.BodyLines, "encodeMultiPartFormData(fields, [])")
 	}
@@ -433,7 +441,7 @@ func FormString(generator *NodeJsGenerator, data *common.DataOption) string {
 			}
 			// sent file name
 			// field name, source file name
-			buffer.WriteString(fmt.Sprintf("        {key: \"%s\", filename: \"%s\", content: %s, contentType: \"%s\"},\n", field[0],
+			buffer.WriteString(fmt.Sprintf("    {key: \"%s\", filename: \"%s\", content: %s, contentType: \"%s\"},\n", field[0],
 				sentFileName, generator.FileContent(), contentType))
 			result = buffer.String()
 		} else if strings.HasPrefix(field[1], "<") {
@@ -442,7 +450,7 @@ func FormString(generator *NodeJsGenerator, data *common.DataOption) string {
 			fragments := strings.Split(field[1][1:], ";")
 
 			// field name, content
-			buffer.WriteString(fmt.Sprintf("        {key:\"%s\", value: %s", field[0], generator.FileContent()))
+			buffer.WriteString(fmt.Sprintf("    {key: \"%s\", value: %s", field[0], generator.FileContent()))
 
 			var contentType string
 			for _, fragment := range fragments[1:] {
