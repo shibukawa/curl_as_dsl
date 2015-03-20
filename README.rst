@@ -31,7 +31,7 @@ Global Options
        java               : Java        (java.net.HttpURLConnection)
        objc, objc.session : Objective-C (NSURLSession)
        objc.connection    :             (NSURLConnection)
-       vim                : Vim Script  (WebAPI-vim)
+       vim                : Vim script  (WebAPI-vim)
 
 Supported cURL Options
 ~~~~~~~~~~~~~~~~~~~~~~~~
