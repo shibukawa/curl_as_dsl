@@ -26,7 +26,7 @@ Why it supports only standard libraries? %&#@# library is more popular to access
 I know there are tons of HTTP access libraries. For example `AFNetworking <http://cocoadocs.org/docsets/AFNetworking/2.0.0/index.html>`_ is common in Objective-C programmers.
 But using standard library is more stable option. Adding module should be done carefully (do you know npm's complicated dependency hell?).
 
-Bug, I welcome your pull request.
+But, I welcome your pull request to support third party libraries.
 
 Why cURL?
 ~~~~~~~~~~~
