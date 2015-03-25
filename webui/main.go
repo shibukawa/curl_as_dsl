@@ -5,7 +5,7 @@ import (
 	"github.com/jessevdk/go-flags"
 	"github.com/shibukawa/curl_as_dsl/common"
 	"github.com/shibukawa/curl_as_dsl/generator"
-	"github.com/shibukawa/optstring_parser"
+	"github.com/shibukawa/shell"
 	"honnef.co/go/js/console"
 	"html"
 	"strings"
@@ -27,7 +27,7 @@ func GenerateCode(target, options string) (string, string) {
 	if !strings.HasPrefix(options, "curl ") {
 		options = "curl " + options
 	}
-	args := optstring_parser.Parse(options)
+	args := shell.Parse(options)
 
 	urls, err := parser.ParseArgs(args)
 	if err != nil {

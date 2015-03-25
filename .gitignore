@@ -1,7 +1,11 @@
 testserver/testserver
 testserver/test.html
 httpgen
+httpgen.exe
 curl_as_dsl
+curl_as_dsl.exe
+form2curl/form2curl/form2curl
+form2curl/form2curl/form2curl.exe
 .idea
 test/
 *.iml

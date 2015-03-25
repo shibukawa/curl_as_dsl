@@ -3,4 +3,5 @@
 go-bindata -pkg="generator" -o="generator/bindata.go" templates
 go fmt generator/*.go
 go build
-pushd webui;gopherjs build; popd
+pushd form2curl/form2curl; go build; popd
+pushd webui; gopherjs build; popd
