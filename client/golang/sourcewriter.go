@@ -170,6 +170,7 @@ func (self *GoGenerator) SetFormForBody() {
 	for _, data := range self.Options.ProcessedData {
 		buffer.WriteString(FormString(self, &data))
 	}
+	buffer.WriteString("writer.Close()\n")
 	self.Data = buffer.String()
 }
 
