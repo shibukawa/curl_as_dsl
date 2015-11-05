@@ -12,7 +12,7 @@ func escapeDQ(src string) string {
 }
 
 func ClientNeeded(options *common.CurlOptions) bool {
-	if options.Proxy != "" || options.User != "" || len(options.Cookie) > 0 {
+	if options.Http2Flag || options.Insecure || options.Proxy != "" || options.User != "" || len(options.Cookie) > 0 {
 		return true
 	}
 	if len(options.AWSV2) > 0 {
@@ -99,6 +99,12 @@ func processCurlFullFeatureRequest(generator *GoGenerator) (string, interface{})
 	if options.User != "" {
 		generator.Modules["encoding/base64"] = true
 	}
+	if options.Insecure {
+		generator.Modules["crypto/tls"] = true
+	}
+	if options.Http2Flag {
+		generator.Modules["golang.org/x/net/http2"] = true
+	}
 	if generator.Options.AWSV2 != "" {
 		generator.Modules["encoding/base64"] = true
 		generator.Modules["crypto/hmac"] = true
@@ -106,7 +112,9 @@ func processCurlFullFeatureRequest(generator *GoGenerator) (string, interface{})
 		generator.Modules["time"] = true
 		generator.Modules["fmt"] = true
 	}
-
+	if options.Http2Flag {
+		generator.Modules["golang.org/x/net/http2"] = true
+	}
 	return "full", *generator
 }
 

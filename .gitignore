@@ -11,3 +11,6 @@ test/
 *.iml
 *.js.map
 webui/*.js
+testserver/server.crt
+testserver/server.csr
+testserver/server.key

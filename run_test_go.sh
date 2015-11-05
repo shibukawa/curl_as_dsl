@@ -102,3 +102,11 @@ echo "case 24: Basic authentication"
 ./httpgen curl -u USER:PASS http://localhost:18888 > test/test.go
 pushd test;go build;./test;popd
 
+echo "case 25: simple get with https"
+./httpgen curl --insecure https://localhost:18889 > test/test.go
+pushd test;go build;./test;popd
+
+echo "case 26: simple get with http2"
+./httpgen curl --insecure --http2 https://localhost:18889 > test/test.go
+pushd test;go build;./test;popd
+

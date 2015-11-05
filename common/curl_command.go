@@ -122,27 +122,29 @@ type CurlOptions struct {
 	DataAscii     func(string) `long:"data-ascii" value-name:"DATA" description:"HTTP POST ASCII data (H)"`
 	DataBinary    func(string) `long:"data-binary" value-name:"DATA" description:"HTTP POST binary data (H)"`
 	DataUrlEncode func(string) `long:"data-urlencode" value-name:"DATA" description:"HTTP POST data url encoded (H)"`
+	Get           bool         `short:"G" long:"get" description:"Send the -d data with a HTTP GET (H)"`
+	Form          func(string) `short:"F" long:"form" value-name:"KEY=VALUE" description:"Specify HTTP multipart POST data (H)"`
+	FormString    func(string) `long:"form-string" value-name:"KEY=VALUE" description:"Specify HTTP multipart POST data (H)"`
+	Header        []string     `short:"H" long:"header" value-name:"LINE" description:"Pass custom header LINE to server (H)"`
+	Head          bool         `short:"I" long:"head" description:"Show document info only"`
+	Http11        func()       `long:"http1.1" description:"Use HTTP 1.1 (H)"`
+	Http2         func()       `long:"http2" description:"Use HTTP 2 (H)"`
+	Insecure      bool         `short:"k" long:"insecure" description:"Allow connections to SSL sites without certs (H)"`
+	Proxy         string       `short:"x" long:"proxy" value-name:"[PROTOCOL://]HOST[:PORT]" description:"Use proxy on given port"`
+	Referer       func(string) `short:"e" long:"referer" description:"Referer URL (H)"`
+	Request       string       `short:"X" long:"request" value-name:"COMMAND" description:"Specify request command to use"`
+	TrEncoding    func()       `long:"tr-encoding" description:"Request compressed transfer encoding (H)"`
+	Transfer      func(string) `short:"T" long:"upload-file" value-name:"FILE" description:"Transfer FILE to destination"`
+	Url           string       `long:"url" value-name:"URL" description:"URL to work with"`
+	User          string       `short:"u" long:"user" value-name:"USER[:PASSWORD]" description:"Server user and password"`
+	UserAgent     func(string) `short:"A" long:"user-agent" value-name:"STRING" description:"User-Agent to send to server (H)"`
 	//Digest bool `long:"digest" description:"Use HTTP Digest Authentication (H)"`
-	Get        bool         `short:"G" long:"get" description:"Send the -d data with a HTTP GET (H)"`
-	Form       func(string) `short:"F" long:"form" value-name:"KEY=VALUE" description:"Specify HTTP multipart POST data (H)"`
-	FormString func(string) `long:"form-string" value-name:"KEY=VALUE" description:"Specify HTTP multipart POST data (H)"`
-	Header     []string     `short:"H" long:"header" value-name:"LINE" description:"Pass custom header LINE to server (H)"`
-	Head       bool         `short:"I" long:"head" description:"Show document info only"`
-	//Http11 bool `long:"http1.1" description:"Use HTTP 1.1 (H)"`
-	//Http2 bool `long:"http2" description:"Use HTTP 2 (H)"`
-	Proxy      string       `short:"x" long:"proxy" value-name:"[PROTOCOL://]HOST[:PORT]" description:"Use proxy on given port"`
-	Referer    func(string) `short:"e" long:"referer" description:"Referer URL (H)"`
-	Request    string       `short:"X" long:"request" value-name:"COMMAND" description:"Specify request command to use"`
-	TrEncoding func()       `long:"tr-encoding" description:"Request compressed transfer encoding (H)"`
-	Transfer   func(string) `short:"T" long:"upload-file" value-name:"FILE" description:"Transfer FILE to destination"`
-	Url        string       `long:"url" value-name:"URL" description:"URL to work with"`
-	User       string       `short:"u" long:"user" value-name:"USER[:PASSWORD]" description:"Server user and password"`
-	UserAgent  func(string) `short:"A" long:"user-agent" value-name:"STRING" description:"User-Agent to send to server (H)"`
 
 	// Original parameter
 	AWSV2 string `long:"awsv2" value-name:"ACCESS-KEY:SECRET-KEY" description:"AWS V2 style authentication (original)"`
 
 	// Internal Use
+	Http2Flag     bool
 	ProcessedData DataOptions
 }
 
@@ -170,6 +172,14 @@ func (self *CurlOptions) Init() {
 
 	self.FormString = func(data string) {
 		self.ProcessedData.Append(data, FormStringType)
+	}
+
+	self.Http11 = func() {
+		self.Http2Flag = false
+	}
+
+	self.Http2 = func() {
+		self.Http2Flag = true
 	}
 
 	self.Referer = func(data string) {

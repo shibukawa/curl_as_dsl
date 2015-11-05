@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+	"golang.org/x/net/http2"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"sync"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -64,9 +66,28 @@ func authHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	var httpServer http.Server
+	var httpsServer http.Server
+	http2.VerboseLogs = true
+	http2.ConfigureServer(&httpsServer, nil)
+
 	http.HandleFunc("/auth", authHandler)
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/js", jsHandler)
-	log.Println("start listening :18888")
-	http.ListenAndServe(":18888", nil)
+
+	var wg sync.WaitGroup
+	wg.Add(2)
+	go func() {
+		log.Println("start http listening :18888")
+		httpServer.Addr = ":18888"
+		log.Println(httpServer.ListenAndServe())
+		wg.Done()
+	}()
+	go func() {
+		log.Println("start https listening :18889")
+		httpsServer.Addr = ":18889"
+		log.Println(httpsServer.ListenAndServeTLS("server.crt", "server.key"))
+		wg.Done()
+	}()
+	wg.Wait()
 }
