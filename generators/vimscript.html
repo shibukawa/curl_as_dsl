@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Vim Script &mdash; cURL as DSL 1.0 documentation</title>
+  <title>Vim script &mdash; cURL as DSL 1.0 documentation</title>
   
 
   
@@ -75,7 +75,7 @@
 <li class="toctree-l2"><a class="reference internal" href="java.html">Java</a></li>
 <li class="toctree-l2"><a class="reference internal" href="objc.html">Objective-C</a></li>
 <li class="toctree-l2"><a class="reference internal" href="php.html">PHP</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Vim Script</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Vim script</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../what_is_this.html">What is this?</a><ul>
@@ -85,6 +85,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html#license">License</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../development.html#the-mit-license-mit">The MIT License (MIT)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../history.html">History</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../history.html#id1">11/06/2015</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../history.html#id2">03/14/2015</a></li>
 </ul>
 </li>
 </ul>
@@ -113,7 +118,7 @@
       
           <li><a href="index.html">Generators</a> &raquo;</li>
       
-    <li>Vim Script</li>
+    <li>Vim script</li>
       <li class="wy-breadcrumbs-aside">
         
           <a href="../_sources/generators/vimscript.txt" rel="nofollow"> View page source</a>
@@ -125,7 +130,7 @@
           <div role="main" class="document">
             
   <div class="section" id="vim-script">
-<h1>Vim Script<a class="headerlink" href="#vim-script" title="Permalink to this headline">¶</a></h1>
+<h1>Vim script<a class="headerlink" href="#vim-script" title="Permalink to this headline">¶</a></h1>
 <p>Vim Script generator uses <a class="reference external" href="http://www.vim.org/scripts/script.php?script_id=4019">WebAPI-vim</a> to speak http protocol. You need to install it.</p>
 <div class="section" id="restriction">
 <h2>Restriction<a class="headerlink" href="#restriction" title="Permalink to this headline">¶</a></h2>
@@ -133,7 +138,8 @@
 <li>WebAPI-vim supports only GET and POST.</li>
 <li>WebAPI-vim can&#8217;t send any body content when <code class="docutils literal"><span class="pre">get</span></code> is used as a method.
 cURL can do this, but it is not common usage, I think.</li>
-<li>WebAPI-vim supports only one value for each header.</li>
+<li>WebAPI-vim supports only one value for each header.
+<code class="docutils literal"><span class="pre">--http2</span></code>, <code class="docutils literal"><span class="pre">--insecure</span></code> are not supported.</li>
 </ul>
 </div>
 </div>

@@ -6,6 +6,8 @@
 cURL as DSL
 =======================================
 
+* `github repository <https://github.com/shibukawa/curl_as_dsl>`_
+
 .. raw:: html
 
    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -72,11 +74,14 @@ It doens't support fully options of cURL. It supports only options for http 1.x 
           --data-ascii=DATA                   HTTP POST ASCII data (H)
           --data-binary=DATA                  HTTP POST binary data (H)
           --data-urlencode=DATA               HTTP POST data url encoded (H)
-      -G, --get                               Send the -d data with a HTTP GET (H)
       -F, --form=KEY=VALUE                    Specify HTTP multipart POST data (H)
           --form-string=KEY=VALUE             Specify HTTP multipart POST data (H)
+      -G, --get                               Send the -d data with a HTTP GET (H)
       -H, --header=LINE                       Pass custom header LINE to server (H)
       -I, --head                              Show document info only
+          --http1.1                           Use HTTP 1.1 (H)
+          --http2                             Use HTTP 2 (H)
+      -k, --insecure                          Allow connections to SSL sites without certs (H)
       -x, --proxy=[PROTOCOL://]HOST[:PORT]    Use proxy on given port
       -e, --referer=                          Referer URL (H)
       -X, --request=COMMAND                   Specify request command to use
@@ -96,6 +101,7 @@ Document
    generators/index
    what_is_this
    development
+   history
 
 Indices and tables
 ==================

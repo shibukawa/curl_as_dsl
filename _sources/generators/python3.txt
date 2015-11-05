@@ -7,3 +7,5 @@ Restriction
 -------------
 
 This code treats all text as string. It will be error when sending binary files by using ``--data-binary`` option or ``-F`` option. You need to fix the code to support binary file.
+
+``--http2``, ``--insecure`` are not supported.

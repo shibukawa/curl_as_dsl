@@ -7,3 +7,8 @@ This tool supports the following APIs:
 * ``NSURLConnection``
 
 I tested only on Mac OS X.
+
+Restriction
+-------------
+
+``--http2``, ``--insecure`` are not supported.
