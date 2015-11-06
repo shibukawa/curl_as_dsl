@@ -34491,8 +34491,8 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 	};
 	NodeJsGenerator.prototype.indent = function() { return this.$val.indent(); };
 	NodeJsGenerator.ptr.prototype.PrepareOptions = function() {
-		var $ptr, _i, _i$1, _i$2, _r, _r$1, _r$10, _r$11, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _ref$2, buffer, header, header$1, i, indent, self, value, x, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; buffer = $f.buffer; header = $f.header; header$1 = $f.header$1; i = $f.i; indent = $f.indent; self = $f.self; value = $f.value; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _i, _i$1, _i$2, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _ref$2, buffer, header, header$1, i, indent, self, value, x, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; buffer = $f.buffer; header = $f.header; header$1 = $f.header$1; i = $f.i; indent = $f.indent; self = $f.self; value = $f.value; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		self = $clone(this, NodeJsGenerator);
 		buffer = new bytes.Buffer.ptr(sliceType$4.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
 		indent = self.indent();
@@ -34550,8 +34550,15 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 			_r$11 = buffer.WriteString(_r$10); /* */ $s = 23; case 23: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
 			_r$11;
 		/* } */ case 2:
+		/* */ if (self.Options.Insecure) { $s = 24; continue; }
+		/* */ $s = 25; continue;
+		/* if (self.Options.Insecure) { */ case 24:
+			_r$12 = fmt.Sprintf("\n%s    rejectUnauthorized: false,", new sliceType$3([new $String(indent)])); /* */ $s = 26; case 26: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
+			_r$13 = buffer.WriteString(_r$12); /* */ $s = 27; case 27: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
+			_r$13;
+		/* } */ case 25:
 		return buffer.String();
-		/* */ } return; } if ($f === undefined) { $f = { $blk: NodeJsGenerator.ptr.prototype.PrepareOptions }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.header = header; $f.header$1 = header$1; $f.i = i; $f.indent = indent; $f.self = self; $f.value = value; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: NodeJsGenerator.ptr.prototype.PrepareOptions }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.header = header; $f.header$1 = header$1; $f.i = i; $f.indent = indent; $f.self = self; $f.value = value; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	NodeJsGenerator.prototype.PrepareOptions = function() { return this.$val.PrepareOptions(); };
 	NodeJsGenerator.ptr.prototype.AddMultiPartCode = function() {
@@ -34810,6 +34817,7 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 		} else {
 			_key$1 = "http"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[$String.keyFor(_key$1)] = { k: _key$1, v: true };
 			generator.ClientModule = "http";
+			options.Insecure = false;
 		}
 		_ref = options.ProcessedData;
 		_i = 0;
@@ -34860,7 +34868,7 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 			$r = generator.SetFormForBody(); /* */ $s = 16; case 16: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 			$s = 8; continue;
 		/* } else if (_r$2 === "GET" && (generator.processedHeaders.$length === 0) && (generator.specialHeaders.$length === 0)) { */ case 7:
-			if (templateName === "full") {
+			if (templateName === "full" && !options.Insecure) {
 				templateName = "simple_get";
 			}
 		/* } */ case 8:

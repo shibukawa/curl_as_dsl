@@ -4,7 +4,8 @@ History
 11/06/2015
 --------------
 
-* ``--http2``, ``--insecure`` are supported (only for Golang)
+* ``--http2`` is supported (only for Golang)
+* ``--insecure`` is supported (only for Golang and node.js)
 
 03/14/2015
 --------------
