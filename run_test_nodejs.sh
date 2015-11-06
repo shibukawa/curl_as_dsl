@@ -104,3 +104,7 @@ pushd test;node test.js;popd
 echo "case 25: simple get with https"
 ./httpgen -t node curl --insecure https://localhost:18889 > test/test.js
 pushd test;node test.js;popd
+
+echo "case 26: simple get with http2"
+./httpgen -t node curl --insecure --http2 https://localhost:18889 > test/test.js
+pushd test;node test.js;popd

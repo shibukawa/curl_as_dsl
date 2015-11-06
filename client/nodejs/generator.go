@@ -118,28 +118,28 @@ func (self NodeJsGenerator) PrepareOptions() string {
 	var buffer bytes.Buffer
 	indent := self.indent()
 	if len(self.processedHeaders) != 0 || len(self.specialHeaders) != 0 {
-		buffer.WriteString(fmt.Sprintf("\n%s    headers: {\n", indent))
+		fmt.Fprintf(&buffer, "\n%s    headers: {\n", indent)
 		for _, header := range self.processedHeaders {
 			if len(header.Values) == 1 {
-				buffer.WriteString(fmt.Sprintf("%s        \"%s\": \"%s\",\n", indent, header.Key, header.Values[0]))
+				fmt.Fprintf(&buffer, "%s        \"%s\": \"%s\",\n", indent, header.Key, header.Values[0])
 			} else {
-				buffer.WriteString(fmt.Sprintf("%s        \"%s\": [", indent, header.Key))
+				fmt.Fprintf(&buffer, "%s        \"%s\": [", indent, header.Key)
 				for i, value := range header.Values {
 					if i != 0 {
 						buffer.WriteString(", ")
 					}
-					buffer.WriteString(fmt.Sprintf("\"%s\"", value))
+					fmt.Fprintf(&buffer, "\"%s\"", value)
 				}
 				buffer.WriteString("],\n")
 			}
 		}
 		for _, header := range self.specialHeaders {
-			buffer.WriteString(fmt.Sprintf("%s        %s,\n", indent, header))
+			fmt.Fprintf(&buffer, "%s        %s,\n", indent, header)
 		}
-		buffer.WriteString(fmt.Sprintf("%s    },", indent))
+		fmt.Fprintf(&buffer, "%s    },", indent)
 	}
 	if self.Options.Insecure {
-		buffer.WriteString(fmt.Sprintf("\n%s    rejectUnauthorized: false,", indent))
+		fmt.Fprintf(&buffer, "\n%s    rejectUnauthorized: false,", indent)
 
 	}
 	return buffer.String()
@@ -239,23 +239,23 @@ func (self *NodeJsGenerator) SetDataForForm(hasIndent bool) {
 		if count == 0 {
 			buffer.WriteString("var query = querystring.stringify({\n")
 		} else {
-			buffer.WriteString(fmt.Sprintf("%s, \"", indent))
+			fmt.Fprintf(&buffer, "%s, \"", indent)
 		}
 		if len(values) == 1 {
-			buffer.WriteString(fmt.Sprintf("%s    \"%s\": \"%s\",\n", indent, escapeDQ(key), escapeDQ(values[0])))
+			fmt.Fprintf(&buffer, "%s    \"%s\": \"%s\",\n", indent, escapeDQ(key), escapeDQ(values[0]))
 		} else {
-			buffer.WriteString(fmt.Sprintf("%s    \"%s\": [\n%s         ", indent, key, indent))
+			fmt.Fprintf(&buffer, "%s    \"%s\": [\n%s         ", indent, key, indent)
 			for i, value := range values {
 				if i != 0 {
 					buffer.WriteString(", ")
 				}
-				buffer.WriteString(fmt.Sprintf("\"%s\"", escapeDQ(value)))
+				fmt.Fprintf(&buffer, "\"%s\"", escapeDQ(value))
 			}
-			buffer.WriteString(fmt.Sprintf("],\n%s    ", indent))
+			fmt.Fprintf(&buffer, "],\n%s    ", indent)
 		}
 		count++
 	}
-	buffer.WriteString(fmt.Sprintf("});%s\n", indent))
+	fmt.Fprintf(&buffer, "});%s\n", indent)
 
 	self.PrepareBody = buffer.String()
 	self.HasBody = true
@@ -309,13 +309,25 @@ func (self *NodeJsGenerator) SetFormForBody() {
 	self.HasBody = true
 }
 
+func (self NodeJsGenerator) TearDown() string {
+	indent := self.indent()
+	var buffer bytes.Buffer
+	fmt.Fprintf(&buffer, "\n    %sres.on('end', function() {", indent)
+	fmt.Fprintf(&buffer, "\n        %sprocess.exit(0);", indent)
+	fmt.Fprintf(&buffer, "\n    %s});", indent)
+	return buffer.String()
+}
+
 /*
 	Dispatcher function of curl command
 	This is an exported function and called from httpgen.
 */
 func ProcessCurlCommand(options *common.CurlOptions) (string, interface{}) {
 	generator := NewNodeJsGenerator(options)
-	if strings.HasPrefix(options.Url, "https") {
+	if options.Http2Flag {
+		generator.Modules["http2"] = true
+		generator.ClientModule = "http2"
+	} else if strings.HasPrefix(options.Url, "https") {
 		generator.Modules["https"] = true
 		generator.ClientModule = "https"
 	} else {
@@ -446,8 +458,8 @@ func FormString(generator *NodeJsGenerator, data *common.DataOption) string {
 			}
 			// sent file name
 			// field name, source file name
-			buffer.WriteString(fmt.Sprintf("    {key: \"%s\", filename: \"%s\", content: %s, contentType: \"%s\"},\n", field[0],
-				sentFileName, generator.FileContent(), contentType))
+			fmt.Fprintf(&buffer, "    {key: \"%s\", filename: \"%s\", content: %s, contentType: \"%s\"},\n", field[0],
+				sentFileName, generator.FileContent(), contentType)
 			result = buffer.String()
 		} else if strings.HasPrefix(field[1], "<") {
 			var buffer bytes.Buffer
@@ -455,7 +467,7 @@ func FormString(generator *NodeJsGenerator, data *common.DataOption) string {
 			fragments := strings.Split(field[1][1:], ";")
 
 			// field name, content
-			buffer.WriteString(fmt.Sprintf("    {key: \"%s\", value: %s", field[0], generator.FileContent()))
+			fmt.Fprintf(&buffer, "    {key: \"%s\", value: %s", field[0], generator.FileContent())
 
 			var contentType string
 			for _, fragment := range fragments[1:] {
@@ -465,7 +477,7 @@ func FormString(generator *NodeJsGenerator, data *common.DataOption) string {
 				}
 			}
 			if contentType != "" {
-				buffer.WriteString(fmt.Sprintf(", contentType: \"%s\"},\n", contentType))
+				fmt.Fprintf(&buffer, ", contentType: \"%s\"},\n", contentType)
 			} else {
 				buffer.WriteString("},\n")
 			}

@@ -4,7 +4,7 @@
     console.log("Got response: " + res.statusCode + " " + res.statusMessage);
     res.on('data', function (chunk) {
         console.log('BODY: ' + chunk);
-    });
+    });{{ .TearDown }}
 }).on('error', function(e) {
     console.log("Got error: " + e.message);
 });

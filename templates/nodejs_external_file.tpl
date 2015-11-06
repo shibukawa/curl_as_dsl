@@ -15,7 +15,7 @@ fs.readFile("{{ (index .ExternalFiles 0).FileName }}"{{if (index .ExternalFiles 
         console.log("Got response: " + res.statusCode + " " + res.statusMessage);
         res.on('data', function (chunk) {
             console.log('BODY: ' + chunk);
-        });
+        });{{ .TearDown }}
     });
     {{ range $_, $line := .BodyLines}}req.write({{ $line }});
     {{end}}req.end();
