@@ -34491,74 +34491,68 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 	};
 	NodeJsGenerator.prototype.indent = function() { return this.$val.indent(); };
 	NodeJsGenerator.ptr.prototype.PrepareOptions = function() {
-		var $ptr, _i, _i$1, _i$2, _r, _r$1, _r$10, _r$11, _r$12, _r$13, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _ref$2, buffer, header, header$1, i, indent, self, value, x, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$12 = $f._r$12; _r$13 = $f._r$13; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; buffer = $f.buffer; header = $f.header; header$1 = $f.header$1; i = $f.i; indent = $f.indent; self = $f.self; value = $f.value; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _i, _i$1, _i$2, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _ref, _ref$1, _ref$2, buffer, header, header$1, i, indent, self, value, x, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; buffer = $f.buffer; header = $f.header; header$1 = $f.header$1; i = $f.i; indent = $f.indent; self = $f.self; value = $f.value; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		buffer = [buffer];
 		self = $clone(this, NodeJsGenerator);
-		buffer = new bytes.Buffer.ptr(sliceType$4.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
+		buffer[0] = new bytes.Buffer.ptr(sliceType$4.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
 		indent = self.indent();
 		/* */ if (!((self.processedHeaders.$length === 0)) || !((self.specialHeaders.$length === 0))) { $s = 1; continue; }
 		/* */ $s = 2; continue;
 		/* if (!((self.processedHeaders.$length === 0)) || !((self.specialHeaders.$length === 0))) { */ case 1:
-			_r = fmt.Sprintf("\n%s    headers: {\n", new sliceType$3([new $String(indent)])); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-			_r$1 = buffer.WriteString(_r); /* */ $s = 4; case 4: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-			_r$1;
+			_r = fmt.Fprintf(buffer[0], "\n%s    headers: {\n", new sliceType$3([new $String(indent)])); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			_r;
 			_ref = self.processedHeaders;
 			_i = 0;
-			/* while (true) { */ case 5:
-				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 6; continue; }
+			/* while (true) { */ case 4:
+				/* if (!(_i < _ref.$length)) { break; } */ if(!(_i < _ref.$length)) { $s = 5; continue; }
 				header = $clone(((_i < 0 || _i >= _ref.$length) ? $throwRuntimeError("index out of range") : _ref.$array[_ref.$offset + _i]), common.HeaderGroup);
-				/* */ if (header.Values.$length === 1) { $s = 7; continue; }
-				/* */ $s = 8; continue;
-				/* if (header.Values.$length === 1) { */ case 7:
-					_r$2 = fmt.Sprintf("%s        \"%s\": \"%s\",\n", new sliceType$3([new $String(indent), new $String(header.Key), new $String((x = header.Values, (0 >= x.$length ? $throwRuntimeError("index out of range") : x.$array[x.$offset + 0])))])); /* */ $s = 10; case 10: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-					_r$3 = buffer.WriteString(_r$2); /* */ $s = 11; case 11: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-					_r$3;
-					$s = 9; continue;
-				/* } else { */ case 8:
-					_r$4 = fmt.Sprintf("%s        \"%s\": [", new sliceType$3([new $String(indent), new $String(header.Key)])); /* */ $s = 12; case 12: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-					_r$5 = buffer.WriteString(_r$4); /* */ $s = 13; case 13: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-					_r$5;
+				/* */ if (header.Values.$length === 1) { $s = 6; continue; }
+				/* */ $s = 7; continue;
+				/* if (header.Values.$length === 1) { */ case 6:
+					_r$1 = fmt.Fprintf(buffer[0], "%s        \"%s\": \"%s\",\n", new sliceType$3([new $String(indent), new $String(header.Key), new $String((x = header.Values, (0 >= x.$length ? $throwRuntimeError("index out of range") : x.$array[x.$offset + 0])))])); /* */ $s = 9; case 9: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+					_r$1;
+					$s = 8; continue;
+				/* } else { */ case 7:
+					_r$2 = fmt.Fprintf(buffer[0], "%s        \"%s\": [", new sliceType$3([new $String(indent), new $String(header.Key)])); /* */ $s = 10; case 10: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+					_r$2;
 					_ref$1 = header.Values;
 					_i$1 = 0;
-					/* while (true) { */ case 14:
-						/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 15; continue; }
+					/* while (true) { */ case 11:
+						/* if (!(_i$1 < _ref$1.$length)) { break; } */ if(!(_i$1 < _ref$1.$length)) { $s = 12; continue; }
 						i = _i$1;
 						value = ((_i$1 < 0 || _i$1 >= _ref$1.$length) ? $throwRuntimeError("index out of range") : _ref$1.$array[_ref$1.$offset + _i$1]);
 						if (!((i === 0))) {
-							buffer.WriteString(", ");
+							buffer[0].WriteString(", ");
 						}
-						_r$6 = fmt.Sprintf("\"%s\"", new sliceType$3([new $String(value)])); /* */ $s = 16; case 16: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-						_r$7 = buffer.WriteString(_r$6); /* */ $s = 17; case 17: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-						_r$7;
+						_r$3 = fmt.Fprintf(buffer[0], "\"%s\"", new sliceType$3([new $String(value)])); /* */ $s = 13; case 13: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+						_r$3;
 						_i$1++;
-					/* } */ $s = 14; continue; case 15:
-					buffer.WriteString("],\n");
-				/* } */ case 9:
+					/* } */ $s = 11; continue; case 12:
+					buffer[0].WriteString("],\n");
+				/* } */ case 8:
 				_i++;
-			/* } */ $s = 5; continue; case 6:
+			/* } */ $s = 4; continue; case 5:
 			_ref$2 = self.specialHeaders;
 			_i$2 = 0;
-			/* while (true) { */ case 18:
-				/* if (!(_i$2 < _ref$2.$length)) { break; } */ if(!(_i$2 < _ref$2.$length)) { $s = 19; continue; }
+			/* while (true) { */ case 14:
+				/* if (!(_i$2 < _ref$2.$length)) { break; } */ if(!(_i$2 < _ref$2.$length)) { $s = 15; continue; }
 				header$1 = ((_i$2 < 0 || _i$2 >= _ref$2.$length) ? $throwRuntimeError("index out of range") : _ref$2.$array[_ref$2.$offset + _i$2]);
-				_r$8 = fmt.Sprintf("%s        %s,\n", new sliceType$3([new $String(indent), new $String(header$1)])); /* */ $s = 20; case 20: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
-				_r$9 = buffer.WriteString(_r$8); /* */ $s = 21; case 21: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
-				_r$9;
+				_r$4 = fmt.Fprintf(buffer[0], "%s        %s,\n", new sliceType$3([new $String(indent), new $String(header$1)])); /* */ $s = 16; case 16: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+				_r$4;
 				_i$2++;
-			/* } */ $s = 18; continue; case 19:
-			_r$10 = fmt.Sprintf("%s    },", new sliceType$3([new $String(indent)])); /* */ $s = 22; case 22: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
-			_r$11 = buffer.WriteString(_r$10); /* */ $s = 23; case 23: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
-			_r$11;
+			/* } */ $s = 14; continue; case 15:
+			_r$5 = fmt.Fprintf(buffer[0], "%s    },", new sliceType$3([new $String(indent)])); /* */ $s = 17; case 17: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			_r$5;
 		/* } */ case 2:
-		/* */ if (self.Options.Insecure) { $s = 24; continue; }
-		/* */ $s = 25; continue;
-		/* if (self.Options.Insecure) { */ case 24:
-			_r$12 = fmt.Sprintf("\n%s    rejectUnauthorized: false,", new sliceType$3([new $String(indent)])); /* */ $s = 26; case 26: if($c) { $c = false; _r$12 = _r$12.$blk(); } if (_r$12 && _r$12.$blk !== undefined) { break s; }
-			_r$13 = buffer.WriteString(_r$12); /* */ $s = 27; case 27: if($c) { $c = false; _r$13 = _r$13.$blk(); } if (_r$13 && _r$13.$blk !== undefined) { break s; }
-			_r$13;
-		/* } */ case 25:
-		return buffer.String();
-		/* */ } return; } if ($f === undefined) { $f = { $blk: NodeJsGenerator.ptr.prototype.PrepareOptions }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$12 = _r$12; $f._r$13 = _r$13; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.header = header; $f.header$1 = header$1; $f.i = i; $f.indent = indent; $f.self = self; $f.value = value; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ if (self.Options.Insecure) { $s = 18; continue; }
+		/* */ $s = 19; continue;
+		/* if (self.Options.Insecure) { */ case 18:
+			_r$6 = fmt.Fprintf(buffer[0], "\n%s    rejectUnauthorized: false,", new sliceType$3([new $String(indent)])); /* */ $s = 20; case 20: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+			_r$6;
+		/* } */ case 19:
+		return buffer[0].String();
+		/* */ } return; } if ($f === undefined) { $f = { $blk: NodeJsGenerator.ptr.prototype.PrepareOptions }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.header = header; $f.header$1 = header$1; $f.i = i; $f.indent = indent; $f.self = self; $f.value = value; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	NodeJsGenerator.prototype.PrepareOptions = function() { return this.$val.PrepareOptions(); };
 	NodeJsGenerator.ptr.prototype.AddMultiPartCode = function() {
@@ -34638,8 +34632,9 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 	};
 	NodeJsGenerator.prototype.SetDataForBody = function() { return this.$val.SetDataForBody(); };
 	NodeJsGenerator.ptr.prototype.SetDataForForm = function(hasIndent) {
-		var $ptr, _entry, _entry$1, _entry$2, _i, _i$1, _i$2, _i$3, _key, _key$1, _keys, _keys$1, _r, _r$1, _r$10, _r$11, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _ref$2, _ref$3, _tuple, buffer, count, data, entries, hasIndent, i, indent, key, key$1, self, singleData, value, values, values$1, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _entry = $f._entry; _entry$1 = $f._entry$1; _entry$2 = $f._entry$2; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _i$3 = $f._i$3; _key = $f._key; _key$1 = $f._key$1; _keys = $f._keys; _keys$1 = $f._keys$1; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; _ref$3 = $f._ref$3; _tuple = $f._tuple; buffer = $f.buffer; count = $f.count; data = $f.data; entries = $f.entries; hasIndent = $f.hasIndent; i = $f.i; indent = $f.indent; key = $f.key; key$1 = $f.key$1; self = $f.self; singleData = $f.singleData; value = $f.value; values = $f.values; values$1 = $f.values$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _entry, _entry$1, _entry$2, _i, _i$1, _i$2, _i$3, _key, _key$1, _keys, _keys$1, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _ref, _ref$1, _ref$2, _ref$3, _tuple, buffer, count, data, entries, hasIndent, i, indent, key, key$1, self, singleData, value, values, values$1, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _entry = $f._entry; _entry$1 = $f._entry$1; _entry$2 = $f._entry$2; _i = $f._i; _i$1 = $f._i$1; _i$2 = $f._i$2; _i$3 = $f._i$3; _key = $f._key; _key$1 = $f._key$1; _keys = $f._keys; _keys$1 = $f._keys$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; _ref$3 = $f._ref$3; _tuple = $f._tuple; buffer = $f.buffer; count = $f.count; data = $f.data; entries = $f.entries; hasIndent = $f.hasIndent; i = $f.i; indent = $f.indent; key = $f.key; key$1 = $f.key$1; self = $f.self; singleData = $f.singleData; value = $f.value; values = $f.values; values$1 = $f.values$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		buffer = [buffer];
 		self = this;
 		entries = {};
 		indent = "";
@@ -34672,7 +34667,7 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 			}
 			_i++;
 		}
-		buffer = new bytes.Buffer.ptr(sliceType$4.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
+		buffer[0] = new bytes.Buffer.ptr(sliceType$4.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
 		count = 0;
 		_ref$2 = entries;
 		_i$2 = 0;
@@ -34689,53 +34684,47 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 			/* */ if (count === 0) { $s = 3; continue; }
 			/* */ $s = 4; continue;
 			/* if (count === 0) { */ case 3:
-				buffer.WriteString("var query = querystring.stringify({\n");
+				buffer[0].WriteString("var query = querystring.stringify({\n");
 				$s = 5; continue;
 			/* } else { */ case 4:
-				_r = fmt.Sprintf("%s, \"", new sliceType$3([new $String(indent)])); /* */ $s = 6; case 6: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-				_r$1 = buffer.WriteString(_r); /* */ $s = 7; case 7: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-				_r$1;
+				_r = fmt.Fprintf(buffer[0], "%s, \"", new sliceType$3([new $String(indent)])); /* */ $s = 6; case 6: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+				_r;
 			/* } */ case 5:
-			/* */ if (values$1.$length === 1) { $s = 8; continue; }
-			/* */ $s = 9; continue;
-			/* if (values$1.$length === 1) { */ case 8:
-				_r$2 = fmt.Sprintf("%s    \"%s\": \"%s\",\n", new sliceType$3([new $String(indent), new $String(escapeDQ(key$1)), new $String(escapeDQ((0 >= values$1.$length ? $throwRuntimeError("index out of range") : values$1.$array[values$1.$offset + 0])))])); /* */ $s = 11; case 11: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-				_r$3 = buffer.WriteString(_r$2); /* */ $s = 12; case 12: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-				_r$3;
-				$s = 10; continue;
-			/* } else { */ case 9:
-				_r$4 = fmt.Sprintf("%s    \"%s\": [\n%s         ", new sliceType$3([new $String(indent), new $String(key$1), new $String(indent)])); /* */ $s = 13; case 13: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-				_r$5 = buffer.WriteString(_r$4); /* */ $s = 14; case 14: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-				_r$5;
+			/* */ if (values$1.$length === 1) { $s = 7; continue; }
+			/* */ $s = 8; continue;
+			/* if (values$1.$length === 1) { */ case 7:
+				_r$1 = fmt.Fprintf(buffer[0], "%s    \"%s\": \"%s\",\n", new sliceType$3([new $String(indent), new $String(escapeDQ(key$1)), new $String(escapeDQ((0 >= values$1.$length ? $throwRuntimeError("index out of range") : values$1.$array[values$1.$offset + 0])))])); /* */ $s = 10; case 10: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+				_r$1;
+				$s = 9; continue;
+			/* } else { */ case 8:
+				_r$2 = fmt.Fprintf(buffer[0], "%s    \"%s\": [\n%s         ", new sliceType$3([new $String(indent), new $String(key$1), new $String(indent)])); /* */ $s = 11; case 11: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+				_r$2;
 				_ref$3 = values$1;
 				_i$3 = 0;
-				/* while (true) { */ case 15:
-					/* if (!(_i$3 < _ref$3.$length)) { break; } */ if(!(_i$3 < _ref$3.$length)) { $s = 16; continue; }
+				/* while (true) { */ case 12:
+					/* if (!(_i$3 < _ref$3.$length)) { break; } */ if(!(_i$3 < _ref$3.$length)) { $s = 13; continue; }
 					i = _i$3;
 					value = ((_i$3 < 0 || _i$3 >= _ref$3.$length) ? $throwRuntimeError("index out of range") : _ref$3.$array[_ref$3.$offset + _i$3]);
 					if (!((i === 0))) {
-						buffer.WriteString(", ");
+						buffer[0].WriteString(", ");
 					}
-					_r$6 = fmt.Sprintf("\"%s\"", new sliceType$3([new $String(escapeDQ(value))])); /* */ $s = 17; case 17: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-					_r$7 = buffer.WriteString(_r$6); /* */ $s = 18; case 18: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-					_r$7;
+					_r$3 = fmt.Fprintf(buffer[0], "\"%s\"", new sliceType$3([new $String(escapeDQ(value))])); /* */ $s = 14; case 14: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+					_r$3;
 					_i$3++;
-				/* } */ $s = 15; continue; case 16:
-				_r$8 = fmt.Sprintf("],\n%s    ", new sliceType$3([new $String(indent)])); /* */ $s = 19; case 19: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
-				_r$9 = buffer.WriteString(_r$8); /* */ $s = 20; case 20: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
-				_r$9;
-			/* } */ case 10:
+				/* } */ $s = 12; continue; case 13:
+				_r$4 = fmt.Fprintf(buffer[0], "],\n%s    ", new sliceType$3([new $String(indent)])); /* */ $s = 15; case 15: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+				_r$4;
+			/* } */ case 9:
 			count = count + (1) >> 0;
 			_i$2++;
 		/* } */ $s = 1; continue; case 2:
-		_r$10 = fmt.Sprintf("});%s\n", new sliceType$3([new $String(indent)])); /* */ $s = 21; case 21: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
-		_r$11 = buffer.WriteString(_r$10); /* */ $s = 22; case 22: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
-		_r$11;
-		self.PrepareBody = buffer.String();
+		_r$5 = fmt.Fprintf(buffer[0], "});%s\n", new sliceType$3([new $String(indent)])); /* */ $s = 16; case 16: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+		_r$5;
+		self.PrepareBody = buffer[0].String();
 		self.HasBody = true;
 		self.BodyLines = $append(self.BodyLines, "query");
 		_key$1 = "querystring"; (self.Modules || $throwRuntimeError("assignment to entry in nil map"))[$String.keyFor(_key$1)] = { k: _key$1, v: true };
-		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: NodeJsGenerator.ptr.prototype.SetDataForForm }; } $f.$ptr = $ptr; $f._entry = _entry; $f._entry$1 = _entry$1; $f._entry$2 = _entry$2; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._i$3 = _i$3; $f._key = _key; $f._key$1 = _key$1; $f._keys = _keys; $f._keys$1 = _keys$1; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f._ref$3 = _ref$3; $f._tuple = _tuple; $f.buffer = buffer; $f.count = count; $f.data = data; $f.entries = entries; $f.hasIndent = hasIndent; $f.i = i; $f.indent = indent; $f.key = key; $f.key$1 = key$1; $f.self = self; $f.singleData = singleData; $f.value = value; $f.values = values; $f.values$1 = values$1; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: NodeJsGenerator.ptr.prototype.SetDataForForm }; } $f.$ptr = $ptr; $f._entry = _entry; $f._entry$1 = _entry$1; $f._entry$2 = _entry$2; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._i$3 = _i$3; $f._key = _key; $f._key$1 = _key$1; $f._keys = _keys; $f._keys$1 = _keys$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f._ref$3 = _ref$3; $f._tuple = _tuple; $f.buffer = buffer; $f.count = count; $f.data = data; $f.entries = entries; $f.hasIndent = hasIndent; $f.i = i; $f.indent = indent; $f.key = key; $f.key$1 = key$1; $f.self = self; $f.singleData = singleData; $f.value = value; $f.values = values; $f.values$1 = values$1; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	NodeJsGenerator.prototype.SetDataForForm = function(hasIndent) { return this.$val.SetDataForForm(hasIndent); };
 	NodeJsGenerator.ptr.prototype.SetFormForBody = function() {
@@ -34807,15 +34796,35 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: NodeJsGenerator.ptr.prototype.SetFormForBody }; } $f.$ptr = $ptr; $f._i = _i; $f._i$1 = _i$1; $f._i$2 = _i$2; $f._r = _r; $f._r$1 = _r$1; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.data = data; $f.fields = fields; $f.files = files; $f.indent = indent; $f.self = self; $f.value = value; $f.value$1 = value$1; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	NodeJsGenerator.prototype.SetFormForBody = function() { return this.$val.SetFormForBody(); };
+	NodeJsGenerator.ptr.prototype.TearDown = function() {
+		var $ptr, _r, _r$1, _r$2, buffer, indent, self, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; buffer = $f.buffer; indent = $f.indent; self = $f.self; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		buffer = [buffer];
+		self = $clone(this, NodeJsGenerator);
+		indent = self.indent();
+		buffer[0] = new bytes.Buffer.ptr(sliceType$4.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
+		_r = fmt.Fprintf(buffer[0], "\n    %sres.on('end', function() {", new sliceType$3([new $String(indent)])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r;
+		_r$1 = fmt.Fprintf(buffer[0], "\n        %sprocess.exit(0);", new sliceType$3([new $String(indent)])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		_r$1;
+		_r$2 = fmt.Fprintf(buffer[0], "\n    %s});", new sliceType$3([new $String(indent)])); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		_r$2;
+		return buffer[0].String();
+		/* */ } return; } if ($f === undefined) { $f = { $blk: NodeJsGenerator.ptr.prototype.TearDown }; } $f.$ptr = $ptr; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f.buffer = buffer; $f.indent = indent; $f.self = self; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	NodeJsGenerator.prototype.TearDown = function() { return this.$val.TearDown(); };
 	ProcessCurlCommand = function(options) {
-		var $ptr, _i, _key, _key$1, _r, _r$1, _r$2, _ref, _ref$1, data, fileName, generator, isText, options, templateName, x, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _key = $f._key; _key$1 = $f._key$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _ref = $f._ref; _ref$1 = $f._ref$1; data = $f.data; fileName = $f.fileName; generator = $f.generator; isText = $f.isText; options = $f.options; templateName = $f.templateName; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _i, _key, _key$1, _key$2, _r, _r$1, _r$2, _ref, _ref$1, data, fileName, generator, isText, options, templateName, x, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _i = $f._i; _key = $f._key; _key$1 = $f._key$1; _key$2 = $f._key$2; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _ref = $f._ref; _ref$1 = $f._ref$1; data = $f.data; fileName = $f.fileName; generator = $f.generator; isText = $f.isText; options = $f.options; templateName = $f.templateName; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		generator = NewNodeJsGenerator(options);
-		if (strings.HasPrefix(options.Url, "https")) {
-			_key = "https"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[$String.keyFor(_key)] = { k: _key, v: true };
+		if (options.Http2Flag) {
+			_key = "http2"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[$String.keyFor(_key)] = { k: _key, v: true };
+			generator.ClientModule = "http2";
+		} else if (strings.HasPrefix(options.Url, "https")) {
+			_key$1 = "https"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[$String.keyFor(_key$1)] = { k: _key$1, v: true };
 			generator.ClientModule = "https";
 		} else {
-			_key$1 = "http"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[$String.keyFor(_key$1)] = { k: _key$1, v: true };
+			_key$2 = "http"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[$String.keyFor(_key$2)] = { k: _key$2, v: true };
 			generator.ClientModule = "http";
 			options.Insecure = false;
 		}
@@ -34873,7 +34882,7 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 			}
 		/* } */ case 8:
 		return [templateName, (x = generator, new x.constructor.elem(x))];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: ProcessCurlCommand }; } $f.$ptr = $ptr; $f._i = _i; $f._key = _key; $f._key$1 = _key$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._ref = _ref; $f._ref$1 = _ref$1; $f.data = data; $f.fileName = fileName; $f.generator = generator; $f.isText = isText; $f.options = options; $f.templateName = templateName; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: ProcessCurlCommand }; } $f.$ptr = $ptr; $f._i = _i; $f._key = _key; $f._key$1 = _key$1; $f._key$2 = _key$2; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._ref = _ref; $f._ref$1 = _ref$1; $f.data = data; $f.fileName = fileName; $f.generator = generator; $f.isText = isText; $f.options = options; $f.templateName = templateName; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.ProcessCurlCommand = ProcessCurlCommand;
 	NewStringForData = function(generator, data) {
@@ -34993,8 +35002,10 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 	};
 	$pkg.StringForData = StringForData;
 	FormString = function(generator, data) {
-		var $ptr, _arg, _arg$1, _arg$2, _arg$3, _arg$4, _arg$5, _i, _i$1, _r, _r$1, _r$10, _r$11, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _ref, _ref$1, _ref$2, buffer, buffer$1, contentType, contentType$1, data, field, field$1, fragment, fragment$1, fragments, fragments$1, generator, result, sentFileName, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _arg$3 = $f._arg$3; _arg$4 = $f._arg$4; _arg$5 = $f._arg$5; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$10 = $f._r$10; _r$11 = $f._r$11; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; buffer = $f.buffer; buffer$1 = $f.buffer$1; contentType = $f.contentType; contentType$1 = $f.contentType$1; data = $f.data; field = $f.field; field$1 = $f.field$1; fragment = $f.fragment; fragment$1 = $f.fragment$1; fragments = $f.fragments; fragments$1 = $f.fragments$1; generator = $f.generator; result = $f.result; sentFileName = $f.sentFileName; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var $ptr, _arg, _arg$1, _arg$2, _arg$3, _arg$4, _arg$5, _arg$6, _arg$7, _i, _i$1, _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _ref, _ref$1, _ref$2, buffer, buffer$1, contentType, contentType$1, data, field, field$1, fragment, fragment$1, fragments, fragments$1, generator, result, sentFileName, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $ptr = $f.$ptr; _arg = $f._arg; _arg$1 = $f._arg$1; _arg$2 = $f._arg$2; _arg$3 = $f._arg$3; _arg$4 = $f._arg$4; _arg$5 = $f._arg$5; _arg$6 = $f._arg$6; _arg$7 = $f._arg$7; _i = $f._i; _i$1 = $f._i$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _ref = $f._ref; _ref$1 = $f._ref$1; _ref$2 = $f._ref$2; buffer = $f.buffer; buffer$1 = $f.buffer$1; contentType = $f.contentType; contentType$1 = $f.contentType$1; data = $f.data; field = $f.field; field$1 = $f.field$1; fragment = $f.fragment; fragment$1 = $f.fragment$1; fragments = $f.fragments; fragments$1 = $f.fragments$1; generator = $f.generator; result = $f.result; sentFileName = $f.sentFileName; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		buffer = [buffer];
+		buffer$1 = [buffer$1];
 		result = "";
 		_ref = data.Type;
 		/* */ if (_ref === 3) { $s = 1; continue; }
@@ -35013,7 +35024,7 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 			/* */ if (strings.HasPrefix((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]), "<")) { $s = 8; continue; }
 			/* */ $s = 9; continue;
 			/* if (strings.HasPrefix((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]), "@")) { */ case 7:
-				buffer = new bytes.Buffer.ptr(sliceType$4.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
+				buffer[0] = new bytes.Buffer.ptr(sliceType$4.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
 				fragments = strings.Split((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]).substring(1), ";");
 				contentType = "application/octet-stream";
 				sentFileName = (0 >= fragments.$length ? $throwRuntimeError("index out of range") : fragments.$array[fragments.$offset + 0]);
@@ -35029,25 +35040,25 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 					}
 					_i++;
 				}
-				_arg = new $String((0 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 0]));
-				_arg$1 = new $String(sentFileName);
+				_arg = buffer[0];
+				_arg$1 = new $String((0 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 0]));
+				_arg$2 = new $String(sentFileName);
 				_r$1 = generator.FileContent(); /* */ $s = 11; case 11: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-				_arg$2 = new $String(_r$1);
-				_arg$3 = new $String(contentType);
-				_r$2 = fmt.Sprintf("    {key: \"%s\", filename: \"%s\", content: %s, contentType: \"%s\"},\n", new sliceType$3([_arg, _arg$1, _arg$2, _arg$3])); /* */ $s = 12; case 12: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-				_r$3 = buffer.WriteString(_r$2); /* */ $s = 13; case 13: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-				_r$3;
-				result = buffer.String();
+				_arg$3 = new $String(_r$1);
+				_arg$4 = new $String(contentType);
+				_r$2 = fmt.Fprintf(_arg, "    {key: \"%s\", filename: \"%s\", content: %s, contentType: \"%s\"},\n", new sliceType$3([_arg$1, _arg$2, _arg$3, _arg$4])); /* */ $s = 12; case 12: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+				_r$2;
+				result = buffer[0].String();
 				$s = 10; continue;
 			/* } else if (strings.HasPrefix((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]), "<")) { */ case 8:
-				buffer$1 = new bytes.Buffer.ptr(sliceType$4.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
+				buffer$1[0] = new bytes.Buffer.ptr(sliceType$4.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
 				fragments$1 = strings.Split((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]).substring(1), ";");
-				_arg$4 = new $String((0 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 0]));
-				_r$4 = generator.FileContent(); /* */ $s = 14; case 14: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
-				_arg$5 = new $String(_r$4);
-				_r$5 = fmt.Sprintf("    {key: \"%s\", value: %s", new sliceType$3([_arg$4, _arg$5])); /* */ $s = 15; case 15: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
-				_r$6 = buffer$1.WriteString(_r$5); /* */ $s = 16; case 16: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
-				_r$6;
+				_arg$5 = buffer$1[0];
+				_arg$6 = new $String((0 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 0]));
+				_r$3 = generator.FileContent(); /* */ $s = 13; case 13: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+				_arg$7 = new $String(_r$3);
+				_r$4 = fmt.Fprintf(_arg$5, "    {key: \"%s\", value: %s", new sliceType$3([_arg$6, _arg$7])); /* */ $s = 14; case 14: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+				_r$4;
 				contentType$1 = "";
 				_ref$2 = $subslice(fragments$1, 1);
 				_i$1 = 0;
@@ -35060,40 +35071,39 @@ $packages["github.com/shibukawa/curl_as_dsl/client/nodejs"] = (function() {
 					}
 					_i$1++;
 				}
-				/* */ if (!(contentType$1 === "")) { $s = 17; continue; }
-				/* */ $s = 18; continue;
-				/* if (!(contentType$1 === "")) { */ case 17:
-					_r$7 = fmt.Sprintf(", contentType: \"%s\"},\n", new sliceType$3([new $String(contentType$1)])); /* */ $s = 20; case 20: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
-					_r$8 = buffer$1.WriteString(_r$7); /* */ $s = 21; case 21: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
-					_r$8;
-					$s = 19; continue;
-				/* } else { */ case 18:
-					buffer$1.WriteString("},\n");
-				/* } */ case 19:
-				result = buffer$1.String();
+				/* */ if (!(contentType$1 === "")) { $s = 15; continue; }
+				/* */ $s = 16; continue;
+				/* if (!(contentType$1 === "")) { */ case 15:
+					_r$5 = fmt.Fprintf(buffer$1[0], ", contentType: \"%s\"},\n", new sliceType$3([new $String(contentType$1)])); /* */ $s = 18; case 18: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+					_r$5;
+					$s = 17; continue;
+				/* } else { */ case 16:
+					buffer$1[0].WriteString("},\n");
+				/* } */ case 17:
+				result = buffer$1[0].String();
 				$s = 10; continue;
 			/* } else { */ case 9:
-				_r$9 = fmt.Sprintf("    {key: \"%s\", value: \"%s\"},\n", new sliceType$3([new $String((0 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 0])), new $String((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]))])); /* */ $s = 22; case 22: if($c) { $c = false; _r$9 = _r$9.$blk(); } if (_r$9 && _r$9.$blk !== undefined) { break s; }
-				result = _r$9;
+				_r$6 = fmt.Sprintf("    {key: \"%s\", value: \"%s\"},\n", new sliceType$3([new $String((0 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 0])), new $String((1 >= field.$length ? $throwRuntimeError("index out of range") : field.$array[field.$offset + 1]))])); /* */ $s = 19; case 19: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+				result = _r$6;
 			/* } */ case 10:
 			$s = 3; continue;
 		/* } else if (_ref === 4) { */ case 2:
 			field$1 = strings.SplitN(data.Value, "=", 2);
-			/* */ if (!((field$1.$length === 2))) { $s = 23; continue; }
-			/* */ $s = 24; continue;
-			/* if (!((field$1.$length === 2))) { */ case 23:
-				_r$10 = fmt.Fprintln(os.Stderr, new sliceType$3([new $String("Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")])); /* */ $s = 25; case 25: if($c) { $c = false; _r$10 = _r$10.$blk(); } if (_r$10 && _r$10.$blk !== undefined) { break s; }
-				_r$10;
+			/* */ if (!((field$1.$length === 2))) { $s = 20; continue; }
+			/* */ $s = 21; continue;
+			/* if (!((field$1.$length === 2))) { */ case 20:
+				_r$7 = fmt.Fprintln(os.Stderr, new sliceType$3([new $String("Warning: Illegally formatted input field!\ncurl: option -F: is badly used here")])); /* */ $s = 22; case 22: if($c) { $c = false; _r$7 = _r$7.$blk(); } if (_r$7 && _r$7.$blk !== undefined) { break s; }
+				_r$7;
 				os.Exit(1);
-			/* } */ case 24:
-			_r$11 = fmt.Sprintf("    {key: \"%s\", value: \"%s\"},\n", new sliceType$3([new $String((0 >= field$1.$length ? $throwRuntimeError("index out of range") : field$1.$array[field$1.$offset + 0])), new $String((1 >= field$1.$length ? $throwRuntimeError("index out of range") : field$1.$array[field$1.$offset + 1]))])); /* */ $s = 26; case 26: if($c) { $c = false; _r$11 = _r$11.$blk(); } if (_r$11 && _r$11.$blk !== undefined) { break s; }
-			result = _r$11;
+			/* } */ case 21:
+			_r$8 = fmt.Sprintf("    {key: \"%s\", value: \"%s\"},\n", new sliceType$3([new $String((0 >= field$1.$length ? $throwRuntimeError("index out of range") : field$1.$array[field$1.$offset + 0])), new $String((1 >= field$1.$length ? $throwRuntimeError("index out of range") : field$1.$array[field$1.$offset + 1]))])); /* */ $s = 23; case 23: if($c) { $c = false; _r$8 = _r$8.$blk(); } if (_r$8 && _r$8.$blk !== undefined) { break s; }
+			result = _r$8;
 		/* } */ case 3:
 		return result;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: FormString }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$10 = _r$10; $f._r$11 = _r$11; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._r$9 = _r$9; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.buffer$1 = buffer$1; $f.contentType = contentType; $f.contentType$1 = contentType$1; $f.data = data; $f.field = field; $f.field$1 = field$1; $f.fragment = fragment; $f.fragment$1 = fragment$1; $f.fragments = fragments; $f.fragments$1 = fragments$1; $f.generator = generator; $f.result = result; $f.sentFileName = sentFileName; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: FormString }; } $f.$ptr = $ptr; $f._arg = _arg; $f._arg$1 = _arg$1; $f._arg$2 = _arg$2; $f._arg$3 = _arg$3; $f._arg$4 = _arg$4; $f._arg$5 = _arg$5; $f._arg$6 = _arg$6; $f._arg$7 = _arg$7; $f._i = _i; $f._i$1 = _i$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._r$7 = _r$7; $f._r$8 = _r$8; $f._ref = _ref; $f._ref$1 = _ref$1; $f._ref$2 = _ref$2; $f.buffer = buffer; $f.buffer$1 = buffer$1; $f.contentType = contentType; $f.contentType$1 = contentType$1; $f.data = data; $f.field = field; $f.field$1 = field$1; $f.fragment = fragment; $f.fragment$1 = fragment$1; $f.fragments = fragments; $f.fragments$1 = fragments$1; $f.generator = generator; $f.result = result; $f.sentFileName = sentFileName; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.FormString = FormString;
-	NodeJsGenerator.methods = [{prop: "Url", name: "Url", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Host", name: "Host", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Port", name: "Port", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Method", name: "Method", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Path", name: "Path", pkg: "", typ: $funcType([], [$String], false)}, {prop: "indent", name: "indent", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: $funcType([], [$String], false)}, {prop: "PrepareOptions", name: "PrepareOptions", pkg: "", typ: $funcType([], [$String], false)}];
+	NodeJsGenerator.methods = [{prop: "Url", name: "Url", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Host", name: "Host", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Port", name: "Port", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Method", name: "Method", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Path", name: "Path", pkg: "", typ: $funcType([], [$String], false)}, {prop: "indent", name: "indent", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: $funcType([], [$String], false)}, {prop: "PrepareOptions", name: "PrepareOptions", pkg: "", typ: $funcType([], [$String], false)}, {prop: "TearDown", name: "TearDown", pkg: "", typ: $funcType([], [$String], false)}];
 	ptrType$2.methods = [{prop: "AddMultiPartCode", name: "AddMultiPartCode", pkg: "", typ: $funcType([], [], false)}, {prop: "FileContent", name: "FileContent", pkg: "", typ: $funcType([], [$String], false)}, {prop: "SetDataForUrl", name: "SetDataForUrl", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForBody", name: "SetDataForBody", pkg: "", typ: $funcType([], [], false)}, {prop: "SetDataForForm", name: "SetDataForForm", pkg: "", typ: $funcType([$Bool], [], false)}, {prop: "SetFormForBody", name: "SetFormForBody", pkg: "", typ: $funcType([], [], false)}];
 	ExternalFile.init([{prop: "FileName", name: "FileName", pkg: "", typ: $String, tag: ""}, {prop: "TextType", name: "TextType", pkg: "", typ: $Bool, tag: ""}]);
 	NodeJsGenerator.init([{prop: "Options", name: "Options", pkg: "", typ: ptrType, tag: ""}, {prop: "Modules", name: "Modules", pkg: "", typ: mapType, tag: ""}, {prop: "ClientModule", name: "ClientModule", pkg: "", typ: $String, tag: ""}, {prop: "PrepareBody", name: "PrepareBody", pkg: "", typ: $String, tag: ""}, {prop: "HasBody", name: "HasBody", pkg: "", typ: $Bool, tag: ""}, {prop: "BodyLines", name: "BodyLines", pkg: "", typ: sliceType, tag: ""}, {prop: "ExternalFiles", name: "ExternalFiles", pkg: "", typ: sliceType$1, tag: ""}, {prop: "usedFile", name: "usedFile", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: $Int, tag: ""}, {prop: "extraUrl", name: "extraUrl", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: $String, tag: ""}, {prop: "AdditionalDeclaration", name: "AdditionalDeclaration", pkg: "", typ: $String, tag: ""}, {prop: "processedHeaders", name: "processedHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: sliceType$2, tag: ""}, {prop: "specialHeaders", name: "specialHeaders", pkg: "github.com/shibukawa/curl_as_dsl/client/nodejs", typ: sliceType, tag: ""}, {prop: "UseSimpleGet", name: "UseSimpleGet", pkg: "", typ: $Bool, tag: ""}]);
@@ -57687,7 +57697,7 @@ $packages["github.com/shibukawa/curl_as_dsl/generator"] = (function() {
 		if (!($interfaceIsEqual(err, $ifaceNil))) {
 			return [ptrType.nil, err];
 		}
-		info = new bindataFileInfo.ptr("templates/nodejs_external_file.tpl", new $Int64(0, 961), 420, $clone(time.Unix(new $Int64(0, 1426433181), new $Int64(0, 0)), time.Time));
+		info = new bindataFileInfo.ptr("templates/nodejs_external_file.tpl", new $Int64(0, 976), 420, $clone(time.Unix(new $Int64(0, 1446807860), new $Int64(0, 0)), time.Time));
 		a = new asset.ptr(bytes$1, new info.constructor.elem(info));
 		return [a, $ifaceNil];
 		/* */ } return; } if ($f === undefined) { $f = { $blk: templatesNodejs_external_fileTpl }; } $f.$ptr = $ptr; $f._r = _r; $f._tuple = _tuple; $f.a = a; $f.bytes$1 = bytes$1; $f.err = err; $f.info = info; $f.$s = $s; $f.$r = $r; return $f;
@@ -57709,7 +57719,7 @@ $packages["github.com/shibukawa/curl_as_dsl/generator"] = (function() {
 		if (!($interfaceIsEqual(err, $ifaceNil))) {
 			return [ptrType.nil, err];
 		}
-		info = new bindataFileInfo.ptr("templates/nodejs_external_files.tpl", new $Int64(0, 1101), 420, $clone(time.Unix(new $Int64(0, 1426433181), new $Int64(0, 0)), time.Time));
+		info = new bindataFileInfo.ptr("templates/nodejs_external_files.tpl", new $Int64(0, 1116), 420, $clone(time.Unix(new $Int64(0, 1446807870), new $Int64(0, 0)), time.Time));
 		a = new asset.ptr(bytes$1, new info.constructor.elem(info));
 		return [a, $ifaceNil];
 		/* */ } return; } if ($f === undefined) { $f = { $blk: templatesNodejs_external_filesTpl }; } $f.$ptr = $ptr; $f._r = _r; $f._tuple = _tuple; $f.a = a; $f.bytes$1 = bytes$1; $f.err = err; $f.info = info; $f.$s = $s; $f.$r = $r; return $f;
@@ -57731,7 +57741,7 @@ $packages["github.com/shibukawa/curl_as_dsl/generator"] = (function() {
 		if (!($interfaceIsEqual(err, $ifaceNil))) {
 			return [ptrType.nil, err];
 		}
-		info = new bindataFileInfo.ptr("templates/nodejs_full.tpl", new $Int64(0, 650), 420, $clone(time.Unix(new $Int64(0, 1426433181), new $Int64(0, 0)), time.Time));
+		info = new bindataFileInfo.ptr("templates/nodejs_full.tpl", new $Int64(0, 665), 420, $clone(time.Unix(new $Int64(0, 1446807850), new $Int64(0, 0)), time.Time));
 		a = new asset.ptr(bytes$1, new info.constructor.elem(info));
 		return [a, $ifaceNil];
 		/* */ } return; } if ($f === undefined) { $f = { $blk: templatesNodejs_fullTpl }; } $f.$ptr = $ptr; $f._r = _r; $f._tuple = _tuple; $f.a = a; $f.bytes$1 = bytes$1; $f.err = err; $f.info = info; $f.$s = $s; $f.$r = $r; return $f;
@@ -57753,7 +57763,7 @@ $packages["github.com/shibukawa/curl_as_dsl/generator"] = (function() {
 		if (!($interfaceIsEqual(err, $ifaceNil))) {
 			return [ptrType.nil, err];
 		}
-		info = new bindataFileInfo.ptr("templates/nodejs_simple_get.tpl", new $Int64(0, 372), 420, $clone(time.Unix(new $Int64(0, 1426433181), new $Int64(0, 0)), time.Time));
+		info = new bindataFileInfo.ptr("templates/nodejs_simple_get.tpl", new $Int64(0, 387), 420, $clone(time.Unix(new $Int64(0, 1446807731), new $Int64(0, 0)), time.Time));
 		a = new asset.ptr(bytes$1, new info.constructor.elem(info));
 		return [a, $ifaceNil];
 		/* */ } return; } if ($f === undefined) { $f = { $blk: templatesNodejs_simple_getTpl }; } $f.$ptr = $ptr; $f._r = _r; $f._tuple = _tuple; $f.a = a; $f.bytes$1 = bytes$1; $f.err = err; $f.info = info; $f.$s = $s; $f.$r = $r; return $f;
@@ -58131,10 +58141,10 @@ $packages["github.com/shibukawa/curl_as_dsl/generator"] = (function() {
 		_templatesGo_simple_methodTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFF\x8C\x8F\xCFj\xC30\f\xC6\xEFz\n\xCD\x87a\x97\xE0\xDC\x07=\xEC\x0F\xBBm\x8C\xC2\x1E [\xD4\xD6\xA0E\x99\xA32F\xC8\xBBO\x8EK\xCE\xF3\xC5\xFC\xF4I\x9F>\xB5;H_\xA3dE\x0Fh\xCF\r\xA4\xEDYut\x15\x93\xB4I.\x9A\xF8\xCA,'\x07\x01v-\xC0''\x1A\x14\xEF\xF6x[\x06\xE2\xE3\xCA\xF3\x02\x99\xBE/4i\x83\x94s\x91W\xF5\x95~\x0E\xB5\xEE\xDD<c|!=K\x8F\xCB\xE2\x1A,\xFC\x9E\xD9\xA0\xC1!q0\x87i\xDC\xC6\xEB\x9E\xF8$\xFEj\x1C \x1DW\xF1f_\xDAq^\xA3Y\xB2\xF8\xDCi\xC7\xDE\xA4\x00\v\xF4t\xA4\x8C\xC5*>H\xFFk\xF9d\"\x1F\xE0\xC3`3\xAF\xC7\xC5\x03u\xFD=\xB3\xDF\xBA\xFF\xB9\xA3\x14\xDEr\x1A\xD4Oj\xDF\xC9\x17\xF3\x10\xE0/\x00\x00\xFF\xFF;~|bW\x01\x00\x00"));
 		_templatesGo_simple_postTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFF\x9C\x8D\xC1j\xC30\x10D\xEF\xFA\x8A\xAD\xC9A\x02\xA3\x0F(\xE4\xD0\x16z+\x84B\xCFE\x8D\xD6\xAE\xC8F2\xD2\xFA\x10\x8C\xFE\xBD+\xA5\xF8\x03\xB2\x07\x1B\xCD\xBC\x99Y\xDC\xF9\xE2f\x84\xAB\vQ\xA9p]Rf\xD0j\xDB \xBB(\xFA\xE1\x82\xB7\x11\x0E\xDF\xF0|\x04\xFB\x91\xFCJX\xA0V\x90\x1B\x04j\xB6<\x07\t`\xF4\xB5\x1A\xA5\xA65\x9E{\x9D6\xB0\xA9\x06f,\xCB\b\x98s+\xF9e^\xEC)\x15\xD6\x12\xB7_\x99$>\xC20\x8C\x10\x03\x99\xCE\x87\xA9\xC3O\xC7&\xFDw\xB4\xA34\xDBw\xC7\x8E\xB4\xD8w\xB4\xF6\xAF\xC7\ts\x9F\xB1\xAF\xC9\xDF\xEC\x1B\xA5\x82\xFAN\xFC\x88\xB0\x8F\x87\xB4r \xFB\x89\xCE\xBF\x10\xE9=\xF1\xE0n3N9D\xD6\x85\xE57\xEB6f\x8C\xAA\xEA/\x00\x00\xFF\xFF%\x9C2\xD8W\x01\x00\x00"));
 		_templatesJava_fullTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFF\x9CR\xC1n\xDB0\f\xBD\xFB+\xB8\xA2\x05d\xA0\xF0\x07\xB4\xE8a\xCDv\b\xD0`C\xB2\x9E\xB6aP$\xC6\x15*S\x86$\xAF\xCD\f\xFD\xFB(;A\x12\xCF\xA7\xF1\x10@\x8F\x8F\xEF\xBD\x90\xEE{\xF0\x92j\x84\xEBW\xDC\xDF\xC2\xF5/\xB8{\x80j\xE5tg1@J\xA6i\x9D\x8F\xC0\xB4L`\xE0\xBE\xE8{$\x9DRQ\xB4\xDD\xD6\x1A\x05\xCA\xCA\x10`%\rA\x9F\x89\xD5G\xADM4\x8E\xA4\xFD\x84\xDC\xF42?x\xB4\x00\xAE\xC3P\x88\x8C*\xF8\xED\x8C\x86\x86G\xC5&zC\xF5\xF7\x9F }\x1DJ\xE8\x07r\xAE\xE8\xF7g\xAF\\\xD9c\xE1\x9A\xC6\xD1\x92\xD8HZ\xF3\x07Y>\xC3_=\xB6\xD2\xE3\xA3\xD39\xEB\xF3\xFA\t:o\xE1\x01\b\xDF\x80_\"s\x9E\x19I\xA9\xBC/fD\x89P\xE5\xB4\x8B\xE1?\xA5\x04\x8A!\x9E\x17\xF3\xED\x92\xD5+\xD7\"\x9DZb\x8C\xE1\xDE\xF7\xA3\xC9Y\xAA\x13\xE9\xB8\x8Ccm\xF6!bS\xB9.V-\xAF!\xEE\xC4\xD5\x1AC\xEB(\xE0\x1D\xDCh\xB8\t?\xE8\xEAv\bS\xD5\x18\x8F\xBD\x85\xD3(\xCA\x7F\xF1\x15\x86 kn\xB1\xFF\xB9\xCDc\xB7\xDB\xA1G\xBDF\xA9\xD1\xC3\xD6\x1F6s\x89\x8B\f-\xA9\xED\"\xDF\x04es@\x8F&g\x1D6\x988\x8CW\x04\x939\x93\x05\xBF\xBD\x18\x8B \xC4\xD0c\xE3\xAD\xAFXC?\x19\xCAA\xE1\x03G\xE9\xAC-'\xB7\x9E\xDB\x8E\xA5Qd\xE2}\xB9R\x96W\xD6\x05\xD6>\xB1\xF8\x9C2\xAA\x17\x10+iw\xCE7\xA8\xF9\x9B\xF8\xFC\xAE\xB0\x1D\x8E\x82Ss\x1C\xFD6Q\xAA\xD7o^\xAAy\xB1\xE5\x97\xFF\x96(\xC6\xDFT\xFC\r\x00\x00\xFF\xFF\xD92\xFE\x9C\x87\x03\x00\x00"));
-		_templatesNodejs_external_fileTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFF|RMo\xDB0\f\xBD\xE7W\x10F\x818X \xF48\xA4\xE8aM\xF7qX\xD6\x1Dz\xD9\xA9\x10,:\x11\xEAH\x9EDo\t\f\xFD\xF7\x91\xB2\x1B\xBB\xC56\x01\x89\xF9\xF1\xA8G>\xF1\x97\x0EPG\xB8\x85\x80?;\x1B\xB0,\xEAX\xACn\x16}\x0FA\xBB=\xC2\xD53\x9E\xD7p\xF5\x04\x9B[P;o\xBA\x06#\xA4$u\x8C\x91,{\xF3\xFA):\xDC\x83\xCE\xA4\xC4A\xF5\xC1\x18K\xD6;\xDD\xDCc\xD5\xE8\xA0\xC5a\xD8\xA2\x8E*\xA06\x9Fl3\x94\x97\xD6\x19<\x81\xFAx\"\f\f\x97D\x84\xEB\x95\x12\xE3\x9B>\xA2\xDC\xDD\xF7\xB6\xFE7\xF2\x11O\xF4xn\x05\xB9\x06n\xA1\xF2\xC6\xBA\xFD\x06\x8A\x8E\xEA\xF7E\x1A\xBBZC\xDD\xB9*\xB7Qb\b\xECr\xFD\xD6;BG+\xE8\x17\xC0GX8\xF7\xE2\xCA\xA9\xBC\x8B\xBEA\xC5a\x1Fr\xF2\xE6\x92\vH]p\x83\x9F\xF2\xBF\x8C\xFE=`\xAB\x03\xDEys\x1E\xB5c\xB9X4\xC9m\x1B\xCBt\x83\xB2\x9CT\"$F*'\xBE\x83\x8F\xC4\xAD\v\xF8\v\x9B2\xFD\xFA\x92l5\x1D6\x03\t[2oV\xC6!\x07| \xB8Ni\xC2r`\xC4J*c\xB3\x10\x17\xC4\x11\xE9\xE0\xCDH\xB6\xCBN\xA6\x9B\r\xF1\xD0\x8A`\xB2\x03\xC3\x90\x93\x88e\xC0\xF87\x9D\x1A\xBF/\x8B\xCF\x9Ex\xE8\xD8r\f\xF9~x'\x9E\x8A\xA4\xA9\x8B[o\x90\x03\xC5\x9B\xF0\x0Ec\xD4{|\xA5nT\xCC\xB34\x9A\xF4r\xFEz\xD5\xA1s\xCFs\xEE\xB7\xFC\xCB\xBB\x87\xFB\x1F\x1BX2\xC1\x80\x9D.M\xA3\xFD\xF2\x9DV\xFF\x89\x17\xBF\xB1,\xA5\xEC\xBE<\xDEWvbJ\xFCD\xEAw\xB0\x84\xA5,{F\xA4\xA9:+*\x106\xCA1*\xAE4\x9EWf\xD6y\x89\xFF\x15,\xC3\x07\xB5P\x1D_\xC9!|\xF2\xFB\x13\x00\x00\xFF\xFF\xAD@\xEF \xC1\x03\x00\x00"));
-		_templatesNodejs_external_filesTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFF|S]k\xDB0\x14}\xEF\xAF\xB8\x98B\x14f\xC4\x1EGB\x1F\xD6t\x1F\x0F\xCB\xDA\x87\xBE\x8C1\x8A\xB0\xAF\x13\xAD\x8E\xE4I\xF2\xBA`\xF4\xDFw\xAF\xAC\xC4N\x19\x13\xB4\xD1\xFD\x90\xCE\xB9\xE7X\xBF\x95\x83\xC6\xC3\r8\xFC\xD5k\x87\xA2h|\xB1\\_\r\x038ev\b\xD7\xCFx,\xE1\xFA\tV7 \xB7\xB6\xEE[\xF4\x10#\x9F\xA3\x1E\xAER4??e\xC7{\xD0\xD41RR\xBE\xAFk\x1D\xB45\xAA\xBD\xC3\xAAUNq@mW\x0F\xCE\x1E\xB4G\xA9\xDAV|\x9F!k\xC2\xC5?\x01\x1D\x1D\xF9\xA8[L\x14>\xCC\x12L\x04h\x19|\x81|\x89hzS\xA5\x8B\x85\xEF\xAB\n\xBD/\x89\xDAO\xAC\xC2\x12\x86+\xC8\xAB\xF1\xD2\xA1\xAA\xF9\x0E&|\x81\"\xF9\xDFWu@\x1A`\x18ts\xC9A>R\xF4x\xEC\x90\xA0K\xA0\xE1*[k\xB3[A\xD1\x87\xE6]\x11\xF3\xBC%L<\xD0\xB9\x12j\x15\xD4\x9C\x01/\xBA\x9B\x8B\x94\xCE\x14S\xB4\x86\b\xD8z\xA4l\x9E@\xA4\xC3\x94?\x9F\x8E\xA4\xEC\xF8[\x9E\x14\xFE\xB1\x94a\x8Ff6\x7FCt7\xD6\x044\xC1\x9F\xA0\xD9\x87\x07\x87\x9Drxk\xEBc6\x92\xBC#\x07\xB9\xB6i5\xB5\x8F6SQ\xB2\xAB\xE8\x83\x98\x88\xEF\xAD\x0F4-7\x7F\xA6-\xDB\\\x9E\x8B\x9D\n\xFB\xD5\bB;\x96()h\x90\x12\xD6\x05x\x1B\xA7\x19:J\xE4^.\xA5\xDE4\xC9\xB9\xE3\x80ao\xEB\f\xB6MA\x82\x9B\rq\xDF\xF1\xAC\xFC\x1D\x8CzL\xBA\v\x87~.xEm\x96\xFCk\xEDN\x14\x9Fl\xA0\xA1}G9\xA4\xFB\xE1\rG\xD2\x07\x15z\xBF\xB15R\xA2x\x95\xDE\x92\x11j\x87Yx^\\#\x9C\x05\xBB\xB3\x98\x1B^\xED{\xF3\xFC\xDA\xEC9\xFE\xE2\xF6\xFE\xEE\xDB\n\x16\x040\xF6\xAE\xFF\xE1\xEC\xFAdX~\rO\xF4\x1AZm\xC6W\xC0\xE6}\xA1\xC0\xC7H\x16\xC9\x17\xA7\x03\n~y\xA9#N\xA7\x93\xA2\xDCB\x1B\x91\xB3\x1C2q\xFA\xDA\xAC\x9B1\x17\xF8_\xC1R\xFB\xA8\x16\xCA\xC3\x85\x1C\x8CG\x7F\x7F\x03\x00\x00\xFF\xFF\xAF\xA1\x969M\x04\x00\x00"));
-		_templatesNodejs_fullTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFFtQ\xC1j\xEB0\x10\xBC\xFB+\x16\x13\xB0\xC23\xE2\x9D\xFD\xC8\xE1%\x81\xF6\xD0\x90\\{\n\xC2\xDA\xC4&\x8E\xE5JrK\x10\xFA\xF7\xEE\xCAI\x13\x02\xF5\xC5\xBB3\xC3\xCCj7\x04\xB0\xAA?\"\xCCNx)a\xB6\x87j\x01rc\xF4\xD8\xA1\x83\x18?\x95\x05\xD20K\x1D,\xC0\xE2\xC7\xD8Z\x14\xF9\x1D\xCD\xE7\xFF\xB2\x10\xB0\xD71\x12(\xFFk\xDD\xFA\xD6\xF4\xAA[c\xDD)\xAB\xB8!Y\xC6\xE4\xCE\xE2\xA0,.\x8D\xBE\\\xDD\xC9\x90l\x99[u-\xF6~\xCA&Rr\x14:/B\x06\xF45\xC6\xF9\n8V\xBER\xC9\xB9e\"\x06\xE5\x9B*\x19\xEC\xA8\"\xBC\f\xA1=@\x8F\x04\x18\xEB\xE1/E'\x1D5W\x1D\xC3I\x97\x86N\xEC\x19}c\xF45`\x93\x9A\x14\xF10\xF4v\xE0\x97\xF0V\xB2X\xC2a\xECk\xEE\x85E7\x87i\xC6\x9Ah\xD3\xA1\xEC\xCCQ\xE4/\xC6\xD3\xE3\xDC@\x18\x92/\xFC\xE1N:\xAF\xFC\xE8VF#\x01\xF9\x13\xBCA\xE7\xD4\x11i\x9F\xEC\xC68\xF9\x17ZyU\xDC\x03A\xD4\xCD\xD8\x9Fn\x99\xCF\xB9\xC5r\xBB~\xAF\xA0 \xE3I7\x99E\xFA\xC7t\xA8\xDB\xC1\xF7t\xEE\xAE\xA55\xF1\xC5\xF9 o\xD4\xB8\x18i\xED\xF2\xCB\xB6\x1E\x05\x9F8)b\xBC\x9F\x98i*\x04!\\\xF2\x80h\xAD\xB1\x0F\x13\n\xFCu!I:m\x03\xE5\xF9\xE7\xB9\xE4\xFF\x1D\x00\x00\xFF\xFF\fgk\xD6\x8A\x02\x00\x00"));
-		_templatesNodejs_simple_getTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFFt\x8EAK31\x10\x86\xEF\xFD\x15C(l\x96\xAF\xE4\x07\xECG/V\xF0T<y\xF0$a\xF7u]\x1A\x13\x9D$\x82\x84\xFCw']\xB4R0\x970\xCF\f\xCF\xFB\x96Bl\xFD\f\xDA\x9E\xF0\xB9\xA3\xED\x13\r{2\xC70e\x87H\xB5~X&\xB9i[\x99hO\x8C\xF7\xBC0\xB4\xBAP\xD5\xFF\xDF\x94\x02?\xD5*?\x99\x83[\xE0\xD3\xEA\x90\xB5\x99\x91t\xE3\x0F\xECd\xDC\xD1s\xF6cZ\x82\xD7\x8C\xD8S\xD9\x90\xBC1\xF8\x18\x1C\x8C\v\xB3Vw!IN|\x13\x86\x81\x14\xFDk\x93\x89\xC9\xA6\x1C\x0Fa\x82\x00u\x85\x8F\x88\xD1\xCE\x90&\xCD\xD6\xB8\xF8\xBB\xC9&\xDB]\x02I\x8F/\xD9\x9F\xBE3\xAFs\xBB\x9B\xFB\xDB\xC7\x81:\x11\xAFw\xAB\xAC\xCA_\xFB\xB3\x0F\xCC\x81\x7F\t5\xFE\xEC\x7F>]\xCB\xC3\xBC\xFE\xB4k\xB2\xAF\x00\x00\x00\xFF\xFF\xAA\xD8\x85\xD7t\x01\x00\x00"));
+		_templatesNodejs_external_fileTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFF|SM\x8F\xDA0\x10\xBD\xF3+F\xD1J\x18\x15Y{\xAC@{\xE8B?\x0E\xA5\xDB\x03\x97\x9EVV<\x01k\x83\x9D\xDAN\x17\x14\xF9\xBFw\xC6II\x16\xB5\x8D\x04\xF2\xCC{\xF6\xF3{\xB6\x7F)\x0FU\x80\x07\xF0\xF8\xB35\x1EEQ\x85b\xB1\x9Eu\x1Dxe\x0F\bw/xY\xC2\xDD3\xAC\x1E@\xEE\x9Cnk\f\x90\x12\xCF#\x0E\xA3TM\xE7\x8F\xDD~\x1D\xB4:%j\xCA\x0FZ\x9Bh\x9CU\xF5\x16\xCBZy\xC5\x05\xD1fU\x90\x1E\x95\xFEd\xEA~\xBA0V\xE3\x19\xE4\xC7sDOt\x06\x02\xDC/$\x0F\xBE\xA9\x13\xF2\xDA]g\xAA\x7F3\xF7x\x8E\xFBK\xC3\xCC%\xD0\x16J\xA7\x8D=\xAC\xA0hc\xF5\xBEH\xC3\xAE\x96P\xB5\xB6\xCC\xDB\x10\xE8=\x954\x7F\xE3lD\x1B\x17\xD0\xCD\x80>V!\xECO\xC9_\xE9lp5Jj;\x9F\xC1\xF5\x15\xF3\x18[o\xFB:\xE5\x7F\xB6\xFE\xDDc\xA3<>:}\x19\xB2\xA3\xB8(4\xC66\xB5!\xB9>Y\x02%\x07\x89!\x8AQ\xEF\xE8B\xA4\xAD3\xF9\v\r\xD9\xFD\xF2\n6*\x1EW\xBD\b\x8D\xD8oN\xC6\"5\x9C\x8Fp\x9F\xD2\xC8\xA5\xC6\xC0e(ss\x10W\xC6\t\xE3\xD1\xE9Al\x97\x8B,71\xF1\xD4p`|\x07z\x93c\x88\xC2c\xF8[N\xB5;\x88\xE2\xB3\x8Bd:4\xD4CZ\x1F\xDEq%CT\xB1\r\x1B\xA7\x91\x1A\xC5M{\x87!\xA8\x03\xBEI7H\xD2\x99k\x15\xD5|zz\xE5\xB1\xB5/S\xED[\xFD\xF9\xE3\xD3\xF6\xC7\n\xE6$\xD0s\xC7E\xD3b\xCD\xF6\xF6\xA8\xFC\xD6\xBD\xDA\xAB\xB1\x812\xBE\x84gz\x07\xB5\xA1d\xF9)\xF0Y~\xA5\"\xA4D'&_\xBD\x89(\xF8\xEEgF\x1Ag\xE7\x80\x99B\x031t\xB9d\x1F\xF9\x06M\x8C\b\xFCo~\x99\xDE\x87\x87\xF2\xF4&\x1D\xD6\xE3\xDF\xEF\x00\x00\x00\xFF\xFF\xEA\xB9(X\xD0\x03\x00\x00"));
+		_templatesNodejs_external_filesTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFF|SOo\xDB>\f\xBD\xE7S\x10F\x818\xF8\x19\xC2\xEF8$\xE8aM\xF6\xE7\xB0\xAC=\xE42\fC!\xD8t\xA2\xD5\x91<I^\x16\x04\xFA\xEE#e5Vz\x98\x806\"\xF9$\xF2\xBDg\xFD\x96\x16Z\x07\xF7`\xF1\xD7\xA0,\x96E\xEB\x8A\xC5jv\xB9\x80\x95z\x8Fp\xF7\x82\xE7\n\xEE\x9Eay\x0Fbk\x9A\xA1C\x07!\xF09\xC2p\x95\xA2\xFC\xFC\x94\x1D\xEFA\xDD\x84@I\xF1\xBEi\x94WF\xCBn\x83u'\xAD\xE4\x80`\xB3'k\x8E\xCA\xA1\x90]W~\xCF:+\xEA\x8B\x7F<Z:\xF2Qu\x18G\xF8\x90%x\x10\xA0\xA5\xF1\x04\xE9\x92\xB2\x1Dt\x1D/.\xDDP\xD7\xE8\\E\xA3\xFD\xC4\xDA/\xE02\x83\xB4Z',\xCA\x86\xEF\xE0\x81o\xBA\b\xFE\xF7U\x1E\x91\b\\.\xAA\xBD\x9DA\xEC(\xDA\x9D{\xA4\xD6\x15\x10\xB9\xDA4J\xEF\x97P\f\xBE}W\x84\xC4\xB7\x82i\x0E\xB4\xB6\x82Fz\x99O\xC0\x8B\xEE\xE6\"\xA5\xD3\x881ZA\x00\xEC\x1CR61(\xE3a\xCA_O\x07Rv\xFC\xAD^\x15\xFE\xB1\x10\xFE\x80:\xE3\xDF\xD2\xB8k\xA3=j\xEF^[\xB3\x0FO\x16{i\xF1\xC14\xE7d$yG\x0Erm\xDD)\x82\x8F6SQ\xB0\xAB\xE8|9\r~0\xCE\x13[\x06\x7F\xA6-\xDB\\]\x8B\xBD\xF4\x87\xE5\xD8\x84v,QTP#%\x8C\xF5\xF0\x7F\x988\xF4\x94HX.EldrE\x1C\xD1\x1FL\x93\x9Amc\x10\xDBe$\x1E{\xE6\xCA\xDF\xC1\xA8\xC7\xA4{i\xD1\xE5\x82\xD7\x043\xE4_g\xF6e\xF1\xC9x\"\xEDz\xCA!\xDD\x0F\xFFq$\x9C\x97~pk\xD3 %\x8A7\xE9-\x19!\xF7\x98\x84\xE7\xC55\xEA3gw\xE6\xB9\xE1\xF5a\xD0/o\xCD\xCE\xFB\xCF\x1F\x1E7\xDF\x960\xA7\x06#v\x95;\xCB\xF4v(\xED\xC6\x9C\xF4\x95X\x82L\x8F\xE3\x99\x1EG\xA7\xF4\xF8(\xD8\xCB/\x14\xB8\x10\xC81q\xB2\xCAc\xC9\x0F1\"\xC2t:\n\xCC\x10\xDA\x94)\xCB!\xF3\xA0\x8F\xCF\xD8\x8CH\x89\xFF\xD4/\xC2G\xF1P\x1Co\xD4\xE1~\xF4\xF77\x00\x00\xFF\xFF\xD2\xC2\xDF\xAA\\\x04\x00\x00"));
+		_templatesNodejs_fullTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFFtRAk\xF2@\x10\xBD\xE7W\fA\xC8\xCA\x17\x96\xEF\x1C\xF1P\x15\xDACE\x0F\xBD\xF4$Kv4\xC1\x98Mw7\x15\t\xFB\xDF;\xB3\xD1*Bs\xDAy\xF3xof^\x86\x01\xACj\x0F\b\x93#^r\x98\xEC\xA0\x98\x83\\\x1B\xDD7\xE8 \x84oe\x818\xDC\xA5\n\xE6`\xF1\xAB\xAF-\x8A\xF4\x8E\xA6\xD3Y2\f\xD8\xEA\x10\b\x94/Z\xD7\xBE6\xADjVX6\xCA*.\x88\x96psk\xB1S\x16\x17F_\xAE\xEA$H\xB2\xDC[65\xB6~\xF4\xA6\xA6d+t^\f\t\xD0W\x19\xE7\v`[\xF9FO\xF6\xCDc\xA3S\xBE*\xA2\xC0\x96^\x84\xE7\xC3P\xEF\xA1E\x02\x8C\xF5\xF0\x9F\xAC#\x8F\x8A+\x8F\xE1\xC8\x8BC\xC7\xEE\t}e\xF4\xD5`\x1D\x8Bh\xF10\xF4\xA6\xE3M\xF8*I\xC8a\xDF\xB7%\xD7\xC2\xA2\x9B\xC28cIm\xD3\xA0l\xCCA\xA4\xAF\xC6\xD3r\xAE#\fI\x17\xFEq%\x9DW\xBEwK\xA3\x91\x80\xF4\t^\xA3s\xEA\x80tOVc\x9C\xF43\xAD\xBC\xCA\xEE\x86 \xCA\xAAo\x8F7\xCFg\xDFl\xB1Y}\x16\x90\x91\xF0\xC8\x1B\xC5\xC2t\xC6\xAB|\xA0\xB2+s\x8Ey\x84\x98\xDB-\xFF\x1D\xA5\xDF\xD4t5\xFE\x018\x9Fw*\\\b\x94\x82<\xDB\xDA\xA3\xE0\xC4##\x84{\xE2\xDC\xA6\x87 \x84\x9F</Zk\xEC\xC3\xC0\x02\xFF\xBCO\xA4\x8E\xC7Ay\xFA\xDD\x9E\xF4\x7F\x02\x00\x00\xFF\xFF)\x91\x9D\x9C\x99\x02\x00\x00"));
+		_templatesNodejs_simple_getTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFFt\x8F\xC1J\x031\x10\x86\xEF\xFB\x14C(l\x16K\x1E`K/\xB6\xE0\xA9x\xD1\x83'\t\xBB\xE3\xBA4ft\x92(\x12\xF2\xEEN\xBAh\xA5\xD0\\\xC2|3|\xFFL\xCE\xC0\xD6O\b\xAB#~\xAFa\xF5\f\xFD\x16\xCC\x81\xC6\xE40@)\x9F\x96AfjW*\xD8\x02\xE3G\x9A\x19\xB5:S\xD5m\x9A\x9C\xD1\x8F\xA5\xC8\x0Ff\xE7f\xF4qqH\xDBL\x18u\xE5\x8F\xEC\xA4\\\xC3K\xF2C\x9C\xC9k\xC6\xD0An@\xDE@>\x90C\xE3h\xD2\xEA\x8E\xA2\xE4\x84wa\xD8\x83\x82\x9BZ\x99\x10mLaG#\nP\x17\xF8\x80!\xD8\te\x93j\xAB\\\xFC\xEDh\xA3m\xCF\x81\xA0\x87\xD7\xE4\x8F\xBF\x99\x97\xB9\xED\xED\xFD\xFE\xA9\x87V\xC4\xCB\xDC\"+\xDD\xA6n\xFF\x80\x96\xF7\xF4\xE5\xE5\x84\xA6t'=2\x13\xFF\xF3k\xBCz\xCEit\xB9\x05\xCD\xDB\xDF\xB2\xE2n~\x02\x00\x00\xFF\xFF\xB7\x8F#\x13\x83\x01\x00\x00"));
 		_templatesObjc_nsurlconnection_fullTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFF\xA4TaO\xE38\x10\xFD\x9E_1\xC7\x01J+\x8E\x1F\x90R\xD4\x83^\xC5\x89\xD2\xA2\x16\xB4ZE\xD1\xCA\xC4\xD3\xC6\xBB\xAE\x9Du\x1CP\xB7\xEA\x7F\xDFq\x1A\x87\xD0\x8D\xF6\xCB\"\xA1\xDA\x9E\xF1{\xCF3o\xB2\xDB\x81aj\x8Dp\xFA\r\xB7\x17p\xFA\x05\xA2!\\>h^J,`\xBF\xFF[lrm,\\Q\xA2K\xA1\xA3\xEB`\xB7C\xC5\xF7\xFB \xB8\x99\xCF\xA7Pd\xBA\x94\xFC\x1E1_\x94J\t\xB5\x86!|\xFEo9\b\x82\x91P\x16\xCD\x8A\xA5\bwOO\x8Fc\xFD\xA6\xA4f|\x8C\x12\xD7\xCC\"D0[\xCE_\xBEbj\xAFf\xCB\xE7\xC5\xF4V+E\x1B\xA1\x95O\xB9\x86]\x00\xF47[>\x94\x96\xBDH\x1C3\xCB\xA0\x9Fj\x02V\xB6\x18\x04$bDb\x1C\xD7&\x97\xB8\xA1S\xE6\x00:\t\x83\xE0\x1F\b_\xB5\xE0\xBD\xB4a\x8A\xC2#j\xE8\xB7\xA2\xC0\x05_`\x8A\xE2\x15\x17X\xE4Z\x15X_\xF0[J7\xF52\xF0Z\x1D\xF7\x87\x94\xCC\xDA\xBC\xD9\r!\xECHiP\x065\xC8T\xAF\xC3\xD1\xC9\x92\x9ES\x16\x11\x9CI~r\x01m\x9C\xCB\xA2\n\xDDj\x8E=\x7Fg,*\xD5\xCCl\x89\x13\x19GS\x10\xDD\x87[L\xCA\xBB*2\x11(yq\xB8\xB9\xD2\x06B\xC1\xC15X(\xA8\xAF\xF6\xEA\xE2\xB7\xF5\x9C\x8DH\xCB\x88\xA4Tv\x89=\x89\xAE\xBA8\xD1\xE6\x1E\xB7\x11\x85\x92Z\xD2\xDE5\xE8\x0F\x8A\xEE\xDA\xED\x92\x0Fm\xEFq\xFA\xA9\xAB\x1C{\x0F\x00\xCBsr@\x95\xE9\xE2\xC9\xA0\x9Bs,\xF8D(QdSr\x04\xB9\xF4\xF7\x1A\x9A^\x1E\x9Em\x0Er\xF8I\xFD\xAE.\xCF\xCF\xE6\xEFv\xA4i\xB9\xFC\x97sQuC\x8E1\x95\xCC\x1C|IcCS\x01\x1B&T\xE8\x16\xCC\xAC\xD3\vH3f\xA0O\xEB\xD78\xF1e\x1F\xB1\xD2jC\xD6e\x05\xE6Z\xCBV7\x1C\xFC\xAD\xDEl\xB4\xFA_\x11\x07\x93\xE2\x07\x12\xB2;~4\x983\x837\x9A\xBBYm\xE6\xA6\xF2\xDA\xF7\x12\v\v}S/\x86\x10w\xC5\xEB\xF0'a3:\x8D\xE2\xAAL@\xFF\xEEdi\x8D\xAB\x9Dcz6\x92\x18\x12\xAA\xB7\xDB\xD1'C\xAC\xB6\x1E\x83^\xE9\xB5vN~\x9F\xFB\x15\x89\x88;S\xC8\xA8:M\xC8\x8E\xC2&\x83\x06\xADe\xC8\xA3\xE6\xB5\xFC\xE30\x8F\xE3-8\xF7\x8EZh\xE4k\xE1\xF5D~A\x9C\r\x97XA\xF8\xD7;~\xAF\xB1\xC5\x8A\t\x89\x1C\xAC\x86\xD4\xA0\x13\xFD\x9E\xE4\x9Dr$\x9A\xEC2\xD5:\x87\xBE\xCD\x90\xAAZ\xB5\xC0\x9F\xA5\xA51\xE4\xE8z\xDBz\xF4[F4\x10\xFEj\xBA\xF3s\x88\x0F@\xA6T\xD4\x01\x8ChTp\xC5J\xE9Q\xDC!\xBC \r\xB8\x9B%t\xDDt\xBF4b\xF4\xF9PvR\xDA\xD2`\xD2\x1E\xD7\x9F\x01\x00\x00\xFF\xFF$k\xCC\x1D\x12\x06\x00\x00"));
 		_templatesObjc_nsurlsession_fullTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFF|Tko\x1A;\x10\xFD\xCE\xAF\x18\xE5&\xD1\x82P>_-\x97+\x9A\x07J\x15\xF2\x10\x10U\x15\"\xC8Y\x0F\xE0\xC6\xD8[?\xDAR\xB4\xFF\xBDc\xEFn\xB4P\xDA\x95`\xED\x19\xCF\x993\x9E3\xBB\xDB\x81aj\x85p\xFA\x86\xDB.\x9C. \xED\xC3\xC5\xBD\xE6^\xA2\x85\xA2\xF8Glrm\x1C\xFCG\x07\xC3\x112\xFD\xDF\xDA\xEDP\xF1\xA2h]>>\x8E\xC0\xAE\xB5\x97\xFC\x0E1\x1F{\xA5\x84ZA\x1F>\xDFLzt\n.>p.\x9C\xD0\x8A\xC9k\xCC$3,l\b\xA3%\x94\x83\r\x13*\t\vfVY\x17\xB253\xD0\xA1\xF5\xB7\xD9\xBC\r\xBB\x16\xD03`\xDEi\x83\x12\x99\xC5\\kY\x99\xC3\x13\xE0\xAF\xF4f\xA3\xD5GE9\x98\x14?\x91\x90\x83\xF9\xC9`\xCE\f^j\x1E\xF8>L\xEE\xBDc\xAF\x12\x9F\xC7\xA31~\xF5h\x1DtL\xB5\xE8\xC3\xEC\x98\xBFr\x7F\x12nM\xD6\x94\xCE\xD0\v\xE8\x17,\x13g\xA8\xCC4dz6\x922\xCC\xE7e\xB5tmb\xB9\xAD1\xA8\xCA\x9Ak\f\x9F\xA0\xB5\xA1\xFA\x8E\xAD\x161w\xC3a\xE9\x02\x90W;\x82<\x16}\xCD\x1C\x9B2\xFB\xD6\x01G\xFF\x01\xA2F\xE3\x95'0\xAC(\xA4u\x95\x99\xDE\xE4\x12\xC3\xDD\xDF2\xC5%\x9A\xF4%y\x98\x04,\xE8\x84\xB8n\x99c\x8C6\xD7\xCAb\xB8\x9Er\x15\x1C7\xC6hj\f\x86W\xBB\xD1\x80\x92\xDA\xEDt\xFA\xB4\x17\xBAv.\x7F\xDF\xF5!9r\xA4]\xC3\xF7\x0E\xC0Fz\x95\fN&\x8E9oS8\x93\xFC\xA4\vM\xBC\v\x1B]W\x9Ac\xFB0\xF6ZdQifK\x1C\x90q4\x96\xD2\xEFE3)o\xA3g(Pr\xBB\x8F\xB0\xA4\"\x13\xC1!\x88\\(\xA8 \x0E\vn\xF2<\x1B\x10\xC7\x01Q\x8C\xA33\xAB\x93\xEA\xD7/\x98\xB9\xA16w\xB8M\xC95?\xA0Z\xEC\xED\xC42\x897\v\xFD>(!\x8F\xE7+\x15\x07\xD4t\xFC\x115;{\xB7QM:\x9B\x13c\x11\xD5\x1Az\x9AF-\x00\xAA\x8C\xF4HB\r\xCD\x9D\x0E\xFF-\x03n*\xEB\xBC\xF7\xC7\xBA\xA2.\xFAei!\xE1_\xF9sas\xE6\xB2\xF5\xC2nU\x96\xBC\xEFV\xE8\x16a\xBE\x17$@\x8FI\xBB\v/I{w\xF4c\xF1\xF0\xD8\x83\xA2\x91\xA3hP\x9BE\x95\x93\\\xFC\x06\xC9\xDC\x18\t\x8A\x1Fi\x9DC\xC7\xAD\x91F3\xCERm\xCB\xBC1\xA8\\\xB5m\xC0}_\v\x89\x90\xFC\xCE\xE2\xFC\x9CRE \xE3\x15\x8D1\xA6$(\\2/k\x94`\x84W$\x95 \xDD\x0F\x86OBx\x87\xFA\x1DSn\xE8\x9D78\xAF{]\xB4\x8A\xD6\xAF\x00\x00\x00\xFF\xFF\xA5\xF2\x94\xDD[\x05\x00\x00"));
 		_templatesPhp_fullTpl = new sliceType($stringToBytes("\x1F\x8B\b\x00\x00\tn\x88\x00\xFFt\x8EOK\xC5@\f\xC4\xEF\xFD\x14ay\x87-\x14\xBF\x80V\xF1\xCF\xC1\x8B\xE0\xC5\x93<\x96\xB0\x9B\xDAB\xDB]\xD2(\x95\xC7\xFB\xEE&\xAD\n\x1E<\xFEf&\x93\xB9\xBA)}9\x9D\xE0\xE26\xA5A\x86<\xE3\xF8@qDF\x038\x9F\xCD{f*\xC8t\x97\xD3\xE7_\xE5\x910\x11\xABV\x1D\xA2\xAC\xD0\xC2\"L8\x85\x98g\xA1UBT\x12\xF2\xAF\x15\x80\xEBE\x8A\x83\xF6\x1A\x8C\x94'\x92>\xA7MqV\xF9\xB4\xB1vm\xF4\xDBlpou\xB3\xD8\x1F\x80cu\xAC/\xABCW\xF4]\x97\v\xCD\xDE\"/<\xAA\xDD\x80c\xD7@\x87\xE3B\r\xD8&\x8D\x0E\x1D\xF8-\xDE\xB6\xBBSk\v\xAD\x83x5?\x90Cz\x9F\x8A\xFF^\xFEF\x12t\x19\x86\x84\x82vV\xFF\x13\x8A\xFB\xA6\xE5'\xF3\x15\x00\x00\xFF\xFF\xB4\f\x94\x89I\x01\x00\x00"));
