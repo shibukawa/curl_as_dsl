@@ -138,6 +138,10 @@ func (self NodeJsGenerator) PrepareOptions() string {
 		}
 		buffer.WriteString(fmt.Sprintf("%s    },", indent))
 	}
+	if self.Options.Insecure {
+		buffer.WriteString(fmt.Sprintf("\n%s    rejectUnauthorized: false,", indent))
+
+	}
 	return buffer.String()
 }
 
@@ -317,6 +321,7 @@ func ProcessCurlCommand(options *common.CurlOptions) (string, interface{}) {
 	} else {
 		generator.Modules["http"] = true
 		generator.ClientModule = "http"
+		options.Insecure = false
 	}
 
 	for _, data := range options.ProcessedData {
@@ -353,7 +358,7 @@ func ProcessCurlCommand(options *common.CurlOptions) (string, interface{}) {
 	} else if options.ProcessedData.HasForm() {
 		generator.SetFormForBody()
 	} else if options.Method() == "GET" && len(generator.processedHeaders) == 0 && len(generator.specialHeaders) == 0 {
-		if templateName == "full" {
+		if templateName == "full" && !options.Insecure {
 			templateName = "simple_get"
 		}
 	}

@@ -101,3 +101,6 @@ echo "case 24: Basic authentication"
 ./httpgen -t node curl -u USER:PASS http://localhost:18888 > test/test.js
 pushd test;node test.js;popd
 
+echo "case 25: simple get with https"
+./httpgen -t node curl --insecure https://localhost:18889 > test/test.js
+pushd test;node test.js;popd
