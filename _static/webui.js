@@ -32589,6 +32589,7 @@ $packages["github.com/shibukawa/curl_as_dsl/client/golang"] = (function() {
 			_r$1;
 			_i++;
 		/* } */ $s = 1; continue; case 2:
+		buffer.WriteString("    writer.Close()\n");
 		self.Data = buffer.String();
 		/* */ $s = -1; case -1: } return; } if ($f === undefined) { $f = { $blk: GoGenerator.ptr.prototype.SetFormForBody }; } $f.$ptr = $ptr; $f._i = _i; $f._r = _r; $f._r$1 = _r$1; $f._ref = _ref; $f.buffer = buffer; $f.data = data; $f.self = self; $f.$s = $s; $f.$r = $r; return $f;
 	};
@@ -32682,15 +32683,15 @@ $packages["github.com/shibukawa/curl_as_dsl/client/golang"] = (function() {
 			/* */ if (strings.HasPrefix(data.Value, "@")) { $s = 6; continue; }
 			/* */ $s = 7; continue;
 			/* if (strings.HasPrefix(data.Value, "@")) { */ case 6:
-				buffer$2[0] = new bytes.Buffer.ptr(sliceType$1.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
-				buffer$2[0].WriteString("var buffer bytes.Buffer\n");
-				_r = fmt.Fprintf(buffer$2[0], "content, err := ioutil.ReadFile(\"%s\")\n", new sliceType([new $String(data.Value.substring(1))])); /* */ $s = 9; case 9: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+				buffer[0] = new bytes.Buffer.ptr(sliceType$1.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
+				buffer[0].WriteString("var buffer bytes.Buffer\n");
+				_r = fmt.Fprintf(buffer[0], "content, err := ioutil.ReadFile(\"%s\")\n", new sliceType([new $String(data.Value.substring(1))])); /* */ $s = 9; case 9: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 				_r;
-				buffer$2[0].WriteString("if err != nil {\n");
-				buffer$2[0].WriteString("    log.Fatal(err)\n");
-				buffer$2[0].WriteString("}\n");
-				buffer$2[0].WriteString("buffer.WriteString(strings.Replace(string(content), \"\\n\", \"\", -1))");
-				result = buffer$2[0].String();
+				buffer[0].WriteString("if err != nil {\n");
+				buffer[0].WriteString("    log.Fatal(err)\n");
+				buffer[0].WriteString("}\n");
+				buffer[0].WriteString("buffer.WriteString(strings.Replace(string(content), \"\\n\", \"\", -1))");
+				result = buffer[0].String();
 				name = "&buffer";
 				_key = "strings"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[$String.keyFor(_key)] = { k: _key, v: true };
 				$s = 8; continue;
@@ -32705,13 +32706,13 @@ $packages["github.com/shibukawa/curl_as_dsl/client/golang"] = (function() {
 			/* */ if (strings.HasPrefix(data.Value, "@")) { $s = 11; continue; }
 			/* */ $s = 12; continue;
 			/* if (strings.HasPrefix(data.Value, "@")) { */ case 11:
-				buffer[0] = new bytes.Buffer.ptr(sliceType$1.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
-				_r$2 = fmt.Fprintf(buffer[0], "file, err := os.Open(\"%s\")\n", new sliceType([new $String(data.Value.substring(1))])); /* */ $s = 14; case 14: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+				buffer$1[0] = new bytes.Buffer.ptr(sliceType$1.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
+				_r$2 = fmt.Fprintf(buffer$1[0], "file, err := os.Open(\"%s\")\n", new sliceType([new $String(data.Value.substring(1))])); /* */ $s = 14; case 14: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
 				_r$2;
-				buffer[0].WriteString("if err != nil {\n");
-				buffer[0].WriteString("    log.Fatal(err)\n");
-				buffer[0].WriteString("}\n");
-				result = buffer[0].String();
+				buffer$1[0].WriteString("if err != nil {\n");
+				buffer$1[0].WriteString("    log.Fatal(err)\n");
+				buffer$1[0].WriteString("}\n");
+				result = buffer$1[0].String();
 				name = "file";
 				_key$2 = "os"; (generator.Modules || $throwRuntimeError("assignment to entry in nil map"))[$String.keyFor(_key$2)] = { k: _key$2, v: true };
 				$s = 13; continue;
@@ -32726,15 +32727,15 @@ $packages["github.com/shibukawa/curl_as_dsl/client/golang"] = (function() {
 			/* */ if (strings.HasPrefix(data.Value, "@")) { $s = 16; continue; }
 			/* */ $s = 17; continue;
 			/* if (strings.HasPrefix(data.Value, "@")) { */ case 16:
-				buffer$1[0] = new bytes.Buffer.ptr(sliceType$1.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
-				buffer$1[0].WriteString("var buffer bytes.Buffer\n");
-				_r$4 = fmt.Fprintf(buffer$1[0], "content, err := ioutil.ReadFile(\"%s\")\n", new sliceType([new $String(data.Value.substring(1))])); /* */ $s = 19; case 19: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+				buffer$2[0] = new bytes.Buffer.ptr(sliceType$1.nil, 0, arrayType.zero(), arrayType$1.zero(), 0);
+				buffer$2[0].WriteString("var buffer bytes.Buffer\n");
+				_r$4 = fmt.Fprintf(buffer$2[0], "content, err := ioutil.ReadFile(\"%s\")\n", new sliceType([new $String(data.Value.substring(1))])); /* */ $s = 19; case 19: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
 				_r$4;
-				buffer$1[0].WriteString("if err != nil {\n");
-				buffer$1[0].WriteString("    log.Fatal(err)\n");
-				buffer$1[0].WriteString("}\n");
-				buffer$1[0].WriteString("buffer.WriteString(url.QueryEscape(string(content)))");
-				result = buffer$1[0].String();
+				buffer$2[0].WriteString("if err != nil {\n");
+				buffer$2[0].WriteString("    log.Fatal(err)\n");
+				buffer$2[0].WriteString("}\n");
+				buffer$2[0].WriteString("buffer.WriteString(url.QueryEscape(string(content)))");
+				result = buffer$2[0].String();
 				name = "&buffer";
 				$s = 18; continue;
 			/* } else { */ case 17:
