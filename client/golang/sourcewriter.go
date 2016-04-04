@@ -29,10 +29,6 @@ func NewGoGenerator(options *common.CurlOptions) *GoGenerator {
 	result.Modules["log"] = true
 	result.Modules["io/ioutil"] = true
 	result.DataVariable = "nil"
-	// Now, http2 module can't handle proxy
-	if options.Http2Flag {
-		options.Proxy = ""
-	}
 	return result
 }
 
@@ -58,15 +54,11 @@ func (self GoGenerator) PrepareClient() string {
 }
 
 func (self GoGenerator) ClientBody() string {
-	if !self.Options.Http2Flag && !self.Options.Insecure && self.Options.Proxy == "" {
+	if !self.Options.Insecure && self.Options.Proxy == "" {
 		return "{}"
 	}
 	var buffer bytes.Buffer
-	if self.Options.Http2Flag {
-		buffer.WriteString(`{Transport: &http2.Transport{`)
-	} else {
-		buffer.WriteString(`{Transport: &http.Transport{`)
-	}
+	buffer.WriteString(`{Transport: &http.Transport{`)
 	if self.Options.Insecure {
 		buffer.WriteString("TLSClientConfig: &tls.Config{InsecureSkipVerify: true},\n")
 	}
