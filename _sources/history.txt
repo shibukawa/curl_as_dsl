@@ -1,6 +1,11 @@
 History
 ============
 
+4/4/2016
+-------------
+
+* ``--http2`` was removed from Golang client (Go 1.6 natively support it)
+
 11/25/2015
 -------------
 
