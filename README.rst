@@ -5,6 +5,10 @@ This command generates source code from cURL command line options.
 
 WebSite: http://shibukawa.github.io/curl_as_dsl/
 
+This code is no longer maintained. The following tool is better to use now.
+
+* https://curl.trillworks.com/
+
 Install
 ---------
 
